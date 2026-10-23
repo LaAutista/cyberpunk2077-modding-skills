@@ -1,0 +1,28 @@
+# Local evidence and path configuration stay private.
+local/
+work/
+output/
+.env
+.env.*
+*.local.json
+*.log
+node_modules/
+__pycache__/
+# Do not commit game resources, exports or third-party mod packages.
+*.archive
+*.mesh
+*.rig
+*.anims
+*.xbm
+*.ent
+*.app
+*.blend
+*.blend1
+*.glb
+*.gltf
+*.fbx
+*.dds
+*.zip
+*.exe
+*.dll
+*.so
