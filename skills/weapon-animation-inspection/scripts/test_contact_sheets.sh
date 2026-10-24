@@ -56,4 +56,39 @@ for manifest in '{"fps":0,"frames":[0]}' '{"fps":30,"frames":[]}' \
     expect_failure 'invalid render manifest' "$scratch/render" "$scratch/invalid"
     [[ ! -e $scratch/invalid ]]
 done
-printf 'PASS: selections, endpoint, dimensions, hashes, review flags and nine rejection cases.\n'
+mkdir "$scratch/objects"
+for frame in 0 1 2; do
+    printf -v name '%04d.png' "$frame"
+    magick -size 64x36 "xc:rgb($((frame * 50)),40,80)" "$scratch/objects/$name"
+    digest=$(sha256sum -- "$scratch/objects/$name"); digest=${digest%% *}
+    file=$name
+    if (( frame == 1 )); then file=$scratch/objects/$name; fi
+    jq -nc --argjson frame "$frame" --arg file "$file" --arg sha "$digest" \
+       '{frame:$frame,time:($frame/60),path:$file,sha256:$sha}' >> "$scratch/frames.jsonl"
+done
+jq -s '{rendered:true,fps:60,frames:.}' "$scratch/frames.jsonl" > "$scratch/valid-objects.json"
+cp "$scratch/valid-objects.json" "$scratch/objects/render-manifest.json"
+bash "$helper" "$scratch/objects" "$scratch/object-sheets" --every 2
+jq -e '.selectedFrames == [0,2] and .renderManifest == "render-manifest.json"
+ and .sourceImageHashesVerifiedAgainstManifest == true and .visuallyReviewed == false
+ and .runtimeVerified == false' "$scratch/object-sheets/sheets.json" >/dev/null
+jq '.frames |= map(if (.path|startswith("/")) then . else .path=("objects/"+.path) end)' \
+    "$scratch/valid-objects.json" > "$scratch/objects/render-manifest.json"
+bash "$helper" "$scratch/objects" "$scratch/rooted-object-sheets" --path-root "$scratch" --every 2
+jq -e '.selectedFrames == [0,2] and .sourceImageHashesVerifiedAgainstManifest == true' \
+    "$scratch/rooted-object-sheets/sheets.json" >/dev/null
+for mutation in '.rendered=false' '.frames[1].sha256=("0"*64)' '.frames[1].sha256="bad"' \
+    '.frames[1].path="missing.png"' '.frames[1].frame=0' '.frames|=reverse' \
+    'del(.frames[1].time)' '.frames[1].path="../0001.png"'; do
+    jq "$mutation" "$scratch/valid-objects.json" > "$scratch/objects/render-manifest.json"
+    expect_failure 'invalid/incomplete/stale frame-object evidence' "$scratch/objects" "$scratch/object-fail" --every 2
+    [[ ! -e $scratch/object-fail ]]
+done
+cp "$scratch/valid-objects.json" "$scratch/objects/render-manifest.json"
+printf '{"fps":60,"frames":[0]}\n' > "$scratch/objects/render.json"
+expect_failure 'ambiguous manifests' "$scratch/objects" "$scratch/ambiguous"
+[[ ! -e $scratch/ambiguous ]]
+rm "$scratch/objects/render.json" "$scratch/objects/0001.png"
+expect_failure 'missing unselected hashed frame' "$scratch/objects" "$scratch/object-missing" --every 2
+[[ ! -e $scratch/object-missing ]]
+printf 'PASS: both schemas, relative/absolute paths, selections, endpoint, dimensions, hashes, review flags and nineteen rejection cases.\n'

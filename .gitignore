@@ -26,3 +26,16 @@ __pycache__/
 *.exe
 *.dll
 *.so
+*.uasset
+*.uexp
+*.ubulk
+*.uemodel
+*.ueanim
+*.usmap
+*.pak
+*.utoc
+*.ucas
+*.pdb
+*.pyc
+**/bin/
+**/obj/

@@ -32,13 +32,17 @@ The Lynx project used different native/Wine routes for particular operations.
 | JSON summary/regressions | Bash, jq, standard coreutils; tested on WolvenKit 9.0.1 / JSON 0.0.9 copies. Other serializers need schema tests. |
 | Contact sheets | Bash, jq, ImageMagick and the selected font; frame manifests and images from your renderer. Sheets must actually be viewed. |
 | Mesh/rig/animation work | Your own lawfully obtained resources, compatible [WolvenKit](https://github.com/WolvenKit/WolvenKit), [Blender](https://www.blender.org/download/) and [Cyberpunk Blender tools](https://github.com/WolvenKit/Cyberpunk-Blender-add-on). See the [weapon workflow](weapon-rigging-animation.md). |
+| RoN extraction | Existing .NET 10 SDK, pinned CUE4Parse source/dependencies, Linux Oodle and build-compatible mappings; [source instructions](ron-source-extraction.md). |
+| Native animation adapter | Existing WolvenKit 9.0.1 assemblies, .NET 10 SDK/runtime, Node.js and Bash; [commands and supported contract](native-animation-authoring.md). |
+| Additive preview math | Blender Python, NumPy/mathutils supplied by Blender; [helper and synthetic checks](../../weapon-animation-inspection/references/additive-preview.md). |
 | Runtime mod development | Only the frameworks needed for the feature; see the [topic map](topic-map.md). Verify installed API signatures and lifecycle. |
 | Portable repository audit | Node.js with built-in modules; no npm install. The small audit is not a comprehensive secret scanner. |
 
 No game assets, private Modwright bridge, Lynx-specific adapter, .NET runtime,
-WolvenKit, Blender, framework binaries or MCP dependency tree is bundled. Python
-commands in the historical Lynx case belong to its established Blender/modding
-toolchain; they do not imply that those private scripts ship here.
+WolvenKit, Blender, framework binaries or MCP dependency tree is bundled. The
+original source/native-animation and preview helpers are included; weapon-specific
+scene/retarget/build orchestration is not. Python commands in the historical Lynx
+case still refer to its established project tools, not newly bundled scripts.
 
 ## Linux, Wine and Proton
 

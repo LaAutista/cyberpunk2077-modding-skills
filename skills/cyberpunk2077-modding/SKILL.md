@@ -37,6 +37,7 @@ reference library or preinstalled bridge is assumed.
 | Inventory clips/material references | [Read-only jq summaries and regression checks](references/tool-selection.md), on fresh serialized copies. |
 | Ordinary CR2W authoring differences | A schema-aware diff if available; ignored render buffers require dedicated geometry/payload checks. |
 | Fit rigs, adapt animation, inspect collision/contact | [Reusable weapon workflow](references/weapon-rigging-animation.md) and [inspection skill](../weapon-animation-inspection/SKILL.md). |
+| Port an Unreal weapon or first-person reload | [Source-to-native port workflow](references/ron-port-workflow.md), including extraction, graph-aware adaptation, preview and export gates. |
 | Runtime state inspection | An existing bounded, version-matched bridge if available; prove engine calls separately from offline protocol tests. |
 | Evaluate another MCP server | [Tool selection](references/tool-selection.md) and [pinned implementation comparison](references/mcp-comparison.md). |
 
@@ -61,3 +62,8 @@ attempted fixes, tradeoffs and the specific missing information or decision.
 Keep source-linked discoveries in the project's own notes. Do not describe fetched
 documentation as reviewed, an offline fixture as runtime proof, or a user's tested
 reload as proof of every animation, package or platform.
+
+The [HK416 case and open issues](references/ron-hk416-case-study.md) distinguish
+the rejected donor-derived package, the clean rebuild's offline checks, and the
+user's later confirmation that the reload plays. Thumb/contact, optic, texture
+and sound issues remain open; preserve them when continuing on another machine.

@@ -1,0 +1,109 @@
+diff --git a/CUE4Parse-Conversion/ExportSession.cs b/CUE4Parse-Conversion/ExportSession.cs
+index 5d599b7c..2bc63455 100644
+--- a/CUE4Parse-Conversion/ExportSession.cs
++++ b/CUE4Parse-Conversion/ExportSession.cs
+@@ -171,7 +171,7 @@ internal string ResolveOutputPath(string savePath, string ext, string? nameSuffi
+         var fullPath = Path.Combine(BaseDirectory.FullName, savePath) + nameSuffix + '.' + ext.ToLower();
+         var dir = Path.GetDirectoryName(fullPath) ?? throw new InvalidOperationException($"Cannot determine directory for path: {fullPath}");
+         Directory.CreateDirectory(dir);
+-        return fullPath.Replace('/', '\\');
++        return OperatingSystem.IsWindows() ? fullPath.Replace('/', '\\') : fullPath;
+     }
+ 
+     public event PropertyChangedEventHandler? PropertyChanged;
+diff --git a/CUE4Parse-Conversion/Legacy/AnimConverter.cs b/CUE4Parse-Conversion/Legacy/AnimConverter.cs
+index c4fdfc1a..b4c09c01 100644
+--- a/CUE4Parse-Conversion/Legacy/AnimConverter.cs
++++ b/CUE4Parse-Conversion/Legacy/AnimConverter.cs
+@@ -529,7 +529,9 @@ private static void ReadPerTrackData(FArchive reader, UAnimSequence animSequence
+             // read scale keys
+             if (scaleOffset == -1)
+             {
+-                track.KeyScale = [FVector.OneVector];
++                // An omitted additive scale channel is a zero delta. Feeding the
++                // absolute identity (one) into additive accumulation doubles it.
++                track.KeyScale = [animSequence.IsValidAdditive() ? FVector.ZeroVector : FVector.OneVector];
+             }
+             else
+             {
+diff --git a/CUE4Parse-Conversion/Writers/ActorX/Structs/Animations/CAnimSequence.cs b/CUE4Parse-Conversion/Writers/ActorX/Structs/Animations/CAnimSequence.cs
+index d8a8a11b..f1624a22 100644
+--- a/CUE4Parse-Conversion/Writers/ActorX/Structs/Animations/CAnimSequence.cs
++++ b/CUE4Parse-Conversion/Writers/ActorX/Structs/Animations/CAnimSequence.cs
+@@ -7,6 +7,7 @@ namespace CUE4Parse_Conversion.Writers.ActorX.Structs.Animations
+     public class CAnimSequence
+     {
+         public UAnimSequence OriginalSequence;
++        public readonly UAnimSequence SourceSequence;
+         public readonly USkeleton Skeleton;
+         public readonly FTransform[]? RetargetBasePose;
+ 
+@@ -27,6 +28,7 @@ public class CAnimSequence
+         public CAnimSequence(UAnimSequence animSequence, USkeleton skeleton)
+         {
+             OriginalSequence = animSequence;
++            SourceSequence = animSequence;
+             Skeleton = skeleton;
+             RetargetBasePose = OriginalSequence.RetargetSource.IsNone switch
+             {
+@@ -39,7 +41,8 @@ false when skeleton.AnimRetargetSources.TryGetValue(OriginalSequence.RetargetSou
+ 
+             Name = OriginalSequence.Name;
+             NumFrames = OriginalSequence.NumFrames;
+-            FramesPerSecond = OriginalSequence.NumFrames / OriginalSequence.SequenceLength * MathF.Max(1, OriginalSequence.RateScale);
++            // Sample count includes both endpoints; RoN's 121 samples over 2 seconds are 60 Hz.
++            FramesPerSecond = Math.Max(1, OriginalSequence.NumFrames - 1) / OriginalSequence.SequenceLength * MathF.Max(1, OriginalSequence.RateScale);
+             IsAdditive = OriginalSequence.AdditiveAnimType != EAdditiveAnimationType.AAT_None;
+             _hasAdditiveTracks = IsAdditive;
+ 
+diff --git a/CUE4Parse-Conversion/Writers/UEFormat/UEAnim.cs b/CUE4Parse-Conversion/Writers/UEFormat/UEAnim.cs
+index 7a812107..0f20fb51 100644
+--- a/CUE4Parse-Conversion/Writers/UEFormat/UEAnim.cs
++++ b/CUE4Parse-Conversion/Writers/UEFormat/UEAnim.cs
+@@ -24,7 +24,9 @@ public UEAnim(string name, string objectPath, CAnimSet animSet, int sequenceInde
+             WriteMetadata(root, sequence, original);
+             WriteTracks(root, sequence, original, animSet.Skeleton.ReferenceSkeleton);
+ 
+-            if (original.CompressedCurveData?.FloatCurves is { Length: > 0 } floatCurves)
++            // Additive conversion replaces OriginalSequence with its base for bone mapping.
++            // Preserve the actual reload's curves, not the idle base's curves.
++            if (sequence.SourceSequence.CompressedCurveData?.FloatCurves is { Length: > 0 } floatCurves)
+                 WriteCurves(root, floatCurves, sequence.FramesPerSecond);
+         });
+     }
+@@ -120,7 +122,7 @@ private static (List<FVectorKey> Positions, List<FQuatKey> Rotations, List<FVect
+         FQuat? prevRot = null;
+         FVector? prevScale = null;
+         var constant = original.GetOrDefault<bool>("bConstantAnimation");
+-        var hasTrack = original.FindTrackForBoneIndex(boneIndex) >= 0;
++        var hasTrack = sequence.IsAdditive || original.FindTrackForBoneIndex(boneIndex) >= 0;
+ 
+         for (var frame = 0; frame < sequence.NumFrames; frame++)
+         {
+@@ -130,6 +132,11 @@ private static (List<FVectorKey> Positions, List<FQuatKey> Rotations, List<FVect
+             if (hasTrack)
+                 track.GetBoneTransform(frame, sequence.NumFrames, ref rotation, ref translation, ref scale);
+ 
++            // Avoid carrying the library's approximate inverse-square-root norm into exchange files.
++            var norm = MathF.Sqrt(rotation.X * rotation.X + rotation.Y * rotation.Y + rotation.Z * rotation.Z + rotation.W * rotation.W);
++            if (!float.IsFinite(norm) || norm < 1e-8f) throw new InvalidDataException("Invalid animation quaternion");
++            rotation = new FQuat(rotation.X / norm, rotation.Y / norm, rotation.Z / norm, rotation.W / norm);
++
+             translation.Scale(parentScale);
+             scale = scale.RelativeTo(boneTransform.Scale3D);
+ 
+@@ -141,9 +148,11 @@ private static (List<FVectorKey> Positions, List<FQuatKey> Rotations, List<FVect
+             }
+             else
+             {
+-                AppendChangedKey(positions, ref prevPos, frame, translation);
+-                AppendChangedKey(rotations, ref prevRot, frame, rotation);
+-                AppendChangedKey(scales, ref prevScale, frame, scale);
++                // Preserve the sampled timeline. Dropping repeated keys without
++                // retaining the end of each hold changes linear interpolation.
++                positions.Add(new FVectorKey(frame, translation));
++                rotations.Add(new FQuatKey(frame, rotation));
++                scales.Add(new FVectorKey(frame, scale));
+             }
+         }
+ 

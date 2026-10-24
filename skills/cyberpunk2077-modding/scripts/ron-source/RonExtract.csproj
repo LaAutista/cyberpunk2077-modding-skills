@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Cue4ParseRoot Condition="'$(Cue4ParseRoot)' == ''">$(RON_CUE)</Cue4ParseRoot>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(Cue4ParseRoot)/CUE4Parse-Conversion/CUE4Parse-Conversion.csproj" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux.NoDependencies" Version="[2.88.9]" />
+  </ItemGroup>
+  <Target Name="RequireExternalSource" BeforeTargets="PrepareForBuild;Restore">
+    <Error Condition="!Exists('$(Cue4ParseRoot)/CUE4Parse-Conversion/CUE4Parse-Conversion.csproj')"
+           Text="Set RON_CUE or -p:Cue4ParseRoot to the pinned, patched external CUE4Parse checkout." />
+  </Target>
+</Project>

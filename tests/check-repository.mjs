@@ -17,7 +17,7 @@ function walk(dir) {
 }
 walk(root);
 const relative = file => path.relative(root, file);
-const allowed = new Set(['.md', '.jq', '.sh', '.mjs', '.yaml', '.yml']);
+const allowed = new Set(['.md', '.jq', '.sh', '.mjs', '.yaml', '.yml', '.py', '.cs', '.csproj', '.patch']);
 const privacyPatterns = [
   [/\/(?:home|Users)\/[^\s/"'`]+\//, 'personal absolute path'],
   [/[A-Za-z]:\\(?:Users|Documents and Settings)\\/i, 'personal Windows path'],

@@ -15,6 +15,10 @@ and [tool-selection guide](../cyberpunk2077-modding/references/tool-selection.md
 Use the [Lynx case](references/lynx-case-study.md) for proven local reasoning and
 bounded evidence; use its [command contracts](references/lynx-command-contracts.md)
 only after supplying the described project-specific tools and owned assets.
+For Unreal source recovery and graph-aware retargeting, use the
+[HK416-derived reusable workflow](../cyberpunk2077-modding/references/ron-port-workflow.md).
+Use the [additive preview helper](references/additive-preview.md) only with its
+explicit bind-relative export contract and chosen normal base.
 
 ## Work sequence
 
