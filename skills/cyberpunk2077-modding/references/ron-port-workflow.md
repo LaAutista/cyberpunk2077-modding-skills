@@ -4,6 +4,9 @@ Use this alongside the [rigging workflow](weapon-rigging-animation.md), not inst
 of its collision, visual and native checks. The HK416 supplied the measured examples;
 its bone names, offsets, asset paths and thresholds are not a universal adapter.
 See the [case and unresolved gameplay issues](ron-hk416-case-study.md) before resuming it.
+For later full-state recovery, source FMOD audio and Scenario weight diagnostics,
+read the [beta findings](ron-beta-source-audio.md); they do not supersede native
+rest/weight preservation, visual review or gameplay acceptance.
 The [historical project command contracts](hk416-project-commands.md) preserve
 assembly/render/cook examples and explicitly identify unavailable private adapters.
 
@@ -147,3 +150,8 @@ image or log, attempted changes, tradeoffs and the next discriminating check.
 The [HK416 issue table](ron-hk416-case-study.md#current-user-reported-status) is an
 example. A reload playing is valuable evidence, but it does not close its thumb,
 aiming, texture or audio issues or validate every player/animation/platform.
+
+For the later editing-rig/rest-frame failure, private equip gate, shared locomotion
+contact constraints and actual ReArmament aiming audit, see
+[HK416 rest, scope and inspection findings](hk416-rest-scope-inspection.md).
+Its numeric/export results and unresolved Neto MAX/gameplay boundaries are separate.

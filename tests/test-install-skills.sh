@@ -2,11 +2,18 @@
 set -euo pipefail
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 scratch=$(mktemp -d)
-trap 'rm -rf -- "$scratch"' EXIT
+fixture_cache="$repo/skills/cyberpunk2077-modding/scripts/setup/__pycache__/installer-fixture.pyc"
+[[ ! -e $fixture_cache ]]
+mkdir -p -- "$(dirname -- "$fixture_cache")"
+printf 'generated fixture cache\n' > "$fixture_cache"
+trap 'rm -f -- "$fixture_cache"; rm -rf -- "$scratch"' EXIT
 dest=$scratch/agent/skills
 run() { bash "$repo/scripts/install-skills.sh" --dest "$dest" "$@"; }
 run
-for skill in cyberpunk2077-modding weapon-animation-inspection; do diff -qr "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
+for skill in cyberpunk2077-modding weapon-animation-inspection; do diff -qr -x __pycache__ -x '*.pyc' -x '*.pyo' "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
+[[ -f $dest/cyberpunk2077-modding/scripts/setup/provision.mjs ]]
+[[ -f $dest/cyberpunk2077-modding/scripts/comparison/diagnostic-dependencies.json ]]
+[[ -z $(find "$dest" -type d -name __pycache__ -print -quit) ]]
 if run >"$scratch/reject.log" 2>&1; then printf 'Existing install was not rejected.\n' >&2; exit 1; fi
 run --update
 [[ ! -e $scratch/agent/skill-backups ]]

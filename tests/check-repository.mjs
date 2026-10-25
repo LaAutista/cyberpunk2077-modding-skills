@@ -8,7 +8,7 @@ const errors = [];
 const files = [];
 function walk(dir) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (entry.name === '.git') continue;
+    if (entry.name === '.git' || entry.name === '__pycache__') continue;
     const file = path.join(dir, entry.name);
     if (entry.isSymbolicLink()) errors.push(`${path.relative(root, file)}: unexpected symlink`);
     else if (entry.isDirectory()) walk(file);
@@ -17,7 +17,7 @@ function walk(dir) {
 }
 walk(root);
 const relative = file => path.relative(root, file);
-const allowed = new Set(['.md', '.jq', '.sh', '.mjs', '.yaml', '.yml', '.py', '.cs', '.csproj', '.patch']);
+const allowed = new Set(['.md', '.jq', '.sh', '.mjs', '.yaml', '.yml', '.py', '.c', '.cs', '.csproj', '.patch']);
 const privacyPatterns = [
   [/\/(?:home|Users)\/[^\s/"'`]+\//, 'personal absolute path'],
   [/[A-Za-z]:\\(?:Users|Documents and Settings)\\/i, 'personal Windows path'],
@@ -46,7 +46,7 @@ function headings(text) {
 }
 for (const file of files) {
   const name = relative(file);
-  if (!allowed.has(path.extname(file)) && !['LICENSE', '.gitignore'].includes(path.basename(file)))
+  if (!allowed.has(path.extname(file)) && !((name.startsWith('setup/') || name.startsWith('skills/cyberpunk2077-modding/scripts/setup/')) && ['.json', '.txt'].includes(path.extname(file))) && name !== 'skills/cyberpunk2077-modding/scripts/comparison/diagnostic-dependencies.json' && !['LICENSE', '.gitignore'].includes(path.basename(file)))
     errors.push(`${name}: unexpected publication file type`);
   const bytes = fs.readFileSync(file);
   if (bytes.includes(0) || bytes.length > 256 * 1024) errors.push(`${name}: binary or oversized file`);

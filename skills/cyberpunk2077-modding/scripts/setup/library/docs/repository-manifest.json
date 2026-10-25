@@ -1,0 +1,86 @@
+[
+  {
+    "name": "RED4ext",
+    "remote": "https://github.com/WopsS/RED4ext.git",
+    "commit": "c52c8d802f67013cceae722d9996a3418608b991",
+    "path": "docs/upstream/RED4ext"
+  },
+  {
+    "name": "RED4ext.SDK",
+    "remote": "https://github.com/wopss/RED4ext.SDK.git",
+    "commit": "ad7277714ad30d6885d7050c5ba24fa0102f6920",
+    "path": "docs/upstream/RED4ext.SDK"
+  },
+  {
+    "name": "archivexl",
+    "remote": "https://github.com/psiberx/cp2077-archive-xl.git",
+    "commit": "5474e34d56112f5d8843ae863e1e72ff510957c0",
+    "path": "docs/upstream/archivexl"
+  },
+  {
+    "name": "archivexl-wiki",
+    "remote": "https://github.com/psiberx/cp2077-archive-xl.wiki.git",
+    "commit": "b13163615d321570e4e81ba530e6d9eefbb51a56",
+    "path": "docs/upstream/archivexl-wiki"
+  },
+  {
+    "name": "cet-source",
+    "remote": "https://github.com/maximegmd/CyberEngineTweaks.git",
+    "commit": "bcbe4574102c12e9f88218f6a7e881edd9aadca4",
+    "path": "docs/upstream/cet-source"
+  },
+  {
+    "name": "codeware",
+    "remote": "https://github.com/psiberx/cp2077-codeware.git",
+    "commit": "613a1cb830ecf33508ffca839d3ea631073504ef",
+    "path": "docs/upstream/codeware"
+  },
+  {
+    "name": "codeware-wiki",
+    "remote": "https://github.com/psiberx/cp2077-codeware.wiki.git",
+    "commit": "0475d902c26efb21f4d602d1d3d91209db2ae8a1",
+    "path": "docs/upstream/codeware-wiki"
+  },
+  {
+    "name": "nativedb-wiki",
+    "remote": "https://github.com/CDPR-Modding-Documentation/NativeDB-wiki.git",
+    "commit": "ed4e34def19277b5eb814f1d877a3a80cf3a2b8c",
+    "path": "docs/upstream/nativedb-wiki"
+  },
+  {
+    "name": "redlib",
+    "remote": "https://github.com/psiberx/cp2077-red-lib.git",
+    "commit": "6822105d15d1b8bd1e6aae5e57827835e585cfe8",
+    "path": "docs/upstream/redlib"
+  },
+  {
+    "name": "redscript-compiler",
+    "remote": "https://github.com/jac3km4/redscript.git",
+    "commit": "3ca666c8ec14cfc803ef3888aab6ebc7a1c2bb86",
+    "path": "docs/upstream/redscript-compiler"
+  },
+  {
+    "name": "tweakxl",
+    "remote": "https://github.com/psiberx/cp2077-tweak-xl.git",
+    "commit": "f8da6be4fb7b8340d5744d822a85de1400f2cafb",
+    "path": "docs/upstream/tweakxl"
+  },
+  {
+    "name": "tweakxl-wiki",
+    "remote": "https://github.com/psiberx/cp2077-tweak-xl.wiki.git",
+    "commit": "834930683bda2cc472ed466657489734c5c71b19",
+    "path": "docs/upstream/tweakxl-wiki"
+  },
+  {
+    "name": "wolvenkit-developer-wiki",
+    "remote": "https://github.com/WolvenKit/WolvenKit.wiki.git",
+    "commit": "d83777e40c3e5244f74e3b592f62af1d66057732",
+    "path": "docs/upstream/wolvenkit-developer-wiki"
+  },
+  {
+    "name": "wolvenkit-source",
+    "remote": "https://github.com/WolvenKit/WolvenKit.git",
+    "commit": "2034eb7d27bcc9c1566b5782117f58ba451b70bf",
+    "path": "docs/upstream/wolvenkit-source"
+  }
+]

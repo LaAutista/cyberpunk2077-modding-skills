@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "Bounded copied-asset diagnostics; exact helper bytes precede import",
+  "helpers": {
+    "scenario_export": {
+      "relativePath": "scenario-blender-export/scripts/bx_export.py",
+      "sha256": "80b2e757385d1ee9a1de82f018b31dbc4eb8cf7af1887f1321d8a333ee87bb8b",
+      "revision": "Scenario0.59.0 / 5429dea302ccc7edbce8ace9d5c1fb6852499540"
+    },
+    "cp_sampler": {
+      "relativePath": "weapon-animation-inspection/scripts/weapon_animation_gltf.py",
+      "sha256": "04cab6999875543a82f6afe3f08dab373f3189f59773482b41df147319473d37",
+      "revision": "Cyberpunk sampler c2d324022179aba8d8423d77651df4659d3a65ea"
+    }
+  },
+  "runtimes": {
+    "blender": [
+      "5.2.3"
+    ],
+    "numpy": [
+      "2.5.4",
+      "2.3.4"
+    ]
+  },
+  "diagnostics": {
+    "scenario": [
+      "scenario_export"
+    ],
+    "parent": [
+      "cp_sampler"
+    ],
+    "skin": []
+  },
+  "runtimeRequirements": {
+    "scenario": [
+      "blender",
+      "numpy"
+    ],
+    "parent": [
+      "blender",
+      "numpy"
+    ],
+    "skin": [
+      "numpy"
+    ]
+  }
+}

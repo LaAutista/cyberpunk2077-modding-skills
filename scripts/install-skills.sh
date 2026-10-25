@@ -15,13 +15,14 @@ done
 dest=$(realpath -m -- "$dest")
 case "$dest/" in "$repo/skills/"*) printf 'Destination overlaps source skills.\n' >&2; exit 1 ;; esac
 skills=(cyberpunk2077-modding weapon-animation-inspection)
+same_skill() { diff -qr -x __pycache__ -x '*.pyc' -x '*.pyo' -- "$1" "$2"; }
 unchanged=true
 for skill in "${skills[@]}"; do
     [[ -f $repo/skills/$skill/SKILL.md ]]
     if [[ -e $dest/$skill || -L $dest/$skill ]]; then
         if ! $update; then printf 'Already exists: %s (use --update to back up and replace)\n' "$dest/$skill" >&2; exit 1; fi
     fi
-    if ! diff -qr -- "$repo/skills/$skill" "$dest/$skill" >/dev/null 2>&1; then unchanged=false; fi
+    if ! same_skill "$repo/skills/$skill" "$dest/$skill" >/dev/null 2>&1; then unchanged=false; fi
 done
 if $unchanged; then printf 'Already current: %s\n' "$dest"; exit 0; fi
 mkdir -p -- "$dest"
@@ -45,7 +46,10 @@ trap 'exit 143' TERM
 # Complete and compare both staged copies before changing either installed skill.
 for skill in "${skills[@]}"; do
     cp -R -- "$repo/skills/$skill" "$stage/$skill"
-    diff -qr -- "$repo/skills/$skill" "$stage/$skill" >/dev/null
+    # Bytecode is generated locally and can embed private source paths.
+    find "$stage/$skill" -type d -name __pycache__ -prune -exec rm -rf -- {} +
+    find "$stage/$skill" -type f \( -name '*.pyc' -o -name '*.pyo' \) -delete
+    same_skill "$repo/skills/$skill" "$stage/$skill" >/dev/null
 done
 for skill in "${skills[@]}"; do
     if [[ -e $dest/$skill || -L $dest/$skill ]]; then
@@ -60,7 +64,7 @@ for skill in "${skills[@]}"; do
     mv -- "$stage/$skill" "$dest/$skill"
     installed+=("$skill")
 done
-for skill in "${skills[@]}"; do diff -qr -- "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
+for skill in "${skills[@]}"; do same_skill "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
 success=true
 printf 'Installed both skills: %s\n' "$dest"
 printf 'Use $cyberpunk2077-modding or $weapon-animation-inspection in Codex.\n'

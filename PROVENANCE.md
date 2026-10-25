@@ -126,3 +126,95 @@ retains [Apache-2.0](skills/cyberpunk2077-modding/scripts/ron-source/cue4parse-L
 and [attribution](skills/cyberpunk2077-modding/scripts/ron-source/cue4parse-NOTICE.md).
 External mapping files, commercial decompression libraries and game resources are
 referenced, not redistributed or licensed by this repository.
+
+## Beta source/audio and Scenario evidence update, 2026-10-24
+
+The [beta findings](skills/cyberpunk2077-modding/references/ron-beta-source-audio.md)
+add original guidance from 94 source sequence exports, 73 HK416-base compositions,
+54 independently checked embedded audio samples and 54 staged AudioXL events.
+The minimal script compile used only current Codeware/AudioXL and copied vanilla
+cache; private audio metadata passed native roundtrip. No author weapon-core code,
+commercial assets, bank, DLL or new fixed-path adapter is redistributed. Gameplay,
+native phase-event pacing and final visual/package acceptance remain separate.
+
+Scenario collection installation is tied to commit
+`5429dea302ccc7edbce8ace9d5c1fb6852499540`: 166 public skills installed and discovered,
+with seven maintainer skills excluded. All installed files matched that source and
+prior skill files/settings were preserved. Synthetic helper checks and a later
+read-only weight diagnostic on nine actual meshes are explicitly distinguished
+from thumb/contact repair. No cloud service, upload or paid generation was used.
+This repository update documents the integration findings; it does not bundle
+Scenario's collection or imply its optional applications/services were tested.
+
+## Neto Fallout / Scenario comparison, 2026-10-25
+
+The [comparison reference](skills/cyberpunk2077-modding/references/fo4-scenario-comparison.md)
+adds concise task routing, versioned source attribution and two original bounded
+diagnostics. Neto's supplied FO4 skill 1.0.0 and the pinned Scenario skills remain
+independent and unchanged; neither their source prose/helpers nor game assets are
+redistributed here. The prior Cyberpunk workflow and uncommitted work were
+preserved before this additive update.
+
+Blender 5.2.3 LTS tests on copied actual CP assets demonstrate:
+
+- A deliberately wrong rigid model parent can preserve bind placement while
+  deviating 0.782 m during reload; restoring the parent/rebased bind recovers the
+  independently composed baseline within 1.10e-7 m across 2,689 time samples.
+  Rotated shell bounds also expose up to 6.446 mm of posed-AABB center drift.
+- Scenario's default glTF exchange export removes 36,931 named influences from
+  the copied eight-influence arm. Explicit all-influence export preserves them
+  within 1.19e-7 component error. Both generic comparisons still reject the
+  source's 67-root layout; root-name order changes, and no native index/bind or
+  animated-deformation acceptance is claimed.
+
+The included diagnostics repeat these controls without cooking or editing native
+resources. They retain input hashes, fail on unsupported assumptions and require
+fresh outputs. Scope is local-TRS rigid-parent and named-weight preservation,
+not generic rig conversion. The reference retains failed execution attempts,
+local audio/child-exit workarounds, source-specific supersession and deferred
+Max/CAT, runtime dispatch, material and gameplay checks. Existing native and
+visual verification gates remain authoritative.
+
+## Setup/preflight review candidate
+
+The runtime in `skills/cyberpunk2077-modding/scripts/setup` travels with the skill;
+repository `setup/*.mjs` files invoke the same implementation. Download identities
+come from original local release receipts, Microsoft's official SDK metadata,
+Blender's official checksums, GitHub release asset digests and official npm/PyPI
+integrity metadata. No binary dependency or commercial game data is bundled.
+The Wine manifest records456 matching console/desktop file hashes and authored
+metadata deltas. Per-project NuGet lock graphs retain resolved package content hashes.
+
+The offline FMOD helper derives from the user's original
+`CP2077Dev/tools/ron_beta_audio_fmod.c`, using public Windows/FMOD API declarations
+and owner-supplied DLLs; no FMOD SDK implementation is copied. The documentation
+scripts and independent repository manifest derive from the laptop reference
+library; original acquisition/source/version/hash semantics are preserved. The
+scoped new corpus is distinct from the historical full-library inventory.
+`setup/VALIDATION.md` records clean-tool-root provisioning, repeated runs,
+source/native/Blender/FMOD checks and remaining OS/runtime/gameplay boundaries.
+
+
+### Additional isolated comparison gates
+
+The completed comparison guidance/probes and preceding RON/native additions were
+incorporated from a stable local source snapshot without modifying that checkout.
+The added CPU GLB verifier checks named joint mappings, inverse binds and sampled
+linear-blend skinning. It uses generated fixture controls and copied owned assets;
+no game asset or third-party Scenario implementation is bundled. Dependency pins
+identify the exercised Scenario export helper and independent CP sampler by exact
+SHA256, with observed Blender/NumPy version gates before importing verified bytes.
+Synthetic stress and selected Normal-clip evidence remain separate from native
+mesh cooking, unresolved corrective-joint coverage, the preserved multiple-root
+warning and gameplay. See the comparison guide and setup validation receipt.
+
+### Later rest-frame and inspection guidance
+
+The original [HK416 rest/scope/inspection note](skills/cyberpunk2077-modding/references/hk416-rest-scope-inspection.md)
+and its RoN-workflow routing link were reconciled from the current shared source
+into this isolated candidate using before/after file hashes. The note preserves
+control-rest versus mesh-bind distinctions, private state ownership, contact and
+aiming inspection, and its explicit MAX/native/visual/gameplay evidence limits.
+Project-relative adapter examples remain case-specific supplied-input routes;
+no private assets, scene files, installed binaries or live configuration is copied.
+These source-reported findings are not new installer validation results.

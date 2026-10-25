@@ -5,6 +5,8 @@ description: Build, modify and package Cyberpunk 2077 mods using version-matched
 
 # Cyberpunk 2077 modding
 
+For setup or missing tools, start with the agent-neutral [preflight and setup](references/setup-preflight.md) using the packaged `scripts/setup/*.mjs` entry points (or repository `setup/*.mjs`). Preflight is read-only; follow the task-specific prerequisites and report unknown/manual gates before building.
+
 Inspect the user's current project and installed toolchain before implementing a
 change. Read the [development playbook](references/development-playbook.md), relevant
 [topic sources](references/topic-map.md) and [documented corrections](references/documentation-corrections.md).
@@ -38,6 +40,8 @@ reference library or preinstalled bridge is assumed.
 | Ordinary CR2W authoring differences | A schema-aware diff if available; ignored render buffers require dedicated geometry/payload checks. |
 | Fit rigs, adapt animation, inspect collision/contact | [Reusable weapon workflow](references/weapon-rigging-animation.md) and [inspection skill](../weapon-animation-inspection/SKILL.md). |
 | Port an Unreal weapon or first-person reload | [Source-to-native port workflow](references/ron-port-workflow.md), including extraction, graph-aware adaptation, preview and export gates. |
+| Recover source audio/state coverage or evaluate Scenario Blender helpers | [Beta source/audio findings](references/ron-beta-source-audio.md), with standalone AudioXL integration and separate installation, diagnostic and gameplay evidence. |
+| Compare Fallout/CAT or Scenario rigging/export advice with Cyberpunk | [Versioned comparison and copied-asset tests](references/fo4-scenario-comparison.md). Use transferable diagnostics; retain Cyberpunk hierarchy, weights, timing and native export gates. |
 | Runtime state inspection | An existing bounded, version-matched bridge if available; prove engine calls separately from offline protocol tests. |
 | Evaluate another MCP server | [Tool selection](references/tool-selection.md) and [pinned implementation comparison](references/mcp-comparison.md). |
 

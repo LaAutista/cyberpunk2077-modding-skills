@@ -1,6 +1,7 @@
 # Environment and prerequisites
 
-The skills are instructions plus small helpers, not a toolchain installer. Record
+Reading/installing the skills does not provision tools. Use the opt-in isolated
+[setup entry points](setup-preflight.md) for the evidenced Linux toolchain. Record
 the game executable, framework versions, active manager/profile, input hashes,
 WolvenKit build, Blender/add-on versions and operation-specific commands before work.
 Keep machine-specific paths in a private file outside version control.

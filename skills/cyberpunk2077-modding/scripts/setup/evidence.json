@@ -1,0 +1,69 @@
+{
+  "origin": "CP2077Dev local source inspection, 2026-10-25",
+  "observedFiles": {
+    "wk-linux": {
+      "source": "tools/WolvenKit.ConsoleLinux-9.0.1/WolvenKit.CLI.dll",
+      "sha256": "5be65c014812d82ec2a3dfc0340f91efe138b04b98fff80fabd8c92985c201bb"
+    },
+    "wk-wine": {
+      "source": "tools/WolvenKit.CLI-Wine/WolvenKit.CLI.deps.json",
+      "sha256": "2753271820ba4a506f8c49fbc73ee028bed56eeff279186ee96fc6053f63c894"
+    },
+    "wk-red4": {
+      "source": "tools/WolvenKit.ConsoleLinux-9.0.1/WolvenKit.RED4.dll",
+      "sha256": "8725402865ce80615c8857efd6941fcfc96d358a9fdf89dc149b84911ae6d2ed"
+    },
+    "runtime": {
+      "source": "tools/dotnet/shared/Microsoft.NETCore.App/10.0.12/.version",
+      "sha256": "1857f3b4781cf9df423bc9e9e0789af6fcc7eac59bab307a3fd1ee2830fc887d"
+    },
+    "native-wrapper": {
+      "source": "tools/ron_native_animation.sh",
+      "sha256": "c7ddb6bfac03dd6476113141c7521489edfab4579e01a26bb41cb9201384f011"
+    },
+    "fmod-source": {
+      "source": "tools/ron_beta_audio_fmod.c",
+      "sha256": "693e906978fdaa907c18d93135c60e4ea2ab862fb2968203a1c0123abf50d4c1"
+    },
+    "compiler-wrapper": {
+      "source": "tools/check_ron_hk416_addon_scripts.py",
+      "sha256": "a65e0aef9b6ddf8aaf1fe3c822286e2716218cdb3ed5b7e8457b19a7e901cc6a"
+    }
+  },
+  "sourceExtraction": {
+    "dotnetSdk": "10.0.400",
+    "cue4parseCommit": "990d4d7d4e0340a75a14323436d55568f1415e00",
+    "submodules": [
+      "414689d5cff4286a7898487a46dc5e48005d38da CUE4Parse-Natives/ACL/external/acl (v2.1.0)",
+      " 0d98dba29d66e93259db7daa53a9327df767a415 CUE4Parse-Natives/ACL/external/acl/external/benchmark (v1.6.1)",
+      " c4e3767e265808590986d5db6ca1b5532a7f3d13 CUE4Parse-Natives/ACL/external/acl/external/catch2 (v2.13.7)",
+      " d7982f2b2524feeb322f424b29cf43df30b5d5b7 CUE4Parse-Natives/ACL/external/acl/external/rtm (v2.2.0)",
+      " 0d98dba29d66e93259db7daa53a9327df767a415 CUE4Parse-Natives/ACL/external/acl/external/rtm/external/benchmark (v1.6.1)",
+      " c4e3767e265808590986d5db6ca1b5532a7f3d13 CUE4Parse-Natives/ACL/external/acl/external/rtm/external/catch2 (v2.13.7)",
+      " 54b3985e8ccc5efb5f24dabf0b4b802a996366e6 CUE4Parse-Natives/ACL/external/acl/external/sjson-cpp (v0.9.0)",
+      " c4e3767e265808590986d5db6ca1b5532a7f3d13 CUE4Parse-Natives/ACL/external/acl/external/sjson-cpp/external/catch2 (v2.13.7)"
+    ],
+    "extractorSha256": "34dff9e8f22c93be7258bc9c6fe663d20cdefb7e470278d2245927fcfc5bbe0c",
+    "nativeSha256": "207bfc8dd0cf04c8f9899a366bf2af2b4dfec1a26d331e7674212fca812076b6",
+    "patchSha256": "0d12c87e96d895eea06e725bec5f0ef158855ce5e6ac7779a453950104ebfd2c"
+  },
+  "dependencies": {
+    "mapping": {
+      "file": "ReadyOrNot-UMG-20261024.usmap",
+      "url": "https://unofficial-modding-guide.com/downloads/Mappings.usmap",
+      "sha256": "f1ce422460be333aaee3f73a8802e7269be9d83aba9033606794abd3a8b32848",
+      "note": "Original local filename retained; date suffix is not a build compatibility claim. Tested on the listed assets, not all game content."
+    },
+    "oodle": {
+      "file": "liboodle-data-shared.so",
+      "url": "https://github.com/WorkingRobot/OodleUE/releases/download/2026-06-04-1357/gcc-x64-release.zip",
+      "version": "2.9.16",
+      "sha256": "f21d70299bbe873f63e8aef778b30f4dee6dec1fc09140c185caf1f8d153f771"
+    }
+  },
+  "notes": [
+    "Observed file hashes identify this machine, not official release provenance.",
+    "WolvenKit9.1.0 is installed; builders select9.0.1.",
+    "Runtime10.0.12 .version verified; SDK10.0.400 comes from source extraction receipt."
+  ]
+}

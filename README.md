@@ -61,6 +61,10 @@ Use `/skills` to confirm discovery; restart the client if the new skills do not
 appear. Other agents can read the two `SKILL.md` files directly or use their own
 skill installation mechanism. Automatic discovery in other hosts is not tested here.
 
+## Setup/preflight review candidate
+
+See [agent-neutral setup commands and boundaries](setup/README.md). Run `node setup/preflight.mjs` from the checkout for read-only discovery; isolated provisioning supports the evidenced Linux toolchain and keeps supplied inputs/manual gates explicit.
+
 ## Prerequisites and checks
 
 - Reading/invocation requires an agent that can access the Markdown files.

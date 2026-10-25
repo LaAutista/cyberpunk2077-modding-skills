@@ -1,0 +1,68 @@
+{
+  "id": "ron-hk416",
+  "destination": "cyberpunk2077",
+  "status": "verified-bounded-source-extraction",
+  "sourceBuild": {
+    "steam": 25784851,
+    "unreal": "5.3.2.0",
+    "format": "PAK v11; FUECompressedAnimData/AKF_PerTrackCompression"
+  },
+  "adapter": "../../ron-source",
+  "guide": "../../../references/ron-source-extraction.md",
+  "required": [
+    "sdk",
+    "ron-extract",
+    "oodle",
+    "mapping"
+  ],
+  "laterStages": [
+    "blender",
+    "ueformat",
+    "wk-linux",
+    "wk-wine",
+    "runtime"
+  ],
+  "pins": {
+    "cue4parse": "990d4d7d4e0340a75a14323436d55568f1415e00",
+    "ueformat": "d858fe38b2b5b8c63ac4b7481b4386ebfabbf935",
+    "sdk": "10.0.400",
+    "oodle": "2.9.16"
+  },
+  "evidence": "../evidence.json",
+  "gates": [
+    "owned inputs",
+    "source inventory",
+    "patched extraction and all-sample exchange checks",
+    "graph-aware full-motion Blender inspection",
+    "Cyberpunk adaptation",
+    "native export/readback",
+    "package validation",
+    "user-controlled gameplay"
+  ],
+  "limits": [
+    "HK416 selected assets only",
+    "no ACL source clip exercised",
+    "offline parity is not gameplay",
+    "current setup candidate does not automate dependency build"
+  ],
+  "buildRequirements": [
+    "sdk",
+    "cue4parse",
+    "cxx",
+    "cmake"
+  ],
+  "audio": {
+    "optional": true,
+    "component": "audio",
+    "fmodAPI": "2.03.10",
+    "supplied": [
+      "fmod.dll",
+      "fmodstudio.dll",
+      "resonanceaudio.dll",
+      "Master.bank",
+      "Master.strings.bank",
+      "Weapons.bank"
+    ]
+  },
+  "pathBase": "manifest-directory"
+}

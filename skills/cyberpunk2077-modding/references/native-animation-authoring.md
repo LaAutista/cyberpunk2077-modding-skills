@@ -9,7 +9,8 @@ the skill. A different toolkit version needs a reviewed adaptation and new nativ
 regressions; changing a directory name does not establish compatibility.
 
 This is a per-container authoring gate. It accepts selected existing named clips
-with `Normal` animation, `rootMotionType: None`, and LINEAR or STEP channels in
+with `Normal`, `Additive` or `AdditiveWithoutFirstFrame` animation,
+`rootMotionType: None`, and LINEAR or STEP channels in
 WolvenKit's GLB extras schema. It is not a generic animation converter or a weapon
 retargeter. Supply the matching original native `.anims`, `.rig`, serialized JSON,
 and authored GLB. A project must still own clean input extraction, version/hash
@@ -36,13 +37,17 @@ validation, visual acceptance, packaging, and user-controlled gameplay checks.
   `W == 1` and XYZ is nonzero. The reader derives quaternions from actual serialized
   native bytes without receiving authored values. Raw records store time/flags;
   constant records store flags/time. Unknown key kinds, missing rotation coverage,
-  quantized rotation keys, and unexplained differences fail. The tolerance remains
+  unsupported record layouts, and unexplained differences fail. The tolerance remains
   `1e-5`; numerical disagreement is not solved by increasing it.
 - Original null motion-extraction and null event handles remain null when the
   imported result also has no payload. Explicit `animEvents: []` intentionally
   clears events; omitted/null metadata retains the toolkit's standard behavior.
   The semantics gate accepts full original event payload preservation or explicit
-  emptiness. It does **not** certify newly authored nonempty event payloads.
+  emptiness. The beta extension also checks complete native payloads for unfiltered
+  named `Sound` events and equip `Phase` events named `active`/`recover`. Their
+  start/duration are uint32 ticks at30Hz, bounded by the clip. Unsupported payload
+  fields, filters and new arbitrary event classes are rejected. Event readback
+  proves serialization, not audible dispatch or gameplay phase behavior.
 - The independent semantics gate parses float tails directly, checking key counts,
   exact float32 values, track indices, and nearest ticks. It checks rig counts,
   extra counts, scale keys/flags, and original fallback rows. With no scale keys,
@@ -51,11 +56,32 @@ validation, visual acceptance, packaging, and user-controlled gameplay checks.
   Fallback lookup rows and full root tables are preserved; rebuilding fallback
   poses or proving their runtime selection is outside this adapter.
 
-The rotation reader only independently decodes the explicitly required Normal/raw
-compressed clips; it leaves other exported clips alone. Unselected integrity is
-checked separately. Root-motion adaptation, additive authoring, quantized selected
-rotations, CUBICSPLINE, new clip names, new skeletons, graph/IK/procedural motion,
-and arbitrary event authoring are outside this tested contract.
+The reader independently decodes explicitly required compressed clips and restores
+the matching native bind for additive exports; it leaves other exported clips
+alone. Raw, constant and supported quantized rotation records are decoded with
+explicit layout guards. Selected authoring uses raw keyed output. Unselected
+integrity is checked separately. Root-motion adaptation, CUBICSPLINE, new clip
+names, new skeletons, graph/IK/procedural motion and arbitrary event authoring
+remain outside this tested contract.
+
+## Additive representation
+
+Supply bind-relative GLB values `E.T=B.T+D.T`, `E.Q=normalize(B.Q*D.Q)`,
+`E.S=B.S*D.S`, where B is the **original local rig bind**, not the desired stance.
+To express a desired pose P over normal base L, use `D.T=P.T-L.T`,
+`D.Q=inverse(L.Q)*P.Q`, `D.S=P.S/L.S`. The preview must explicitly select L.
+The observed Unreal source additive order differs; do not interchange them.
+
+`prepare --preserve-key-sampling` removes B once, using inverse(B.Q) on the left,
+and marks root extras `betaAdditiveRepresentation=raw-delta-v1`. Repeated preparation
+and unprepared additive imports are rejected. The importer disables the toolkit's
+stock additive stripping: its quaternion right-division is not the inverse of B*D
+for noncommuting rotations. Preserve the first sample of AdditiveWithoutFirstFrame;
+its native graph semantics are not a reason to discard authored keys.
+
+The tiny-quaternion correction also covers independently observed native bind
+normalization and additive composition shortcuts. Unknown differences still fail
+at1e-5; this extension did not loosen the comparison tolerance.
 
 ## Configure an isolated run
 
@@ -80,6 +106,7 @@ mkdir "$work/baseline-json" "$work/native-json"
 "$WOLVENKIT_ROOT/WolvenKit.CLI" cr2w --serialize "$work/source.rig" -o "$work/baseline-json"
 bash "$helper/native-animation.sh" export "$work/source.anims" "$work/source.rig" "$work/original.glb"
 node "$helper/test-native-animation.mjs"
+node "$helper/test-beta-additive.mjs"
 ```
 
 Record source and tool SHA256 hashes before and after the run. Test unchanged
@@ -91,7 +118,7 @@ selected descriptor and event metadata:
 
 ```bash
 node "$helper/check-animation.mjs" perturb "$ONE_CLIP_GLB" "$work/changed.glb" "$CLIP" "$BONE" 0.001
-node "$helper/check-animation.mjs" prepare "$ONE_CLIP_GLB" "$work/unchanged-prepared.glb"
+node "$helper/check-animation.mjs" prepare "$ONE_CLIP_GLB" "$work/unchanged-prepared.glb" --preserve-key-sampling
 # Import, serialize, export, and read back as below for each fixture.
 node "$helper/check-animation.mjs" verify "$ORIGINAL_JSON" "$NEW_JSON" \
   "$ONE_CLIP_GLB" "$READBACK_GLB" "$CLIP"
@@ -140,11 +167,25 @@ These original helpers derive from the clean HK416 project's
 `adapter/adapter-maintained/NativeAnimation.csproj`,
 `check-selected-animation.mjs`, `readback-selected-animation.mjs`,
 `native-json-canonical.mjs`, and `verify-selected-semantics-v2.mjs`, plus the
-original `tools/ron_native_animation.sh` launcher pattern. Portable changes remove
-project path/role assumptions, enforce the selected Normal/null-root-motion
-contract and installed toolkit version, refuse existing outputs, and add
+original `tools/ron_native_animation.sh` launcher pattern. The initial portable version removed
+project path/role assumptions, enforced the selected Normal/null-root-motion
+contract and installed toolkit version, refused existing outputs, and added
 synthetic regressions. The generic semantics gate uses explicit event emptiness
 instead of recognizing weapon-specific reload aliases.
+
+The later beta extension retains that original contract and adds the explicitly
+bounded additive, Sound and Phase cases above. Ten copied-resource integrations
+covered unchanged and single translation-channel +.001 edits for both player
+additive types and a Normal weapon fixture. Strict metadata, channels, floats,
+fallbacks and original chunks passed; seven corruption/contract guards rejected
+bad copies. Controlled Sound/Phase cases checked full native payloads and rejected
+incorrect event names/ticks/phase starts. Portable production files match the tested
+adapter. After synchronization, the synthetic suites passed, ten saved native
+integration outputs and three event cases were independently rechecked, and fresh
+portable compilation plus one controlled additive import/export/readback passed.
+See the [beta source/audio findings](ron-beta-source-audio.md) for the separate
+assembly, visual, timing and gameplay boundaries. Historical counts below belong
+to the earlier Normal-only checkpoint and are not totals for the newer beta.
 
 The source project's historical selected checkpoint covered 58 selected and 91
 untouched clips across five containers, including 15,938 stored float keys and

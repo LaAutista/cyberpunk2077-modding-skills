@@ -24,6 +24,9 @@ and unrelated motion. This reference does not authorize deployment or game launc
   worked on every weapon. New rig mappings, codecs, IK, graph reconstruction,
   custom arms or alternate exports need their own proof. Keep proposed techniques
   labelled untested until exercised and inspected.
+- For imported Fallout/CAT or Scenario advice, use the [comparison and tested
+  boundaries](fo4-scenario-comparison.md), including fixed-animation parent tests
+  and the Cyberpunk exception to generic four-influence export guidance.
 
 ## 1. Establish both assemblies before fitting
 

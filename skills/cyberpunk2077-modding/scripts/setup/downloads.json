@@ -1,0 +1,68 @@
+[
+  {
+    "id": "WolvenKit-9.0.1.zip",
+    "url": "https://github.com/WolvenKit/WolvenKit/releases/download/9.0.1/WolvenKit-9.0.1.zip",
+    "algorithm": "sha256",
+    "hash": "46c4bcccc8b34c2d76e43153c539550cae08355d64bfccc3c77ff3fd6e2722e8"
+  },
+  {
+    "id": "WolvenKit.ConsoleLinux-9.0.1.zip",
+    "url": "https://github.com/WolvenKit/WolvenKit/releases/download/9.0.1/WolvenKit.ConsoleLinux-9.0.1.zip",
+    "algorithm": "sha256",
+    "hash": "d891ce01ae7b791b60fa4648658ce67f2fd60c29b46f1d58d63ecf9544b8c0af"
+  },
+  {
+    "id": "redscript-cli.exe",
+    "url": "https://github.com/jac3km4/redscript/releases/download/v0.5.31/redscript-cli.exe",
+    "algorithm": "sha256",
+    "hash": "cdcbed2e0c943322bbcbbac4a9c62ef29adc5620e4b0934f0d2a31a8282b5b62"
+  },
+  {
+    "id": "dotnet-runtime-10.0.12-linux-x64.tar.gz",
+    "url": "https://builds.dotnet.microsoft.com/dotnet/Runtime/10.0.12/dotnet-runtime-10.0.12-linux-x64.tar.gz",
+    "algorithm": "sha512",
+    "hash": "58388fdde4f13bd703c7a6f7defb3300b17e42ba5fe8bca50066f80f64ac7406620dcdfb4acc1eff7992750c8cc5cff8369dd12d09730c8a9e8760d6032f7f6e"
+  },
+  {
+    "id": "WolvenKit.Console-9.0.1.zip",
+    "url": "https://github.com/WolvenKit/WolvenKit/releases/download/9.0.1/WolvenKit.Console-9.0.1.zip",
+    "algorithm": "sha256",
+    "hash": "364427384c0f4ebb6b157fa9abd01595258af1b7993c7b3a7edd2920f2016e92"
+  },
+  {
+    "id": "dotnet-sdk-10.0.400-linux-x64.tar.gz",
+    "url": "https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.400/dotnet-sdk-10.0.400-linux-x64.tar.gz",
+    "algorithm": "sha512",
+    "hash": "1033977dd837150e0814cf0c5d5b17ceb63925fda7ba2158b47258a4bd7c048cf82eac3bc1166f3146f53124a3f5fba09db1de1260d2ce96399860303b404b48",
+    "provenance": "https://builds.dotnet.microsoft.com/dotnet/release-metadata/10.0/releases.json"
+  },
+  {
+    "id": "blender-5.2.3-linux-x64.tar.xz",
+    "url": "https://download.blender.org/release/Blender5.2/blender-5.2.3-linux-x64.tar.xz",
+    "algorithm": "sha256",
+    "hash": "78486c018b4443efe5e75ab54c290ed8c15abafd249b862c2c9ce2530a918eec",
+    "strip": 1
+  },
+  {
+    "id": "oodle-gcc-x64-release.zip",
+    "url": "https://github.com/WorkingRobot/OodleUE/releases/download/2026-06-04-1357/gcc-x64-release.zip",
+    "algorithm": "sha256",
+    "hash": "458c66945ea6124d4f6fcf64cec5601ab230f61f6677a6ecab6cca621a9d0e11",
+    "strip": 0
+  },
+  {
+    "id": "llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64.tar.xz",
+    "url": "https://github.com/mstorsjo/llvm-mingw/releases/download/20260922/llvm-mingw-20260922-ucrt-ubuntu-22.04-x86_64.tar.xz",
+    "algorithm": "sha256",
+    "hash": "bb7bb7654b33d5aa8712acb837c963b2e0c56352560c76105270a3268c665c21",
+    "strip": 1
+  },
+  {
+    "id": "rea-agents-6.4.0.tgz",
+    "url": "https://registry.npmjs.org/rea-agents/-/rea-agents-6.4.0.tgz",
+    "algorithm": "sha512",
+    "hash": "563d7359f4a59dae5ba611a86a823f4dc541b98bf37bdbbe3b23c2dd2873f18901a9a093a81e023a79d1a17ed70f0329c08db86651447a5db2123d24f0b4d611",
+    "strip": 1,
+    "provenance": "https://registry.npmjs.org/rea-agents/6.4.0"
+  }
+]

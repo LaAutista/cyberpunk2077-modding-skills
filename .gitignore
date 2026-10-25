@@ -39,3 +39,9 @@ __pycache__/
 *.pyc
 **/bin/
 **/obj/
+
+# Acquired documentation and generated indexes stay local.
+skills/cyberpunk2077-modding/scripts/setup/library/docs/upstream/
+skills/cyberpunk2077-modding/scripts/setup/library/docs/source-manifest.json
+skills/cyberpunk2077-modding/scripts/setup/library/docs/catalog.json
+skills/cyberpunk2077-modding/scripts/setup/library/docs/index.html

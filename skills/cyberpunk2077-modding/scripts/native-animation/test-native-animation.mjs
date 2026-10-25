@@ -45,11 +45,11 @@ try {
   assert.equal(json.animations[0].samplers[0].interpolation,'STEP');
   assert.equal(json.animations[0].extras.optimizationHints.preferSIMD,false);
   run('check-animation.mjs',['prepare',source,prepared],false);
-  j.animations[0].extras.animationType='Additive';writeGlb(path.join(work,'unsupported.glb'),j,bin);
+  j.animations[0].extras.animationType='Unsupported';writeGlb(path.join(work,'unsupported.glb'),j,bin);
   run('check-animation.mjs',['prepare',path.join(work,'unsupported.glb'),path.join(work,'rejected.glb')],false);
   j.animations[0].extras.animationType='Normal';
   j.animations[0].channels.length=1;j.animations[0].samplers.length=1;
-  const rig=path.join(work,'rig.json');fs.writeFileSync(rig,JSON.stringify({Data:{RootChunk:{boneNames:[{$value:'bone'}]}}}));
+  const rig=path.join(work,'rig.json');fs.writeFileSync(rig,JSON.stringify({Data:{RootChunk:{boneNames:[{$value:'bone'}],boneTransforms:[{Rotation:{i:0,j:0,k:0,r:1}}]}}}));
   for(const constant of [false,true]){
     const name=constant?'step':'linear',native=path.join(work,name+'.json'),cli=path.join(work,name+'.glb'),out=path.join(work,name+'-readback.glb');
     j.animations[0].samplers[0].interpolation=constant?'STEP':'LINEAR';bin.writeFloatLE(1,0);
@@ -69,4 +69,4 @@ try {
     run('readback-animation.mjs',[native,rig,cli,path.join(work,name+'-bad.glb'),'--required-clips','fixture'],false);
   }
   console.log('PASS: nearest native ticks, float32 accessor bounds, STEP retention, unsupported mode refusal, independent LINEAR/STEP tiny-quaternion decoding, reversed-header rejection, and overwrite refusal.');
-} finally {fs.rmSync(work,{recursive:true,force:true});}
+} finally {console.log('Fixture evidence retained:',work);}

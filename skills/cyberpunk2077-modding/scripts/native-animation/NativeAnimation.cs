@@ -44,7 +44,15 @@ if(Path.GetFullPath(args[2])==Path.GetFullPath(args[5]))throw new Exception("Ref
 var rig=RIG.ProcessRig(rigFile)??throw new Exception("Bad rig");var model=ModelRoot.Load(args[4]);
 var names=anims.Animations.Select(a=>a.Chunk!.Animation.Chunk!.Name.ToString()).ToHashSet();
 if(model.LogicalAnimations.Select(a=>a.Name).Distinct().Count()!=model.LogicalAnimations.Count)throw new Exception("Duplicate selected clip names");
-if(model.LogicalAnimations.Any(a=>a.Extras?["animationType"]?.ToString()!="Normal"||a.Extras?["rootMotionType"]?.ToString()!="None"))throw new Exception("Selected imports require Normal animation and rootMotionType None");
+var supportedTypes=new HashSet<string>{"Normal","Additive","AdditiveWithoutFirstFrame"};
+foreach(var incoming in model.LogicalAnimations) {
+ var type=incoming.Extras?["animationType"]?.ToString()??"";
+ if(!supportedTypes.Contains(type)||incoming.Extras?["rootMotionType"]?.ToString()!="None")throw new Exception("Selected imports require a supported animation type and rootMotionType None");
+ var original=anims.Animations.SingleOrDefault(e=>e.Chunk!.Animation.Chunk!.Name.ToString()==incoming.Name)?.Chunk?.Animation.Chunk;
+ if(original is null||original.AnimationType.ToString()!=type)throw new Exception("Selected animation type must match original target: "+incoming.Name);
+ if(original.MotionExtraction?.Chunk is not null)throw new Exception("Root-motion adaptation is outside this selected null-root-motion adapter");
+ if(type!="Normal"&&model.Extras?["betaAdditiveRepresentation"]?.ToString()!="raw-delta-v1")throw new Exception("Run beta prepare before importing bind-relative additive clips");
+}
 if(model.LogicalAnimations.Count==0||model.LogicalAnimations.Any(a=>!names.Contains(a.Name)))throw new Exception("Import must select existing named clips; no empty or new clip imports");
 // Import selected clips only: installed CopyOldAnim cannot preserve inline
 // vanilla recoil buffers (sentinel external address). Reattach originals below.
@@ -53,18 +61,18 @@ var originalChunks=anims.AnimationDataChunks.ToArray();
 var selectedNames=model.LogicalAnimations.Select(a=>a.Name).ToHashSet();
 anims.Animations.Clear();
 foreach(var entry in originalEntries.Where(e=>selectedNames.Contains(e.Chunk!.Animation.Chunk!.Name.ToString())))anims.Animations.Add(entry);
-var importArgs=new GltfImportArgs{ImportFormat=GltfImportAsFormat.Anims};
+var importArgs=new GltfImportArgs{ImportFormat=GltfImportAsFormat.Anims,AdditiveStripLocalTransform=false};
 var method=typeof(ModTools).GetMethod("PutAnimations",BindingFlags.NonPublic|BindingFlags.Instance)!;
 object?[] parameters={anims,rig,model,Path.GetFileName(args[4]),Path.GetFileName(args[3]),importArgs};
 if(!(bool)method.Invoke(tool,parameters)!)throw new Exception("Import failed");
 anims=(animAnimSet)parameters[0]!;
 // WKit9.0.1 RQuaternionNormalize snaps W==1 to identity even when XYZ is
-// nonzero. Repair only that demonstrated Normal/raw-key case before writing.
+// nonzero. Prepared additive rotations are already raw deltas, so the same repair applies.
 // The independent raw-key reader also checks the compressed-export counterpart.
 int repaired=0;
 foreach(var incoming in model.LogicalAnimations) {
 var desc=anims.Animations.Single(a=>a.Chunk!.Animation.Chunk!.Name.ToString()==incoming.Name).Chunk!.Animation.Chunk!;
-if(desc.AnimationType!=Enums.animAnimationType.Normal)continue;
+if(!supportedTypes.Contains(desc.AnimationType.ToString()))throw new Exception("Unexpected selected animation type");
 var affected=incoming.Channels.Where(c=>c.TargetNodePath==PropertyPath.rotation)
  .SelectMany(c=>c.GetRotationSampler().GetLinearKeys().Where(k=>k.Value.W==1f&&(k.Value.X!=0f||k.Value.Y!=0f||k.Value.Z!=0f)).Select(k=>(Channel:c,Key:k))).ToArray();
 if(affected.Length==0)continue;
