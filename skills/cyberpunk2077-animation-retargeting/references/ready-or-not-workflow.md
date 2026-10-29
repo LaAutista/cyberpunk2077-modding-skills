@@ -14,12 +14,12 @@ independently identified as `CG-SMR-Pelvis-Locomotion-v3-20261028`, SHA-256
 This is positive user gameplay evidence for the reported locomotion/contact fix.
 The body variant was not specified; do not infer a test matrix or every attachment.
 
-The subsequent camera-comfort v4 reduces authored locomotion amplitude to 10%.
+The subsequent camera-comfort v4 reduced the shared locomotion carrier to 10%.
 Archive SHA-256: `44c05193306dfefa81e092f6035049d2303d559a2321c8e463a3e01e071770d1`.
-Its native/contact/package checks passed and it was installed into the same enabled
-mod folder with rollback. Its perceived comfort and gameplay acceptance remain
-OPEN until the user tests that revision. Keep v3's camera failure and later feedback
-visible; neither the successful port nor a new package erases those observations.
+Its offline checks passed, but the user rejected the gun feel: the camera was reduced
+and the gun lost the movement they liked. This is a failed requirement, not an
+accepted comfort build. Preserve v3's full weapon motion and its camera complaint;
+keep v4's rejection visible even when a later candidate passes technical checks.
 
 Record the effective enabled folder and archive hash again when resuming. Earlier
 HK416 handoffs referred to a disabled Recovery folder; the user later installed the
@@ -79,19 +79,33 @@ compensation did not cancel intermediate blends: v3 failed its original 0.25 mm
 camera-preservation tolerance, reaching about 1.91 mm in the offline model. The
 user subsequently reported excessive in-game camera movement.
 
-For the requested 90% reduction, v4 scales carrier translation deltas by 0.1 and
-slerps carrier rotation deltas from identity by 0.1, keeping the original clock.
-Recompute camera locals using the updated parent hierarchy. This also softens gun
-bob while retaining the common carrier and both grip relationships. Changing only
-a named camera channel cannot be assumed to remove motion inherited from parents.
-Do not scale anatomical rest translations or unrelated recoil/ADS/reload motion.
+A request to reduce camera shake does not authorize reducing the shared gun/body
+carrier. Preserve the identified full-amplitude weapon baseline. Inspect the actual
+camera branch, inherited parent motion and separate headbob layers before editing;
+a camera-named channel alone does not establish final camera ownership. After two
+failed corrections, use the failure ledger and a discriminating source/graph or
+runtime check before another change.
 
-Independently decoded v4 checks found hand drift below 0.001 mm and modeled camera
-displacement at most 0.025 mm across those weights; all 500 transition combinations
-passed. This verifies the authored reduction and the stated evaluator. It does not
-measure total on-screen camera motion or guarantee comfort. Test walking, strafing,
-sprint entry/exit and ADS with the same save, FOV, body and hand mods; record the
-user's comfort judgment separately from hand contact and native numeric checks.
+The current-game HK416 investigation found separate male/female `head_bobbing.anims`
+sets. The base graph's camera locomotion state consumes `add_walk_0`, `add_jog_0`,
+`add_sprint_0` and their transitions/upperbody variants, distinct from the private
+`add_*_weapon_0` clips. Native camera Aim/Target translation keys reach about 84 mm
+in sprint. Upperbody variants also contain torso motion: scaling the entire clip
+would change more than the camera.
+
+The camera-only candidate restores v3 weapon sets byte-for-byte and scopes private
+headbob sets with the existing equipped-HK wrapper. It scales only camera-branch
+additive translation and rotation deltas to 0.1 in 42 walk/jog/sprint and transition
+clips per body. Keep non-camera bytes, key times, events, float tracks and scale
+unchanged. Check quantized rotation error explicitly; 10% authored gain does not
+prove 90% less total on-screen motion. Do not copy game assets into this repository.
+
+Confirm native serialization/readback and package identities separately from
+runtime. Test walking, strafing, sprint entry/exit and ADS with the same save, FOV,
+body and hand mods. The gun should retain the v3 movement and both grips; hard
+camera bob should diminish. Check a different weapon after unequipping to confirm
+scope. Camera-only gameplay and comfort remain OPEN until that identified build is
+tested. Do not treat source inspection or the earlier v4 test as that acceptance.
 
 ## Keep the native clock and untouched behavior
 
@@ -104,9 +118,10 @@ verification without forcing all verification times into the authored key set.
 Use the existing selected-clip writer and independent readback. Compare both player
 variants, untouched descriptors/chunks, events, float tracks, scale and additive
 semantics. Then extract the packed archive and compare every shipped resource and
-loose-file hash. V4 changes three locomotion loops per body, preserves 121 other
-player clips, and retains the CG resources, scripts and audio. Prior script compile
-evidence was reused by exact payload identity; it was not a new compiler run.
+loose-file hash. V4 changed three locomotion loops per body and preserved 121 other player clips.
+The camera-only correction instead restores both complete v3 weapon sets and adds
+scoped camera sets, retaining CG resources, scripts and audio. Prior script compile
+evidence may be reused only by exact payload identity; label it as reused.
 
 Preserve the working archive and manager settings before an authorized update.
 Use the existing enabled mod when the user's workflow calls for that; record the

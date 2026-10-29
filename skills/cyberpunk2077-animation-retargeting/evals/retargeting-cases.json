@@ -150,15 +150,17 @@
     },
     {
       "id": "ron-partial-weight-camera",
-      "prompt": "The installed pelvis-coupled port keeps both hands attached, but the user says walking and sprinting camera motion is excessive. Reduce it by 90%. Full-weight camera compensation passed; partial-weight camera preservation failed. No new native assets or game session are supplied in this evaluation. Give the exact intended change and acceptance checks.",
+      "prompt": "The user liked the full gun movement and stable grips in the pelvis-coupled v3 port. They requested 90% less hard camera shake/headbob. A v4 attempt scaled the shared body/gun carrier to 0.1: the camera was reduced, but the user rejected the now-stiff gun. Full-weight camera compensation previously passed while partial-weight preservation failed. No new native assets or game session are supplied in this evaluation. Give the intended correction, a concrete failure record and next discriminator, and acceptance checks.",
       "must_observe": [
-        "Preserve identified user-tested baseline and retain the partial-weight camera failure.",
-        "Reduce locomotion carrier deltas to 0.1 with parent-first camera recomputation and preserved hand coupling; disclose softer gun bob and unchanged timing.",
-        "Check intermediate weights and transitions, preserve unrelated clips and native key clocks; require new identified-build comfort report."
+        "Preserve the identified v3 full-amplitude gun/hand baseline and retain both the partial-weight failure and v4 user rejection.",
+        "Do not reduce the shared carrier again. Separate camera-only channels, inherited motion and independent camera layers through actual graph/source evidence.",
+        "Produce a concrete two-failure ledger and discriminating test; label its result OPEN when assets/runtime are unavailable.",
+        "Require byte/trajectory preservation of weapon motion, contact across partial weights, native/package scope checks and user camera/gun acceptance."
       ],
       "must_not_observe": [
-        "Scale rest anatomy or all animations.",
-        "Claim exact 90 percent total engine camera motion or new runtime acceptance from the offline model."
+        "Recommend scaling the shared gun/body carrier to 0.1 to meet a camera-only request.",
+        "Claim an executed source/graph discriminator or a new gameplay/comfort pass without supplied evidence.",
+        "Claim exact 90 percent total engine camera motion from authored gain or an offline model."
       ]
     }
   ],

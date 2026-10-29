@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget external or Cyberpunk weapon/player animation onto a verified Cyberpunk 2077 skeleton. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.1.0"
+  version: "1.1.1"
 ---
 
 # Cyberpunk 2077 animation retargeting
