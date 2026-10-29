@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Bounded archive ownership and CR2W graph inspection for agents; read-only."""
+"""Bounded archive ownership, CR2W graph and rig-mask inspection; read-only."""
 import argparse
 from collections import Counter
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -110,6 +111,76 @@ def compare_graphs(first, second):
             'differenceCount': count, 'differences': differences, 'runtimeVerified': False}
 
 
+def rig_mask(path, mask_name, selected):
+    raw = path.read_bytes()
+    rig = json.loads(raw)['Data']['RootChunk']
+    if rig['$type'] != 'animRig':raise ValueError('Expected serialized animRig')
+    def array(obj, key):
+        value = obj[key]
+        if not isinstance(value, list):raise ValueError('Expected array: ' + key)
+        return value
+    def name(value):
+        if not isinstance(value, dict) or value.get('$type') != 'CName' or not isinstance(value.get('$value'), str) or not value['$value']:
+            raise ValueError('Expected nonempty string CName')
+        return value['$value']
+    names = [name(v) for v in array(rig, 'boneNames')]
+    parents = array(rig, 'boneParentIndexes')
+    if not names or len(set(names)) != len(names) or len(parents) != len(names):
+        raise ValueError('Empty/duplicate bones or mismatched parent count')
+    if any(type(p) is not int or p < -1 or p >= len(names) for p in parents):
+        raise ValueError('Invalid parent index')
+    ancestors = {}
+    for i, bone in enumerate(names):
+        chain = set()
+        while i != -1:
+            if i in chain:raise ValueError('Cyclic bone hierarchy')
+            chain.add(i);i = parents[i]
+        ancestors[bone] = {names[j] for j in chain}
+    def bone(value):
+        result = name(value)
+        if result not in ancestors:raise ValueError('Unknown bone: ' + result)
+        return result
+    def weight(entry):
+        value = entry['weight']
+        if type(value) not in (int, float) or not 0 <= value <= 1 or not math.isfinite(value):
+            raise ValueError('Weight must be finite and between 0 and 1')
+        return value
+    def merge(target, addition):
+        for key, value in addition.items():
+            if key in target and target[key] != value:
+                raise ValueError('Unsupported conflicting mask declarations: ' + key)
+            target[key] = value
+    def tree(entry, parent=None):
+        root = bone(entry['rootBone'])
+        if parent is not None and (parent == root or parent not in ancestors[root]):
+            raise ValueError('Subtree root must descend from its declared parent')
+        value = weight(entry)
+        result = {n: value for n in names if root in ancestors[n]}
+        overrides = {}
+        for child in array(entry, 'subtreesToChange'):merge(overrides, tree(child, root))
+        result.update(overrides)
+        return result
+    parts = [p for p in array(rig, 'parts') if name(p['name']) == mask_name]
+    if len(parts) != 1:raise ValueError('Expected exactly one rig part named: ' + mask_name)
+    part = parts[0]
+    if array(part, 'mask') or array(part, 'maskRotMS'):
+        raise ValueError('Compiled mask arrays are unsupported; use an explicit declarative rig part')
+    weights = {}
+    for entry in array(part, 'treeBones'):merge(weights, tree(entry))
+    # Conflicting single/tree or sibling declarations need native precedence evidence.
+    for entry in array(part, 'singleBones'):merge(weights, {bone(entry['bone']): weight(entry)})
+    rotations = {bone(v) for v in array(part, 'bonesWithRotationInModelSpace')}
+    selected = list(dict.fromkeys(selected))
+    if len(selected) > 32:raise ValueError('Select at most 32 bones per inspection')
+    if any(n not in ancestors for n in selected):raise ValueError('Unknown selected bone')
+    return {'source': str(path.resolve()), 'sha256': hashlib.sha256(raw).hexdigest(),
+            'mask': mask_name, 'boneCount': len(names),
+            'nonzeroWeightBones': sum(weights.get(n, 0) > 0 for n in names),
+            'bones': [{'name': n, 'weight': weights.get(n, 0),
+                       'modelSpaceRotationDeclared': n in rotations} for n in selected],
+            'activeMaskVerified': False, 'runtimeVerified': False}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='action', required=True)
@@ -119,6 +190,9 @@ def main():
     graph.add_argument('file', type=Path);graph.add_argument('--node');graph.add_argument('--clip')
     compare = sub.add_parser('compare-graphs', help='Check full graph properties and reference identity after serialization')
     compare.add_argument('authored', type=Path);compare.add_argument('readback', type=Path)
+    mask = sub.add_parser('rig-mask', help='Expand declarative rig-part weights for selected bones')
+    mask.add_argument('file', type=Path);mask.add_argument('--mask', required=True)
+    mask.add_argument('--bone', action='append', default=[])
     args = parser.parse_args()
     try:
         if args.action == 'locate':
@@ -146,11 +220,13 @@ def main():
                           'clips': sorted(set(clips.values()))}
                 if args.clip:
                     result = {'clip': args.clip, 'nodes': [k for k, v in clips.items() if v == args.clip]}
+        elif args.action == 'rig-mask':
+            result = rig_mask(args.file, args.mask, args.bone)
         else:
             result = compare_graphs(args.authored, args.readback)
         print(json.dumps(result, indent=2))
         return 1 if result.get('passed') is False or result.get('complete') is False else 0
-    except (OSError, ValueError, KeyError, struct.error) as error:
+    except (OSError, ValueError, KeyError, TypeError, struct.error) as error:
         print(json.dumps({'status': 'FAILED', 'error': str(error)}));return 1
 
 

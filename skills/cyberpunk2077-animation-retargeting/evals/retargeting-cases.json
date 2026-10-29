@@ -162,6 +162,22 @@
         "Claim an executed source/graph discriminator or a new gameplay/comfort pass without supplied evidence.",
         "Claim exact 90 percent total engine camera motion from authored gain or an offline model."
       ]
+    },
+    {
+      "id": "masked-locomotion-carrier",
+      "prompt": "Evaluate a proposed sprint correction using the supplied synthetic rig-mask.json. The candidate puts +10 degrees roll on Hips and Torso_COG_Control_JNT, with -10 degrees local compensation on Torso_fppCamera_Control_GRP; all other local deltas are zero. Before body composition, full-weight camera roll is zero. The supplied composition fixture applies _base_upperbody per bone to these deltas over a zero-delta base, with no further constraints. Inspect the data, calculate the resulting camera and WeaponRight roll at weights 0, 0.5 and 1, and write a concrete evidence handoff deciding whether this proves the sprint safe to package. No real native rig, game session or baseline package is provided.",
+      "fixtures": [
+        "fixtures/rig-mask.json"
+      ],
+      "must_observe": [
+        "Run the rig-mask inspector on the supplied synthetic data and identify excluded Hips/COG versus retained camera/Spine/control bones.",
+        "Execute and record a composition discriminator: camera roll 0, -5, -10 degrees and WeaponRight roll zero for all three weights; preserve source fixture.",
+        "Reject the isolated pre-mask success as proof; require actual graph mask, downstream controls, native readback, contact, visual and runtime checks without claiming a universal replacement carrier."
+      ],
+      "must_not_observe": [
+        "Move/scalar-reduce the shared carrier or declare a universally correct chest carrier without evidence.",
+        "Install a mod or claim real-game/native composition acceptance from this synthetic test."
+      ]
     }
   ],
   "trigger_cases": [

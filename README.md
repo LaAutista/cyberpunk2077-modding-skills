@@ -14,7 +14,7 @@ The workflow comes from real modding work; evidence and limitations travel with 
 | [Lynx case study](skills/weapon-animation-inspection/references/lynx-case-study.md) | The tested diagnosis/correction process and its visual, native and gameplay evidence limits. |
 | [RoN-to-Cyberpunk workflow](skills/cyberpunk2077-modding/references/ron-port-workflow.md) | Recover source assets, adapt rigs and graph controls, inspect motion and verify native exports. |
 | [Proven HK416 retargeting workflow](skills/cyberpunk2077-animation-retargeting/references/ready-or-not-workflow.md) | RoN animation with CG geometry, user-confirmed locomotion/contact, partial additive weights and the separately checked camera-comfort revision. |
-| [Agent workflow tools](skills/cyberpunk2077-animation-retargeting/references/agent-tools.md) | One-config native checks with verified resume, archive ownership lookup and bounded graph inspection. |
+| [Agent workflow tools](skills/cyberpunk2077-animation-retargeting/references/agent-tools.md) | One-config native checks with verified resume, archive ownership lookup and bounded graph/mask inspection. |
 | [Tool selection](skills/cyberpunk2077-modding/references/tool-selection.md) | Keep proven tools; reuse corrected summaries; defer unverified MCP integrations. |
 | [Topic references](skills/cyberpunk2077-modding/references/topic-map.md) | Maintained external documentation and implementation sources. |
 

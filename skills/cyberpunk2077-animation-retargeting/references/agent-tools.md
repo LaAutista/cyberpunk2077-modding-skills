@@ -1,6 +1,6 @@
 # Agent workflow tools
 
-Use these for repeated resource lookup, graph inspection and the established native
+Use these for repeated resource lookup, graph/mask inspection and the established native
 animation checks. They do not choose calibration, author motion, execute engine IK,
 review renders, install a mod or establish gameplay acceptance.
 
@@ -94,6 +94,32 @@ including shared-reference identity, every property and array order. It tolerate
 only small numeric serialization variation (absolute/relative2e-8) and reports at
 most20 differences. Header timestamps/paths are excluded. A matching graph is
 serialization evidence, not proof of native scheduling, initialization or gameplay.
+
+## Inspect the composing body mask
+
+```sh
+python3 -B scripts/asset_inspect.py rig-mask /private/player.rig.json \
+  --mask _base_upperbody --bone Hips --bone Torso_COG_Control_JNT \
+  --bone Torso_Chest_Control_Override_GRP --bone Torso_fppCamera_Control_GRP
+```
+
+Use the serialized rig matching the current graph. The result binds the input hash
+to declared bone weights and explicit model-space rotation flags. Unlisted bones
+have weight0; a valid excluded bone is a result, not a command failure. Output
+contains counts and at most32 requested bones, never the full rig hierarchy.
+
+The inspector supports declarative `treeBones` with descendant `subtreesToChange`
+and `singleBones`. Nested subtree weights replace their parent subtree's weights;
+same-weight overlaps are allowed. Conflicting sibling, top-level or single/tree
+declarations, malformed hierarchies, unknown bones, invalid weights and nonempty
+compiled `mask`/`maskRotMS` arrays fail explicitly. Do not guess native precedence
+or claim support for a compiled-only mask from these declarations.
+
+This establishes declared mask weights only. Trace which mask the current state
+actually applies and inspect downstream constraints before choosing a carrier.
+Sample native-readback motion after that composition at partial weights, including
+camera, hand-to-gun and control transforms. Flags do not execute model-space
+rotation handling. `activeMaskVerified` and `runtimeVerified` remain false.
 
 Portable regression checks from the repository root:
 

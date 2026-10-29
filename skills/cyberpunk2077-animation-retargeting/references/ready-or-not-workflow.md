@@ -6,7 +6,7 @@ by the CGTrader HK416 and its locomotion correction on 2026-10-28. Reuse the rou
 measure a new weapon's skeleton, geometry and contact calibration independently.
 
 Use the [agent workflow tools](agent-tools.md) for repeated native gates and
-archive/graph inspection. They remove command repetition without transferring
+archive/graph/mask inspection. They remove command repetition without transferring
 another weapon's calibration or treating checked files as gameplay acceptance.
 
 ## Identify the accepted baseline
@@ -61,12 +61,15 @@ separation while walking and sprinting. Sampling weights 0, 0.25, 0.5, 0.75 and 
 reproduced up to 5.328 mm of support-hand drift in the earlier sprint candidate.
 Therefore a full-weight endpoint check cannot certify the locomotion blend.
 
-For this native rig, apply the same locomotion carrier to `Hips` and the separate
-`Torso_COG_Control_JNT` branch, retaining grip-relative descendant poses. The
-current game graph reconstructs the torso through controls and copies weapon
-controls into the driven weapon bones; moving only the visible FK hierarchy is
-insufficient. Reconstruct parents first, then synchronize the required hand/weapon
-controls. Inspect the current graph instead of hardcoding historical node numbers.
+The HK416 candidate used a shared carrier on `Hips` and the separate
+`Torso_COG_Control_JNT` branch. This is historical calibration, not a universal
+recipe. Before reusing it, trace the current graph's body-composition mask and
+downstream torso/hand/weapon constraints. Expand the matching native rig part with
+[`asset_inspect.py rig-mask`](agent-tools.md#inspect-the-composing-body-mask).
+An excluded carrier can disappear while its camera compensation survives. Moving
+visible FK bones alone also misses downstream control-driven reconstruction.
+Reconstruct parents first and check required controls after composition. Use the
+current graph instead of hardcoding historical node numbers.
 
 Verify the actual walk/jog/sprint dispatch, source-transform caching and blend
 weight route. Check hand-to-gun transforms through the complete loops, intermediate
@@ -75,6 +78,21 @@ scales and finger shapes unless the measured fixture calls for a separate change
 The HK416 local-additive probe checked 2,430 poses per build across both bodies and
 500 transition combinations; these counts are coverage receipts, not universal
 thresholds or an execution of the complete engine graph, masks or IK solver.
+
+The MP5 v10 sprint diagnostic exposed this missing check on 2026-10-29: the user
+recording showed a rolling view and the gun leaving the screen. Its identified
+native `_base_upperbody` part retained `Spine`, `Torso_Chest_Control_GRP` and
+`arms_root_space` subtrees while excluding `Hips` and `Torso_COG_Control_JNT`.
+An isolated mask discriminator reproduced up to 44.73 degrees of camera rotation
+and removed the intended weapon motion, despite a passing pre-mask camera check.
+That supports the failure mechanism; the exact active engine mask/state was not
+captured. Never transfer an isolated numerical pass to runtime acceptance.
+
+MP5 v11 instead moves the retained `Torso_Chest_Control_Override_GRP`, a sibling
+of the camera group, and checks the identified downstream chest-driver-to-Spine3
+constraint. Native readback and isolated composition checks passed, but v11's
+gameplay test is OPEN. This control is a candidate for that graph and rig, not a
+new universal carrier. Require its user test before describing it as proven.
 
 ## Camera comfort is an independent requirement
 

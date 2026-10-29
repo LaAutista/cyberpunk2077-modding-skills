@@ -1,4 +1,5 @@
 import contextlib
+import hashlib
 import importlib.util
 import io
 import json
@@ -143,6 +144,90 @@ class AssetInspectionTests(unittest.TestCase):
         result = inspect.short(payload)
         self.assertLess(len(json.dumps(result)), 1000)
         self.assertEqual(result['nodes'][-1]['omittedItems'], 980)
+
+
+class RigMaskTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        self.path = Path(self.temp.name) / 'rig.json'
+        source = SCRIPTS.parent / 'evals/fixtures/rig-mask.json'
+        self.path.write_bytes(source.read_bytes())
+        self.doc = json.loads(self.path.read_bytes())
+        self.rig = self.doc['Data']['RootChunk']
+        self.part = self.rig['parts'][0]
+
+    def check(self, *bones):
+        self.path.write_text(json.dumps(self.doc))
+        return inspect.rig_mask(self.path, '_base_upperbody', bones)
+
+    def test_carriers_are_excluded_while_camera_and_chest_survive(self):
+        before = self.path.read_bytes()
+        result = inspect.rig_mask(self.path, '_base_upperbody', ['Hips', 'Torso_COG_Control_JNT',
+            'Torso_fppCamera_Control_GRP', 'Torso_Chest_Control_Override_GRP', 'WeaponRight'])
+        self.assertEqual([b['weight'] for b in result['bones']], [0, 0, 1, 1, 1])
+        self.assertEqual(result['nonzeroWeightBones'], 7)
+        self.assertEqual(result['sha256'], hashlib.sha256(before).hexdigest())
+        self.assertEqual(self.path.read_bytes(), before)
+        self.assertFalse(result['activeMaskVerified']);self.assertFalse(result['runtimeVerified'])
+
+    def test_nested_fractional_overrides_and_separate_single_bone(self):
+        def tree(n, w, children):
+            return {'rootBone': {'$type': 'CName', '$value': n}, 'weight': w, 'subtreesToChange': children}
+        self.part['treeBones'] = [tree('Torso_Chest_Control_GRP', .75, [
+            tree('Torso_Chest_Control_Override_GRP', .25, [tree('Torso_Chest_Driver_GRP', 0, [])])])]
+        self.part['singleBones'] = [{'bone': {'$type': 'CName', '$value': 'Hips'}, 'weight': .5}]
+        self.part['bonesWithRotationInModelSpace'] = [{'$type': 'CName', '$value': 'Torso_fppCamera_Control_GRP'}]
+        result = self.check('Hips', 'Torso_Chest_Control_Override_GRP', 'Torso_Chest_Driver_GRP', 'Torso_fppCamera_Control_GRP')
+        self.assertEqual([b['weight'] for b in result['bones']], [.5, .25, 0, .75])
+        self.assertEqual([b['modelSpaceRotationDeclared'] for b in result['bones']], [False, False, False, True])
+
+    def test_conflicting_overlap_is_rejected_instead_of_guessing_precedence(self):
+        self.part['treeBones'][-1]['weight'] = .5
+        with self.assertRaisesRegex(ValueError, 'conflicting'):self.check()
+        self.part['treeBones'][-1]['weight'] = 1
+        self.part['singleBones'] = [{'bone': {'$type': 'CName', '$value': 'WeaponRight'}, 'weight': 0}]
+        with self.assertRaisesRegex(ValueError, 'conflicting'):self.check()
+
+    def test_invalid_hierarchies_are_rejected(self):
+        original = list(self.rig['boneParentIndexes'])
+        for parents in [original[:-1], [True]+original[1:], [10]+original[1:], [-2]+original[1:],
+                        [0]+original[1:], [4]+original[1:]]:
+            with self.subTest(parents=parents):
+                self.rig['boneParentIndexes'] = parents
+                with self.assertRaises(ValueError):self.check()
+        self.rig['boneParentIndexes'] = original
+        self.rig['boneNames'][1] = self.rig['boneNames'][0]
+        with self.assertRaises(ValueError):self.check()
+
+    def test_invalid_weights_references_and_compiled_masks_are_rejected(self):
+        entry = self.part['treeBones'][0]
+        for value in [True, -.1, 1.1, 10**1000, float('nan'), float('inf'), '1']:
+            with self.subTest(weight=value):
+                entry['weight'] = value
+                with self.assertRaises(ValueError):self.check()
+        entry['weight'] = 1
+        entry['subtreesToChange'] = [{'rootBone': {'$type': 'CName', '$value': 'Root'}, 'weight': 0, 'subtreesToChange': []}]
+        with self.assertRaisesRegex(ValueError, 'descend'):self.check()
+        entry['subtreesToChange'] = []
+        for key in ['mask', 'maskRotMS']:
+            self.part[key] = [1]
+            with self.assertRaisesRegex(ValueError, 'Compiled'):self.check()
+            self.part[key] = []
+        entry['rootBone']['$value'] = 'Missing'
+        with self.assertRaisesRegex(ValueError, 'Unknown bone'):self.check()
+
+    def test_cli_json_errors_and_bounded_selection(self):
+        with patch.object(sys, 'argv', ['inspect', 'rig-mask', str(self.path), '--mask', '_base_upperbody', '--bone', 'Hips']), contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(inspect.main(), 0)
+        self.assertEqual(json.loads(out.getvalue())['bones'][0]['weight'], 0)
+        with self.assertRaisesRegex(ValueError, 'exactly one'):inspect.rig_mask(self.path, 'missing', [])
+        with self.assertRaisesRegex(ValueError, 'Unknown selected'):inspect.rig_mask(self.path, '_base_upperbody', ['missing'])
+        with self.assertRaisesRegex(ValueError, 'at most 32'):inspect.rig_mask(self.path, '_base_upperbody', [str(i) for i in range(33)])
+        self.path.write_text('{"Data":null}')
+        with patch.object(sys, 'argv', ['inspect', 'rig-mask', str(self.path), '--mask', '_base_upperbody']), contextlib.redirect_stdout(io.StringIO()) as out:
+            self.assertEqual(inspect.main(), 1)
+        self.assertEqual(json.loads(out.getvalue())['status'], 'FAILED')
 
 
 if __name__ == '__main__':

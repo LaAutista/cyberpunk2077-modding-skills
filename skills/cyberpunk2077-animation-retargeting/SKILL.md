@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget external or Cyberpunk weapon/player animation onto a verified Cyberpunk 2077 skeleton. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Cyberpunk 2077 animation retargeting
@@ -47,6 +47,9 @@ For Ready or Not ports, read the [proven HK416 workflow](references/ready-or-not
 before choosing an adapter. It covers source-reference versus replacement geometry,
 partial-weight locomotion contact, native key clocks and camera comfort, with the
 identified user-tested baseline and the limits of transferring it to another weapon.
+Before selecting a locomotion carrier or adding camera compensation, inspect the
+composing rig mask and downstream control constraints. A local additive/contact
+pass cannot establish that those tracks survive the actual body composition.
 
 ## Bound the work
 
@@ -68,7 +71,7 @@ final arrays. Never mix native control rests with per-mesh inverse binds.
 ## Included checks and handoff
 
 For repeated native conversion/checks, archive ownership lookup and bounded graph
-inspection, use the [agent workflow tools](references/agent-tools.md). Prefer the
+and rig-mask inspection, use the [agent workflow tools](references/agent-tools.md). Prefer the
 resumable native runner over copying another per-weapon command script; its checked
 receipt still leaves visual and runtime gates open.
 

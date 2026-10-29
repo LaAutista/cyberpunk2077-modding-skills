@@ -1,0 +1,118 @@
+{
+  "note": "Synthetic ten-bone hierarchy for mask inspection, not a game rig or runtime fixture.",
+  "Data": {
+    "RootChunk": {
+      "$type": "animRig",
+      "boneNames": [
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "Root"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "Hips"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "Spine"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "arms_root_space"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "WeaponRight"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "Torso_COG_Control_JNT"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "Torso_Chest_Control_GRP"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "Torso_Chest_Control_Override_GRP"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "Torso_Chest_Driver_GRP"
+        },
+        {
+          "$type": "CName",
+          "$storage": "string",
+          "$value": "Torso_fppCamera_Control_GRP"
+        }
+      ],
+      "boneParentIndexes": [
+        -1,
+        0,
+        1,
+        2,
+        3,
+        0,
+        5,
+        6,
+        7,
+        6
+      ],
+      "parts": [
+        {
+          "$type": "animRigPart",
+          "name": {
+            "$type": "CName",
+            "$storage": "string",
+            "$value": "_base_upperbody"
+          },
+          "mask": [],
+          "maskRotMS": [],
+          "singleBones": [],
+          "bonesWithRotationInModelSpace": [],
+          "treeBones": [
+            {
+              "$type": "animRigPartBoneTree",
+              "rootBone": {
+                "$type": "CName",
+                "$storage": "string",
+                "$value": "Spine"
+              },
+              "weight": 1,
+              "subtreesToChange": []
+            },
+            {
+              "$type": "animRigPartBoneTree",
+              "rootBone": {
+                "$type": "CName",
+                "$storage": "string",
+                "$value": "Torso_Chest_Control_GRP"
+              },
+              "weight": 1,
+              "subtreesToChange": []
+            },
+            {
+              "$type": "animRigPartBoneTree",
+              "rootBone": {
+                "$type": "CName",
+                "$storage": "string",
+                "$value": "arms_root_space"
+              },
+              "weight": 1,
+              "subtreesToChange": []
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

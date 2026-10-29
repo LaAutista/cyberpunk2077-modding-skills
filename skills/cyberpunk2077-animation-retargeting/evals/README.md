@@ -4,6 +4,8 @@
 from deterministic Python/native helper tests. [minimal.json](fixtures/minimal.json)
 is synthetic two-bone data with intentionally synthetic identity hashes. It is not
 a game skeleton or a certified source decode.
+The [rig-mask fixture](fixtures/rig-mask.json) is a synthetic ten-bone hierarchy for
+`masked-locomotion-carrier`; it establishes only the supplied composition example.
 
 For each workflow case, start an independent evaluation with the current skill
 and only that case's `prompt` plus relevant raw fixtures. Keep `must_observe` and
