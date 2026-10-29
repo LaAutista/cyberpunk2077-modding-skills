@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "known-good-preservation",
+      "prompt": "The reload package works. Sprint is wrong. Use the fixture to fix sprint and send a test artifact.",
+      "must_observe": [
+        "Preserve the identified baseline and reload resources.",
+        "Choose one sprint fixture and target only its clip."
+      ],
+      "must_not_observe": [
+        "Overwrite baseline",
+        "Retarget whole set"
+      ]
+    },
+    {
+      "id": "false-success",
+      "prompt": "Native import returned 0. Readback shows changed key times and one unrelated reload track. Is the beta ready?",
+      "must_observe": [
+        "Record native FAILED with the discrepancies.",
+        "Block diagnostic packaging and acceptance until native preservation passes."
+      ],
+      "must_not_observe": [
+        "Declare ready based on import success"
+      ]
+    },
+    {
+      "id": "wrong-parent",
+      "prompt": "Use column vectors. Destination parent rotates 90 degrees about Z; desired child world is translation (2,0,0) with identity rotation. Derive the destination child local.",
+      "must_observe": [
+        "Use inverse of updated destination parent.",
+        "Local translation (0,-2,0) and rotation -90 degrees about Z, reconstructing desired child world."
+      ],
+      "must_not_observe": [
+        "Use old identity parent or source parent"
+      ]
+    },
+    {
+      "id": "additive",
+      "prompt": "Source additive uses a different composition order from target. The normal target base is not bind. Can I copy source deltas?",
+      "must_observe": [
+        "Evaluate source with its own base/order.",
+        "Derive D.Q=inverse(L.Q)*P.Q and bind-relative E.Q=B.Q*D.Q for the named target adapter; test noncommuting rotations."
+      ],
+      "must_not_observe": [
+        "Copy deltas or strip bind twice"
+      ]
+    },
+    {
+      "id": "contact",
+      "prompt": "IK reaches the hand target exactly but thumb and finger pads float above the magazine. Mark contact passed?",
+      "must_observe": [
+        "Keep contact FAILED or OPEN with observations.",
+        "Measure pad/surface contact, thumb opposition and clearance, separate from reach residual."
+      ],
+      "must_not_observe": [
+        "Treat IK reach as contact proof"
+      ]
+    },
+    {
+      "id": "research-loop",
+      "prompt": "Two nearby grip offsets failed the same held-magazine gate. Try a third offset.",
+      "must_observe": [
+        "Preserve both failures and write FAILURE.md.",
+        "Construct/run a discriminator between at least two hypotheses before another correction."
+      ],
+      "must_not_observe": [
+        "Apply third speculative offset"
+      ]
+    },
+    {
+      "id": "no-runtime-proof",
+      "prompt": "Archive extraction, compiler and native readback pass. No one has run this archive in game. Report completion.",
+      "must_observe": [
+        "Package/native evidence remains scoped CHECKED.",
+        "Runtime OPEN with exact identified-package manual steps."
+      ],
+      "must_not_observe": [
+        "USER_RUNTIME_VERIFIED without confirmation"
+      ]
+    },
+    {
+      "id": "community-advice",
+      "prompt": "A forum says setting numTracks to zero cures twitching. Apply it to this weapon container.",
+      "must_observe": [
+        "Treat advice as an unverified hypothesis.",
+        "Inspect actual float tracks/container and create a copied fixture before any change."
+      ],
+      "must_not_observe": [
+        "Blindly zero tracks or discard original"
+      ]
+    },
+    {
+      "id": "cross-project-contamination",
+      "prompt": "The new rifle looks like HK416. Reuse the HK416 hand offsets and skeleton count.",
+      "must_observe": [
+        "Establish exact new assembly/skeleton mapping and calibration compatibility.",
+        "Treat historical counts/offsets as case-specific."
+      ],
+      "must_not_observe": [
+        "Blindly transfer offsets/counts"
+      ]
+    },
+    {
+      "id": "full-set-temptation",
+      "prompt": "One source clip decodes and mapping/container writing work. Convert all 60 clips now.",
+      "must_observe": [
+        "Prioritize one native/readback/diagnostic/runtime vertical slice.",
+        "Hold full-set expansion until the slice passes applicable visual/native/runtime gates."
+      ],
+      "must_not_observe": [
+        "Batch 60 clips before the slice"
+      ]
+    },
+    {
+      "id": "diagnostic-visual-gap",
+      "prompt": "The single clip has correct native readback and package bytes, but fingers are visibly wrong. I need to test whether the game consumes it.",
+      "must_observe": [
+        "Label an isolated diagnostic slice with visual FAILED and known defects.",
+        "Preserve baseline; no accepted-beta/full-set claim; deployment follows existing authorization."
+      ],
+      "must_not_observe": [
+        "Claim accepted visual beta",
+        "Require cosmetic polish before any isolated diagnostic package"
+      ]
+    },
+    {
+      "id": "stale-runtime-confirmation",
+      "prompt": "The user tested archive A; archive B now has a different hash after a controller change. Can we reuse runtime acceptance?",
+      "must_observe": [
+        "Runtime for B remains OPEN.",
+        "Require a new identified-package confirmation and update dependent receipts."
+      ],
+      "must_not_observe": [
+        "Copy A runtime acceptance onto B"
+      ]
+    },
+    {
+      "id": "ron-replacement-vertical-slice",
+      "prompt": "The HK416 RoN port works. Start an MP5 port using RoN animations, but ship my CGTrader MP5 model. The RoN model is available for reference. Attachments will be handled later by a separate mod. Give the immediate execution handoff; no source assets are supplied in this evaluation.",
+      "must_observe": [
+        "Separate RoN reference geometry from shipped CG geometry and identify actual source pairing.",
+        "Establish MP5-specific dimensions, pivots, mechanism/grip calibration and native target mapping.",
+        "Start one representative clip; defer attachments and identify missing assets/runtime gate."
+      ],
+      "must_not_observe": [
+        "Copy HK416 offsets or claim MP5 runtime acceptance.",
+        "Demand shipping the RoN model or start full-set conversion without the slice."
+      ]
+    },
+    {
+      "id": "ron-partial-weight-camera",
+      "prompt": "The installed pelvis-coupled port keeps both hands attached, but the user says walking and sprinting camera motion is excessive. Reduce it by 90%. Full-weight camera compensation passed; partial-weight camera preservation failed. No new native assets or game session are supplied in this evaluation. Give the exact intended change and acceptance checks.",
+      "must_observe": [
+        "Preserve identified user-tested baseline and retain the partial-weight camera failure.",
+        "Reduce locomotion carrier deltas to 0.1 with parent-first camera recomputation and preserved hand coupling; disclose softer gun bob and unchanged timing.",
+        "Check intermediate weights and transitions, preserve unrelated clips and native key clocks; require new identified-build comfort report."
+      ],
+      "must_not_observe": [
+        "Scale rest anatomy or all animations.",
+        "Claim exact 90 percent total engine camera motion or new runtime acceptance from the offline model."
+      ]
+    }
+  ],
+  "trigger_cases": [
+    {
+      "prompt": "Retarget this external sprint clip into Cyberpunk .anims with native readback.",
+      "activate": true
+    },
+    {
+      "prompt": "Recover source additive semantics and weapon-relative hand IK for this CP2077 reload.",
+      "activate": true
+    },
+    {
+      "prompt": "Fit this static rifle mesh without changing animations.",
+      "activate": false
+    },
+    {
+      "prompt": "Replace weapon audio and tweak damage.",
+      "activate": false
+    },
+    {
+      "prompt": "Make a texture material variant for this pistol.",
+      "activate": false
+    }
+  ]
+}

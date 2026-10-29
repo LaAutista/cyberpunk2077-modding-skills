@@ -1,5 +1,65 @@
 # Provenance and verification
 
+## Proven HK416 route, 2026-10-28
+
+The retargeting skill 1.1.0 adds a [focused RoN workflow](skills/cyberpunk2077-animation-retargeting/references/ready-or-not-workflow.md). The user confirmed the installed CG HK416 locomotion/contact fix and described the port as solid, with camera motion remaining. The installed v3 archive identity, v4 camera-comfort candidate and exact evidence scopes are recorded there. Reusable findings cover distinct source/reference and replacement geometry, partial additive weights, the two native carrier branches, native clock collisions and parent-first camera compensation. No game/commercial assets or private paths are published.
+
+V4 native import/readback, event/float/scale preservation, both-body contact/amplitude checks, 500 transition combinations and all 79 extracted native resources/65 ZIP members passed. It was installed into the existing enabled mod with a verified rollback and unchanged manager/profile files. No game was launched; v4 comfort remains OPEN. Repository tests and skill evaluations below concern instructions/helpers and do not certify MP5 gameplay or future attachments. The merged publication passed 17 contract tests, three-skill installer/rollback tests, native/additive/summary/contact-sheet regressions, setup/provision/doc-boundary tests, and all three metadata validators. An independent agent evaluated the two new handoff scenarios with their rubrics withheld; both met the reviewed criteria. No asset/game test was part of that evaluation.
+
+## Retargeting operating contract, 2026-10-28
+
+The [agent contract](AGENTS.md) and dedicated
+[retargeting skill](skills/cyberpunk2077-animation-retargeting/SKILL.md) add
+single-gate status, immutable-baseline checks, a two-failure discriminator rule,
+one-clip vertical slices, a failure ledger and workflow/trigger eval scenarios.
+They reuse the existing technical hub and native writer/readback; no game assets,
+new universal retargeter or third-party implementation are added. The user's
+refactoring brief supplies the process requirements; existing source-linked
+chapters retain the technical evidence and its dated limits.
+
+The new policy permits isolated diagnostic packages with disclosed visual defects
+to test runtime consumption. Full-motion visual review remains mandatory for
+accepted-beta promotion and full-set expansion, alongside native and identified
+runtime acceptance. This is an explicit packaging-policy update, not a retrospective
+claim that an old rejected candidate passed.
+
+Seventeen Python contract tests passed: malformed fixtures/mappings, missing or
+wrong evidence categories, changed hashes, baseline aliasing, stale discriminators,
+failed-gate evidence preservation and read-only CLI behavior. Existing portable
+summary, contact-sheet, native-key and additive-math regressions passed. Installer
+tests cover three skills, migration from two, backup/no-op behavior, unrelated-file
+preservation and rollback when the third promotion fails. All three entrypoints
+passed skill metadata validation; repository links and publication checks passed.
+
+The workflow evals require independent agent runs and review of actual outputs;
+their rubrics are not assertion-string tests. Execution records stay outside the
+published skill. Synthetic checks and description-level routing evaluations do
+not establish live host automatic selection, native asset correctness, Blender
+acceptance or gameplay. No new port, mod installation or game launch is part of
+this refactor.
+
+## Local retargeting knowledge hub, 2026-10-26
+
+The [retargeting hub](skills/cyberpunk2077-modding/references/animation-retargeting/index.md)
+adds original procedural synthesis from existing RoN/HK416, Halo V4 and M1911/MAX
+reports plus inspected FO4 reference construction and Bingle-linked source.
+Its evidence register identifies versions, local report paths, hashes, actual
+review coverage and reproduction entry points. Raw guides, third-party source,
+assets and game frames are not copied into the hub. The complete returned Shiagur
+guide 2.0 text was subsequently read through Google Drive at the revision pinned
+in the evidence register, closing the earlier web-reader gap. Its original
+technique synthesis keeps recommendations separate from execution/compatibility
+proof; images and linked videos were not reviewed in that read. Existing tutorial
+video review is still exactly eight frames.
+
+This is a local documentation update, not a new port/tool validation. Existing
+892-pose V4 and 5.55 µm idle surface results keep their scope; palm/hidden-surface,
+bind/contact and runtime gaps remain explicit. The inspected HKX loader is a
+candidate with no weapon-fixture execution; COD/Battlefield adapters are untested.
+No addon was installed/executed or active port output changed for this update.
+Keep machine-specific raw evidence manifests outside a publication package and
+recheck local acquisition-path preservation before reusing reference rigs.
+
 This repository publishes original instructions and reusable helpers from a
 Cyberpunk modding workspace, adapted for public use on 2026-10-23. Original prose
 and code are [MIT-licensed](LICENSE). External documentation, dependencies and

@@ -1,73 +1,69 @@
 ---
 name: cyberpunk2077-modding
-description: Build, modify and package Cyberpunk 2077 mods using version-matched documentation, WolvenKit, redscript, CET and native tools. Use for mod implementation, weapon rigging and animation adaptation, resource inspection and evidence-based MCP tool selection.
+description: Implement and inspect Cyberpunk 2077 mods, resources, weapon ports and animation retargets using version-matched WolvenKit, redscript, ArchiveXL, TweakXL and native APIs. Use for mod development and tool evaluation; distinguish offline checks, visual acceptance and gameplay evidence.
 ---
 
 # Cyberpunk 2077 modding
 
 For setup or missing tools, start with the agent-neutral [preflight and setup](references/setup-preflight.md) using the packaged `scripts/setup/*.mjs` entry points (or repository `setup/*.mjs`). Preflight is read-only; follow the task-specific prerequisites and report unknown/manual gates before building.
 
-Inspect the user's current project and installed toolchain before implementing a
-change. Read the [development playbook](references/development-playbook.md), relevant
-[topic sources](references/topic-map.md) and [documented corrections](references/documentation-corrections.md).
-Use [environment setup](references/environment.md) for configurable paths; no private
-reference library or preinstalled bridge is assumed.
+Inspect the current project's instructions, checkpoint, inputs and installed
+game/framework/tool versions. Preserve the user's stack and current restrictions,
+including CET preferences; a documented capability does not authorize adding a
+dependency or changing the architecture. Use the existing manager/profile workflow
+and session authorization for deployment or game launch.
 
-## Implementation decisions
+## Choose the task
 
-- Establish installed game/framework versions and resource identities. Match SDK
-  layouts and addresses to the executable; dated snapshots are not compatibility proof.
-- Select the layer that implements the feature: TweakXL for data, redscript for
-  scripted behavior, CET for Lua tools/overlays, WolvenKit/ArchiveXL for resources,
-  RED4ext when supported script APIs cannot provide required native behavior.
-- Before calling/hooking an API, find a real declaration and usage in version-matched
-  scripts, SDK or framework source. Verify signature, ownership and lifecycle.
-- Plan attach/detach, callbacks, session transitions, delayed work and persistence.
-  Do not retain game objects in long-lived services without a justified lifetime.
-- Preserve the user's project, manager, profiles, settings and working assets.
-  Stage reversible changes and keep evidence separate from shipping resources.
-  Installation, publication and game launch require applicable user authorization.
-- Define success at the changed layer. Test relevant failure cases and regressions;
-  distinguish implemented, automatically checked, visually inspected and gameplay-tested.
-  A compiler, render job or archive build proves only the operation it exercised.
+Load the matching reference, then only the sections or source pages it needs.
+Combine routes when the task actually crosses layers.
 
-## Route the task
-
-| Task | Preferred route |
+| Task | Start here |
 | --- | --- |
-| Extract, convert, import, cook or pack | The project's established native/Wine WolvenKit pipeline with donor containers and native readback. |
-| Inventory clips/material references | [Read-only jq summaries and regression checks](references/tool-selection.md), on fresh serialized copies. |
-| Ordinary CR2W authoring differences | A schema-aware diff if available; ignored render buffers require dedicated geometry/payload checks. |
-| Fit rigs, adapt animation, inspect collision/contact | [Reusable weapon workflow](references/weapon-rigging-animation.md) and [inspection skill](../weapon-animation-inspection/SKILL.md). |
-| Port an Unreal weapon or first-person reload | [Source-to-native port workflow](references/ron-port-workflow.md), including extraction, graph-aware adaptation, preview and export gates. |
-| Recover source audio/state coverage or evaluate Scenario Blender helpers | [Beta source/audio findings](references/ron-beta-source-audio.md), with standalone AudioXL integration and separate installation, diagnostic and gameplay evidence. |
-| Compare Fallout/CAT or Scenario rigging/export advice with Cyberpunk | [Versioned comparison and copied-asset tests](references/fo4-scenario-comparison.md). Use transferable diagnostics; retain Cyberpunk hierarchy, weights, timing and native export gates. |
-| Runtime state inspection | An existing bounded, version-matched bridge if available; prove engine calls separately from offline protocol tests. |
-| Evaluate another MCP server | [Tool selection](references/tool-selection.md) and [pinned implementation comparison](references/mcp-comparison.md). |
+| Implement scripts, tweaks, UI or native behavior | [Development playbook](references/development-playbook.md); use the [topic map](references/topic-map.md) to find the actual API/format source. Read [corrections](references/documentation-corrections.md) when adapting examples. |
+| Extract, import, cook, pack, inventory clips/materials or compare CR2W | [Resource pipeline](references/resource-pipeline.md). Keep the established native/Wine route, compatible donor containers, fresh outputs and native readback; check ignored fields before trusting a diff. |
+| Fit or port a weapon; inspect rigs, mechanisms, collision or hand contact | [Weapon workflow](references/weapon-rigging-animation.md): establish source pairing and the behavior/acceptance ledger before fitting. Use the sibling [inspection skill](../weapon-animation-inspection/SKILL.md) for playback/render/contact inspection. |
+| Retarget any animation; diagnose source playback, binds, fingers, proportions or native deformation | [Retargeting skill](../cyberpunk2077-animation-retargeting/SKILL.md) for one-gate execution and bounded repair loops; [technical hub](references/animation-retargeting/index.md), then the chapter for the failing stage. Complete the finger checkpoint before motion transfer where hands/digits are involved. |
+| Inspect runtime state or evaluate a bridge/MCP/tool, including Edgemodders | [Tool selection](references/tool-selection.md). Discover existing bounded capabilities; distinguish source claims, protocol fixtures and live engine results. |
+| Resolve paths, prerequisites or Linux/Wine setup | [Environment](references/environment.md). Locate the actual tools and profile; historical paths and downloaded packages do not establish working installations. |
 
-Neither compared MCP replaces Blender, native rig recovery, collision probes,
-actual rendered-frame inspection or export validation. Reuse demonstrated additions
-without assuming a second server improves a working CLI or bridge.
+For implementation, verify real declarations and usage before calling or hooking
+an API; check types, ownership, lifecycle and session transitions. Use supported
+script/data layers where they satisfy the feature. Keep evidence and diagnostic
+assets separate from shipping resources.
 
-## Weapon and evidence boundaries
+## Animation acceptance
 
-Compare donor/replacement dimensions, pivots, bones, weights and animation dependencies
-before fitting. Similar weapon types do not establish compatibility. Recover weapon
-and player motion; inspect complete affected draw/fire/reload variants from first-person
-and close-up views, with dense checks around fast motion. Justify local corrections,
-recheck neighbors/contact, then inspect the native export and packaged result.
+**All animations** require the [Blender visual review and receipt](references/animation-retargeting/qa-debugging.md#mandatory-blender-visual-acceptance)
+before accepted-beta promotion: matched source versus converted
+target through the full timeline and important transitions, with full 360° coverage,
+above/below/obscured areas and relevant close-ups. This covers bodies, faces,
+creatures, props, interactions, cameras and mechanisms. Inspect deformation,
+jitter/popping, stretch/twist, clipping, sliding/contact loss and unnatural motion;
+visible defects fail and require correction and renewed review. Every digit and
+thumb, wrist/palm, arm and moving weapon contact must be accounted for when present.
+Stills, numeric checks and export success do not replace actual motion review.
+Diagnostic exports and isolated single-clip test packages are allowed under the
+[vertical-slice contract](../cyberpunk2077-animation-retargeting/references/runtime-validation.md),
+with visual failures/gaps disclosed. They are not accepted betas; native/package
+and runtime acceptance remain separate.
 
-The [Lynx case](../weapon-animation-inspection/references/lynx-case-study.md) supplies
-a verified local example with explicit sample/view limits. Its mappings, offsets
-and private adapters are not a universal weapon converter. Label unavailable motion
-and approximations. Report unresolved defects with location/frame/time, evidence,
-attempted fixes, tradeoffs and the specific missing information or decision.
+A custom animator/control rig is **optional**. Direct raw/native-skeleton retargeting
+is valid; validate the selected path's rest/binds, limb lengths, skin, required
+helpers and exporter. Use justified FK rotations and nonstretch IK/contact
+corrections. An unfinished control rig blocks an independent route only when an
+identified shared native component actually fails that route. See the
+[bind and architecture contract](references/animation-retargeting/spaces-bind.md#native-skeleton-versus-animator-controls).
 
-Keep source-linked discoveries in the project's own notes. Do not describe fetched
-documentation as reviewed, an offline fixture as runtime proof, or a user's tested
-reload as proof of every animation, package or platform.
+## Evidence and handoff
 
-The [HK416 case and open issues](references/ron-hk416-case-study.md) distinguish
-the rejected donor-derived package, the clean rebuild's offline checks, and the
-user's later confirmation that the reload plays. Thumb/contact, optic, texture
-and sound issues remain open; preserve them when continuing on another machine.
+Retain **PASS / FAIL / UNVERIFIED / BLOCKED** in existing and non-retarget ledgers;
+use the [gate-specific vocabulary](../cyberpunk2077-animation-retargeting/references/pipeline.md)
+for new retarget receipts. Record versions,
+input/output identities, inspected times/views, commands and remaining gaps.
+Source inspection, retained receipts, newly run checks, visual review and gameplay
+prove different things; a pass for one build or sample does not cover every asset.
+Use the [evidence register](references/animation-retargeting/evidence-register.md)
+for dated case receipts and ownership context, then check the owning project's
+current checkpoint. Preserve failed reports and valuable references when updating
+knowledge; add source-linked discoveries at the relevant branch, not case history here.

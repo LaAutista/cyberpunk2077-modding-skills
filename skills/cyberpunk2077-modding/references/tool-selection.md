@@ -6,6 +6,9 @@ decisions come from the [pinned MCP comparison](mcp-comparison.md), completed on
 boundaries. Check the [environment guide](environment.md) and
 [documentation topic map](topic-map.md) before adapting commands to another setup.
 
+For an Edgemodders evaluation, read the [capability comparison](edgemodders-comparison.md):
+version/schema caveats, diff blind spots, Fluorine limits and proposed material/import improvements.
+
 ## Adoption decisions
 
 | Implementation | Keep | Selectively reuse and benefit | Defer |
@@ -25,78 +28,15 @@ on preserved copies before relying on it.
 | --- | --- | --- |
 | Extract, serialize, cook, export or pack | Version-checked WolvenKit CLI and existing operation-specific launcher | Require exit/log checks, fresh outputs and the appropriate native roundtrip; a successful command is insufficient. |
 | Inventory animation clips and material references | Included read-only jq helper on fresh serialized copies | Complete supported fields, not animation playback or a resolved dependency graph. |
-| Compare ordinary CR2W authoring changes | Established schema-aware diff, with its ignored fields inspected | The originating Modwright diff ignores some render buffers; keep dedicated mesh and payload checks. |
+| Compare ordinary CR2W authoring changes | Established schema-aware diff, with its ignored fields inspected | The originating Modwright diff ignores `renderResourceBlob` and `parameters` subtrees; keep dedicated payload and parameter checks. |
 | Fit meshes, adapt motion, inspect collisions or hand contact | [Weapon adaptation workflow](weapon-rigging-animation.md), Blender and native readback | Actually inspect complete applicable sequences and dense frames around fast motion; summaries and MCP calls cannot replace this. |
 | Inspect current player/weapon/ammo state | Existing bounded bridge, if installed and accepted for the current game version | Fixture tests prove protocol behavior, not current native game callbacks. |
 | Diagnose an effective TweakDB value absent from offline data | A scoped future typed-query extension | Deferred; requires protocol fixtures and independent live acceptance. |
 
 ## Corrected animation and material inventories
 
-The maintained summaries belong in
-[summarize_weapon_json.jq](../scripts/summarize_weapon_json.jq), with
-[test_summarize_weapon_json.sh](../scripts/test_summarize_weapon_json.sh) beside it.
-They are separate from Blender adapters and MCP servers so inspections do not
-silently lose fields when a wrapper changes. The helper reads JSON and does not
-convert or modify assets.
-
-From the repository root, configure `WK_CLI` as the executable or established
-launcher for **this operation**. Assign `asset_copy` to a preserved native resource,
-`fresh_output` to a new empty directory, and `animation_json` or `mesh_json` to the
-output actually produced there. Serialize each resource separately, stop on a
-nonzero result, and inspect the converter log and output provenance before querying.
-Do not continue with a stale sidecar after conversion fails.
-
-```bash
-SKILL_DIR="$PWD/skills/cyberpunk2077-modding"
-: "${WK_CLI:?Set WK_CLI to the verified serializer executable or launcher}"
-: "${asset_copy:?Set asset_copy to a preserved native resource}"
-: "${fresh_output:?Set fresh_output to a new empty output directory}"
-"$WK_CLI" convert serialize "$asset_copy" -o "$fresh_output"
-```
-
-Only after successful conversion and inspecting the fresh outputs, run:
-
-```bash
-jq -e -f "$SKILL_DIR/scripts/summarize_weapon_json.jq" "$animation_json"
-jq -e -f "$SKILL_DIR/scripts/summarize_weapon_json.jq" "$mesh_json"
-```
-
-The CLI syntax and helper were tested locally with WolvenKit 9.0.1 / JSON 0.0.9.
-Do not assume all WolvenKit operations run natively on Linux: the established
-pipeline used native and Wine routes for different operations. A Wine launcher
-must supply its own correctly mapped paths and environment; the example is not a
-portable Wine implementation.
-
-For `animAnimSet`, the helper follows `animations[].Data.animation.Data`, preserving
-order, duplicate clip names and every duration. For `CMesh`, it preserves material
-names, indexes and local-instance flags, and traverses every explicit typed
-`DepotPath` without suffix, depth or result limits. It separately reports unique
-string paths, total occurrences, empty paths and unresolved non-string storage.
-Unsupported roots or missing required fields fail before producing a summary.
-Adapt a changed serializer schema explicitly and add a regression; unknown is not
-zero, empty or clean.
-
-This material inventory does **not** resolve hashes, dynamic paths, transitive
-dependencies, textures or shaders. An animation list does not recover player arms,
-animation graphs or runtime IK. Retain original JSON and hashes for those checks.
-
-```bash
-bash -n "$SKILL_DIR/scripts/test_summarize_weapon_json.sh"
-bash "$SKILL_DIR/scripts/test_summarize_weapon_json.sh"
-```
-
-The portable synthetic suite covers wrapped fields, duplicate names, 121 clips,
-25-level references, unknown suffixes, `.remt`, explicit unresolved hashes and nine
-malformed inputs that must fail without summary output. Keep these regressions
-with every helper change.
-
-The original private Lynx-copy run additionally compared every one of 19 clip
-name/duration pairs and all 24 explicit paths against retained golden results, and
-retained all 21 material entries by count. Those fixtures and game-derived files
-are not distributed here. The test script's optional two-directory mode is
-specific to that preserved fixture layout, not a generic acceptance threshold.
-Public synthetic checks do not independently reproduce that private native-asset
-study; test your own preserved copies before claiming another schema is supported.
+Use the [resource pipeline and maintained inventory recipe](resource-pipeline.md#corrected-animation-and-material-inventories)
+for fresh serialization, jq summaries and their regression/evidence boundaries.
 
 ## Preserve weapon acceptance
 

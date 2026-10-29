@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Install just these two sibling skills. Updates retain originals outside discovery.
+# Install these three sibling skills. Updates retain originals outside discovery.
 set -euo pipefail
 repo=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)
 dest=${HOME:?}/.agents/skills
@@ -14,7 +14,7 @@ while (( $# )); do
 done
 dest=$(realpath -m -- "$dest")
 case "$dest/" in "$repo/skills/"*) printf 'Destination overlaps source skills.\n' >&2; exit 1 ;; esac
-skills=(cyberpunk2077-modding weapon-animation-inspection)
+skills=(cyberpunk2077-modding weapon-animation-inspection cyberpunk2077-animation-retargeting)
 same_skill() { diff -qr -x __pycache__ -x '*.pyc' -x '*.pyo' -- "$1" "$2"; }
 unchanged=true
 for skill in "${skills[@]}"; do
@@ -43,7 +43,7 @@ cleanup() {
 trap cleanup EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
-# Complete and compare both staged copies before changing either installed skill.
+# Complete and compare all staged copies before changing any installed skill.
 for skill in "${skills[@]}"; do
     cp -R -- "$repo/skills/$skill" "$stage/$skill"
     # Bytecode is generated locally and can embed private source paths.
@@ -66,5 +66,5 @@ for skill in "${skills[@]}"; do
 done
 for skill in "${skills[@]}"; do same_skill "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
 success=true
-printf 'Installed both skills: %s\n' "$dest"
-printf 'Use $cyberpunk2077-modding or $weapon-animation-inspection in Codex.\n'
+printf 'Installed all three skills: %s\n' "$dest"
+printf 'Use $cyberpunk2077-modding, $weapon-animation-inspection or $cyberpunk2077-animation-retargeting in Codex.\n'

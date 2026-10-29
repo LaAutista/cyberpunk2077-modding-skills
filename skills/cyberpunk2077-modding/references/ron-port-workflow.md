@@ -3,7 +3,9 @@
 Use this alongside the [rigging workflow](weapon-rigging-animation.md), not instead
 of its collision, visual and native checks. The HK416 supplied the measured examples;
 its bone names, offsets, asset paths and thresholds are not a universal adapter.
-See the [case and unresolved gameplay issues](ron-hk416-case-study.md) before resuming it.
+Read the [current proven HK416 retargeting workflow](../../cyberpunk2077-animation-retargeting/references/ready-or-not-workflow.md)
+for the CG replacement, user-confirmed locomotion fix and separate camera-comfort
+revision. The [earlier case and issues](ron-hk416-case-study.md) retain historical scope.
 For later full-state recovery, source FMOD audio and Scenario weight diagnostics,
 read the [beta findings](ron-beta-source-audio.md); they do not supersede native
 rest/weight preservation, visual review or gameplay acceptance.

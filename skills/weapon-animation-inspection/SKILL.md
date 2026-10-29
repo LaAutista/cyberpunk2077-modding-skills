@@ -15,10 +15,18 @@ and [tool-selection guide](../cyberpunk2077-modding/references/tool-selection.md
 Use the [Lynx case](references/lynx-case-study.md) for proven local reasoning and
 bounded evidence; use its [command contracts](references/lynx-command-contracts.md)
 only after supplying the described project-specific tools and owned assets.
+For motion transfer, first use the sibling [retargeting state machine](../cyberpunk2077-animation-retargeting/SKILL.md)
+to preserve a baseline, select one blocking fixture and bound failed correction loops.
 For Unreal source recovery and graph-aware retargeting, use the
 [HK416-derived reusable workflow](../cyberpunk2077-modding/references/ron-port-workflow.md).
 Use the [additive preview helper](references/additive-preview.md) only with its
 explicit bind-relative export contract and chosen normal base.
+Start weapon work with the [acceptance ledger and behavior matrix](../cyberpunk2077-modding/references/weapon-rigging-animation.md#acceptance-ledger).
+Keep source pairing, retarget, visual, native/package and runtime results explicitly
+PASS, FAIL or UNVERIFIED in historical ledgers; new retarget receipts use the
+[gate-specific vocabulary](../cyberpunk2077-animation-retargeting/references/pipeline.md).
+Missing source variants require a disclosed fallback and
+its own checks; they cannot become an invented source-fidelity pass.
 
 ## Work sequence
 
@@ -27,6 +35,10 @@ explicit bind-relative export contract and chosen normal base.
    inverse binds, component mounts and every skin influence set. Inventory actual
    clips and material references with the maintained summary helper. Similar
    weapons or an empty Blender Actions list do not establish compatibility.
+   Prove the source model/rig/clip pairing; flag duplicate rigs, double transforms
+   and wrong mounts. Preserve source and target bind/rest contracts, scale, finger
+   hierarchy and channel semantics; rotate joints for poses rather than translating
+   or stretching them to conceal a mismatch.
 2. Recover weapon/component and player-arm motion. Prove playback against an
    independent import where supported; preserve key counts/times, scale modes,
    float tracks and durations. Label missing runtime IK, graph blends, customized
@@ -36,6 +48,11 @@ explicit bind-relative export contract and chosen normal base.
    Review every critical fast-motion/contact frame at full size and state the
    cadence elsewhere. Check receiver/bolt/handle/cover, magazine travel, trigger
    fingers, grips, neighboring parts, joints, visibility and sight alignment.
+   Use the full behavior matrix, including idle/low ready, ADS when supported,
+   locomotion, melee and interruptions. Compare source/retarget/final-native top,
+   left and right matched poses; add palm/underside and close-ups until every
+   thumb/finger and its deformed joints are accounted for through keys and
+   interpolated motion. Source appearance is primary; anatomy references supplement it.
 4. Diagnose before editing. Choose a local mesh, weight, pivot, rig or motion
    correction justified by evidence. Compare tradeoffs; preserve intended
    mechanics and unrelated motion. Do not hide parts or globally distort the

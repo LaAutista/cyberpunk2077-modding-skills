@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cyberpunk Animation Retargeting"
+  short_description: "Retarget one clip with explicit evidence gates"
+  default_prompt: "Use $cyberpunk2077-animation-retargeting to identify the current blocking gate and produce a verified single-clip vertical slice."

@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "source": {
+    "identity": "synthetic-two-bone-source",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "decoder": "synthetic fixture v1",
+    "skeleton": {
+      "names": [
+        "root",
+        "hand"
+      ],
+      "parents": [
+        -1,
+        0
+      ],
+      "reference_local": [
+        {
+          "t": [
+            0,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "t": [
+            1,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "target": {
+    "identity": "synthetic-two-bone-target",
+    "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "container_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "skeleton": {
+      "names": [
+        "root",
+        "hand"
+      ],
+      "parents": [
+        -1,
+        0
+      ],
+      "reference_local": [
+        {
+          "t": [
+            0,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "t": [
+            1,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  },
+  "conventions": {
+    "vectors": "column",
+    "matrix_storage": "row-major",
+    "quaternion": "xyzw",
+    "time": "seconds",
+    "source_units": "m",
+    "working_units": "m",
+    "target_units": "m",
+    "source_to_working": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "working_to_target": [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1
+    ]
+  },
+  "clip": {
+    "name": "synthetic-sprint",
+    "duration": 1,
+    "animation_type": "absolute",
+    "base_definition": "none",
+    "interpolation": "LINEAR",
+    "sample_times": [
+      0,
+      0.5,
+      1
+    ],
+    "local_samples": [
+      [
+        {
+          "t": [
+            0,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "t": [
+            1,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      [
+        {
+          "t": [
+            0.1,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "t": [
+            1,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        }
+      ],
+      [
+        {
+          "t": [
+            0,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "t": [
+            1,
+            0,
+            0
+          ],
+          "q": [
+            0,
+            0,
+            0,
+            1
+          ],
+          "s": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    ],
+    "events": [],
+    "curves": []
+  },
+  "assembly": {
+    "player_anchor": "root",
+    "weapon_root": "hand (synthetic only)",
+    "component_mounts": "none in this synthetic fixture",
+    "ownership": "root owns hand"
+  },
+  "unsupported_semantics": [],
+  "mapping": [
+    {
+      "source": "root",
+      "target": "root"
+    },
+    {
+      "source": "hand",
+      "target": "hand"
+    }
+  ],
+  "unmapped_targets": []
+}

@@ -6,11 +6,14 @@ The workflow comes from real modding work; evidence and limitations travel with 
 
 | Start here | Use it for |
 | --- | --- |
+| [Agent operating contract](AGENTS.md) | Preserve baselines, work one gate, stop failed repair loops and report bounded evidence. |
+| [Animation retargeting skill](skills/cyberpunk2077-animation-retargeting/SKILL.md) | Take one source clip through mapping, target reconstruction, native readback, diagnostic packaging and runtime acceptance. |
 | [Cyberpunk modding skill](skills/cyberpunk2077-modding/SKILL.md) | Choose implementation layers, inspect resources, select tools and verify packages. |
 | [Weapon animation inspection skill](skills/weapon-animation-inspection/SKILL.md) | Inspect donor/replacement rigs, full motion, collisions, hand contact and native exports. |
+| [Animation retargeting knowledge hub](skills/cyberpunk2077-modding/references/animation-retargeting/index.md) | Load focused chapters for source playback, rest/bind, proportions, finger alignment, contact, native helpers, events and evidence-based debugging. Local case receipts retain explicit acceptance limits. |
 | [Lynx case study](skills/weapon-animation-inspection/references/lynx-case-study.md) | The tested diagnosis/correction process and its visual, native and gameplay evidence limits. |
 | [RoN-to-Cyberpunk workflow](skills/cyberpunk2077-modding/references/ron-port-workflow.md) | Recover source assets, adapt rigs and graph controls, inspect motion and verify native exports. |
-| [HK416 status and open issues](skills/cyberpunk2077-modding/references/ron-hk416-case-study.md) | User-confirmed reload playback, with thumb/contact, optic, texture and sound issues still open. |
+| [Proven HK416 retargeting workflow](skills/cyberpunk2077-animation-retargeting/references/ready-or-not-workflow.md) | RoN animation with CG geometry, user-confirmed locomotion/contact, partial additive weights and the separately checked camera-comfort revision. |
 | [Tool selection](skills/cyberpunk2077-modding/references/tool-selection.md) | Keep proven tools; reuse corrected summaries; defer unverified MCP integrations. |
 | [Topic references](skills/cyberpunk2077-modding/references/topic-map.md) | Maintained external documentation and implementation sources. |
 
@@ -23,7 +26,7 @@ git clone https://github.com/LaAutista/cyberpunk2077-modding-skills.git
 cd cyberpunk2077-modding-skills
 ```
 
-For Codex, install **both sibling skill folders** into your user skill directory:
+For Codex, install **all three sibling skill folders** into your user skill directory:
 
 ```bash
 bash scripts/install-skills.sh
@@ -43,9 +46,13 @@ deliberately. An unchanged installation is a no-op. Run only one installer at a 
 
 For a repository-scoped or other existing installation, pass
 `--dest "/path/to/project/.agents/skills"` (or your current skills directory).
-Keep the two folders adjacent so their relative links
+Keep the three folders adjacent so their relative links
 resolve. See [official skill discovery and invocation documentation](https://learn.chatgpt.com/docs/build-skills).
 These instructions install knowledge and helpers, not game tools, MCP servers or mods.
+
+The root `AGENTS.md` governs this checkout; it is not installed as a global agent
+policy. The retargeting skill carries its own gate/loop/baseline rules when invoked
+from a mod project. Keep project STATUS and failure evidence with that project.
 
 Example prompts in Codex:
 
@@ -53,12 +60,15 @@ Example prompts in Codex:
 $cyberpunk2077-modding Inspect this mod project, choose the appropriate tools,
 and distinguish automated checks from runtime verification.
 
+$cyberpunk2077-animation-retargeting Take one sprint clip through the next blocking
+gate. Preserve the working reload and produce an isolated diagnostic slice.
+
 $weapon-animation-inspection Inspect this replacement's donor rig and reloads.
 Preserve appearance and timing, inspect actual rendered frames, and verify native readback.
 ```
 
 Use `/skills` to confirm discovery; restart the client if the new skills do not
-appear. Other agents can read the two `SKILL.md` files directly or use their own
+appear. Other agents can read the three `SKILL.md` files directly or use their own
 skill installation mechanism. Automatic discovery in other hosts is not tested here.
 
 ## Setup/preflight review candidate
@@ -67,6 +77,8 @@ See [agent-neutral setup commands and boundaries](setup/README.md). Run `node se
 
 ## Prerequisites and checks
 
+- Retarget fixture/mapping/receipt checks require Python 3.11+ only; these structural
+  checks do not replace measured transforms, native readback or gameplay evidence.
 - Reading/invocation requires an agent that can access the Markdown files.
 - JSON summaries require Bash and jq; contact sheets additionally require
   ImageMagick and its configured font. Git is needed for cloning.
@@ -85,9 +97,14 @@ Run the portable regressions from this checkout:
 bash skills/cyberpunk2077-modding/scripts/test_summarize_weapon_json.sh
 bash skills/weapon-animation-inspection/scripts/test_contact_sheets.sh
 node skills/cyberpunk2077-modding/scripts/native-animation/test-native-animation.mjs
+node skills/cyberpunk2077-modding/scripts/native-animation/test-beta-additive.mjs
+python3 -B -m unittest discover -s tests -p 'test_retarget_contract.py' -v
 bash tests/test-install-skills.sh
 node tests/check-repository.mjs
 ```
+
+The retargeting [workflow evals](skills/cyberpunk2077-animation-retargeting/evals/README.md)
+test agent decisions separately from these deterministic helper checks.
 
 The JSON helper rejects malformed required fields and preserves complete animation
 lists and explicit material references. [Detailed MCP findings](skills/cyberpunk2077-modding/references/mcp-comparison.md)

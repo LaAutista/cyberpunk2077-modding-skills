@@ -4,6 +4,10 @@ This is working knowledge for the coding agent. Read the relevant source documen
 
 ## Choose the implementation layer
 
+Treat this as a capability map. Preserve the user's current stack and restrictions,
+including CET preferences. A CET example is not a default recommendation to add
+CET or enable a bridge; choose it only within the requested or existing workflow.
+
 | Requested change | Starting point | What to establish before coding |
 | --- | --- | --- |
 | Item stats, loot, vendors, vehicle parameters, record variants | TweakXL YAML | Existing record, property types, inherited arrays, record relationships |

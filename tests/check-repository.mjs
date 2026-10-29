@@ -17,7 +17,7 @@ function walk(dir) {
 }
 walk(root);
 const relative = file => path.relative(root, file);
-const allowed = new Set(['.md', '.jq', '.sh', '.mjs', '.yaml', '.yml', '.py', '.c', '.cs', '.csproj', '.patch']);
+const allowed = new Set(['.md', '.jq', '.sh', '.mjs', '.yaml', '.yml', '.json', '.py', '.c', '.cs', '.csproj', '.patch']);
 const privacyPatterns = [
   [/\/(?:home|Users)\/[^\s/"'`]+\//, 'personal absolute path'],
   [/[A-Za-z]:\\(?:Users|Documents and Settings)\\/i, 'personal Windows path'],
@@ -59,6 +59,9 @@ for (const file of files) {
     if (skillName !== path.basename(path.dirname(file)) || !/^description: .+/m.test(front?.[1] ?? ''))
       errors.push(`${name}: missing or inconsistent skill metadata`);
   }
+  if (file.endsWith('.json')) {
+    try { JSON.parse(text); } catch { errors.push(`${name}: invalid JSON`); }
+  }
   if (!file.endsWith('.md')) continue;
   for (const match of text.matchAll(/\[[^\]]*\]\(([^)]+)\)/g)) {
     const link = match[1];
@@ -74,7 +77,7 @@ for (const file of files) {
     links++;
   }
 }
-if (skills !== 2) errors.push(`Expected two skill entry points, found ${skills}`);
+if (skills !== 3) errors.push(`Expected three skill entry points, found ${skills}`);
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;

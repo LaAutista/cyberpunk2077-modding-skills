@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "project": "",
+  "baseline": null,
+  "baseline_note": "No known-good artifact has been identified yet.",
+  "candidate": null,
+  "fixture": {"path": "", "sha256": ""},
+  "current_gate": {"id": "source", "question": ""},
+  "gates": {
+    "source": {"status": "OPEN", "evidence": []},
+    "target": {"status": "OPEN", "evidence": []},
+    "mapping": {"status": "OPEN", "evidence": []},
+    "retarget": {"status": "OPEN", "evidence": []},
+    "native": {"status": "OPEN", "evidence": []},
+    "visual": {"status": "OPEN", "evidence": []},
+    "package": {"status": "OPEN", "evidence": []},
+    "runtime": {"status": "OPEN", "evidence": []}
+  },
+  "attempts": [],
+  "discriminator": null,
+  "next_test": ""
+}

@@ -41,7 +41,37 @@ and Bake Animation enabled, 60 fps, frames 0–4, step 1, with Skins/Morphs. Ret
 names, hierarchy, units and saved bind pose; identify intentional rest/weight/helper
 changes. Preserve the exact original handoff so a returned correction can be
 compared in world space even when the editing rig subsequently improves. Neto's
-`idle tweak.max` correction remains unevaluated until that export is available.
+`idle tweak.max` remains unevaluated directly; the subsequently supplied
+`idle fix.FBX` is an independently evaluable export of the correction.
+
+## Transfer an animator's returned pose, not the exporter's incidental bind edits
+
+The returned binary FBX 7400 imported successfully in Blender 5.2.3: 275 bones,
+27 meshes, identical hierarchy/topology. Its frames 0–2 at 30 fps cover the same
+duration as the original frames 0–4 at 60 fps. Compare seconds, not frame labels.
+Preserve both files and hash them. Diff posed world transforms, rest transforms,
+mesh points, named weights, morphs and helper controls separately. Max's round
+trip changed several unweighted rest frames; blindly replacing native binds would
+be incorrect. The main posed axes matched the native baseline within 0.000012
+matrix units, allowing the intended wrist/finger rotation deltas to be transferred.
+
+Reconstruct the hierarchy parent-first with the original native local joint
+translations/scales. Synchronize `arm_left_ik_offset` with the resulting left-hand
+world transform; editing FK while leaving that controller stale is insufficient.
+Do not apply an idle hand shape throughout magazine manipulation. This candidate
+uses a fore-end contact test relative to `WeaponRight` and a 120 ms temporal
+envelope at grip release/return. A spatial-only fade was rejected because a fast
+reload crossed it in one frame. Inspect the dense transition frames; the envelope
+is a port-specific adaptation, not a recovered RoN event or general magic value.
+
+Neto also moved `l_thumb_side_mscl_JNT` and `l_pinky_knuckle_B_top_mscl_JNT`.
+Those controls are absent from the weapon animation skeleton. Their edits are
+recorded but not assigned to unrelated bones or exported into a shared player rig.
+The offline renderer approximates muscle deformation. **The right-side finger-base
+crease remains visible**, including in the returned FBX; transfer/export success
+does not establish a complete skin repair. Next investigate the actual muscle
+graph and loaded FPP mesh/rig, or obtain an animator correction on the revised
+control rig with helper edits explicitly identified. Neither path is yet proven.
 
 ## Private animation ownership and state selection
 
@@ -128,4 +158,46 @@ assets independently; retain animation/material summary regression tests; extrac
 the finished archive and compare all inputs. Report native, visual and runtime
 results separately. Neto's exact repose, muscle solver output, remaining source
 state integration, indoor/outdoor audio and gameplay switching are not established
-by these tool checks.
+by these tool checks. The rotational portion of Neto's repose has now survived
+native import/readback for 31 clips per player variant; his helper translations
+have not. In the local evidence folder, `neto-fbx/compare_skin.py`, `stage_idle.py`,
+`adapt_clips_smooth.py`, `author_clips_smooth.mjs` and `import_neto_smooth.sh` record
+the actual staged experiment. They depend on private source manifests and are
+not published assets or a generic fresh-clone recipe. Native assertions separately
+preserve unrelated clips, events, float tracks, skeleton data and source durations.
+
+The final local inspection used 80 sequence/view combinations (20 clips, two
+player variants, two cameras): action sheets at 60 Hz and breathing/locomotion
+at 10 Hz plus endpoint. Original-size release/regrip samples supplemented the
+sheets; not every PNG was opened individually. The source actions remained
+continuous in these samples, while the finger-base crease remained. Record
+`visuallyInspected: true` separately from `visuallyAccepted: false`.
+
+The final local rerun order, after preserving the existing output folders, was:
+
+```bash
+# These private scripts resolve the local evidence tree; relocate their roots
+# when moving a full private project. They are not shipped by this skill.
+blender -b --factory-startup -t 2 --python-exit-code 1 \
+  --python "$R/neto-fbx/stage_idle.py"
+blender -b --factory-startup -t 2 --python-exit-code 1 \
+  --python "$R/neto-fbx/adapt_clips_smooth.py"
+node "$R/neto-fbx/author_clips_smooth.mjs"
+bash "$R/import_neto_smooth.sh"
+blender -b --factory-startup -t 2 --python-exit-code 1 \
+  --python "$R/check_neto_preservation.py"
+# Only after binding a real image review receipt to the final inputs:
+python tools/package_ron_hk416_ready.py check
+python tools/package_ron_hk416_ready.py pack
+```
+
+The packaging helper keeps prior attempts, limits native changes to the two
+private player animation sets, preserves all other Refined resources, and checks
+fresh evidence, archive extraction and ZIP member hashes. Its scope/script change
+is compiled independently. Packaging remains a test-candidate operation, not
+visual or gameplay acceptance. Keep `REPORT.md`, the small before/after evidence
+set and `INSTALL.txt` with the local candidate; do not publish the source assets.
+
+The subsequent [neutral alignment, locomotion and ADS-reload findings](hk416-ads-centering.md)
+cover camera-relative source motion, existing native reload selectors and independent
+cross-component duration checks. New routing remains a gameplay candidate.
