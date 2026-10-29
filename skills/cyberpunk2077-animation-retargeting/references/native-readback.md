@@ -5,6 +5,11 @@ Do not add a second native writer or a receipt-only substitute for byte readback
 Confirm the installed WolvenKit/.NET versions and the helper's supported codecs,
 animation types, events and root-motion limitations before running it.
 
+The [agent native runner](agent-tools.md#run-the-native-gate-from-one-fixture)
+orchestrates this existing sequence from one private config, with fresh baseline
+exports, hash-checked resume, retained failures and bounded execution. Use it when
+the fixture fits the existing selected-clip adapter.
+
 Start with copies of the compatible original container and matching rig. Run an
 unchanged roundtrip and one controlled channel edit, then the selected single clip.
 Keep the expectation from the unprepared authoring input. Reusing the serializer's

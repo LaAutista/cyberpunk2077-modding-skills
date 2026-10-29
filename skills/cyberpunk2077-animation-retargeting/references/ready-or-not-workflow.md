@@ -5,6 +5,10 @@ for the commands and prerequisites. This reference adds the decisions establishe
 by the CGTrader HK416 and its locomotion correction on 2026-10-28. Reuse the route;
 measure a new weapon's skeleton, geometry and contact calibration independently.
 
+Use the [agent workflow tools](agent-tools.md) for repeated native gates and
+archive/graph inspection. They remove command repetition without transferring
+another weapon's calibration or treating checked files as gameplay acceptance.
+
 ## Identify the accepted baseline
 
 The user reported that the installed pelvis-coupled HK416 worked and described the

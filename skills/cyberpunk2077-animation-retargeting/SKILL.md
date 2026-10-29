@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget external or Cyberpunk weapon/player animation onto a verified Cyberpunk 2077 skeleton. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.1.1"
+  version: "1.2.0"
 ---
 
 # Cyberpunk 2077 animation retargeting
@@ -66,6 +66,11 @@ parents must precede child reconstruction; synchronize controls and export fresh
 final arrays. Never mix native control rests with per-mesh inverse binds.
 
 ## Included checks and handoff
+
+For repeated native conversion/checks, archive ownership lookup and bounded graph
+inspection, use the [agent workflow tools](references/agent-tools.md). Prefer the
+resumable native runner over copying another per-weapon command script; its checked
+receipt still leaves visual and runtime gates open.
 
 From this skill directory, using Python 3.11+'s standard library:
 
