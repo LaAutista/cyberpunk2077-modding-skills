@@ -4,6 +4,8 @@ Use the existing [source extraction, assembly and native route](../../cyberpunk2
 for the commands and prerequisites. This reference adds the decisions established
 by the CGTrader HK416 and its locomotion correction on 2026-10-28. Reuse the route;
 measure a new weapon's skeleton, geometry and contact calibration independently.
+The [accepted MP5 1.0 workflow](mp5-workflow.md) extends this route through reloads,
+ADS, attachments, sprint transitions, melee and equip, with scoped exceptions.
 
 Use the [agent workflow tools](agent-tools.md) for repeated native gates and
 archive/graph/mask inspection. They remove command repetition without transferring
@@ -90,9 +92,10 @@ captured. Never transfer an isolated numerical pass to runtime acceptance.
 
 MP5 v11 instead moves the retained `Torso_Chest_Control_Override_GRP`, a sibling
 of the camera group, and checks the identified downstream chest-driver-to-Spine3
-constraint. Native readback and isolated composition checks passed, but v11's
-gameplay test is OPEN. This control is a candidate for that graph and rig, not a
-new universal carrier. Require its user test before describing it as proven.
+constraint. Native readback and isolated composition checks passed. The user
+confirmed v11 sprint worked, then reported a donor transition immediately after
+stopping; later builds addressed that transition. The user accepted v14 as1.0.
+This control is verified for that reported graph/rig scope, not a universal carrier.
 
 ## Camera comfort is an independent requirement
 

@@ -28,6 +28,11 @@ PASS, FAIL or UNVERIFIED in historical ledgers; new retarget receipts use the
 Missing source variants require a disclosed fallback and
 its own checks; they cannot become an invented source-fidelity pass.
 
+For established RoN ports, use the [MP5 recipe](../cyberpunk2077-animation-retargeting/references/mp5-workflow.md).
+Inspect current replacement geometry/skin and post-composition controls; source
+model views or an IK curve alone do not prove final hand contact. Batch review
+of compatible actions is valid; retain explicit user-accepted release exceptions.
+
 ## Work sequence
 
 1. Preserve complete donor/replacement assemblies, native resources, build inputs

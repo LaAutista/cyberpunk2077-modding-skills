@@ -8,7 +8,8 @@ Case-specific offsets, skeletons, clocks and thresholds need new fixtures before
 1. Read the relevant skill and the owning project's current STATUS/evidence handoff.
 2. Identify and preserve the known-good artifact, its hash and its actual evidence
    level. If none exists, say so; an intermediate export is not a runtime baseline.
-3. Select one blocking gate, one named fixture and the smallest discriminating test.
+3. For an unknown/failing route select one blocking gate and discriminating fixture.
+   For an established route batch compatible actions using measured contracts.
 4. Record input/tool versions and hashes before editing. Preserve dirty work and
    failed reports. Do not change live profiles or launch the game without authorization.
 
@@ -54,6 +55,12 @@ acceptance, native/package checks and identified runtime acceptance are all
 required before promotion or full-set expansion. See the
 [runtime contract](skills/cyberpunk2077-animation-retargeting/references/runtime-validation.md).
 
+After a route is accepted, reuse unchanged evidence and batch compatible clips;
+do not require another single-clip approval cycle per action. Explicit user release
+acceptance may retain named defects or native fallbacks. Record those limits
+without inventing a flawless visual pass or expanding release criteria. Use the
+[MP5 workflow](skills/cyberpunk2077-animation-retargeting/references/mp5-workflow.md).
+
 After two failed corrections at the same gate, stop correction. Write FAILURE.md
 with the fixture, observations, attempted changes, evidence and remaining hypotheses.
 Construct a discriminator separating at least two hypotheses; run it before another
@@ -67,6 +74,8 @@ From the repository root, run the checks affected by the change:
 
 ```sh
 python3 -B -m unittest discover -s tests -p 'test_retarget_contract.py' -v
+python3 -B -m unittest discover -s tests -p 'test_agent_workflow_tools.py' -v
+node tests/test-animation-coverage.mjs
 bash tests/test-install-skills.sh
 node tests/check-repository.mjs
 bash skills/cyberpunk2077-modding/scripts/test_summarize_weapon_json.sh

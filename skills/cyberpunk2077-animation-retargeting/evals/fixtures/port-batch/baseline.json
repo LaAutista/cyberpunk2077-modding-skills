@@ -1,0 +1,56 @@
+{
+  "Data": {
+    "RootChunk": {
+      "animations": [
+        {
+          "animation": {
+            "name": {
+              "$value": "idle"
+            },
+            "animationType": "Normal",
+            "animBuffer": {
+              "$type": "synthetic",
+              "duration": 1,
+              "inplaceCompressedBuffer": {
+                "Bytes": "AQID"
+              }
+            }
+          },
+          "events": []
+        },
+        {
+          "animation": {
+            "name": {
+              "$value": "draw"
+            },
+            "animationType": "Normal",
+            "animBuffer": {
+              "$type": "synthetic",
+              "duration": 1,
+              "inplaceCompressedBuffer": {
+                "Bytes": "AQID"
+              }
+            }
+          },
+          "events": []
+        },
+        {
+          "animation": {
+            "name": {
+              "$value": "reload"
+            },
+            "animationType": "Normal",
+            "animBuffer": {
+              "$type": "synthetic",
+              "duration": 1,
+              "inplaceCompressedBuffer": {
+                "Bytes": "AQID"
+              }
+            }
+          },
+          "events": []
+        }
+      ]
+    }
+  }
+}

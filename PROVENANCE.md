@@ -1,5 +1,38 @@
 # Provenance and verification
 
+## Accepted MP5 1.0 and reusable tooling, 2026-10-30
+
+Retargeting skill 1.4.0 records the user's extended-play acceptance of MP5 v14 as
+1.0, with reload-while-ADS and minor empty-reload visual issues retained. The
+[MP5 workflow](skills/cyberpunk2077-animation-retargeting/references/mp5-workflow.md)
+binds that scope to the archive hash and discloses native fallbacks. It documents
+source composition, mask/control ownership, camera motion, contact windows,
+integer event clocks, current rig pairing, scoped dispatch, audio and attachments.
+Established routes may batch compatible actions after the initial vertical slice;
+explicit user acceptance is not replaced with an assistant-created parity target.
+
+Original reusable tools now inventory nested RoN FP action references, batch the
+existing native runner with all-fixture preflight and hash-verified resume, and
+compare per-clip payloads separately from metadata/relocation. Private MP5 class
+records yielded 110 A2 references/53 unique packages and 107 A3 references/54
+packages. Three private native fixtures ran 30 stages in 61.938 seconds and
+reproduced the accepted native resources byte-for-byte. The unchanged rerun reused
+30 stages in 1.783 seconds with zero conversions. These measure the native gate,
+not full-port throughput; under one hour remains a target. The first integration
+attempt exposed null event arrays; the preserved failure led to a regression fix.
+
+Checks passed: 25 workflow-tool tests, 17 contract tests, synthetic coverage tests,
+installer/backup tests, native/additive/summary/contact-sheet regressions, three
+skill metadata validators and repository links/publication checks. An independent
+agent executed the new inventory/coverage scenario with the rubric withheld and
+preserved acceptance, batching and evidence boundaries. All three installed user
+skills match the candidate; Codex force-reloaded discovery found them enabled in
+three project scopes without errors. An existing project-specific inspection
+skill remains present and was not replaced. Discovery does not prove automatic
+routing. No game assets, purchased models or private logs/configs are published;
+synthetic fixtures contain no actual animation data. No live mod or game was changed.
+
+
 ## Proven HK416 route, 2026-10-28
 
 The retargeting skill 1.1.1 updates a [focused RoN workflow](skills/cyberpunk2077-animation-retargeting/references/ready-or-not-workflow.md). The user confirmed the installed CG HK416 locomotion/contact fix and described the port as solid, with camera motion remaining. The installed v3 archive identity, v4 camera-comfort candidate and exact evidence scopes are recorded there. Reusable findings cover distinct source/reference and replacement geometry, partial additive weights, the two native carrier branches, native clock collisions and parent-first camera compensation. No game/commercial assets or private paths are published.

@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget external or Cyberpunk weapon/player animation onto a verified Cyberpunk 2077 skeleton. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.3.0"
+  version: "1.4.0"
 ---
 
 # Cyberpunk 2077 animation retargeting
@@ -15,7 +15,9 @@ bounded validators; it does not supply a universal retargeter or game assets.
 
 Read the current project STATUS/handoff and preserve the known-good artifact with
 its hash and evidence scope. If no runtime baseline exists, record that explicitly.
-Choose exactly one blocking gate, one fixture and one next discriminating test.
+For an unknown or failing route, choose one blocking gate, fixture and next
+discriminating test. For an established route, batch compatible actions using
+the measured contract and hash-verified evidence.
 Keep raw source, evaluated source, preview, final native and package identities
 separate. Preserve unrelated tracks, dirty work, user settings and failed reports.
 
@@ -34,12 +36,14 @@ Historical receipts retain their original terms and limitations.
 | C — coordinates/mapping | Declared vector/matrix/quaternion conventions, units and both basis transforms; explicit bone correspondence and justified unmapped targets. Check reference-pose reconstruction before motion. Read [spaces](references/spaces-and-transforms.md). |
 | D — one clip | Preserve target anatomical translations/scales/lengths and unrelated tracks; solve rotations, assembly placement, nonstretch reach, phase-specific contact and required controls. Check target deformation and original unclamped contact residuals. Read [contact](references/contact-and-ik.md). |
 | E — native | Author into a copy of a compatible container with the matching rig. Independently decode stored bytes; compare keys/times, untouched clips, events/floats, scale and additive semantics. Read [semantics](references/cyberpunk-animation-semantics.md) and [native checks](references/native-readback.md). |
-| F — package | Isolate exactly the tested clip; extract and compare shipped resources. Record source/rig/container/archive hashes, game version, prerequisites, conflicting packages and visual status. A diagnostic package is not an accepted beta. |
+| F — package | Isolate the initial diagnostic clip or explicitly checked action batch; extract and compare shipped resources. Record source/rig/container/archive hashes, game version, prerequisites, conflicting packages and visual status. A diagnostic package is not an accepted beta. |
 | G — runtime | User confirms the identified package, effective profile and affected variants at beginning/middle/end, transitions, contact, relevant IK and interruptions. Record failures separately. Read [runtime validation](references/runtime-validation.md). |
 
 Read only references needed for the current gate. For general tools/resource work
 use the sibling [modding skill](../cyberpunk2077-modding/SKILL.md); for actual
 motion/deformation review use [weapon inspection](../weapon-animation-inspection/SKILL.md).
+For comparable complete ports, start with the [MP5 1.0 workflow](references/mp5-workflow.md)
+and its private recipe, batching boundaries and throughput guidance.
 The existing [technical hub](../cyberpunk2077-modding/references/animation-retargeting/index.md)
 retains detailed, source-linked chapters and dated case evidence.
 
@@ -54,11 +58,15 @@ pass cannot establish that those tracks survive the actual body composition.
 ## Bound the work
 
 Once one source clip decodes, mapping is established and the target container is
-writable, the next deliverable is the isolated vertical slice. Resolve its named
+writable for a new route, the next deliverable is the isolated vertical slice. Resolve its named
 blocking gate before adding polish or processing more clips. A diagnostic slice
 may disclose known visual defects to test runtime consumption; do not call it
 accepted or replace a baseline. Before accepted-beta promotion or full-set work,
-require all applicable gates, including full-motion Blender review and G, to pass.
+require applicable native/package, full-motion review and runtime evidence. Once
+the route is established, batch compatible clips and review changed motion and
+state boundaries together. Do not impose a stop-and-ask cycle per clip. Explicit
+user acceptance defines release scope: record known defects/fallbacks and untested
+combinations separately, without inventing evidence or requiring deferred work.
 
 After two failed corrections at the same gate, stop implementation and write
 FAILURE.md using the [failure ledger](references/failure-ledger.md). Separate at
@@ -70,7 +78,7 @@ final arrays. Never mix native control rests with per-mesh inverse binds.
 
 ## Included checks and handoff
 
-For repeated native conversion/checks, archive ownership lookup and bounded graph
+For source inventory, native batches/resume, clip coverage, archive lookup and bounded graph
 and rig-mask inspection, use the [agent workflow tools](references/agent-tools.md). Prefer the
 resumable native runner over copying another per-weapon command script; its checked
 receipt still leaves visual and runtime gates open.

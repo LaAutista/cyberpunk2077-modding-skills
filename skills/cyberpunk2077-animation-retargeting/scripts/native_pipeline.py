@@ -44,6 +44,12 @@ def glb_names(path):
         extras = animation.get('extras', {})
         if extras.get('animationType') not in ('Normal', 'Additive', 'AdditiveWithoutFirstFrame') or extras.get('rootMotionType') != 'None':
             raise ValueError('Unsupported animation type or root motion')
+        for event in extras.get('animEvents') or []:
+            for field in ('startFrame', 'durationInFrames'):
+                value = event.get(field)
+                if (isinstance(value, bool) or not isinstance(value, (int, float))
+                        or not 0 <= value <= 0xffffffff or int(value) != value):
+                    raise ValueError(f'{animation["name"]}: {field} must be an unsigned integer native event frame')
     if document.get('extras', {}).get('betaAdditiveRepresentation'):
         raise ValueError('Supply the unprepared authored GLB, not raw additive intermediates')
     return names
@@ -164,6 +170,8 @@ def run(config_path, mode):
     cfg = load_config(config_path)
     output = cfg['output'];state_path = output / 'state.json'
     state = json.loads(state_path.read_text()) if state_path.exists() else None
+    if state is None and output.exists() and (not output.is_dir() or any(output.iterdir())):
+        raise ValueError('Refusing an unrecognized nonempty output directory')
     if state and state['fingerprint'] != cfg['fingerprint']:
         raise ValueError('Inputs, tools or config changed. Use a fresh output directory; old evidence is preserved.')
     if state:
@@ -206,6 +214,7 @@ def run(config_path, mode):
             except Exception as error:
                 item.update(status='FAILED', error=str(error));state['status'] = 'FAILED';save(state_path, state)
                 return {'status': 'FAILED', 'failedStep': name, 'error': str(error), 'stepsReused': reused,
+                        'stepsRun': len(state['completed']) - reused,
                         'resume': ['python3', '-B', str(Path(__file__).resolve()), 'run', str(config_path)], 'runtimeVerified': False}
             save(state_path, state)
             print(json.dumps({'step': name, 'status': 'CHECKED', 'seconds': round(result['seconds'], 3)}), file=sys.stderr, flush=True)
@@ -219,13 +228,56 @@ def run(config_path, mode):
                 'receipt': str(state_path), 'runtimeVerified': False, 'visuallyReviewed': False}
 
 
+def batch(path, mode):
+    """Preflight the complete batch, then use the existing runner serially."""
+    started = time.monotonic()
+    manifest = json.loads(path.read_text())
+    fixtures = manifest.get('fixtures')
+    if manifest.get('schema') != 1 or not isinstance(fixtures, list) or not fixtures:
+        raise ValueError('Batch needs schema 1 and a nonempty fixtures array of config paths')
+    if any(not isinstance(p, str) or not p for p in fixtures):
+        raise ValueError('Each fixture must be a config path')
+    paths = [(path.parent / Path(p).expanduser()).resolve() for p in fixtures]
+    if len(paths) != len(set(paths)):
+        raise ValueError('Duplicate fixture config')
+    configs = [load_config(p) for p in paths]
+    outputs = [c['output'] for c in configs]
+    sources = {path, *paths, *(Path(p) for c in configs for p in c['identity']['files'])}
+    if len({c['lock'] for c in configs}) != 1:
+        raise ValueError('Batch fixtures must use the same heavy-work lock')
+    for i, output in enumerate(outputs):
+        if any(p.is_relative_to(output) for p in sources | {c['lock'] for c in configs}):
+            raise ValueError('Batch output contains a config, input, tool or lock')
+        if any(output.is_relative_to(other) or other.is_relative_to(output) for other in outputs[:i]):
+            raise ValueError('Batch outputs overlap')
+    # Validate every existing receipt before the first mutation.
+    planned = [run(p, 'plan') for p in paths]
+    rows = []
+    for p, plan in zip(paths, planned):
+        before = time.monotonic()
+        try:
+            result = run(p, mode) if mode == 'run' else plan
+        except Exception as error:
+            result = {'status': 'FAILED', 'error': str(error), 'runtimeVerified': False}
+        rows.append({'config': str(p), 'secondsThisInvocation': round(time.monotonic() - before, 3), **result})
+        if result['status'] in ('FAILED', 'BUSY'):
+            break
+    statuses = [r['status'] for r in rows]
+    status = 'FAILED' if 'FAILED' in statuses else 'BUSY' if 'BUSY' in statuses else 'CHECKED' if all(s == 'CHECKED' for s in statuses) else 'OPEN'
+    return {'status': status, 'fixtures': rows, 'fixturesNotRun': [str(p) for p in paths[len(rows):]],
+            'stepsRun': sum(r.get('stepsRun', 0) for r in rows),
+            'stepsReused': sum(r.get('stepsReused', 0) for r in rows),
+            'secondsThisInvocation': round(time.monotonic() - started, 3),
+            'runtimeVerified': False, 'visuallyReviewed': False}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=('plan', 'run', 'status'))
+    parser.add_argument('action', choices=('plan', 'run', 'status', 'batch-plan', 'batch-run', 'batch-status'))
     parser.add_argument('config', type=Path)
     args = parser.parse_args()
     try:
-        result = run(args.config.resolve(), args.action)
+        result = batch(args.config.resolve(), args.action[6:]) if args.action.startswith('batch-') else run(args.config.resolve(), args.action)
     except Exception as error:
         result = {'status': 'FAILED', 'error': str(error), 'runtimeVerified': False}
     print(json.dumps(result, indent=2))

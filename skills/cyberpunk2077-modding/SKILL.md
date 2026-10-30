@@ -32,6 +32,10 @@ an API; check types, ownership, lifecycle and session transitions. Use supported
 script/data layers where they satisfy the feature. Keep evidence and diagnostic
 assets separate from shipping resources.
 
+For complete RoN ports on an established route, use the sibling
+[MP5 1.0 workflow](../cyberpunk2077-animation-retargeting/references/mp5-workflow.md)
+for the private recipe, reusable tools, attachments, audio and release boundaries.
+
 ## Animation acceptance
 
 **All animations** require the [Blender visual review and receipt](references/animation-retargeting/qa-debugging.md#mandatory-blender-visual-acceptance)
@@ -40,7 +44,8 @@ target through the full timeline and important transitions, with full 360° cove
 above/below/obscured areas and relevant close-ups. This covers bodies, faces,
 creatures, props, interactions, cameras and mechanisms. Inspect deformation,
 jitter/popping, stretch/twist, clipping, sliding/contact loss and unnatural motion;
-visible defects fail and require correction and renewed review. Every digit and
+visible defects fail a clean visual pass. Correct them and renew review unless
+the user explicitly accepts named exceptions; keep those defects recorded. Every digit and
 thumb, wrist/palm, arm and moving weapon contact must be accounted for when present.
 Stills, numeric checks and export success do not replace actual motion review.
 Diagnostic exports and isolated single-clip test packages are allowed under the

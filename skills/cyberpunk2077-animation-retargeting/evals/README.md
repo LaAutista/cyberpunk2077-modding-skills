@@ -7,6 +7,9 @@ a game skeleton or a certified source decode.
 The [rig-mask fixture](fixtures/rig-mask.json) is a synthetic ten-bone hierarchy for
 `masked-locomotion-carrier`; it establishes only the supplied composition example.
 
+The `port-batch` fixtures are synthetic AnimData references and native-shaped JSON
+for `accepted-release-batched-port`; their payload bytes are not animations.
+
 For each workflow case, start an independent evaluation with the current skill
 and only that case's `prompt` plus relevant raw fixtures. Keep `must_observe` and
 `must_not_observe` with the reviewer; do not feed the answer rubric to the evaluated

@@ -178,6 +178,26 @@
         "Move/scalar-reduce the shared carrier or declare a universally correct chest carrier without evidence.",
         "Install a mod or claim real-game/native composition acceptance from this synthetic test."
       ]
+    },
+    {
+      "id": "accepted-release-batched-port",
+      "prompt": "The user accepted MP5 v14 as 1.0 after extended play, explicitly retaining reload-while-ADS and minor empty-reload visual issues. They want the next comparable port in under an hour. Its source decoder, rig/control mapping and native route are already established and its replacement model is fitted. Using the provided synthetic source AnimData and baseline/candidate native JSON, execute the reusable inventory and coverage tools and write a concise actionable handoff for batching the remaining actions. State what evidence can be reused, how failures/resume should work, and what the timing and release evidence do and do not establish. No game/native tool environment or new user runtime result is provided. Keep generated artifacts in the supplied evaluation directory; do not change installed skills, projects, game state or source fixtures.",
+      "must_observe": [
+        "Preserve explicit 1.0 acceptance and known issues without blocking on literal source parity.",
+        "Execute inventory including array Body_FP/Gun_FP references and coverage separating unchanged payload from metadata-only and motion changes.",
+        "Use existing recipe/compatible native batches, preflight, shared lock and hash-verified resume; no per-clip approval loop on established route.",
+        "Keep changed-payload evidence distinct from source fidelity and runtime; sub-hour remains a target without end-to-end measurement."
+      ],
+      "must_not_observe": [
+        "Launch/install or alter the accepted MP5.",
+        "Claim every clip or body/optic was source-ported or tested.",
+        "Discard gates or promise complete conversions in under an hour based on native timings."
+      ],
+      "fixtures": [
+        "fixtures/port-batch/source.json",
+        "fixtures/port-batch/baseline.json",
+        "fixtures/port-batch/candidate.json"
+      ]
     }
   ],
   "trigger_cases": [

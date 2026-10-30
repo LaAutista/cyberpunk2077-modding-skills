@@ -1,0 +1,47 @@
+[
+  {
+    "Name": "SyntheticAnimData",
+    "Properties": {
+      "IdlePose_FP": {
+        "ObjectName": "AnimSequence'idle'",
+        "ObjectPath": "Fixture/Animation/idle.0"
+      },
+      "Draw": {
+        "Body_FP": {
+          "ObjectName": "AnimSequence'draw_arms'",
+          "ObjectPath": "Fixture/Animation/draw_arms.0"
+        },
+        "Gun_FP": {
+          "ObjectName": "AnimSequence'draw_weapon'",
+          "ObjectPath": "Fixture/Animation/draw_weapon.0"
+        },
+        "Body_TP": {
+          "ObjectName": "AnimSequence'draw_tp'",
+          "ObjectPath": "Fixture/Animation/draw_tp.0"
+        }
+      },
+      "FireSingle": [
+        {
+          "Body_FP": {
+            "ObjectName": "AnimSequence'fire_arms'",
+            "ObjectPath": "Fixture/Animation/fire_arms.0"
+          },
+          "Gun_FP": {
+            "ObjectName": "AnimSequence'fire_weapon'",
+            "ObjectPath": "Fixture/Animation/fire_weapon.0"
+          }
+        },
+        {
+          "Body_FP": {
+            "ObjectName": "AnimSequence'fire_arms'",
+            "ObjectPath": "Fixture/Animation/fire_arms.0"
+          },
+          "Gun_FP": {
+            "ObjectName": "AnimSequence'fire_weapon_variant'",
+            "ObjectPath": "Fixture/Animation/fire_weapon_variant.0"
+          }
+        }
+      ]
+    }
+  }
+]

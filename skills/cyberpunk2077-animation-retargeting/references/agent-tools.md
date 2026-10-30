@@ -65,6 +65,73 @@ being treated as successful work. Exit0 alone is insufficient: expected outputs,
 signatures, JSON and final verifier results are checked, including WolvenKit's
 logged conversion errors that can accompany exit0.
 
+## Batch established native fixtures
+
+After the first route is established, put existing fixture configs in a private
+manifest. Each fixture may contain several compatible authored clips. Relative
+fixture paths resolve against the manifest; each config retains its own path base.
+
+```json
+{"schema": 1, "fixtures": ["player-male.json", "player-female.json", "weapon.json"]}
+```
+
+```sh
+python3 -B scripts/native_pipeline.py batch-plan /private/batch.json
+python3 -B scripts/native_pipeline.py batch-run /private/batch.json
+python3 -B scripts/native_pipeline.py batch-status /private/batch.json
+```
+
+All configs and existing receipts are validated before any conversion. Outputs
+must be distinct, nonoverlapping and outside every input/config/tool/lock; all
+fixtures share a heavy-work lock. Jobs run serially and stop at the first failure
+or busy lock. Rerun the same command to reuse completed fixtures/stages. The JSON
+includes per-fixture results, unstarted fixtures, steps run/reused and wall seconds
+for this invocation. It does not measure authoring, visual review or gameplay.
+
+Preflight also rejects fractional/negative/out-of-range native event frames in
+the authored GLB. The native event clock is separate from the animation key clock;
+this check does not resample or retime either. Empty/null event arrays are valid.
+
+## Inventory source action references once
+
+```sh
+python3 -B scripts/ron_action_inventory.py /private/AnimData.uasset.json \
+  --output /private/source-actions.json
+python3 -B scripts/ron_action_inventory.py /private/AnimData.uasset.json \
+  --action FireSingle --action Draw --output /private/selected-actions.json
+```
+
+Python standard library only. Reads exported class `Properties`, including nested
+arrays, and preserves property/index plus `Body_FP`/`Gun_FP` context. Direct `_FP`
+properties are included; TP references are excluded. The complete receipt contains
+source hash, references and deduplicated extraction paths with numeric export
+object suffixes removed. It fails on unknown selected properties, malformed refs
+or no explicit FP references. Output files must be new. Without `--output`, stdout
+contains the full JSON; with it, stdout is a compact summary.
+
+This inventories explicit references only. Resolve inheritance, montages, selected
+variants, additive bases and source decoder semantics separately. Do not infer
+animation type, runtime selection or A2/A3 equivalence from names/counts.
+
+## Measure changed clips separately from changed containers
+
+```sh
+node scripts/animation_coverage.mjs /private/baseline.anims.json \
+  /private/candidate.anims.json /private/coverage.json
+```
+
+Reads WolvenKit native JSON through the sibling canonicalizer. It compares stored
+per-clip payload hashes and metadata separately, excluding relocatable addresses
+and serializer buffer copies. Reports `unchanged`, `metadata_only`,
+`motion_changed`, `added` and `removed`; output must be new. Chunk bounds,
+duplicate names and malformed payloads fail. Unchanged donor bytes identify
+retained native data; metadata and graph composition still influence evaluated
+motion. Changed bytes can be helper edits or codec differences, so they do not
+prove source fidelity. The report does not decode motion or certify runtime.
+
+Portable coverage regression: `node tests/test-animation-coverage.mjs` from the
+repository root. Never publish real input JSON or generated coverage receipts.
+
 ## Find the archive before extracting
 
 ```sh

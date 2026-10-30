@@ -12,6 +12,11 @@ rest/weight preservation, visual review or gameplay acceptance.
 The [historical project command contracts](hk416-project-commands.md) preserve
 assembly/render/cook examples and explicitly identify unavailable private adapters.
 
+For an established route, use the [MP5 1.0 recipe](../../cyberpunk2077-animation-retargeting/references/mp5-workflow.md)
+to batch compatible actions, separate attachment eligibility from geometry, keep
+audio/events explicit and preserve user-accepted known issues. Use the associated
+agent tools instead of copying another sequence of native conversion commands.
+
 ## Tools and prerequisites
 
 | Stage | Working route | Boundary |

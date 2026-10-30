@@ -23,6 +23,7 @@ def module(name):
 
 pipeline = module('native_pipeline')
 inspect = module('asset_inspect')
+ron = module('ron_action_inventory')
 
 
 class PipelineTests(unittest.TestCase):
@@ -113,6 +114,97 @@ class PipelineTests(unittest.TestCase):
     def test_input_directory_cannot_be_output(self):
         value = json.loads(self.config.read_text());value['output'] = '.';self.config.write_text(json.dumps(value))
         with self.assertRaisesRegex(ValueError, 'must not contain source'):pipeline.load_config(self.config)
+
+    def make_batch(self):
+        second = self.root / 'second.json'
+        value = json.loads(self.config.read_text());value['output'] = 'second-output'
+        second.write_text(json.dumps(value))
+        manifest = self.root / 'batch.json'
+        manifest.write_text(json.dumps({'schema': 1, 'fixtures': [self.config.name, second.name]}))
+        return manifest, second
+
+    def test_batch_preflights_every_fixture_before_any_mutation(self):
+        manifest, second = self.make_batch()
+        value = json.loads(second.read_text());value['inputs']['rig'] = 'missing.rig';second.write_text(json.dumps(value))
+        with self.assertRaisesRegex(ValueError, 'Missing or empty'), patch.object(pipeline, 'execute', self.fake_execute):
+            pipeline.batch(manifest, 'run')
+        self.assertFalse((self.root / 'output').exists());self.assertFalse(self.calls)
+
+    def test_batch_stops_on_failure_and_resumes_serially(self):
+        manifest, _ = self.make_batch()
+        def interrupted(*args):
+            if args[4]['output'].name == 'second-output' and args[1].parent.name == '03-baseline-export':
+                raise RuntimeError('fixture failure')
+            return self.fake_execute(*args)
+        with patch.object(pipeline, 'execute', interrupted), contextlib.redirect_stderr(io.StringIO()):
+            result = pipeline.batch(manifest, 'run')
+        self.assertEqual(result['status'], 'FAILED');self.assertEqual(result['stepsRun'], 12)
+        with patch.object(pipeline, 'execute', self.fake_execute), contextlib.redirect_stderr(io.StringIO()):
+            result = pipeline.batch(manifest, 'run')
+            self.assertEqual((result['stepsRun'], result['stepsReused']), (8, 12))
+            result = pipeline.batch(manifest, 'run')
+            self.assertEqual((result['stepsRun'], result['stepsReused']), (0, 20))
+        self.assertEqual(len(self.calls), 20);self.assertFalse(result['runtimeVerified'])
+
+    def test_batch_rejects_later_unrecognized_output_before_starting(self):
+        manifest, _ = self.make_batch()
+        existing = self.root / 'second-output';existing.mkdir();(existing/'valuable.txt').write_text('preserve')
+        with self.assertRaisesRegex(ValueError, 'unrecognized nonempty'):
+            pipeline.batch(manifest, 'run')
+        self.assertFalse((self.root/'output').exists())
+        self.assertEqual((existing/'valuable.txt').read_text(), 'preserve')
+
+    def test_batch_rejects_overlapping_outputs_and_cross_fixture_sources(self):
+        manifest, second = self.make_batch()
+        value = json.loads(second.read_text());value['output'] = 'output/child';second.write_text(json.dumps(value))
+        with self.assertRaisesRegex(ValueError, 'overlap'):pipeline.batch(manifest, 'plan')
+        value['output'] = 'second-output';second.write_text(json.dumps(value))
+        first = json.loads(self.config.read_text());first['output'] = 'kit';self.config.write_text(json.dumps(first))
+        with self.assertRaisesRegex(ValueError, 'source inputs or tools'):pipeline.batch(manifest, 'plan')
+
+    def test_event_fraction_rejected_before_native_work(self):
+        raw = self.authored.read_bytes();document = json.loads(raw[20:])
+        document['animations'][0]['extras']['animEvents'] = [{'type': 'Phase', 'startFrame': 27.5, 'durationInFrames': 2}]
+        def write():
+            data = json.dumps(document).encode();data += b' ' * (-len(data) % 4)
+            self.authored.write_bytes(struct.pack('<5I', 0x46546C67, 2, 20+len(data), len(data), 0x4E4F534A)+data)
+        write()
+        with self.assertRaisesRegex(ValueError, 'unsigned integer native event frame'):pipeline.run(self.config, 'plan')
+        self.assertFalse((self.root / 'output').exists())
+        document['animations'][0]['extras']['animEvents'][0]['startFrame'] = 28.0;write()
+        self.assertEqual(pipeline.run(self.config, 'plan')['status'], 'OPEN')
+        document['animations'][0]['extras']['animEvents'] = None;write()
+        self.assertEqual(pipeline.run(self.config, 'plan')['status'], 'OPEN')
+
+
+class SourceInventoryTests(unittest.TestCase):
+    def test_nested_arrays_keep_pairing_and_deduplicate_extraction_paths(self):
+        ref = lambda n: {'ObjectPath': 'Game/Animations/' + n + '.0', 'ObjectName': "AnimSequence'"+n+"'"}
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / 'class.json'
+            path.write_text(json.dumps([{'Name': 'Synthetic', 'Properties': {
+                'FireSingle': [{'Body_FP': ref('arms'), 'Gun_FP': ref('weapon'), 'Body_TP': ref('third')},
+                               {'Body_FP': ref('arms'), 'Gun_FP': ref('weapon2')}],
+                'Idle_FP': ref('idle') }}]))
+            before = path.read_bytes();result = ron.inventory(path, ['FireSingle'])
+            self.assertEqual((result['referenceCount'], result['packageCount']), (4, 3))
+            self.assertEqual([r['field'] for r in result['references']],
+                ['FireSingle.0.Body_FP', 'FireSingle.0.Gun_FP', 'FireSingle.1.Body_FP', 'FireSingle.1.Gun_FP'])
+            self.assertNotIn('Game/Animations/third', result['packages'])
+            self.assertEqual(result['sha256'], hashlib.sha256(before).hexdigest())
+            self.assertEqual(path.read_bytes(), before);self.assertFalse(result['sourceSemanticsVerified'])
+            with self.assertRaisesRegex(ValueError, 'Unknown action'):ron.inventory(path, ['typo'])
+            with patch.object(sys, 'argv', ['inventory', str(path), '--output', str(path)]), contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(ron.main(), 1)
+            self.assertEqual(path.read_bytes(), before)
+
+    def test_malformed_or_empty_references_fail_explicitly(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / 'class.json'
+            for value in [[], {}, {'Properties': {}}, {'Properties': {'Idle_FP': {'ObjectPath': 4}}},
+                          {'Properties': {'Idle_FP': {'ObjectPath': 'Game/../secret.0'}}}]:
+                path.write_text(json.dumps(value))
+                with self.subTest(value=value), self.assertRaises(ValueError):ron.inventory(path)
 
 
 class AssetInspectionTests(unittest.TestCase):

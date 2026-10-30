@@ -16,7 +16,7 @@ An **accepted beta** requires the existing
 [full-motion Blender visual receipt](../../cyberpunk2077-modding/references/animation-retargeting/qa-debugging.md#mandatory-blender-visual-acceptance)
 for the current candidate: matched source/target throughout the timeline and
 transitions, full 360-degree coverage including above/below/hidden areas and all
-relevant digit/contact/mechanism close-ups. Visible defects fail acceptance.
+relevant digit/contact/mechanism close-ups. Visible defects fail a claim of clean visual acceptance.
 Generating renders is not inspecting them. A diagnostic runtime pass does not
 waive visual failure or authorize full-set expansion.
 
@@ -43,5 +43,14 @@ Expected success is correct named motion with stable transitions and required
 contact/IK in that tested scope. Missing game access leaves runtime OPEN with
 these manual steps. Only identified user confirmation earns USER_RUNTIME_VERIFIED;
 another build's report or static graph inspection cannot. Expand to other clips
-only after all applicable gates for the slice pass. A later package needs its own
+after applicable gates for a new route pass. An established route can batch
+compatible actions, reviewing their full changed motion and transitions together;
+it does not need an isolated runtime approval cycle for every clip. A later package needs its own
 runtime evidence; a changed hash invalidates reuse of the old confirmation.
+
+
+Explicit user release acceptance can retain named known defects or native
+fallbacks. Record the exact artifact, user's acceptance, exceptions and untested
+combinations. Do not turn that into a flawless visual/source-parity pass, and do
+not override the user's acceptance criteria with a broader assistant checklist.
+The [MP5 1.0 case](mp5-workflow.md) demonstrates this distinction.
