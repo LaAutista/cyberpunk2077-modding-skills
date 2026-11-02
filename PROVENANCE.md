@@ -1,5 +1,53 @@
 # Provenance and verification
 
+## BF6 findings and preview gates, 2026-11-02
+
+Retargeting skill 1.5.0 publishes the installed 1.4.1 full-motion/user-preview gate
+and 1.4.2 synchronized source/native comparison gate, then connects all three
+sibling skills to the [BF6 workflow](skills/cyberpunk2077-animation-retargeting/references/bf6-workflow.md).
+The user requires personal review of every included animation before installation;
+one accepted clip or an offline diagnostic label does not approve the rest. Finger
+repairs begin with one reversible clip, measured palm/rest frames and rotations
+only. Source skin/proxy limitations, failed checks and remaining contact defects
+must be shown rather than concealed by a target-only preview or receipt.
+
+The new reference draws on retained private MP5 magazine-binding and index-bend
+checkpoints, L115/MP5 native readback experiments, connected Blender previews and
+the user's gameplay reports. It records the duplicate slot/root mount diagnosis,
+reference-grip bend bias, source-timed fast motion, arm/control ownership, audio
+provenance and attachment compatibility. The slot correction and index trial are
+not published as accepted gameplay fixes; the index trial retains a failed strict
+angle check and unresolved magazine contact. Earlier L115 action acceptance and
+RoN MP5 1.0 acceptance do not certify the complete current BF6 pair.
+
+Two small original tool changes are brought over from the private pipeline:
+compressed-rotation readback collects appended buffers before one concatenation,
+and the native runner accepts a validated bounded .NET heap setting while keeping
+its existing default, lock, fingerprint/resume and timeout behavior. Private
+readback comparisons previously found identical GLB bytes and verification reports
+for two-clip and 68-clip L115 fixtures; the larger readback fell from roughly
+60 seconds to 3.8 seconds. This is retained stage-specific evidence, not a new
+publication benchmark, full-port time or game result.
+
+The portable checks exercise native buffer offsets across multiple clips/channels,
+the actual heap value received by a child process, invalid settings and stale
+receipt refusal, plus existing repository regressions. Publication verification
+does not run or distribute a complete Blender platform, game assets, commercial
+models, private mappings/configs, renders, raw disassembly or live game recordings.
+The platform's project-specific authoring, preview and graph experiments remain
+private and explicitly incomplete. Under-one-hour conversion remains a target.
+
+Publication checks passed: 28 workflow-tool and 17 contract tests; synthetic native,
+additive and coverage regressions; installer backup/rollback/no-op checks; resource
+summary and contact-sheet tests; all three skill metadata validators; repository
+links and publication-pattern checks. A fresh read-only MP5 empty-reload readback
+checked 31,142 native rotation keys and reproduced the retained GLB and complete
+report exactly. No animation was reauthored, installed or tested in game.
+Three independent prompt evaluations (reference finger bend, duplicated component
+mount, full-set/audio coverage) met their reviewed criteria with answer rubrics
+withheld. They used scenario facts and repository/project instructions, not game
+assets, and do not prove live host routing or that future agents will always comply.
+
 ## Accepted MP5 1.0 and reusable tooling, 2026-10-30
 
 Retargeting skill 1.4.0 records the user's extended-play acceptance of MP5 v14 as

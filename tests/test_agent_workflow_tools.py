@@ -111,6 +111,36 @@ class PipelineTests(unittest.TestCase):
             result = pipeline.execute([sys.executable, '-c', code], folder, folder / 'stdout.log', 'report', cfg, lock.fileno())
         self.assertEqual(json.loads(Path(result['output']).read_text())['root'], str(Path(cfg['executables']['dotnet']).parent))
 
+    def test_heap_limit_defaults_and_reaches_child_process(self):
+        value = json.loads(self.config.read_text())
+        for heap in (None, 512, 4096, 8192):
+            if heap is not None:value['dotnet_heap_mib'] = heap
+            self.config.write_text(json.dumps(value))
+            cfg = pipeline.load_config(self.config)
+            folder = self.root / f'heap-{heap}';folder.mkdir()
+            code = 'import os,json;print(json.dumps({"passed":True,"heap":os.environ["DOTNET_GCHeapHardLimit"]}))'
+            with (self.root / 'lock').open('w') as lock:
+                result = pipeline.execute([sys.executable, '-c', code], folder, folder / 'stdout.log', 'report', cfg, lock.fileno())
+            actual = json.loads(Path(result['output']).read_text())['heap']
+            self.assertEqual(int(actual, 16), (2048 if heap is None else heap) * 1024 * 1024)
+
+    def test_invalid_heap_rejected_before_creating_output(self):
+        value = json.loads(self.config.read_text())
+        for heap in (True, False, None, 511, 8193, 2048.0, '4096'):
+            with self.subTest(heap=heap):
+                value['dotnet_heap_mib'] = heap;self.config.write_text(json.dumps(value))
+                with self.assertRaisesRegex(ValueError, 'dotnet_heap_mib'):
+                    pipeline.run(self.config, 'plan')
+                self.assertFalse((self.root / 'output').exists())
+
+    def test_heap_change_invalidates_completed_receipt(self):
+        with patch.object(pipeline, 'execute', self.fake_execute), contextlib.redirect_stderr(io.StringIO()):
+            pipeline.run(self.config, 'run')
+        value = json.loads(self.config.read_text());value['dotnet_heap_mib'] = 4096
+        self.config.write_text(json.dumps(value))
+        with self.assertRaisesRegex(ValueError, 'Inputs, tools or config changed'):
+            pipeline.run(self.config, 'run')
+
     def test_input_directory_cannot_be_output(self):
         value = json.loads(self.config.read_text());value['output'] = '.';self.config.write_text(json.dumps(value))
         with self.assertRaisesRegex(ValueError, 'must not contain source'):pipeline.load_config(self.config)

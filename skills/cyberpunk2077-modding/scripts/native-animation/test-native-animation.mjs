@@ -68,5 +68,47 @@ try {
     doc.Data.RootChunk.animationDataChunks[0].buffer.Bytes=key.toString('base64');fs.writeFileSync(native,JSON.stringify(doc));
     run('readback-animation.mjs',[native,rig,cli,path.join(work,name+'-bad.glb'),'--required-clips','fixture'],false);
   }
-  console.log('PASS: nearest native ticks, float32 accessor bounds, STEP retention, unsupported mode refusal, independent LINEAR/STEP tiny-quaternion decoding, reversed-header rejection, and overwrite refusal.');
+  // Multiple corrections must keep distinct offsets and preserve the original binary prefix.
+  const multi=structuredClone(j),multiBin=Buffer.from(bin),keys=Buffer.alloc(32);
+  multi.nodes=[{name:'bone'},{name:'second'}];
+  multi.animations=['first','second'].map(name=>({name,extras:{animationType:'Normal'},
+    channels:[{sampler:0,target:{node:0,path:'rotation'}},{sampler:1,target:{node:1,path:'rotation'}}],
+    samplers:[{input:0,output:2,interpolation:'LINEAR'},{input:0,output:2,interpolation:'LINEAR'}]}));
+  for(let bone=0;bone<2;bone++){
+    keys.writeUInt16LE(65535,bone*16);keys.writeUInt16LE(0x2000|bone,bone*16+2);
+    keys.writeFloatLE(1e-5,bone*16+4+bone*4);
+  }
+  fs.writeFileSync(rig,JSON.stringify({Data:{RootChunk:{boneNames:multi.nodes.map(n=>({$value:n.name})),
+    boneTransforms:multi.nodes.map(()=>({Rotation:{i:0,j:0,k:0,r:1}}))}}}));
+  const multiNative=path.join(work,'multi.json'),multiCli=path.join(work,'multi.glb'),multiOut=path.join(work,'multi-readback.glb');
+  fs.writeFileSync(multiNative,JSON.stringify({Data:{RootChunk:{animations:multi.animations.map(a=>({Data:{animation:{Data:{
+    name:{$value:a.name},animationType:'Normal',duration:1,animBuffer:{Data:{$type:'animAnimationBufferCompressed',
+      numAnimKeys:0,numAnimKeysRaw:2,numConstAnimKeys:0,inplaceCompressedBuffer:{Bytes:keys.toString('base64')}}}}}}}))}}}));
+  writeGlb(multiCli,multi,multiBin);
+  run('readback-animation.mjs',[multiNative,rig,multiCli,multiOut,'--required-clips','first,second']);
+  const multiBytes=fs.readFileSync(multiOut),multiJsonLength=multiBytes.readUInt32LE(12);
+  const multiJson=JSON.parse(multiBytes.subarray(20,20+multiJsonLength)),multiOutputBin=multiBytes.subarray(28+multiJsonLength);
+  assert.deepEqual(multiOutputBin.subarray(0,multiBin.length),multiBin);
+  assert.equal(multiOutputBin.length,multiBin.length+4*16);
+  assert.equal(multiJson.buffers[0].byteLength,multiOutputBin.length);
+  const views=multiJson.animations.flatMap(a=>a.samplers.map(s=>multiJson.bufferViews[multiJson.accessors[s.output].bufferView]));
+  assert.deepEqual(views.map(v=>v.byteOffset),[0,1,2,3].map(i=>multiBin.length+i*16));
+  for(let i=0;i<views.length;i++){
+    const actual=[0,1,2,3].map(k=>multiOutputBin.readFloatLE(views[i].byteOffset+k*4));
+    const v=keys.readFloatLE((i%2)*16+4+(i%2)*4),s=Math.sqrt(2-v*v);
+    const expected=i%2?[0,0,-v*s,1-v*v]:[v*s,0,0,1-v*v];
+    actual.forEach((x,k)=>assert(Math.abs(x-Math.fround(expected[k]))<1e-9));
+  }
+  const multiReport=JSON.parse(fs.readFileSync(multiOut+'.raw-readback.json'));
+  assert.equal(multiReport.corrections.length,4);assert.equal(multiReport.runtimeVerified,false);
+  const unchanged=JSON.parse(fs.readFileSync(multiNative));
+  for(let bone=0;bone<2;bone++)keys.fill(0,bone*16+4,bone*16+16);
+  for(const a of unchanged.Data.RootChunk.animations)a.Data.animation.Data.animBuffer.Data.inplaceCompressedBuffer.Bytes=keys.toString('base64');
+  fs.writeFileSync(multiNative,JSON.stringify(unchanged));
+  const unchangedOut=path.join(work,'unchanged-readback.glb');
+  run('readback-animation.mjs',[multiNative,rig,multiCli,unchangedOut,'--required-clips','first,second']);
+  const unchangedBytes=fs.readFileSync(unchangedOut);
+  assert.deepEqual(unchangedBytes.subarray(28+unchangedBytes.readUInt32LE(12)),multiBin);
+  assert.equal(JSON.parse(fs.readFileSync(unchangedOut+'.raw-readback.json')).corrections.length,0);
+  console.log('PASS: native ticks/bounds, STEP retention, mode/header/overwrite refusals, independent tiny-quaternion decoding and multi-clip/channel buffer offsets with preserved input bytes.');
 } finally {console.log('Fixture evidence retained:',work);}

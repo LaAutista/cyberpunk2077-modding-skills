@@ -1,16 +1,19 @@
 # Diagnostic slice, accepted beta and runtime
 
 As soon as one source clip, mapping and writable compatible container exist, take
-that clip through the remaining native/package checks. Do not spend the main
-workstream polishing fingers or porting a complete set before testing the plumbing.
+that clip through native readback and complete Blender playback review. Resolve
+visible motion/contact defects offline. Do not port a complete set or reconstruct
+the engine before demonstrating one acceptable connected sequence.
 
-The current vertical-slice policy permits an **isolated diagnostic package** with
-explicitly disclosed visual defects or missing visual review. Keep its visual
-gate FAILED or OPEN; name the exact clip, intended falsification test, known
-defects and missing audio/events/features. Never overwrite or promote the working
-baseline. A native mismatch, changed unrelated resources or unidentified shipped
-bytes blocks even the diagnostic package. This exception does not authorize
-installation, profile changes or game launch outside the user's current scope.
+An **isolated diagnostic package** may be prepared offline with disclosed defects
+and a FAILED/OPEN visual gate. This does not authorize installation. The
+[mandatory Blender and user-preview gate](../SKILL.md#mandatory-blender-review-before-installation)
+applies to diagnostic packages too: show smooth complete motion, retain failures,
+and wait for explicit acceptance of the identified candidate. A user may expressly
+accept a displayed, named defect for a specific diagnostic; generic permission to
+test or deploy is not that waiver. Never overwrite or promote the working baseline.
+A native mismatch, changed unrelated resources or unidentified shipped bytes
+blocks even the diagnostic package.
 
 An **accepted beta** requires the existing
 [full-motion Blender visual receipt](../../cyberpunk2077-modding/references/animation-retargeting/qa-debugging.md#mandatory-blender-visual-acceptance)
@@ -25,7 +28,11 @@ clip and body variant, prerequisites, mutually exclusive packages and effective
 profile/override. Extract the isolated archive and compare every resource to the
 intended checked output. Leave deployment to the authorized manager/profile path.
 
-For an authorized user runtime test:
+Before an authorized user runtime test, identify the remaining question that
+Blender review did not resolve and verify the user's preview acceptance. Do not
+ask the user to rediscover a known visible failure in game.
+
+For that runtime test:
 
 1. Preserve the profile and working package; enable only the intended test variant
    with its recorded dependencies and confirm which resource override wins.

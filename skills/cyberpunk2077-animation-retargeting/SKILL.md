@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget external or Cyberpunk weapon/player animation onto a verified Cyberpunk 2077 skeleton. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.4.0"
+  version: "1.5.0"
 ---
 
 # Cyberpunk 2077 animation retargeting
@@ -27,6 +27,66 @@ VISUALLY_REVIEWED, USER_RUNTIME_VERIFIED, FAILED, OPEN and HYPOTHESIS. Each desc
 one gate and identified artifact; offline success cannot promote visual/runtime.
 Historical receipts retain their original terms and limitations.
 
+## Mandatory Blender review before installation
+
+Inspect **every animation included in the candidate** in Blender, through its
+complete timeline and relevant starts/stops, loops, blends and state transitions.
+Review the connected target assembly: skinned arms/body, weapon, magazine, bolt
+and other moving parts together. Use the exact candidate's native readback and
+verified assembly inputs; an older mechanism bank or a preview-only placement
+offset cannot stand in for the shipped data.
+
+Actually inspect continuous playback at normal speed, plus slow playback/scrubbing
+of fast contacts. Use first-person and complementary side/close views and the
+[full-motion review checklist](../cyberpunk2077-modding/references/animation-retargeting/qa-debugging.md#mandatory-blender-visual-acceptance).
+Record clip, variant, candidate hash, complete time range, views, observed defects
+and evidence. Unwatched renders, a few poses, contact sheets, numeric checks and
+successful native exports do not pass this gate. Missing coverage stays OPEN;
+visible hand separation, broken bolt/magazine motion, clipping or deformation
+stays FAILED regardless of other passed checks.
+
+**Show the user smooth video previews and obtain their explicit acceptance of the
+identified candidate before installing it.** Render actual motion at least 30 fps
+(or the higher source cadence where fast motion requires it); do not interpolate
+a sparse slideshow and call that a full review. Show complete affected actions
+and transitions, with first-person and useful side/close views. Record the user's
+answer against the preview and candidate identities. Review a batch together;
+do not require a separate conversation per clip. Changed motion requires an updated
+preview and acceptance. A diagnostic label does not waive this installation gate.
+
+Fix Blender-visible failures offline before requesting game tests. Runtime testing
+addresses remaining integration questions; it must not replace the visual homework.
+State preview limitations honestly, but never use absent runtime parity to dismiss
+a defect already visible in Blender. Do not expand engine reconstruction to avoid
+correcting a demonstrated motion defect.
+
+## Mandatory source-versus-retarget comparison
+
+For every port, show the original source animation and the exact native target
+readback side by side, synchronized through every retargeted clip's full timeline.
+Use normal-speed playback (at least 30 fps, or source cadence for fast contacts),
+slow review, matched anatomical views and the connected target weapon assembly.
+A target-only preview cannot clear this gate. Include before/after when repairing
+an existing port; record source, target and preview hashes and the user's review.
+
+Inspect both hands digit by digit, including thumb, open/released poses, closed
+grips and regrip, plus wrists, arms, mechanisms and weapon contact. Compare actual
+anatomical joint directions/bends in measured palm frames, not similarly named
+bone Euler angles. Preserve source articulation and timing; explain deliberate
+replacement-model grip offsets. A plausible-looking target or a numerical pass
+cannot substitute for the comparison. If the source is itself defective, report
+that instead of silently correcting or attributing it to the game runtime.
+
+Use verified source skin when available. Label joint-only proxies, inferred tip
+axes, missing source runtime layers and target body differences explicitly; they
+do not establish source skin/contact equivalence. Missing comparison coverage
+stays OPEN and visible mismatches stay FAILED. Show the user the limited evidence
+before any approval request; never hide its limitations in a receipt alone.
+Start a finger repair with one reversible clip and obtain its review before
+propagating the change. Preserve local translations, scales, lengths, wrist/body
+motion, other digits and unrelated clips. See [contact](references/contact-and-ik.md)
+for the reference-pose trap and the existing visual gate for installation approval.
+
 ## Gates
 
 | Gate | Required evidence before advancing |
@@ -36,14 +96,18 @@ Historical receipts retain their original terms and limitations.
 | C — coordinates/mapping | Declared vector/matrix/quaternion conventions, units and both basis transforms; explicit bone correspondence and justified unmapped targets. Check reference-pose reconstruction before motion. Read [spaces](references/spaces-and-transforms.md). |
 | D — one clip | Preserve target anatomical translations/scales/lengths and unrelated tracks; solve rotations, assembly placement, nonstretch reach, phase-specific contact and required controls. Check target deformation and original unclamped contact residuals. Read [contact](references/contact-and-ik.md). |
 | E — native | Author into a copy of a compatible container with the matching rig. Independently decode stored bytes; compare keys/times, untouched clips, events/floats, scale and additive semantics. Read [semantics](references/cyberpunk-animation-semantics.md) and [native checks](references/native-readback.md). |
-| F — package | Isolate the initial diagnostic clip or explicitly checked action batch; extract and compare shipped resources. Record source/rig/container/archive hashes, game version, prerequisites, conflicting packages and visual status. A diagnostic package is not an accepted beta. |
+| E2 — source/target review | Full synchronized source/native side-by-side; repair before/after; complete finger, mechanism and contact review; identified user acceptance and explicit missing-source limitations. Target-only playback does not pass. |
+| F — package | Isolate the initial diagnostic clip or explicitly checked action batch; extract and compare shipped resources. Record source/rig/container/archive hashes, game version, prerequisites, conflicting packages and visual status. Offline packaging does not clear the mandatory Blender and user-preview installation gate. |
 | G — runtime | User confirms the identified package, effective profile and affected variants at beginning/middle/end, transitions, contact, relevant IK and interruptions. Record failures separately. Read [runtime validation](references/runtime-validation.md). |
 
 Read only references needed for the current gate. For general tools/resource work
 use the sibling [modding skill](../cyberpunk2077-modding/SKILL.md); for actual
 motion/deformation review use [weapon inspection](../weapon-animation-inspection/SKILL.md).
-For comparable complete ports, start with the [MP5 1.0 workflow](references/mp5-workflow.md)
-and its private recipe, batching boundaries and throughput guidance.
+For BF6 and replacement-model ports, start with the
+[BF6 findings and platform boundary](references/bf6-workflow.md): measured interaction
+frames, native component bindings, arm controls, finger calibration and release coverage.
+The historical [RoN MP5 1.0 workflow](references/mp5-workflow.md) retains useful
+batching and recipe guidance; its acceptance does not certify the later BF6 MP5.
 The existing [technical hub](../cyberpunk2077-modding/references/animation-retargeting/index.md)
 retains detailed, source-linked chapters and dated case evidence.
 
@@ -54,14 +118,17 @@ identified user-tested baseline and the limits of transferring it to another wea
 Before selecting a locomotion carrier or adding camera compensation, inspect the
 composing rig mask and downstream control constraints. A local additive/contact
 pass cannot establish that those tracks survive the actual body composition.
+Attaching motion to the pelvis is a hypothesis until that carrier survives the
+selected mask and keeps hands, weapon, camera and player displacement correct.
 
 ## Bound the work
 
 Once one source clip decodes, mapping is established and the target container is
 writable for a new route, the next deliverable is the isolated vertical slice. Resolve its named
 blocking gate before adding polish or processing more clips. A diagnostic slice
-may disclose known visual defects to test runtime consumption; do not call it
-accepted or replace a baseline. Before accepted-beta promotion or full-set work,
+may be prepared offline with disclosed defects; installing it still requires the
+mandatory preview review. Do not call it accepted or replace a baseline.
+Before accepted-beta promotion or full-set work,
 require applicable native/package, full-motion review and runtime evidence. Once
 the route is established, batch compatible clips and review changed motion and
 state boundaries together. Do not impose a stop-and-ask cycle per clip. Explicit

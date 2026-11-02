@@ -10,6 +10,11 @@ The [rig-mask fixture](fixtures/rig-mask.json) is a synthetic ten-bone hierarchy
 The `port-batch` fixtures are synthetic AnimData references and native-shaped JSON
 for `accepted-release-batched-port`; their payload bytes are not animations.
 
+The source-reference finger, double-mount and full-set/audio cases supply only
+measurements or scenario facts. They test diagnosis, preservation and acceptance
+decisions, not actual rendering or game behavior. No source assets are required;
+claiming to have watched or installed a candidate from those facts is a failure.
+
 For each workflow case, start an independent evaluation with the current skill
 and only that case's `prompt` plus relevant raw fixtures. Keep `must_observe` and
 `must_not_observe` with the reviewer; do not feed the answer rubric to the evaluated

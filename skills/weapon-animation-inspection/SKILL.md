@@ -32,6 +32,7 @@ For established RoN ports, use the [MP5 recipe](../cyberpunk2077-animation-retar
 Inspect current replacement geometry/skin and post-composition controls; source
 model views or an IK curve alone do not prove final hand contact. Batch review
 of compatible actions is valid; retain explicit user-accepted release exceptions.
+For BF6 work, use the [native assembly and calibration findings](../cyberpunk2077-animation-retargeting/references/bf6-workflow.md).
 
 ## Work sequence
 
@@ -48,8 +49,15 @@ of compatible actions is valid; retain explicit user-accepted release exceptions
    independent import where supported; preserve key counts/times, scale modes,
    float tracks and durations. Label missing runtime IK, graph blends, customized
    arms, visibility switching, shader substitutes and any approximated motion.
-3. Render complete affected draw, firing and reload variants including endpoints,
-   in matched first-person and useful close views. Actually open the images.
+3. Inspect every animation included in the candidate through complete Blender
+   playback, including draw, firing, reload variants and transitions, in matched
+   first-person and useful close views. Actually inspect the motion and images.
+   Show smooth videos to the user and obtain their acceptance before installation,
+   following the [mandatory preview gate](../cyberpunk2077-animation-retargeting/SKILL.md#mandatory-blender-review-before-installation).
+   Include synchronized source/native playback and repair before/after views under
+   the [source comparison gate](../cyberpunk2077-animation-retargeting/SKILL.md#mandatory-source-versus-retarget-comparison).
+   Label joint-only source proxies and body/skin differences; they cannot establish
+   source surface contact. Use native component mounts, never preview-only offsets.
    Review every critical fast-motion/contact frame at full size and state the
    cadence elsewhere. Check receiver/bolt/handle/cover, magazine travel, trigger
    fingers, grips, neighboring parts, joints, visibility and sight alignment.

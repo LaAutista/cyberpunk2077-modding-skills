@@ -9,6 +9,7 @@ and sample cadence; a sampled fixture is evidence, not permission to resample as
 
 | Source | Establish before retargeting |
 | --- | --- |
+| BF6 | Build/decoder and selected evaluated pose layers, complete player/weapon pairing, original clocks, visibility and mechanism ownership. Measure the source-to-replacement interaction frame; preserve the original source model as a reference. Evaluated samples do not prove missing runtime layers or between-sample interpolation. See the [BF6 workflow](bf6-workflow.md). |
 | RoN / Unreal | Actual package/build, complete motion skeleton, arm/weapon clip pairing, component sockets and clocks, source additive base/order, translation-retarget modes, graph/curve/visibility contributions. The recorded 292-bone HK416 source and 152-bone target are case identities, not required counts. |
 | FO4 / HKX | Decoder/codec identity, full skeleton and binding, actual per-file clock, blend/additive definition, assembly/annotation ownership and independently evaluated playback. Header inspection or an unexecuted HKX library is not decode proof. |
 | Max / M1911 | Scene/take identity, effective frame ticks and export sampling, weighted terminal helpers, per-component clocks and independent native-to-interchange comparisons. A 60 fps header can still contain 30 Hz motion. Unadmitted multi-block clips remain OPEN. |

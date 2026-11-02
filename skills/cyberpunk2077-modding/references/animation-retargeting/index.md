@@ -13,6 +13,7 @@ project's fresh checkpoint before resuming a historical case.
 
 | Current decision or failure | Read |
 | --- | --- |
+| BF6 port, replacement geometry, floating magazine, arm controls or current platform limits | [BF6 findings and workflow](../../../cyberpunk2077-animation-retargeting/references/bf6-workflow.md) |
 | Axes, rest/bind, hierarchy, or direct skeleton versus optional animator controls | [Spaces and bind contracts](spaces-bind.md) |
 | Recover original motion; choose Unreal, MAX, NIF/HKX or CP adapters | [Source playback and adapters](source-playback-adapters.md) |
 | Transfer Shiagur's FO4 advice without importing engine-specific assumptions | [Guide synthesis](shiagur-reference.md) |
@@ -56,8 +57,9 @@ never one combined success flag.
 
 The [register](evidence-register.md) retains the RoN/HK416, Halo V4, M1911 and
 FO4/Bingle snapshots, failures and ownership restrictions. The
-[adapter chapter](source-playback-adapters.md) distinguishes actual source
-inspection from unexecuted HKX candidates and untested COD/Battlefield adapters.
+[adapter chapter](source-playback-adapters.md) retains its dated source-inspection
+limits; the [BF6 findings](../../../cyberpunk2077-animation-retargeting/references/bf6-workflow.md)
+record the later bounded BF6 work without claiming a universal adapter.
 These dated records are not current blanket acceptance. Keep new findings in the
 relevant chapter with source identity/evidence paths; keep raw assets and private
 logs in their owning projects.

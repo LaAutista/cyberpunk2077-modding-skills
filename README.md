@@ -4,17 +4,24 @@ Reusable instructions and tested helpers for AI coding agents working with
 WolvenKit, redscript, CET, weapon rigs, animation adaptation and MCP tooling.
 The workflow comes from real modding work; evidence and limitations travel with it.
 
+The latest update records the BF6 MP5/L115 work: mandatory source/native video
+review, palm-relative finger calibration, native magazine bindings, arm-control
+ownership, first-install audio and faster readback. This is a growing porting
+toolkit, not a finished one-click converter. [Current findings and limits](skills/cyberpunk2077-animation-retargeting/references/bf6-workflow.md)
+separate demonstrated corrections from experiments and pending gameplay checks.
+
 | Start here | Use it for |
 | --- | --- |
 | [Agent operating contract](AGENTS.md) | Preserve baselines, work one gate, stop failed repair loops and report bounded evidence. |
 | [Animation retargeting skill](skills/cyberpunk2077-animation-retargeting/SKILL.md) | Take one source clip through mapping, target reconstruction, native readback, diagnostic packaging and runtime acceptance. |
+| [BF6 porting findings and platform boundary](skills/cyberpunk2077-animation-retargeting/references/bf6-workflow.md) | Source/native comparison, reference-grip repair, actual component bindings, controls, audio and attachment coverage. |
 | [Cyberpunk modding skill](skills/cyberpunk2077-modding/SKILL.md) | Choose implementation layers, inspect resources, select tools and verify packages. |
 | [Weapon animation inspection skill](skills/weapon-animation-inspection/SKILL.md) | Inspect donor/replacement rigs, full motion, collisions, hand contact and native exports. |
 | [Animation retargeting knowledge hub](skills/cyberpunk2077-modding/references/animation-retargeting/index.md) | Load focused chapters for source playback, rest/bind, proportions, finger alignment, contact, native helpers, events and evidence-based debugging. Local case receipts retain explicit acceptance limits. |
 | [Lynx case study](skills/weapon-animation-inspection/references/lynx-case-study.md) | The tested diagnosis/correction process and its visual, native and gameplay evidence limits. |
 | [RoN-to-Cyberpunk workflow](skills/cyberpunk2077-modding/references/ron-port-workflow.md) | Recover source assets, adapt rigs and graph controls, inspect motion and verify native exports. |
 | [Proven HK416 retargeting workflow](skills/cyberpunk2077-animation-retargeting/references/ready-or-not-workflow.md) | RoN animation with CG geometry, user-confirmed locomotion/contact, partial additive weights and the separately checked camera-comfort revision. |
-| [MP5 1.0 repeatable workflow](skills/cyberpunk2077-animation-retargeting/references/mp5-workflow.md) | Accepted release scope, per-weapon recipe, compatible action batches and sub-hour throughput target. |
+| [Historical RoN MP5 1.0 workflow](skills/cyberpunk2077-animation-retargeting/references/mp5-workflow.md) | Accepted RoN release scope, per-weapon recipe and compatible action batches; not acceptance of the later BF6 MP5. |
 | [Agent workflow tools](skills/cyberpunk2077-animation-retargeting/references/agent-tools.md) | RoN action inventory, serial native batches with verified resume, per-clip coverage and archive/graph/mask inspection. |
 | [Tool selection](skills/cyberpunk2077-modding/references/tool-selection.md) | Keep proven tools; reuse corrected summaries; defer unverified MCP integrations. |
 | [Topic references](skills/cyberpunk2077-modding/references/topic-map.md) | Maintained external documentation and implementation sources. |

@@ -2,7 +2,7 @@
 
 Contents: [adapter boundary](#adapter-boundary), [Unreal/RoN/Halo](#unreal-ron-and-halo),
 [MAX/FBX](#max-and-fbx), [FO4/NIF/HKX](#fo4-nif-and-hkx), [CP target](#cyberpunk-target),
-[future adapters](#future-adapters). Evidence IDs resolve in the [register](evidence-register.md).
+[future adapters](#bf6-work-and-future-adapters). Evidence IDs resolve in the [register](evidence-register.md).
 
 ## Adapter boundary
 
@@ -142,10 +142,16 @@ Use the existing [native authoring contract](../native-animation-authoring.md)
 and [event/export chapter](events-native-export.md). It covers a bounded installed
 WolvenKit 9.0.1 adapter, not new skeletons, arbitrary events or full runtime graph.
 
-## Future adapters
+## BF6 work and future adapters
 
-**COD and Battlefield: UNTESTED.** There is no validated source profile, decoder,
-evaluated reference pose, clip/event mapping or CP retarget fixture in this hub.
+The earlier Battlefield entry predated the BF6 MP5/L115 experiments. The
+[BF6 workflow](../../../cyberpunk2077-animation-retargeting/references/bf6-workflow.md)
+now records measured local calibration, native readback, visual findings and
+remaining failures. Its private adapters and source assets are not included here;
+it does not certify other Battlefield titles, every BF6 action or full runtime parity.
+
+**COD and other unadmitted sources remain UNTESTED by this repository.** A
+working third-party port is a useful reference, not proof of this toolchain's adapter.
 Before support claims, identify exact game/build/format, obtain authorized inputs,
 validate source playback independently, and repeat the same source/bind/finger/
 retarget/native/runtime gates. Similar file extensions do not establish support.

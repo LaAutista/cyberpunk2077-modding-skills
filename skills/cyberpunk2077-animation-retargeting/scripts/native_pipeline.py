@@ -96,10 +96,13 @@ def load_config(path):
     if not 0 < timeout <= 60:
         raise ValueError('timeout_seconds must be greater than 0 and at most 60')
     lock = resolve(config.get('lock', '/tmp/cp2077-heavy-work.lock'))
+    heap_mib = config.get('dotnet_heap_mib', 2048)
+    if type(heap_mib) is not int or not 512 <= heap_mib <= 8192:
+        raise ValueError('dotnet_heap_mib must be an integer from 512 to 8192')
     identity = {'config': config, 'files': {str(p): sha(p) for p in sorted(set(required))}}
     fingerprint = hashlib.sha256(json.dumps(identity, sort_keys=True).encode()).hexdigest()
     return dict(inputs=inputs, kit=kit, adapter=adapter, executables=executables,
-                output=output, timeout=timeout, lock=lock, names=names,
+                output=output, timeout=timeout, lock=lock, names=names, heap_mib=heap_mib,
                 fingerprint=fingerprint, identity=identity)
 
 
@@ -135,7 +138,7 @@ def command(step, folder, cfg, completed):
 
 def execute(argv, folder, expected, kind, cfg, lock_fd):
     log = folder / 'stdout.log'
-    env = dict(os.environ, DOTNET_PROCESSOR_COUNT='2', DOTNET_GCHeapHardLimit='0x80000000',
+    env = dict(os.environ, DOTNET_PROCESSOR_COUNT='2', DOTNET_GCHeapHardLimit=hex(cfg['heap_mib']*1024*1024),
                LD_LIBRARY_PATH=str(cfg['kit']), OPENBLAS_NUM_THREADS='2', OMP_NUM_THREADS='2',
                DOTNET_CLI_TELEMETRY_OPTOUT='1', DOTNET_NOLOGO='1',
                DOTNET_ROOT=str(Path(cfg['executables']['dotnet']).parent))

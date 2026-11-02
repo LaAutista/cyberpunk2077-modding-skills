@@ -9,7 +9,9 @@ and unrelated motion. This reference does not authorize deployment or game launc
 
 Choose a case supplement only when it applies: [Unreal/RoN source recovery and
 porting](ron-port-workflow.md), [HK416 recovery](hk416-recovery-contract.md), or
-[HK416 status and unresolved issues](ron-hk416-case-study.md). The generic behavior
+[HK416 status and unresolved issues](ron-hk416-case-study.md); for BF6 use the
+[current workflow and assembly findings](../../cyberpunk2077-animation-retargeting/references/bf6-workflow.md).
+The generic behavior
 and acceptance ledger below still applies to the selected weapon; case-specific
 mappings, offsets and private commands do not become universal defaults.
 
@@ -57,6 +59,14 @@ mechanism check can pass while hand, transition or gameplay acceptance stays unv
 | Visual | Viewed matched source/retarget/native images, every digit accounted for, stated temporal coverage and no unresolved visible defect within it. |
 | Native/package | Independent readback of actual cooked and, when in scope, extracted packaged resources; semantic and identity checks. |
 | Runtime | Authorized game evidence for dispatch, blends, interruptions, contacts, attachments/collision and player displacement on the identified package. Offline tests leave this UNVERIFIED. |
+
+For installation, the visual evidence includes full synchronized source/native
+videos, repair before/after and explicit user acceptance of all included actions.
+Record first-install sound coverage (fire, dry fire, reload variants and applicable
+bolt/charging/equip/holster), source provenance versus donor placeholders, event
+routing/timing, listening and packaged-resource checks. Missing coverage blocks
+first installation; disclose source-audio gaps before review. For optics/muzzles,
+check native slot membership and placement, then actual equip, ADS and removal.
 
 Do not promote a candidate past a failed dependency. Continue independent diagnostics;
 carry missing inputs and fallbacks into the handoff. Reopen affected gates after any

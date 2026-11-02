@@ -1,0 +1,159 @@
+# BF6 weapon ports: findings and platform boundary
+
+Updated 2026-11-02 from the MP5/PW5A3 and L115 work. This is a reusable method
+with bounded case evidence, not a release declaration for either whole weapon.
+The earlier RoN MP5 acceptance is a different source route and artifact. RoN work
+was later shelved in favor of BF6; retain its useful lessons without treating its
+missing-animation fallbacks as the BF6 baseline. Purchased replacement models,
+source-game assets and private project adapters remain outside this repository.
+
+## Deliver a connected action before expanding the platform
+
+Use one source action, measured replacement assembly and exact target native
+readback to produce a reviewable sequence. Fix failures visible there before
+requesting another game test. A full animation-engine reconstruction, all-game
+animation dump or completed humanoid animator rig is not a prerequisite.
+
+Blender is the inspection environment for the geometry and motion actually loaded
+into it. It exposed the earlier bolt, arm and finger failures. That does not make
+an incomplete assembly, missing runtime layer or wrong skin a 1:1 engine preview.
+Record what was evaluated and correct visible defects; investigate graph behavior
+only for a remaining demonstrated mismatch. Runtime testing answers integration
+questions after the user accepts the offline motion.
+
+## Source, replacement and native target are separate contracts
+
+1. Preserve the original source skeleton, source geometry reference, decoded data,
+   evaluated pose samples, events, visibility and clocks. Identify actual arm/weapon
+   clip pairing and any missing source layers. Names alone do not identify variants
+   or source semantics. Preserve original samples alongside native export times.
+2. Measure replacement-model bore/sight line, grip, magazine well, mechanism pivots
+   and attachment rails. Keep the source rig/model as a reference even when shipping
+   CGTrader geometry. Store one declared source-to-target weapon interaction frame;
+   hands and moving parts must use compatible frames throughout manipulation.
+3. Preserve native anatomical offsets, lengths, scales, rests and per-mesh inverse
+   binds. Apply calibrated rotations and nonstretch reach in the final hierarchy.
+   Transport the source elbow bend plane to the target shoulder-to-wrist direction;
+   a static pole projected onto a different reach direction can flip the elbow.
+4. Keep source camera motion, weapon motion and player displacement separately
+   owned. Reducing a common carrier can stiffen the gun without solving camera bob.
+   A pelvis anchor is useful only where the selected mask and constraints retain
+   it. Check partial blend weights and start/stop transitions, not only weight 1.
+
+Do not reuse a measured MP5/L115 axis, offset, clock or visibility interval as a
+new weapon's default. See [spaces](spaces-and-transforms.md),
+[source adapters](source-adapters.md) and [contact](contact-and-ik.md).
+
+## Preview the actual native component hierarchy
+
+A correct-looking preview can bypass a binding that the game still applies.
+Record each component's parent, slot, local transform, rig root, animated part
+and inverse-bind owner. Reconstruct parent-first and apply each mount exactly once.
+Re-export the candidate's own rigs and mechanism banks; do not combine new player
+motion with an older magazine bank or a convenient preview-only offset.
+
+The MP5 investigation found a specific mismatch:
+
+- The preview mounted the magazine directly under `WeaponRight`.
+- The native magazine root was `mag_plug`; the receiver supplied `mag_slot`.
+- Read-only static inspection of the tested executable found `_plug` to `_slot`
+  name remapping in rig binding. This supports that binding for the inspected
+  route/build; it does not prove every component's runtime parent.
+- A 139 mm mount baked into the magazine root plus the receiver slot applied the
+  placement twice. The doubled-mount diagnostic reproduced the reported direction
+  of protrusion; removing another component offset had already failed in game.
+- The offline correction restored the slot-relative rig and six animation aliases
+  and mounted the preview at the receiver slot. Composed weighted-bone matrices
+  matched the previously approved appearance within approximately 3.413e-6 in
+  matrix components at reference, native keys and 60 Hz samples. Meshes, inverse
+  binds and player motion were unchanged. Gameplay acceptance of this correction
+  was still OPEN at this publication.
+
+The general lesson is to prove native assembly ownership, not to zero every root
+or delete every `_plug` offset. A magazine can match the hand numerically in one
+space while being mounted incorrectly in another. Check seated idle, extraction,
+held manipulation, reinsertion, release, visibility changes and final rest together.
+
+## Reconcile authored arms, controls and transitions
+
+Identify whether each clip is Normal or additive, its actual base, active masks
+and the downstream arm-control ownership. Authored wrist motion and an old IK
+target can disagree after composition. Where a control is contractually the same
+target, synchronize it from the final wrist/weapon transform before rebuilding
+parent-local keys. Do not overwrite an intentionally different control target.
+
+Apply an established correction to every routed compatible bank, including idle,
+equip and additive bases; correcting only reload aliases left older arm frames
+elsewhere in the MP5 experiment. Inspect fire-to-idle, bolt-to-idle, sprint-to-stop,
+ADS entry/exit and interruptions. A constant-input graph experiment cannot certify
+those changing states. Observe camera and player movement as well as arm contact.
+
+## Finger articulation and timing
+
+Use the [palm-relative rotation procedure](contact-and-ik.md#palm-relative-finger-rotation)
+and [reference-grip check](contact-and-ik.md#do-not-preserve-a-broken-reference-grip).
+Do not assume identically named bones have compatible axes or reference poses.
+
+In the MP5 empty reload, the source index middle joint held roughly 39 degrees
+of bend while the target reference held about 0.7 degrees. Transferring only
+changes from those references retained an approximately 38-degree bias. Correcting
+the source-relative articulation was a separate operation from a small, measured
+base-knuckle offset for the replacement handguard.
+
+The one-clip trial preserved other motion and passed its ten native pipeline
+stages, but a stricter angular check measured 0.278 degrees against a 0.25-degree
+target, and small magazine-contact intersections remained. Source hand skin was
+unavailable; the comparison used labeled source joints and a preserved target
+skin that was not verified against the user's customized body. The trial was
+awaiting user review, not approved for the full set or installation.
+
+The evaluated source also contained a roughly 43-degree one-frame fingertip
+release at 60 Hz. Compare source and target signed bends/angular changes on the
+same clock before calling a fast step a retarget twitch or smoothing it away.
+Linear world-matrix interpolation between source samples is an estimate, not
+proof of the source engine's interpolation. Preserve failed subframe comparisons.
+
+## Review and first-install coverage
+
+Use the existing [acceptance ledger](../../cyberpunk2077-modding/references/weapon-rigging-animation.md#acceptance-ledger).
+For every included clip and variant, bind source/native/rig/assembly/skin hashes,
+complete time range, cadence, views, video identity, observations and the user's
+explicit acceptance. Repairs need before/after alongside synchronized source and
+native playback. Review a batch together; an accepted clip does not approve others.
+
+Cover idle/low ready, fire/recoil/dry fire, bolt/charging, tactical and empty
+reloads, ADS and ADS reload where supported, walk/jog/run, sprint starts/stops,
+equip/holster, melee and relevant interruptions. Missing source actions require
+named, reviewed fallbacks. Use first-person plus side, underside and hand close-ups.
+Review all digits, thumb opposition, mechanisms and contact across open, closed,
+release and regrip phases. Label source joint proxies and missing layers visibly.
+
+First installations must include sound coverage: firing, dry fire, reload variants
+and applicable bolt/charging/equip/holster events. For BF6 audio record source
+provenance, selected sample, routing, timing, listening and packaged-resource
+checks. Native donor placeholders must be identified as such; disclose source-audio
+gaps before review and never label donor audio BF6. Sounds in a folder do not prove
+they are routed or play on the correct event.
+
+For optics/muzzles, verify record compatibility and placement slots separately
+from rail geometry. Test actual equip, position, ADS/reticle and removal; a visible
+inventory slot is insufficient. Keep one weapon candidate unless variants are
+requested. Extended magazines and staged reloads need explicit part/phase/reset
+coverage. Scope interruption hooks to the intended weapons; do not enable a global
+vanilla reload mod as a side effect of adapting two weapon records.
+
+## What the reusable platform currently supplies
+
+| Capability | Publication/evidence boundary |
+| --- | --- |
+| Source inventory, contract checks, archive/graph/mask inspection | Included helpers; supported formats and synthetic tests described in [agent tools](agent-tools.md). They do not decode every source game or execute the full graph. |
+| Native conversion, independent readback, semantic checks, serial batches/resume | Included tools with input/tool/output fingerprints, bounded jobs and retained failure logs. Readback buffer batching and configurable bounded .NET heap are included in this update. |
+| Measured calibration, connected native Blender preview, contact probes and one-action authoring | Implemented in the private development platform with project adapters and owned inputs. Not bundled as a portable Blender add-on here; installation of these skills does not install that platform. |
+| Partial graph, IK, camera and transition replay | Diagnostic hypotheses with explicit inputs and narrow fixtures. No complete runtime parity or automatic release acceptance. |
+| Source/native visual acceptance and gameplay | Per-candidate human evidence. Neither helper receipts nor this documentation creates it. |
+
+Reuse measured contracts, fixtures and verified resume to remove repeated work.
+Generalize from reviewed conversions, not from an ever-growing runtime simulator.
+A complete conversion in under an hour remains a target without an end-to-end
+measured and accepted port. The retained evidence is summarized in
+[provenance](../../../PROVENANCE.md#bf6-findings-and-preview-gates-2026-11-02).

@@ -26,12 +26,13 @@ Keep failed original reports beside later certificates; later scope must be expl
 ## Mandatory Blender visual acceptance
 
 **Visual coverage requirement recorded 2026-10-27: this gate applies to ALL animations.**
-The 2026-10-28 vertical-slice policy permits disclosed diagnostic test packages;
-it retains this visual gate for accepted-beta promotion and full-set expansion.
-Before promoting a candidate as an accepted beta, play and actually
+The 2026-10-31 user instruction requires smooth previews and explicit user review
+before installation, including diagnostic candidates; see the
+[installation gate](../../../cyberpunk2077-animation-retargeting/SKILL.md#mandatory-blender-review-before-installation).
+Before installation or accepted-beta promotion, play and actually
 review the **converted animation on its target skeleton/rig or target animated
-objects/channels in Blender**. Compare source versus converted side by side or
-with comparable framing and synchronized times. Review the full timeline and
+objects/channels in Blender**. Compare source versus converted side by side with
+matched framing and synchronized times. Review the full timeline and
 important transitions, plus full 360° spatial coverage: front, back, left, right,
 above and below, and obscured areas/close-ups as applicable. Repeat playback from
 complementary views until the relevant motion and surfaces are accounted for.
@@ -78,8 +79,11 @@ for this converted-target Blender review. Diagnostic exports and isolated
 single-clip packages are allowed during
 development under the [vertical-slice contract](../../../cyberpunk2077-animation-retargeting/references/runtime-validation.md),
 including native readback used for review. Disclose visual failures or missing
-review and keep them diagnostic; do not promote an accepted beta or expand the
-full animation set until this gate and the other applicable gates pass.
+review and keep those artifacts offline. A diagnostic label does not waive the
+user's preview-acceptance requirement; only an explicit user acceptance of a
+displayed, named defect for a specific diagnostic can allow that exception.
+Do not promote an accepted beta or expand the full animation set until this gate
+and the other applicable gates pass.
 Blender acceptance still does **not** establish
 in-game/runtime acceptance: retain the separate native/package and runtime gates.
 
@@ -116,6 +120,8 @@ Subject-specific checks completed; inapplicable checks and reason:
 Defect → source/target/unknown origin → frame/time/view/part → evidence:
 Correction → new revision/hash → affected motion/transition re-review → outcome:
 Blender visual gate: UNVERIFIED | FAIL | BLOCKED | PASS (with evidence/reason)
+User smooth-preview review: preview path/hash, candidate identity, actual acceptance or rejection
+Installation eligibility: held until required Blender review and explicit user preview acceptance
 Promotion eligibility: diagnostic-only until Blender visual gate PASS and other applicable gates pass
 Native/package gate: UNVERIFIED | FAIL | BLOCKED | PASS (separate evidence)
 Runtime gate: UNVERIFIED | FAIL | BLOCKED | PASS (separate evidence)

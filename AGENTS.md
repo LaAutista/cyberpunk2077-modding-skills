@@ -49,10 +49,14 @@ import/readback, isolated diagnostic package and user runtime test. Once decode,
 mapping and container writing work, aim the next work at that slice's remaining
 blocking checks. Do not polish or batch a full set first.
 
-A diagnostic package may expose known visual defects to test the plumbing, with
-those defects disclosed. It is not an accepted beta. Full-motion Blender visual
-acceptance, native/package checks and identified runtime acceptance are all
-required before promotion or full-set expansion. See the
+A diagnostic package with disclosed defects may be prepared offline, but may not
+bypass the user's preview gate. Show every included animation and transition as
+smooth synchronized source/native playback, with the assembled arms, weapon and
+moving parts; include before/after for repairs. Record explicit user acceptance
+against the exact candidate and preview hashes before installation. A few poses,
+generated but unwatched videos and passing numbers cannot clear visible failures.
+Full-motion Blender visual acceptance, native/package checks and identified
+runtime acceptance remain separate. See the
 [runtime contract](skills/cyberpunk2077-animation-retargeting/references/runtime-validation.md).
 
 After a route is accepted, reuse unchanged evidence and batch compatible clips;
@@ -60,6 +64,9 @@ do not require another single-clip approval cycle per action. Explicit user rele
 acceptance may retain named defects or native fallbacks. Record those limits
 without inventing a flawless visual pass or expanding release criteria. Use the
 [MP5 workflow](skills/cyberpunk2077-animation-retargeting/references/mp5-workflow.md).
+For BF6, use the [current findings](skills/cyberpunk2077-animation-retargeting/references/bf6-workflow.md).
+Start finger repairs with one reversible clip and review it before propagation.
+Require sound coverage on first installation and disclose source/donor provenance.
 
 After two failed corrections at the same gate, stop correction. Write FAILURE.md
 with the fixture, observations, attempted changes, evidence and remaining hypotheses.

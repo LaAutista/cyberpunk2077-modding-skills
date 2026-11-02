@@ -79,6 +79,13 @@ Use the following fields, with `schema_version: 1`:
   repair budget for that gate; OPEN or a stale boundary does not.
 - `next_test`: the single highest-information test, including expected outcomes.
 
+The skill's E2 source/native comparison belongs to the existing `visual` gate;
+it is not a ninth schema ID. Its evidence must cover each included clip/variant,
+complete times and transitions, source/native/assembly/skin identities, synchronized
+video hashes, views/cadence, actual review, explicit user acceptance and any named
+exceptions. A passed structural receipt does not prove those reviews occurred.
+Record sound coverage and attachment checks in the weapon acceptance ledger.
+
 All file references resolve relative to STATUS.json; absolute paths are allowed
 for private local receipts. Every referenced file is rehashed. New evidence never
 automatically carries over to another fixture/candidate hash. Failure logs remain

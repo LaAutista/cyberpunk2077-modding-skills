@@ -31,6 +31,7 @@ Save a private JSON config. Paths are absolute or relative to the config file;
   },
   "output": "work/native-candidate-01",
   "timeout_seconds": 55,
+  "dotnet_heap_mib": 2048,
   "lock": "/tmp/cp2077-heavy-work.lock"
 }
 ```
@@ -55,6 +56,17 @@ these native checks only. `runtimeVerified` and `visuallyReviewed` stay false.
 another heavy job holds the lock. Do not launch another copy to bypass that lock.
 Each tool has a bounded timeout and modest CPU/thread/heap settings; timed-out
 process groups are killed. Child tools retain the lock if the runner is interrupted.
+`dotnet_heap_mib` optionally sets the .NET heap limit (integer 512–8192 MiB;
+default 2048). Use a measured larger-bank requirement, not unlimited memory or a
+second runner that bypasses the lock. Changing it changes the config fingerprint
+and requires a new output directory. It does not change the Node heap limit.
+
+The independent compressed-rotation reader now appends corrected buffers once,
+avoiding repeated copies of the entire growing GLB. Retained private L115 checks
+found byte-identical output and equivalent reports; the local 68-clip readback
+fell from about 60 seconds to 3.8 seconds. This is one readback-stage benchmark,
+not full-port timing or gameplay proof. Portable tests exercise multiple corrected
+clips/channels and output offsets; see [native checks](native-readback.md).
 
 Rerun the same `run` command to resume: completed steps are reused only after their
 output hashes and all input/tool fingerprints match. Failed attempts remain in

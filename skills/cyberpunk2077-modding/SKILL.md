@@ -35,6 +35,11 @@ assets separate from shipping resources.
 For complete RoN ports on an established route, use the sibling
 [MP5 1.0 workflow](../cyberpunk2077-animation-retargeting/references/mp5-workflow.md)
 for the private recipe, reusable tools, attachments, audio and release boundaries.
+For BF6 ports, use the [current findings and platform boundary](../cyberpunk2077-animation-retargeting/references/bf6-workflow.md).
+Keep historical RoN acceptance separate from BF6 candidates. First installations
+need firing, dry-fire, reload and applicable mechanism/equip/holster sounds;
+record source provenance and identify donor placeholders. A visible attachment
+slot does not prove compatibility or correct optic/muzzle placement.
 
 ## Animation acceptance
 
@@ -48,6 +53,10 @@ visible defects fail a clean visual pass. Correct them and renew review unless
 the user explicitly accepts named exceptions; keep those defects recorded. Every digit and
 thumb, wrist/palm, arm and moving weapon contact must be accounted for when present.
 Stills, numeric checks and export success do not replace actual motion review.
+Show full synchronized source/native videos and repair before/after comparisons;
+obtain the user's acceptance of every included animation before installation,
+following the [source comparison gate](../cyberpunk2077-animation-retargeting/SKILL.md#mandatory-source-versus-retarget-comparison).
+Batch reviews are valid; a diagnostic label does not waive this gate.
 Diagnostic exports and isolated single-clip test packages are allowed under the
 [vertical-slice contract](../cyberpunk2077-animation-retargeting/references/runtime-validation.md),
 with visual failures/gaps disclosed. They are not accepted betas; native/package
