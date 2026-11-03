@@ -751,6 +751,20 @@
       "must_not_observe": [
         "Send completion to the temporary predecessor, decrement to zero after A while the parent is active, require an extra destructor for these direct children, call the vehicle delta V's observed clock, or claim full investigation/game acceptance."
       ]
+    },
+    {
+      "id": "native-transform-numerics",
+      "prompt": "Use the pinned native composition/interpolation measurements. X has t(1,2,3),qX90,s(2,3,4);Y has t(5,6,7),qY60,s(.5,1.5,2). Execute independent calculations for C(X,Y) and C(Y,X). For identity q0, positive-axis q1 with w component float bits3f7d70a3/3f7d70a4/3f7d70a5, and interpolation weight.25, calculate both SLERP and nlerp; identify the selected branch and explain the measured separation. What changes if the input dot has negative-zero bits, the caller reuses q1, or q1 is nonunit? Does this certify the live sine selector, all affine matrices, all CRT domains, actual graph inputs or Saber? Do not execute a PE, game or Blender.",
+      "must_observe": [
+        "Execute translations(11,-26,21) and approximately(10.446152,9,9.566987), with quaternion z signs opposite; scale(1,4.5,8). QS componentwise scales do not establish arbitrary affine shear equivalence, normalization or aliasing.",
+        "Execute both quaternion formulas: equality and the lower adjacent float select SLERP, the upper selects nlerp. At weight.25 the x results differ about4.4333e-5; do not reuse a0.9995 threshold or reverse the equality branch.",
+        "The native helper XORs all q1 sign bits from the dot sign bit and writes q1 before either branch, even at weight0/1. Negative-zero dot can flip q1; an ordinary less-than-zero test or a pure returned-value model misses this.",
+        "SLERP adds no final normalization: q0=(0,0,0,1),q1=(2,0,0,0),w=.5 gives approximately(1.41421354,0,0,.70710677). Keep this diagnostic outside the ordinary unit-input contract.",
+        "Keep2078 composition calls/24936 exact lanes and4464 interpolation calls/4396 ordinary checks/560 exact nlerp results scoped. The two explicit sine dispatches matched in this corpus; live selection, full CRT/graph parity, independent review and visual/game acceptance remain open."
+      ],
+      "must_not_observe": [
+        "Claim a new native run from these calculations, global/game selection from file-backed data, universal bit parity from finite errors, q1 immutability at endpoints, normalized SLERP for arbitrary inputs, or a complete investigation/Saber fix."
+      ]
     }
   ],
   "trigger_cases": [

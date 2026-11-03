@@ -1,5 +1,11 @@
 # Retargeting workflow evals
 
+The `native-transform-numerics` case distinguishes composition order from full
+affine equivalence, .99 equality from the next float, and a returned quaternion
+from the second input's mutation. Execute the supplied independent derivations;
+reuse the documented native observations without claiming new target execution,
+selected globals, complete numerical parity or a character repair.
+
 The `native-normalization-domain` case applies the measured native leaf's input
 range and MXCSR limits without treating a double equation as universal parity.
 The `vehicle-direct-completion` case checks direct child contributions and the

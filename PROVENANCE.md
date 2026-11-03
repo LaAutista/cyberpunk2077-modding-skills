@@ -660,3 +660,18 @@ All49 earlier workflow IDs and six routing cases remain, with two new cases.
 Root review/finite checks do not replace fresh independent evaluation; full
 investigation, selected histories, final movement and visual/game acceptance
 remain open. No game launch, attachment, live mod change or Saber work occurred.
+
+The1.8.20 numerical milestone executes unchanged native QS composition and
+quaternion interpolation with the latter's actual acosf/sinf/MXCSR dependencies.
+Composition passed24936 float32 output-lane comparisons and2058 independent
+ordinary reference pairs across2078 calls. Interpolation passed4464 calls in
+two explicit CPU dispatches/two MXCSR modes,4396 ordinary reference comparisons,
+560 exact nlerp comparisons and24 .99 boundary discriminators. It also confirms
+the second quaternion's sign-bit mutation, including endpoints and negative zero.
+Predeclared error limits passed; changed native payloads were rejected before
+execution. Two failed file reads and the successful unbacked-global discriminator
+are preserved. Native code stays private; only measured contracts are published.
+All51 prior workflow cases and six triggers remain, plus one new root-evaluated
+case. These finite host measurements do not establish selected graph inputs,
+game globals, full CRT domains, fresh independent review or visual/game behavior.
+The full investigation remains open and Saber remains held.

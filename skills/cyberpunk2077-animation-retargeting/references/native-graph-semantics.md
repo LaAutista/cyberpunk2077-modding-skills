@@ -8,8 +8,9 @@ All addresses below are preferred-image addresses, not portable hooks. Class
 registration, constructor stores and instance vtables establish the operator
 identities; constants and branch instructions establish the formulas.
 
-These are scoped implementation findings and analyst numerical checks, with one
-[isolated native normalization measurement](native-normalization.md). The other
+These are scoped implementation findings and analyst numerical checks, including
+isolated native [normalization](native-normalization.md) and
+[composition/interpolation measurements](native-transform-numerics.md). Other
 equations remain unexecuted models; none is a game observation. Use valid transforms, valid mask
 indices and the identified branch. Recheck identities before applying them to a
 different build. The focused references cover [capture and custom curves](native-capture-curves.md),
@@ -36,19 +37,25 @@ C.s = X.s * Y.s
 Helper `0x14032911c` implements this QS composition. It does not introduce a
 general shear representation. Quaternion multiplication and translation/scale
 were cross-checked against independent SSE-lane transcriptions and numerical
-examples, including noncommuting rotations.
+examples, including noncommuting rotations. The exact leaf also passed the
+[finite native composition corpus](native-transform-numerics.md#composition-order-scale-and-input-domain);
+it does not normalize quaternions, and fourth translation/scale lanes participate.
 
 Define `L(X,Y,w)` from `0x14032a460`: translation and scale lerp with `w`;
 rotation uses helper `0x14032a664`. The quaternion helper flips the second
 quaternion's signs when the dot product has its sign bit set, then uses the
-absolute dot. For dot greater than float32(0.99), it normalizes the linear blend.
+absolute dot. It writes the sign-adjusted second quaternion back before either
+branch, even at endpoint weights. For dot greater than float32(0.99), it normalizes the linear blend.
 Otherwise it uses sine/angle SLERP weights. The exact stored threshold is
 `0.9900000095367432`, not the often-assumed 0.9995. The sign-mask initializer and
 acosf/sinf calls were traced. The normalization helper computes reciprocal and
 product before masking zero-norm output to zero lanes, not identity. Its measured
 underflow/overflow limits require input-range validation; finite/nonzero alone
 does not guarantee a unit output. See the [measurement](native-normalization.md).
-These equations are not promises of bit-identical Python/native float behavior.
+The [native interpolation corpus](native-transform-numerics.md#interpolation-branch-and-second-input-mutation)
+executes the selector and actual trig dependencies in two fixture CPU dispatches
+and MXCSR modes. Equality at .99 selects SLERP, which has no final normalization.
+These finite measurements are not universal bit-identical Python/native behavior.
 
 Ordinary transition blend helper `0x1408e3548` reaches this same `L` through
 `0x1408e3a54`. Sparse body records interpolate when both inputs are present, copy
