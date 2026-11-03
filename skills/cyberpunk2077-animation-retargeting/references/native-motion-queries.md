@@ -115,6 +115,11 @@ and moves the resulting context into I38 through `0x140223BB0`:
 | K10 | X=`I+2548`, the address of embedded context storage |
 | byte K18 | 1 |
 
+G and state are reloaded after graph initialization, immediately before K
+construction. Do not substitute an earlier predicate's resource for that later
+snapshot. Joining the outer caller's fresh allocation to these stores assumes
+stable owner/component/instance identity across delegated calls.
+
 K is a separate32-byte allocation: **K differs from H; `[K]` equals H.** This
 joins the earlier compiler-populated G68 list to the ordinal query wrappers.
 The pointer move clears its temporary and disposes of a nonnull old K through
@@ -134,6 +139,8 @@ The null-G setup branch skips K construction/move. The captured fresh-instance
 caller therefore leaves K null, but the branch alone does not clear an old K
 on a hypothetical reused instance. Do not turn that conditional history into
 an observed defect, universal reset contract or proof of runtime reachability.
+Setup replaces D through embedded X before this null-G test, so such hypothetical
+reuse can retain old K0/K8 while the same X points to a new D.
 Final accumulated O30 application is still a separate implementation question.
 
 ### Revision and teardown of the embedded context
@@ -147,6 +154,16 @@ nonzero**, and clears D0 in either case. D162 alone does not advance the counter
 a second call without a new D0 write does not increment it again. This is one
 connected revision writer, not proof of every dirty-flag producer or one update
 per rendered frame. The refresh caller still uses its existing provider indices.
+
+Retirement reloads D from the same embedded X cell when K10 still names it;
+it does not guarantee the same D object survived the host call. Refresh compares
+the revision value alone: replacing D with another D carrying the same revision
+does not itself trigger refresh. Keep valid live K/X/D storage as a premise;
+the refresh leaf does not separately null-check X and D. A revision is not
+object identity or a lifetime guarantee.
+Caller82071C caches the revision at82075E before issuing its queries. A failed
+query can therefore leave the cache holding the new revision; mismatch admission
+does not prove refreshed output or guarantee an automatic retry.
 
 The displaced-instance release reaches `0x140222088`, which calls `0x1402221E4`
 before its later member cleanup. Under normal returns without independent or
@@ -212,6 +229,8 @@ calls virtual18 with that cached value. For A's verified table `0x1430756B8`,
 the target is `0x1403B77CC`. Its call to D45CF0 still needs the nonnull A28
 and handle-resolution gates; refresh then needs nonnull K and a changed
 revision. A policy update is not proof that queries were refreshed.
+The delta is captured before delegated dispatch, while the active policy is
+reloaded afterward; a replacement policy can receive the earlier sample.
 
 Driver `0x1401F83D0` stores incoming XMM1 at M22C **after comparing M8B but
 before branching on that comparison**. The disabled branch can therefore
@@ -685,9 +704,12 @@ not advance. This is an iteration contract, not proof for all callbacks/loops.
 The pending-time branch writes its saved S14 into the update context after the
 child call; do not assume it always restores the original incoming delta.
 
-After base evaluation, +128 `0x142727948` adjusts the first auxiliary QS through
-the actual E+8 pointer, unless J is FFFFFFFF or3. Its bit test is not a general
-index bounds check. With finite translation t, L=length(t), s=S20 and b above,
+Evaluation +128 `0x142727948` captures J and the S base before base evaluation.
+After that call it adjusts the first auxiliary QS through E+8 unless the
+captured J is FFFFFFFF or3. It reloads payload for b and the later accumulation;
+the simple P/S notation assumes stable payload identity across the call.
+Its bit test is not a general index bounds check.
+With finite translation t, L=length(t), s=S20 and b above,
 the selected initialized normalization mask yields:
 
 ```text
@@ -701,7 +723,10 @@ requires that initializer and no later mask writer, plus ordinary masked floatin
 exceptions. Quaternion and scale receive no local writes here. For t=(3,4,0),
 s=2,b=1, output=(6.6,8.8,0); b=-12 reverses direction to(-1.2,-1.6,0).
 Zero t stays zero even with positive b: a scalar cannot supply a direction.
-The host later composes this per-graph QS into O30. This is a concrete motion
+The pointer join is explicit: the outer host's H+0 holds its local QS;
+1B5AF4 forwards H to1B25DC, which copies H+0 to its evaluation frame+18;
+3A98D0 then copies that value to E+8. These are distinct frame layouts.
+The host later composes that per-graph QS into O30. This is a concrete motion
 modifier and accumulation path, not the final entity-movement application.
 
 ## Evidence and open links
@@ -719,12 +744,15 @@ bodies, guarded captures and finite discriminators. The report hashes remain
 in the private investigation ledger; no game resources ship with this skill.
 
 The lifecycle continuation includes a separate draft instruction review completed
-and rechecked by root after worker availability ended. Later Machine/planner
-findings have root instruction/model checks, without a completed separate-agent
-review or native execution. The query-construction supplements also have root-only
-instruction, buffer-history, pointer-construction, revision/teardown, mutation
-and policy-dispatch/stage-registration checks. Their exact checks
-and limitations remain recorded.
+and rechecked by root after worker availability ended. Machine/planner state
+writes, caller overwrites, captured-state timing and the first-QS pointer join now
+have a separate retained-instruction review and finite discriminators. A separate
+query review covers K/X construction, revision/teardown, mutation markers and
+policy dispatch. These reviews do not execute native code or cover arbitrary
+callback histories, every option-buffer constructor or selected gameplay.
+Earlier planner/parent and query-construction/lifetime receipts omit their own
+producer-script hashes; newly bound copies do not retroactively supply that
+provenance. Frozen reports and failures retain their original scope.
 
 The local C188/C190 constructors, named result consumers and the captured
 K-construction/G68-provider join are established. Final O30 application and

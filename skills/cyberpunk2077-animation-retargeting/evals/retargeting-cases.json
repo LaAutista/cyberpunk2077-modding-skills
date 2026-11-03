@@ -823,6 +823,21 @@
         "Use floor or an unrounded double product as native frame quantization, suppress a reverse reset solely because integer frames match, drop inclusive seam identities, reverse stored order, or treat marker1 as proof the fourth handle was retained.",
         "Freeze ordinal at128, retry dropped output by rewinding, claim callback/game execution or universal parity, infer the actual game MXCSR mode, or claim full investigation/port completion."
       ]
+    },
+    {
+      "id": "rig-admission-and-captured-query-state",
+      "prompt": "Use the supplied retargeting skill to review a Cyberpunk2.5 animation trace and execute small deterministic checks for the following synthetic inputs. The rig setup follows the documented S0/component138 resolver, handle cast and I40 move. In one history the source handle is stable; in another its virtual type getter sees object A but the source pair is replaced by object B before the accepting helper reloads it. A has the expected type; B's type is unknown. Explain what the type check establishes in each history and the move/cleanup boundary. For ordinary host input, outer O9C is1 and the unrelated chain context C0 is7; the documented store fills host H+C0, with no later alias write. The rig map is[2,0,4], K=4,L=2,c=1,a=b=0. Compute q and admission, then repeat with O9C=2. Consider whether a=1 makes invalid rig storage safe. For query state, K holds old H/state and K10 points to embedded X. Null-G setup replaces [X] with D_new carrying revision1; cached revision is1. Compute refresh before and after changing D_new's revision to2, and distinguish preserved K fields, storage identity and query success. Include the revision cache write ordering relative to queries and what a failed query means for a later retry. For Machine evaluation, J=1 and the S base are captured before the base call, with S20=2; that call changes current J to3. Payload storage stays valid and unchanged, post-call b=1, auxiliary translation is(3,4,0), and the documented ordinary normalization premises hold. Determine the local translation and whether the new J cancels adjustment; trace its pointer to aggregate O30. Produce an evidence-scoped handoff. No PE/native execution, game assets, Blender or runtime observations are supplied; do not install, launch or claim full-investigation completion.",
+      "must_observe": [
+        "Execute explicit finite/address-history checks. Stable source supports the animRig cast/move join; a type getter followed by source replacement does not prove object B has the checked type. Incoming pair is installed before old-handle cleanup; callback/lifetime premises survive.",
+        "Use sampled O9C through H+C0, not unrelated chain C0. With category1, q=0 and admit; category2, q=4 and reject. q storage is read before a rejection, so a=1 does not make an invalid rig safe.",
+        "Null-G hypothetical reuse may keep K0/K8 while X points to D_new. Equal revision1 does not refresh; revision2 does, subject to live K/X/D and caller gates. Revision alone is not object identity; caching before query calls is not guaranteed query success or ordinal rebinding.",
+        "Captured J=1 still permits adjustment after current J becomes3. With L=5,s=2,b=1, translation is(6.6,8.8,0), w0 and added length11 under the stated finite premises. Distinguish captured S base from later payload reloads.",
+        "Connect host-local QS through H0 to evaluation frame18 to E8 and the later O30 composition, preserving distinct frame layouts. Final movement application, live rig/category/history, graph E8/EC/ED consumers and whole investigation remain open. Models and retained instruction evidence are not new native/game execution."
+      ],
+      "must_not_observe": [
+        "Infer checked type survives arbitrary source replacement, treat cleanup callbacks as pure, use unrelated chain C0, conflate a=1 with safe invalid storage, or infer graph pause/speed semantics from the rig LOD gate.",
+        "Equate revision equality with same-object identity, claim null-G resets all old K fields, use current post-base J instead of captured J, claim O30 has a proved final movement recipient, or certify Blender/game/Saber/full-investigation acceptance."
+      ]
     }
   ],
   "trigger_cases": [

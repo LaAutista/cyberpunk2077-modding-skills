@@ -1,5 +1,13 @@
 # Retargeting workflow evals
 
+The `rig-admission-and-captured-query-state` case tests the typed rig-handle
+join, ordinary-host distance-category input and the limits of type checks across
+callbacks. Its query and Machine histories distinguish captured pointers/indexes
+from later reloads, revision equality from object identity, and a local QS
+modifier from the still-untraced final movement recipient. Execute the finite
+examples without inventing native execution, live histories or graph-control
+semantics.
+
 The `native-event-seams-and-capacity` case checks binary32 frame quantization,
 seconds-based reverse resets, warm cursor behavior, inclusive multi-loop order
 and the distinction between output capacity and retained duration state. Execute

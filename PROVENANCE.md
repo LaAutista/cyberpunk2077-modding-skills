@@ -1,5 +1,30 @@
 # Provenance and verification
 
+## Rig admission and query-state review, 2026-11-03
+
+Retargeting1.8.25 connects the ordinary host's admission object to the component's
+rig reference through a native `animRig` type check and handle move. It also joins
+the host's category input to the aggregate's sampled distance category. Four
+saved-PE function bodies are byte-checked against641 pinned bytes; no native
+function is executed. Guarded read failures remain preserved. The rig's LOD
+policy does not establish the separate reflected graph pause/speed semantics.
+
+Independent retained-instruction reviews qualify Machine/planner captured-state
+timing and connect the host-local QS pointer through distinct evaluation frames.
+The query-context review confirms the scoped construction, revision, mutation
+and dispatch rules while exposing identity limits: equal revisions can belong
+to different context objects, and null-G reuse can retain old context fields
+while replacing the embedded pointee. These are bounded counterexamples to
+automatic freshness claims, not observed game defects. Historical receipts
+without producer-script hashes remain qualified; new bindings are not retroactive.
+
+One workflow case is added, preserving the56 earlier cases and six triggers.
+The shared installation's concurrent helper-dependency guidance is preserved
+byte-for-byte in the deformation reference; this publication does not claim to
+have rerun that port's skin regression. Clipping and preview gates are unchanged.
+Selected callback/rebind histories, final movement/rendering and remaining graph
+controls stay open. No Saber, live mod/profile, Blender or game work ran.
+
 ## Native event collector measurement, 2026-11-03
 
 Retargeting 1.8.24 adds a finite native event-collector contract: 224 calls over

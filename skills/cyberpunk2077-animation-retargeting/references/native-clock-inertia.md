@@ -177,10 +177,29 @@ gives 5; -2 with K=FFFFFFFF gives FFFFFFFE. A map need not be monotone:
 map[2,0,4], K=4, L=2 gives reject/admit/reject for h=0/1/2 when other gates
 admit. Equality rejects; negative L admits before that comparison.
 Because q is computed first, its storage requirements remain even when A2
-would reject. The SDK's rig field names corroborate the R layout, but the
-I+40 producer/type join and H/b/c/L producers are not established by these
-leaves. Their policy and actual values remain distinct boundaries. Provenance:
-`g1-admission-gate-findings` and `g1-admission-q-findings`.
+would reject. Setup now joins I+40 to the animated component's rig reference:
+S0=&component138, resolver32CF98, type-checking handle constructor205638,
+then move195734 into &I40. The cast compares against the registered `animRig`
+class global143BBD270 and tests descriptors D0 through D15 in its unrolled
+ancestry chain. On acceptance it reloads both source words and increments the
+control-block DWORD when nonnull; type identity assumes the source handle
+remains stable across the virtual getter. The move installs the new pair before
+old-handle cleanup. With valid readable handle/type storage, a null source object
+or failed bounded type match yields a null handle, not a usable rig. A null type
+returned by the getter is not separately guarded before ancestry access. Valid
+ordinary-host storage remains a separate requirement.
+
+Thus R+7C is the rig's levelOfDetailStartIndices count, R+80/+8C its
+distanceCategoryToLodMap, R+90 turnOffLOD and R+94 turningOffUpdateAndSample,
+as corroborated by the pinned SDK. Outer host1B3E00 samples O+9C into H+C0;
+wrapper1B5AF4 preserves H and forwards it to1B25DC. This is the aggregate's
+current distance category, with the no-intervening-alias-write premise, not
+the outer chain context's C0. ExistingBB6C14 updates that category before the
+sample; actual requested categories and effective rig policy still need their
+own history. The fresh instance constructor zeros I40 and word I25B0, which
+does not establish later flag writes or alternate rebind behavior. None of
+these joins interprets graph E8/EC/ED. Provenance: `g1-admission-gate-findings`,
+`g1-admission-q-findings` and `rig-admission-followup/findings`.
 
 Bounded byte-load/test plus MOVSS/MULSS displacement scans found unrelated owners and a countdown-like reader, without identifying a typed AnimGraph consumer. Alternate/debug callers, additional instructions and indirect handling remain open. Do not claim globally unused, deprecated, or editor-only; do not add an offline multiplier/pause implementation solely from names. A causal test would hold other inputs fixed, vary each resource field separately, and observe both update admission and node delta at the actual dispatcher. Such a test has not run.
 

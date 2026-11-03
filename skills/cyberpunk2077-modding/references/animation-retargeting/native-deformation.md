@@ -56,6 +56,17 @@ substitute for matching this observed implementation. Preserve both influence
 sets, named joints and full bind matrices. Check dropped/renormalized influences,
 joint-index remaps, bone-palette selection and quantized positions independently.
 
+When checking secondary deformation, do not define an unaffected vertex from
+animator-joint names or direct finger weights alone. Include the complete evaluated
+skin palette: procedural knuckle/muscle helpers can carry weights into neighboring
+skin even when its direct finger weight is zero. Keep preservation of anatomical
+input drivers separate from expected helper-driven skin changes. Trace a flagged
+vertex's actual influences, compare evaluated helper transforms, and restore the
+suspected helper in a diagnostic control before classifying damage. Regression
+checks should include a vertex weighted only indirectly to the corrected finger;
+unchanged-surface masks must include those helper dependencies. This does not waive
+visual inspection or new contact caused by otherwise expected skin movement.
+
 The reusable evaluator matched an independent actual-SSA interpreter on 105,675
 samples for positions, normal core and packed normals. That is not a native GPU
 dispatch, final draw or runtime pose pass. Optional post-LBS geometric correction,
