@@ -190,9 +190,10 @@ an entry policy. Neither is a direct context revision increment.
 The normal route places command processing before the conditional host wrapper;
 inside that wrapper the ordinary host returns before1B5DB4 retires D0/D162.
 This is a local ordering result. The owner refresh3B77CC→D45CF0 now has a
-connected movement-policy caller and stage registration, as below; nested-job
-completion relative to that route is still unproved. A comparison before retirement can
-still see the old value; do not infer same-frame refresh, rebuilt ordinals,
+connected movement-policy caller and stage registration, as below. The ordinary
+nested-job dependency is now connected too: stage0 work precedes stage8 in the
+same scheduler traversal. A comparison before retirement can still see the old
+value; do not infer same-frame refresh, rebuilt ordinals,
 all callback/rebind histories or final entity movement from invalidation alone.
 
 ### Movement-policy dispatch, cached delta and stage order
@@ -232,19 +233,76 @@ and uses float+4 of its returned pair; identify that object's actual override
 before applying an Entity/Puppet clock formula. The nested worker label
 `UpdateSecondPhase` does not mean scheduler stage2.
 
-The same registrar places `EntityAnimations/Update` at stage8. The scheduler
-traverses stages in ascending order and advances queue handles between nonempty
-stage lists. This establishes registration/submission order, **not completion
-of nested work**. The captured27316C rotates handles; it is not a blocking wait.
-Join queue dependencies and nested finalization before claiming that a policy
-refresh necessarily precedes graph update/retirement or observes a same-frame
-revision. Actual selected-instance identity and callback histories remain separate.
+The same registrar places `EntityAnimations/Update` at stage8. Scheduler
+`0x1408ED21C` traverses twelve stages for each of three buckets, using one queue
+and advancing its handles between nonempty stage lists. The ordinary dependency
+and worker path below now connects **completion of nested work** to that ordering.
+`0x14027316C` remains an asynchronous handle advance, not a blocking wait. Stage
+numbers or the advance call alone would not have established this contract.
+Actual selected-instance identity, clock override and callback histories remain
+separate from the conditional static ordering proof.
 
 A third decoded driver route can repeatedly submit `FixedUpdate_PreSolve`
 work, but its connected outer label is `VehicleSystem_SingleFixedStep`.
 Keep that owner and route attached to the evidence: it does not show repeated
 ordinary V updates. The remaining first-route upper producer, concrete selected
 clock, final movement application and native numerical parity are still open.
+
+#### Nested stage completion
+
+Use this contract only for the identified build and ordinary connected queue path,
+with valid handles, nonoverflowing counters, normal returns and stable storage.
+It does not cover arbitrary detached/captured queues or external state mutation.
+
+Stage submitter8ED324 passes queue10 as predecessor and queue18 as completion
+handle to272B40. Submission increments completion.count18 before queuing or
+deferring the job; the zero-to-one transition retains a reference at1C. If the
+predecessor is pending, its byte20 gate protects a count recheck and linked-list
+insertion at head0. If completion wins that race, the job takes the ready route.
+27316C moves a pending queue18 into queue10 and allocates a new empty queue18.
+Jobs sharing a stage can run concurrently; subsequent stages depend on its handle.
+
+Worker2732D0 copies a ready job and its handle, builds context E with E20 pointing
+to a local handle cell, and invokes the callback at2735DF. Wrapper4BA494 constructs
+nested queue Q through2746D8: Q20=E20 and Q30=0. It invokes the stage callback,
+then destroys Q through272DB8. With Q30=0, finalizer272F30 moves any pending Q18
+into Q10; otherwise it releases Q18. If Q10 remains pending and Q20 is nonnull,
+272E1C adds a no-op dependency from Q10 to the parent handle **before returning**.
+That operation increments the parent's pending count; it does not block the caller.
+
+Only after the callback returns does the worker decrement its original group's
+count18 at2735F1. On a one-to-zero transition it acquires the same gate and rechecks
+the count before detaching waiters. Ordinary waiters are submitted with their
+already-counted completion handle. A no-op dependency instead decrements its target
+count at273760;271F00 detaches further waiters on a guarded zero recheck. The
+worker drains those linked records too, propagating completion through nested groups.
+If admission found the child already complete, the no-op can run through the normal
+ready/callback/decrement path. Reference count1C is distinct from pending count18.
+
+Parallel submitter274208 contributes once per worker, including deferred workers.
+Its range wrapper2729F4 invokes the optional terminal callback on the last terminal
+ticket after the claimed ranges finish, before that worker returns. The one-worker
+2E0400 and zero-work-terminal2E03C8 routes also return before the outer decrement.
+With no work or terminal callback, submission uses a no-op dependency. The concrete
+Puppet PreTick path passes Q10/Q18 through2DFD10 to274208 and advances Q before its
+stage wrapper finalizes it. Thus these child workers participate in the parent fence.
+
+For example, a parent body contributes1. Attaching a pending child's dependency
+makes its count2; returning the body leaves1. Finishing the child releases that
+dependency and permits the count to reach0. Children finishing before finalization
+need no pending join. If the join has reserved its parent contribution and the
+child finishes before the guarded recheck, it takes the ready route. Returning
+from the callback alone cannot clear the pending-child example.
+
+For enabled descriptors in this traversal, this connects stage0 completion before
+stage8 execution. A stage0 refresh cannot be described as observing a revision
+retired later by stage8 of that same traversal. It does not prove a one-frame delay,
+exclude other writers/refresh routes, identify V's active policy or diagnose Saber.
+The pinned [SDK group declarations](https://github.com/wopss/RED4ext.SDK/blob/8ebb8da485b4ab22081e9be65de70fe1193538da/include/RED4ext/JobQueue.hpp)
+corroborate group completion; the address joins above come from saved-build code,
+not a separately verified mapping of SDK address hashes. Root instruction checks
+and finite interleaving models support this result; native execution, fresh
+independent-agent review and final game/visual acceptance remain unverified.
 
 ## C188: interval extraction and selected result writes
 

@@ -629,3 +629,18 @@ hashes were revalidated. No fresh independent-agent review, native execution,
 numerical parity or full-investigation completion is implied. A separate earlier
 identity-only game capture supplies current pointers and cleanup evidence, not
 these policy selections or a character's visual acceptance.
+
+The1.8.18 continuation connects ordinary nested-job completion to the registered
+animation-stage order. Saved-build submission, handle rotation, parent-context
+construction, finalization, worker decrement and waiter propagation establish a
+conditional stage0-before-stage8 dependency, including the traced parallel work.
+The caller still advances asynchronously; this does not prove a selected V policy,
+same-frame revision observation, a one-frame delay or a character repair. Root
+checked166 instruction anchors,25 guarded PE reads,631 finite parent/child
+interleavings and19 parallel cases across1061 model states. A post-run provenance
+audit caught a checker hashing its own unfinished log; the original result was
+preserved and the corrected run's109 bindings matched. All48 prior case IDs and
+six routing cases remain; two earlier scheduling criteria are qualified to avoid
+requiring an obsolete global unknown, and a new dependency case makes49. Fresh
+independent-agent review, native concurrency/numerical parity and visual/game
+acceptance remain open. No new game attachment or Saber change is implied.

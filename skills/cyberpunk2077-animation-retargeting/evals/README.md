@@ -163,7 +163,7 @@ callback purity, all mutation producers and runtime scheduling remain unproved.
 
 The `query-context-batch-invalidation` case distinguishes idempotent key bits
 from unconditional nonempty-batch invalidation, coalesced revision advancement,
-empty input and the owner's still-unplaced refresh. It also checks pending-flag
+empty input and what local host order alone proves about refresh. It also checks pending-flag
 history independently of whether the current key operation changed a bit.
 
 The `final-merge-clipping-audit` case checks cumulative accepted-clip preservation,
@@ -174,6 +174,12 @@ itself supplies no game assets and cannot certify gameplay.
 
 The `policy-cached-delta-and-stage-order` case follows the actual cached input,
 including a disabled driver's store, and separates policy pre-update, update and
-conditional query refresh. It also distinguishes stage registration/submission
-from nested-job completion and vehicle work from V evidence. Execute the finite
+conditional query refresh. It distinguishes submission-only evidence from the
+separately connected nested-job contract, and vehicle work from V evidence. Execute the finite
 cases; no scheduler trace, native parity or character acceptance is supplied.
+
+The `nested-stage-completion` case exercises parent/child pending counts, completion
+before/during/after finalization and multiple parallel workers. Execute the finite
+sequence and premature-completion counterexample. Use the ordinary-path premises;
+the newer static dependency proof does not establish V's selected policy, a live
+frame's ordering, native concurrency/parity or a fixed one-frame refresh delay.

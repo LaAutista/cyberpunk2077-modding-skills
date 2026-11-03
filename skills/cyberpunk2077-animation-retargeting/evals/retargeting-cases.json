@@ -678,7 +678,7 @@
         "After the three-record batch D0=1 and D164=9, despite no changed key bit. First retirement gives D0=0,D164=10; second stays10. Empty batch from clean D0 retains9. Starting at FFFFFFFF wraps to0 on the first retirement and stays0 on repetition. Execute assertions.",
         "R70=1 and D160=1 sets D161=1 even when this key operation was unchanged. The other case preserves existing D161=1; the false branch does not clear it. Distinguish prior resource dirtiness from the current key operation.",
         "AEFCAC updates descriptor status and counters, not D0/D164. D0 marks coalesce, D162 alone does not advance revision, and the revision is an invalidation signal rather than a distinct-change count.",
-        "Pre-update command processing precedes the conditional host wrapper and its post-host retirement locally. The separate owner-refresh position, actual callback/rebind histories, native parity and final movement remain unproved. A comparison before retirement can see the old revision."
+        "Pre-update command processing precedes the conditional host wrapper and its post-host retirement locally. That local order alone does not locate a separate owner refresh. If using the newer connected stage0-before-stage8 contract, attribute its ordinary-path premises; actual selected policy, callback/rebind histories, native parity and final movement remain unproved. A comparison before retirement can see the old revision."
       ],
       "must_not_observe": [
         "Skip invalidation because key bits are unchanged, increment D164 once per record or immediately on D0 store, clear pending D161 on the false branch, infer same-frame refresh or actual game/full-investigation acceptance from the finite model."
@@ -704,12 +704,26 @@
       "must_observe": [
         "Execute assertions: the first policy delta is0.025, not the outer0. Disabled1F83D0 stores0.04 before its conditional return without dispatching; the later admitted20D084 loads0.04. Enabled input0.06 updates the cache and invokes virtual10, but M1FD=1 skips its20D084/virtual18 call.",
         "A.virtual10 is the verified ret0 no-op; virtual18 targets3B77CC and reaches refresh only through its A28/handle gates. D45CF0 additionally returns for null K or equal revision. Updating the policy does not guarantee new query writes.",
-        "Stage0 precedes8 in registration/submission, while nested completion, actual selected-object clock override, same-frame revision observation and runtime policy selection remain unproved. Queue handle rotation is not a blocking wait and UpdateSecondPhase is not scheduler stage2.",
+        "Stage0 precedes8 in registration/submission from the prompt alone; handle rotation is not a blocking wait. If applying the newer native completion supplement, explicitly add its connected submission/finalization/worker premises before concluding ordinary nested stage ordering. Actual selected-object clock override, same-frame revision observation and runtime policy selection remain unproved; UpdateSecondPhase is not scheduler stage2.",
         "The repeated submission belongs to the connected vehicle route. It cannot establish repeated ordinary V updates or a stale-delta/Saber defect. Preserve alias/lifetime premises, native numerical parity and final movement/visual acceptance limits."
       ],
       "must_not_observe": [
         "Replace the cached delta with the outer zero, suppress the disabled cache store, call virtual18 solely because virtual10 ran, infer query refresh on every update, equate ascending submission stages with proven nested completion, or transfer the vehicle loop to V.",
         "Claim fresh independent evaluation, native execution, game observation, full-investigation completion or character acceptance from these finite assertions."
+      ]
+    },
+    {
+      "id": "nested-stage-completion",
+      "prompt": "Use the exact-build native motion-query chapter and execute a finite offline dependency check. Assume valid stable handles, nonoverflowing counters, the connected ordinary worker/nested-queue paths, Q30=0, normal returns and enabled stage0/stage8 descriptors in one scheduler traversal. Parent P initially counts one running callback; its nested child group has three pending worker callbacks. Finalization attaches that child group to P, then the parent body returns. Track P through those events and the first, second and final child completion plus release of the dependency. Compare children all finishing before finalization, and a join that has already reserved its parent contribution and observed the child pending, but the child finishes before the gated insertion recheck. Show why removing the parent join produces premature completion. Distinguish work count18 from reference count1C, per-worker parallel completion from one callback finishing, and asynchronous handle advance from blocking. If stage8 later retires revision9 to10, can this stage0 refresh be described as having seen that retirement? Does this establish a fixed one-frame delay or V's selected policy? Do not load a PE, attach a debugger, launch a game or Blender.",
+      "must_observe": [
+        "Execute count assertions: finalization makes P=2; parent body return leaves1. First/second child completion cannot release the parent dependency; final child completion allows it to decrement P to0. If children are already complete, finalization need not add a pending join. Removing the join admits P=0 while children remain.",
+        "Completion during admission is handled by the guarded count recheck; the incremented parent contribution remains until the no-op dependency completes through the ready/worker path. The reference counter is not the pending-work counter. Parallel submission counts worker callbacks individually, and nested contributions can outlive a callback body.",
+        "Explain the connected stage0-before-stage8 ordinary-path result and its prerequisites. A queue advance returns without synchronously waiting; stage numbers alone would not prove completion. Preserve the difference between this finite model, static native evidence and observed runtime concurrency.",
+        "A stage0 refresh cannot see the later stage8 retirement in this traversal. Other writers/routes/buckets and actual selected identity remain separate; do not infer a fixed one-frame delay, stale-cache/Saber defect, full-investigation completion or visual/game acceptance."
+      ],
+      "must_not_observe": [
+        "Release parent dependents when only its body or one parallel worker finishes; treat1C as the work count, treat27316C as a blocking wait, or omit the completion race.",
+        "Apply the ordinary-path proof to arbitrary detached/captured queues or claim actual V identity, native execution/parity, fresh independent review or character acceptance."
       ]
     }
   ],
