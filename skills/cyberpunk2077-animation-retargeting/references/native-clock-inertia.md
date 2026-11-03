@@ -201,6 +201,74 @@ does not establish later flag writes or alternate rebind behavior. None of
 these joins interprets graph E8/EC/ED. Provenance: `g1-admission-gate-findings`,
 `g1-admission-q-findings` and `rig-admission-followup/findings`.
 
+### Component selection and later admission-flag writes
+
+The instance byte has explicit later writers; constructor zero is not its live
+value. In `0x140BA1174`, selected component C reaches `I=[C+270]` and, when I is
+nonnull, `I+25B0=1`. Keep C+178's aggregate handle separate from C+270's instance.
+This store is on the AnimatedComponent fallback of a visual-first dispatch:
+
+- With stable source/type metadata, visual-compatible components pass the
+  prefilter without a byte8 prerequisite. AnimatedComponent-only candidates need
+  an8 somewhere in the supplied byte vector.
+- Both C+68 and C+48 must match the same16-byte key record. Matches split across
+  two records do not combine; duplicate matching records do not repeat the action.
+- A successful `entIVisualComponent` cast dispatches every supplied byte in order
+  to `402318(C,1,byte)`. Only a null visual cast reaches the AnimatedComponent cast
+  and explicit instance store. Visual callback effects are separate.
+
+The five checked paths (BA1174's two prefilters,403854,405D98 and BA1084) compare
+descriptor D0 and at most15 parents, D1..D15. D16 alone does not match. Cached
+descriptors, virtual getter fallback and
+later source-handle reloads require valid storage and stable identity; a successful
+comparison cannot certify an object substituted before the reload.
+
+Visual helper402318 updates WORD[C+12A]. Only a zero/nonzero mask transition with
+latch C+134 zero calls virtual+268. Selector11 additionally clears the latch before
+a disable test or sets it after enabling. This is a mask/callback contract, not
+proof of a particular rendered visibility change.
+
+Helper `0x14040376C` supplies a real clearing path. On its AnimatedComponent
+fallback with nonnull C+270, incoming mode R8b determines the stored byte:
+
+| Mode | Value stored at I+25B0 |
+| --- | --- |
+| zero | raw byte P+190 |
+| nonzero | boolean `(byte[P+190] == 0)` |
+
+P is this helper's entry owner, not automatically BA1174's owner. Mode0 preserves
+nonboolean bytes: P+190=2 stores2, which still rejects at the ordinary gate.
+Mode1 with that byte stores0. The visual branch instead uses selector8 and has
+its own callback/helper effects.
+
+Order matters. In51C854, a match in P+F0/+FC calls mode1, then the second list
+P+100/+10C is still scanned; a match there calls mode0. On the AnimatedComponent
+fallback, with stable P/C/I, both matches write complement then raw value.
+They are not mutually exclusive.
+Its enclosing51C2D8 first processes weak-handle lists P+D0 in mode1 and P+E0 in
+mode0, then those pair lists, then P+128 records in mode1. The same instance may
+be overwritten by later stages; record identities and callback effects matter.
+
+Two BA1174 callers build reason vectors. BA0BA0 requests[8] after its policy
+match;2DED54C appends4 when owner DWORD+DC is1 and appends8 on the policy match,
+then calls only for a nonempty vector. For valid small vectors and normal append
+return, the latter produces[4], [8] or[4,8] in that order. The policy requires
+owner byte+B8 nonzero and compares selector output against global143C0AA28 captured
+**before** a virtual call. That global has a retained `FPP` registration. The
+selector scans the cast gameObject's component handles and uses the first
+nonnull result from98E718; its DWORD+188 in{2,3,4} selects AA20, otherwise AA28.
+A null source/result yields0. Reducing equality to the out-of-range test requires
+initialized, nonzero, distinct and stable globals plus normal resolver behavior.
+The registered name does not prove a current perspective or live global value.
+The additional cast98E718 has only D0..D9 checked before its uncaptured cold branch;
+its target global143BC64B0 has not been assigned a class name here.
+
+For diagnosis, retain the selected component/key pair, vector, P+190, writer
+order and same-instance value at BF2880. This closes bounded selection/set/clear
+edges, not every writer, the producer of P+190, callback/rebind timing or graph
+E8/EC/ED semantics. Provenance: `instance-flag-followup/selection-review` and its
+retained-byte/dataflow checks; these checks did not execute native code.
+
 Bounded byte-load/test plus MOVSS/MULSS displacement scans found unrelated owners and a countdown-like reader, without identifying a typed AnimGraph consumer. Alternate/debug callers, additional instructions and indirect handling remain open. Do not claim globally unused, deprecated, or editor-only; do not add an offline multiplier/pause implementation solely from names. A causal test would hold other inputs fixed, vary each resource field separately, and observe both update admission and node delta at the actual dispatcher. Such a test has not run.
 
 ## Inertia request, history and elapsed ordering

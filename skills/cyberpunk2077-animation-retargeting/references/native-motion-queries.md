@@ -729,6 +729,27 @@ The pointer join is explicit: the outer host's H+0 holds its local QS;
 The host later composes that per-graph QS into O30. This is a concrete motion
 modifier and accumulation path, not the final entity-movement application.
 
+### Component accessor joins do not yet prove the aggregate recipient
+
+The two component-side accessors8230A0/822618 obtain their query object through
+823290 and8232FC. The latter returns `[P+270]+2548` when both pointers exist;
+otherwise it returns a lazily initialized global fallback context. P comes from
+the promoted Q+250/+258 handle, not an unconditional alias of the entry component.
+These are query-context returns, not aggregate O+30.
+
+One accessor carries a C-bearing callback tuple into the record builder. A
+pointer in that tuple, a field at record+30, or membership in a callback table
+does not establish execution or an aggregate read. Follow the selected callback
+transfer/dispatch and exact pointer origin before calling it the final motion
+recipient. Transfer1FFADD0 clears the source table at+40, installs it at destination
++40 and calls its+10 method; selected2FCAE0 copies exactly the24-byte tuple. This
+is a transfer, not a proved evaluation. Table slot0's adapter/method, if invoked,
+reacquires the same query context; its nontrivial cold branch and the actual
+slot0 invocation/timing remain untraced. Retained provenance:
+`aux-recipient-continuation/accessor-followup` and
+`aux-recipient-continuation/getter-callback`. No aggregate O30 reader is proved by
+these accessor joins.
+
 ## Evidence and open links
 
 Retained private reports are `motion-query-context-findings`,

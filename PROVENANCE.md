@@ -1,5 +1,28 @@
 # Provenance and verification
 
+## Component policy and appearance handoff, 2026-11-03
+
+Retargeting1.8.26 traces later set/clear writes to the ordinary host's admission
+byte. The recovered selection distinguishes visual-first dispatch, same-record
+key matches, byte-vector reasons and raw/complement modes. Ordered lists can
+overwrite the same instance more than once; constructor zero or one earlier
+write is insufficient to explain the eventual admission decision.
+
+The appearance continuation joins immediate and queued component dispatch,
+weak-handle expiry, exact descriptor/backend pointer transport and proxy-pair
+replacement. Another accessor resolves to the embedded query context, excluding
+that getter as direct proof of the aggregate's final movement recipient. Saved
+PE bytes and independently checked branch/dataflow joins support these findings;
+no new native execution or selected game history is claimed.
+
+One workflow case is added while preserving57 earlier cases and six triggers.
+Two newer installed RPG7 transition/shoulder guidance additions are preserved
+verbatim and brought into the canonical source; their port measurements and
+regressions were not rerun here. Clipping, source/native preview and installation
+acceptance rules remain unchanged. The producer of the owner policy byte, full
+callback/cache histories, graph controls, final motion/rendering and integration
+remain OPEN. No Saber, live mod/profile, Blender or game work ran.
+
 ## Rig admission and query-state review, 2026-11-03
 
 Retargeting1.8.25 connects the ordinary host's admission object to the component's

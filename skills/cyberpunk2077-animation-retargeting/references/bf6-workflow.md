@@ -88,6 +88,24 @@ elsewhere in the MP5 experiment. Inspect fire-to-idle, bolt-to-idle, sprint-to-s
 ADS entry/exit and interruptions. A constant-input graph experiment cannot certify
 those changing states. Observe camera and player movement as well as arm contact.
 
+For mixed source holds and native transitions, compare the final native pose on
+both sides of each graph edge: idle/start, start/sprint hold, hold/stop, stop/idle,
+and sprint/slide. Check weapon, shoulder/elbow/wrist and driven controls together.
+RPG7 v5 passed isolated clip checks but its sprint hold differed from all three
+native-adapted transitions by about115mm/46degrees. Reproduce the mismatch before
+repair; retain the failing bank as a negative control. Choose a shared compatible
+hold or explicitly adapt transition boundaries, then check intermediate blends
+and inherited locomotion additives against their actual base. A full-weight FK/IK
+match alone does not prove a partial-weight blend or the engine's final IK result.
+
+A fixed-length solve can still fold the arm unnaturally. RPG7's idle retained the
+donor shoulder while fitting the source grip, giving an elbow inner angle near
+28degrees versus78degrees in source. Compare the mapped source clavicle/upper-arm
+placement, elbow plane, wrist/palm and skinned shoulder together even for static
+holds. A source-directed clavicle test preserved grip/weapon/lengths and improved
+the angle, but remained an unaccepted offline probe; it is not a universal fix.
+Check adjoining actions and accepted manipulation before propagating a repair.
+
 ## Finger articulation and timing
 
 Use the [palm-relative rotation procedure](contact-and-ik.md#palm-relative-finger-rotation)

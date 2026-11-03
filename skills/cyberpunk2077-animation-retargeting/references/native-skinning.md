@@ -95,6 +95,51 @@ reload or global absence of invalidation. Actual scheduling, resource identities
 and cache survival remain separate evidence. Retained provenance is
 `shared-pose-deep/skin-wrapper-key-findings.md` and its byte/hash/cache checks.
 
+### Queued appearance and proxy ownership
+
+The immediate and dependency-queued appearance routes converge on component
+virtual+2C8. The queued binder714B40 moves a16-byte weak component pair into its
+payload; callback7149D0 invokes the virtual only after successful strong promotion
+and a nonnull component. Null/expired handles skip the call, including the checked
+failed-CAS continuation. The payload has no mesh, W/M or resource-generation key;
+this callback alone cannot certify that the queued generation is still current.
+
+For the captured component table143031250, +2C8 selects7150E0, gated by C+8B and
+nonnull C+200. For nonnull bone-backend B=[C+1B8], descriptor builder4B2D80
+carries that exact B into descriptor X+C0. Its X+A8 is **not** cache C+1A8. The selected +278/+288
+delegates add no component writes; this bounded observation does not make all
+delegated calls pure or prove transitive cache preservation.
+
+Factory722E64 returns its caller's output-pair address on both result branches.
+The component then moves that pair into C+1E0/+1E8 through4B10D4: the new pair is
+installed before the displaced pair is released. A distinct source pair is
+cleared; self-assignment preserves the pair. Failing7150E0's initial gates returns
+before replacement. Passing them but receiving N==0 from service+2B0 makes722E64
+fill an empty output pair; moving that pair into C1E0 releases the old proxy.
+The factory still returns the output-pair address. These branches are not equivalent.
+An already-acquired consumer handle
+can retain the old proxy after replacement: strong counts1→2 on acquisition,
+2→1 on replacement,1→0 on the final release. This does not prove synchronized
+concurrent acquisition or a selected frame's actual interleaving.
+
+The factory forwards the descriptor to service143BBCAE8 virtual+2B0. For the
+captured service table, this is3D9740, which branches on descriptor byte X+60.
+In7150E0, the post-initialization stack store sets X+60=1. The checked builder
+writes and qword aliases preserve it under valid-object/ABI premises, selecting
+3DAD50 for this table. That constructor's retention of X+C0 and its returned
+backend table remain unresolved. Wrapper constructor
+3D9C64 stores the returned backend N at P+10 and retains N. Later7155C0 calls the
+service's+4D0; its five-byte getter returns [service+70]. That object's+98 receives
+&P10 and the original argument0. These are concrete transport edges, not completed-
+buffer reads. Follow the selected service/result tables and B's actual output pointer
+before claiming a rendering consumer. Preserve the distinction between the
+earlier pose-side proxy call and a reader after matrix production.
+
+Retained provenance: `appearance-handoff-continuation/captured` and
+`appearance-handoff-continuation/proxy-followup`. Weak promotion, descriptor
+aliases and handle lifetime are statically checked. Selected scheduling,
+resource generations, transitive cache lifetime and rendered output remain OPEN.
+
 ### WolvenKit round-trip boundary
 
 The cached [mesh documentation](https://github.com/CDPR-Modding-Documentation/WolvenKit-8-Wiki/blob/2fb9050fad45187867be9fd2b7a98a6ee98f7039/wolvenkit-app/usage/import-export/models.md)

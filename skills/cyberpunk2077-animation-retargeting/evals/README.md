@@ -1,5 +1,12 @@
 # Retargeting workflow evals
 
+The `component-policy-and-appearance-lifetime` case tests same-record selection,
+visual precedence, raw versus complemented instance flags and ordered overwrites.
+It also distinguishes weak component identity from a resource generation, retained
+proxy ownership from synchronized replacement, and a query-context accessor from
+the final accumulated-motion recipient. Execute the finite histories; do not
+promote them to native execution or observed game behavior.
+
 The `rig-admission-and-captured-query-state` case tests the typed rig-handle
 join, ordinary-host distance-category input and the limits of type checks across
 callbacks. Its query and Machine histories distinguish captured pointers/indexes

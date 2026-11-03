@@ -21,6 +21,8 @@ Rows without a linked local reproduction remain proposed discriminators.
 | SIMD resampling / dropped source cadence | Compare stored native key times to the unprepared source expectation; raw keyed output has a separate contract. [Native readback](native-readback.md). |
 | Filename-inferred semantics / plausible but wrong composition | Query actual animation/base/container metadata and evaluate a source pose; a name is not evidence. [Source adapters](source-adapters.md). |
 | Stale preview/controller arrays / clean preview, wrong export | Bind final arrays/native readback to the current candidate hash; compare controllers after parent/FK updates. [Recovery](../../cyberpunk2077-modding/references/hk416-recovery-contract.md). |
+| Mixed source hold/native transition / sprint start-stop snaps | Compare exact final native endpoints and partial blends on both body variants; include downstream wrist/weapon controls and retained additive bases. Isolated clip checks missed RPG7's115mm/46degree sprint boundary mismatch. [BF6 transitions](bf6-workflow.md#reconcile-authored-arms-controls-and-transitions). |
+| Donor shoulder retained / valid lengths but over-folded arm | Compare source-mapped clavicle/upper-arm location, elbow inner angle and forearm/palm direction with skin, not reach alone. Keep hand/weapon contact fixed in the discriminator; reject shoulder/wrist damage or new adjoining-state jumps. [BF6 posture](bf6-workflow.md#reconcile-authored-arms-controls-and-transitions). |
 | Package success called gameplay success | Extract and hash shipped bytes, then obtain identified runtime observation. Until then runtime is OPEN. [Runtime](runtime-validation.md). |
 
 After two failed corrections at the same gate, write this in the owning project:
