@@ -262,7 +262,9 @@ exact-byte admission, compiler review, native log, independent checker and hash
 verification; inverse conversion is retained under `transitions-deep/euler-native/`.
 An independent audit replayed the mask/weight comparisons and checked their
 retained instruction/admission bindings; it did not rerun native code. The wider
-investigation still needs event seams, remaining numerical/constraint paths,
-selected inputs/lifetimes, remaining independent review and final visual/game
-acceptance. These finite measurements do not
+investigation still needs remaining numerical/constraint paths, selected
+inputs/lifetimes and remaining independent review. The separate
+[collector measurement](native-synchronization.md#finite-native-collector-measurement)
+covers bounded event seams, not selected event delivery. Future asset visual/game
+acceptance remains separate. These finite measurements do not
 diagnose or repair a stretched character by themselves.

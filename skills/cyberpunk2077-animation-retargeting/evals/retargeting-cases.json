@@ -808,6 +808,21 @@
         "Claim a traversal-wide all-stage0-before-all-stage8 order, infer same-object revision observation from equal bucket masks, serialize count increments with byte20, or claim valid handles force an already-completed dependency to cover arbitrary future work.",
         "Treat this arithmetic as new native execution, a fixed one-frame delay, a Saber defect/repair, full-investigation completion or game/visual acceptance."
       ]
+    },
+    {
+      "id": "native-event-seams-and-capacity",
+      "prompt": "Use the pinned native synchronization chapter to check an offline event preview. Execute finite assertions for these independent fixtures, starting each with empty output, ordinal0 and no active handles unless specified. Decode binary32 time bits3f333333 andbf333333 and compare the documented frame conversion with truncating an unrounded double product; also check old-.01/new-.005 against flooring. For one instantaneous record P at frame30, first call old=new=1 twice with a persistent cache/output. Then, starting with a consumed P and its existing output, call old bits3f800001/new3f800000 followed by the opposite direction. Determine newly appended records and cursor state each time. For distinct instantaneous A/B/C at frames0/15/30, calculate cold .75-to-.25 with loop delta+2 and, independently, cold .25-to-.75 with loop delta-1, clip bounds0..1. Four distinct duration starts A/B/C/D at frame3 are visited by cold0-to-.1; determine emitted records and retained active state, then visit a D exit at frame6. Finally scan129 instantaneous records cycling through16 valid identities at frame1 in cold0-to-1: determine output count and ordinal, and explain whether dropped output should be retried by rewinding the cursor. Identify the limits before converting these results into claims about game callbacks or a fixed port. No PE/native/game/Blender execution, installation, source changes or reading private fixture outputs.",
+      "must_observe": [
+        "Execute binary32 multiplication before truncation:3f333333 maps21 andbf333333 maps-21, versus20/-20 for the unrounded double products; negative subframe values truncate0 rather than floor-1. Preserve the actual stored bits and rounding.",
+        "Cold equal1 emits P:0 and ordinal1; identical warm call appends nothing. With P already consumed,3f800001 to3f800000 resets despite both quantizing30, appending P:0 again; following forward step appends nothing. Separate persistent total output from per-call additions.",
+        "Execute exact stored-order seam outputs: positive2 is C:0,A:0,B:0,C:0,A:0; negative1 is A:0,C:0. Endpoints are inclusive and caches clear at the documented segments; reverse does not reverse record order or swap duration markers.",
+        "Four starts emit A:1,B:1,C:1,D:1 then A:2,B:2,C:2; active[A,B,C]. Later unmatched D exit emits D:3 then active A/B/C marker2, preserving active[A,B,C]. Output capacity128 leaves ordinal129 for129 instant records; do not rewind to retry suppressed appends.",
+        "Keep the documented224 isolated native calls/95 cases in two controlled MXCSR modes distinct from this newly executed host model. Limits include direct handles/null filter/positive retained counts and finite inputs; per-call state evidence is not an internal append trace. Collector output does not certify reconciliation/delivery, low-byte loop truncation, selected runtime inputs or Saber/visual acceptance."
+      ],
+      "must_not_observe": [
+        "Use floor or an unrounded double product as native frame quantization, suppress a reverse reset solely because integer frames match, drop inclusive seam identities, reverse stored order, or treat marker1 as proof the fourth handle was retained.",
+        "Freeze ordinal at128, retry dropped output by rewinding, claim callback/game execution or universal parity, infer the actual game MXCSR mode, or claim full investigation/port completion."
+      ]
     }
   ],
   "trigger_cases": [

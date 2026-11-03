@@ -2,14 +2,16 @@
 
 Use with [graph investigation](animation-graphs.md) and
 [native graph semantics](native-graph-semantics.md). These findings come from
-static instructions in the saved Cyberpunk 2.5 executable, SHA256
+static instructions and the bounded collector measurement below in the saved
+Cyberpunk 2.5 executable, SHA256
 `d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4`.
 All VAs are preferred-image addresses. They are build identifiers for review,
 not portable hook locations. Class registrations, constructors and vtables tie
 the native methods to the named classes. Reflected SDK declarations corroborate
 fields; declarations alone do not establish execution behavior.
 
-No native/game execution or particular active graph was observed. Recheck the
+Only the named collector paths below were executed in an isolated host fixture;
+no game execution or particular active graph was observed. Recheck the
 build, concrete node class, graph instance, clip entry, active path and call order
 before applying these findings to an asset. Standard-library trigonometry is not
 certified bit-identical to the native approximations.
@@ -197,14 +199,71 @@ reach completion notification without incrementing the wrap count. Nonlooping
 or zero-span paths clamp. Enabled event collection sends old/new times, signed
 loop count and clipped bounds to `0x1401b6400`.
 
-That collector uses seconds*30 with truncating integer conversion. Forward and
+That collector rounds seconds*30 to float32 before truncating to integer. Forward and
 reverse ranges, intermediate full loops, and cache resets are explicit. Interval
 helper `0x1401b5048` advances packed records through rangeEnd inclusive: entry
 records add to an active set (capacity 3) and emit marker 1; exits remove and emit 3;
-instantaneous records emit 0; remaining active entries emit 2. Entry/exit emission
-also requires frame>=rangeStart. These are operational marker meanings, not
+instantaneous records emit 0; remaining active entries emit 2. Entry/exit/instant
+emission also requires frame>=rangeStart. These are operational marker meanings, not
 recovered enum names. Append `0x1401b522c` creates 24-byte records (handle, float 1,
 marker), capacity 128, with optional event virtual+0xf0 filtering.
+
+### Finite native collector measurement
+
+The unchanged collector, positive/negative multi-loop continuation and seven
+helpers executed in 224 calls over 95 fixed cases (112 steps, each under MXCSR
+`1F80` and `9FC0`). All 1,492 code bytes and 20 constant bytes matched the pinned
+executable before execution; the independent reference, primary guard and
+expected results were also bound first. Helpers covered interval collection, direct
+handle resolution, append, forward handle movement, active-array/handle release
+with positive retained counts, and the nonnull-animation duration load.
+
+The independent reference uses exact rational input values, binary32
+nearest/ties-to-even multiplication and truncation toward zero. Every call
+matched exact event identity/order/marker, output count, active order/count,
+cached ordinal and reference-count accounting. Read-only inputs, guard/canary
+checks, MXCSR control preservation and owned mapping cleanup passed. An altered
+payload was rejected before mapping; no changed instruction was executed.
+
+| Discriminator | Measured collector behavior |
+| --- | --- |
+| Input bits `3f333333` (float32 .7) | Product rounds to exactly21; converting an unrounded double product instead gives20. Negative `bf333333` gives-21, not-20. |
+| Times-.01 and-.005 | Both truncate to frame0; flooring would choose-1. |
+| Cold old=new=1, point at30; then identical warm call | First emits the point; the preserved ordinal suppresses another point record on the second call. |
+| Warm old=`3f800001`, new=`3f800000` | Both quantize to30, but the seconds comparison resets the cache and emits the point again. The following forward step within frame30 does not reset. |
+| Points A/B/C at0/15/30, cold .75→.25 with loop delta+2 | Output C,A,B,C,A, all marker0. Inclusive seam segments can repeat an event identity. |
+| Same points, cold .25→.75 with loop delta-1 | Output A,C. Reverse segments still scan ascending stored record order. |
+| Four duration starts at frame3, cold0→.1 | Four marker1 records, then marker2 for only the first three retained handles. Marker1 does not prove active-set insertion. |
+| Remove B from active[A,B,C] | Survivors remain[A,C]; an unmatched exit can still emit marker3. |
+| 129 points at frame1, cold0→1, empty output | First128 records append; cached ordinal still advances to129. Saturation does not stop record consumption. |
+
+The interval plan uses integer frames O/N/F/E and supplied signed loop delta L:
+L=0 forward scans[O,N] with its existing cache; reverse scans[N,O] after clearing.
+L>0 scans[O,E], L-1 copies of[F,E], then[F,N], clearing before each later segment.
+L<0 scans[F,O], -L-1 copies of[F,E], then[N,E], clearing before every segment.
+Direction uses the original seconds, not integer frames. Start/exit records below
+the lower bound still maintain duration state; remaining active handles can emit
+marker2 without a new marker1. Stable first-match removal preserves duplicate
+active handles. Full output suppresses appends while cursor/active updates continue.
+
+Coverage includes adjacent normal floats around ten frame boundaries, equal and
+reverse steps, explicit/default end, invalid/clipped bounds, null/empty containers,
+duration sequences/removal and capacity limits. Frozen times were within[-4,4],
+clip bounds/durations within[-1,2], and loop deltas within[-4,4]. Output accumulated
+across each fixture sequence; this did not run the graph's alternating buffers.
+
+This is direct-index/null-filter coverage with valid storage and positive retained
+reference counts. Logs record every call's resulting state, not every internal
+append attempt. Alternate resolution/filter callbacks, destruction, null-animation
+duration, nonfinite/subnormal/overflow domains, concurrency and actual game MXCSR
+remain unmeasured. The loop delta was supplied directly, so SkAnim's separate
+low-byte truncation was not executed. Collector records do not establish later
+reconciliation, callback delivery or gameplay effects. Private contracts, exact
+admission, independent model, compiler review, complete logs and checks remain
+under `sync-deep/event-native/` and `sync-deep/event-seam-independent/`; no native
+code or game assets are distributed with this skill.
+
+### Reconciliation and delivery
 
 Per-graph host `0x1401b25dc` alternates old/new buffers at instance+0x78/+0xc80.
 After root update:

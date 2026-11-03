@@ -1,5 +1,11 @@
 # Retargeting workflow evals
 
+The `native-event-seams-and-capacity` case checks binary32 frame quantization,
+seconds-based reverse resets, warm cursor behavior, inclusive multi-loop order
+and the distinction between output capacity and retained duration state. Execute
+the supplied finite checks without treating collector output as delivered events
+or claiming new native execution from a host model.
+
 The `scheduler-bucket-and-completion-epoch` case checks bucket-major submission
 order and the limit of a completed dependency when unrelated future work is added.
 It preserves same-bucket ordering and ordinary closed enrollment without assuming

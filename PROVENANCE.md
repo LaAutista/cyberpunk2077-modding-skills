@@ -1,5 +1,34 @@
 # Provenance and verification
 
+## Native event collector measurement, 2026-11-03
+
+Retargeting 1.8.24 adds a finite native event-collector contract: 224 calls over
+95 frozen cases, with exact state, ordered records and reference accounting
+matching an independently authored binary32/logical model. All 1,492 admitted
+instruction bytes and 20 constant bytes matched the pinned Cyberpunk 2.5 PE
+before execution. The unchanged collector and real helpers ran with direct
+handles, a null filter, positive retained counts and bounded inputs in two
+controlled floating-point modes. Protected inputs, canaries and cleanup passed;
+an altered payload was rejected before mapping/execution.
+
+The findings distinguish float32 multiplication from a double-product shortcut,
+reverse seconds from equal integer frames, warm cached ordinals from cold scans,
+inclusive loop segments, three retained duration handles and 128 output records.
+They do not execute event filtering/destruction, graph reconciliation/delivery,
+SkAnim's separate loop-byte conversion, selected gameplay or a character repair.
+The original failed read/lock admissions and truncated disassembly window remain
+preserved privately, with the complete continuation checked before execution.
+The skill adds one focused workflow case, preserving all 55 earlier cases and
+six triggers. Native code, private logs and game assets are not distributed.
+
+Post-run review qualifies the original private contract: the primary guard was
+bound beforehand, but its transitive `thread_policy.py` import was hashed only
+during review. Complete pre-run dependency provenance is not claimed. Logs record
+each call's resulting state, not every internal append attempt. Excluded targets
+on an admitted code page land in trap-filled gaps; other unadmitted pages remain
+inaccessible. These limits do not turn the recorded finite comparisons into
+graph or gameplay evidence.
+
 ## BF6 findings and preview gates, 2026-11-02
 
 Retargeting skill 1.5.0 publishes the installed 1.4.1 full-motion/user-preview gate
