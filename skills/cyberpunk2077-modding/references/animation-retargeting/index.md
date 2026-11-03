@@ -13,6 +13,14 @@ project's fresh checkpoint before resuming a historical case.
 
 | Current decision or failure | Read |
 | --- | --- |
+| Animgraph blend, mask, state transition, interruption or clip/preview/runtime mismatch | [Graphs, blending and transitions](../../../cyberpunk2077-animation-retargeting/references/animation-graphs.md) |
+| Exact blend math, weight history, priority, crossfade curves or frozen-state behavior in the inspected 2.5 build | [Native graph semantics](../../../cyberpunk2077-animation-retargeting/references/native-graph-semantics.md) |
+| Captured-pose conversion, nonunit scale, layout mismatch or custom scalar curves | [Native capture and curves](../../../cyberpunk2077-animation-retargeting/references/native-capture-curves.md) |
+| Feature-selected transition duration or outgoing-action inertia request | [Native feature duration](../../../cyberpunk2077-animation-retargeting/references/native-feature-duration.md) |
+| Animation clock dilation or history-based smoothing | [Native clocks and inertialization](../../../cyberpunk2077-animation-retargeting/references/native-clock-inertia.md) |
+| Clip synchronization, tag ownership, re-entry, loops or event delivery | [Native synchronization](../../../cyberpunk2077-animation-retargeting/references/native-synchronization.md) |
+| SharedMetaPose mapping, baseline/float lifetime or graph-to-skinning ordering | [Native shared-pose publication](../../../cyberpunk2077-animation-retargeting/references/native-shared-pose.md) |
+| Mesh name mapping, stored rig matrices, CPU skinning output or eye/float handoff | [Native skinning preparation](../../../cyberpunk2077-animation-retargeting/references/native-skinning.md) |
 | BF6 port, replacement geometry, floating magazine, arm controls or current platform limits | [BF6 findings and workflow](../../../cyberpunk2077-animation-retargeting/references/bf6-workflow.md) |
 | Axes, rest/bind, hierarchy, or direct skeleton versus optional animator controls | [Spaces and bind contracts](spaces-bind.md) |
 | Recover original motion; choose Unreal, MAX, NIF/HKX or CP adapters | [Source playback and adapters](source-playback-adapters.md) |

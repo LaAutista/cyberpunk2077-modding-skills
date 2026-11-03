@@ -147,6 +147,129 @@ def verify_mapping(data):
             'mapped_bones': len(data['mapping'])}
 
 
+def inspect_source_motion(data):
+    """Inventory sampled source motion; never choose a retarget disposition."""
+    try:
+        verify_mapping(data)
+    except OverflowError as error:
+        raise ValueError('source motion numeric range unsupported') from error
+    source = data['source']['skeleton']
+    target = data['target']['skeleton']
+    clip = data['clip']
+    times, frames = clip['sample_times'], clip['local_samples']
+    basis = data['conventions']['source_to_working']
+    parents = source['parents']
+    # The existing fixture permits arbitrary array order, not just parent-first.
+    children = [[] for _ in parents]
+    order = []
+    for i, parent in enumerate(parents):
+        if parent == -1:
+            order.append(i)
+        else:
+            children[parent].append(i)
+    for i in order:
+        order.extend(children[i])
+    require(len(order) == len(parents), 'source hierarchy traversal incomplete')
+
+    def matrix(value):
+        t, q, s = (value[k] for k in ('t', 'q', 's'))
+        norm = math.sqrt(sum(v*v for v in q))
+        x,y,z,w = (v/norm for v in q)
+        return [(1-2*(y*y+z*z))*s[0], 2*(x*y-z*w)*s[1], 2*(x*z+y*w)*s[2], t[0],
+                2*(x*y+z*w)*s[0], (1-2*(x*x+z*z))*s[1], 2*(y*z-x*w)*s[2], t[1],
+                2*(x*z-y*w)*s[0], 2*(y*z+x*w)*s[1], (1-2*(x*x+y*y))*s[2], t[2],
+                0, 0, 0, 1]
+
+    def positions(frame):
+        world = [None] * len(parents)
+        result = [None] * len(parents)
+        for i in order:
+            local = matrix(frame[i])
+            parent = parents[i]
+            world[i] = local if parent == -1 else [
+                sum(world[parent][r*4+k]*local[k*4+c] for k in range(4))
+                for r in range(4) for c in range(4)]
+            require(all(number(v) for v in world[i]), 'nonfinite source hierarchy result')
+            point = [world[i][3], world[i][7], world[i][11], 1]
+            result[i] = [sum(basis[r*4+k]*point[k] for k in range(4)) for r in range(3)]
+            require(all(number(v) for v in result[i]), 'nonfinite working-space position')
+        return result
+
+    def motion(values, reference):
+        def distances(origin):
+            result = [math.hypot(*(a-b for a,b in zip(value, origin))) for value in values]
+            require(all(number(v) for v in result), 'nonfinite source motion distance')
+            return result
+        first_distances, reference_distances = distances(values[0]), distances(reference)
+        def witness(distances_):
+            index = max(range(len(values)), key=distances_.__getitem__)
+            return {'distance': distances_[index], 'sample_index': index,
+                    'time': times[index], 'value': list(values[index])}
+        return {'reference': list(reference), 'first': list(values[0]),
+                'minimum': [min(v[k] for v in values) for k in range(3)],
+                'maximum': [max(v[k] for v in values) for k in range(3)],
+                'changed_from_first_sample_indices': [i for i,d in enumerate(first_distances) if d != 0],
+                'offset_from_reference_sample_indices': [i for i,d in enumerate(reference_distances) if d != 0],
+                'maximum_distance_from_first': witness(first_distances),
+                'maximum_distance_from_reference': witness(reference_distances)}
+
+    reference_world = positions(source['reference_local'])
+    world_positions = [[] for _ in parents]
+    for frame in frames:
+        for i, position in enumerate(positions(frame)):
+            world_positions[i].append(position)
+    mapped = {pair['source']: pair['target'] for pair in data['mapping']}
+    target_reference = dict(zip(target['names'], target['reference_local']))
+    bones, translation_review, scale_review = [], [], []
+    for i, name in enumerate(source['names']):
+        translation = motion([frame[i]['t'] for frame in frames], source['reference_local'][i]['t'])
+        scale = motion([frame[i]['s'] for frame in frames], source['reference_local'][i]['s'])
+        needs_translation = bool(translation['offset_from_reference_sample_indices'])
+        needs_scale = bool(scale['offset_from_reference_sample_indices'])
+        if needs_translation:
+            translation_review.append(name)
+        if needs_scale:
+            scale_review.append(name)
+        mapped_target = mapped.get(name)
+        bones.append({'source': name, 'parent': source['names'][parents[i]] if parents[i] != -1 else None,
+                      'mapped_target': mapped_target,
+                      'target_reference_local': target_reference[mapped_target] if mapped_target else None,
+                      'local_translation': translation, 'local_scale': scale,
+                      'world_position_working': motion(world_positions[i], reference_world[i]),
+                      'translation_requires_disposition': needs_translation,
+                      'translation_disposition': 'OPEN' if needs_translation else None,
+                      'scale_requires_disposition': needs_scale,
+                      'scale_disposition': 'OPEN' if needs_scale else None})
+    clip_hash = hashlib.sha256(json.dumps(clip, sort_keys=True, separators=(',', ':'),
+                                          allow_nan=False).encode('utf-8')).hexdigest()
+    return {'source_motion_inventory': 'CHECKED', 'behavior': 'OPEN',
+            'translation_handling': 'OPEN', 'scale_handling': 'OPEN',
+            'retarget': 'OPEN', 'visual': 'OPEN', 'runtime': 'OPEN',
+            'rotation_only_assumption_supported': False,
+            'identities': {'source': data['source']['identity'], 'source_sha256': data['source']['sha256'],
+                           'target': data['target']['identity'], 'target_sha256': data['target']['sha256'],
+                           'target_container_sha256': data['target']['container_sha256'],
+                           'clip': clip['name'], 'clip_canonical_payload_sha256': clip_hash},
+            'sample_times': list(times), 'duration': clip['duration'],
+            'animation_type': clip['animation_type'], 'base_definition': clip['base_definition'],
+            'interpolation': clip['interpolation'],
+            'world_position_semantics': ('ABSOLUTE_SOURCE_HIERARCHY' if clip['animation_type'] == 'absolute'
+                                         else 'UNCOMPOSED_ADDITIVE_HIERARCHY_DIAGNOSTIC'),
+            'units': {'local_translation': data['conventions']['source_units'], 'local_scale': 'dimensionless',
+                      'world_position_working': data['conventions']['working_units'],
+                      'target_reference_local_translation': data['conventions']['target_units']},
+            'source_to_working': list(basis), 'bones': bones,
+            'translation_review_bones': translation_review, 'scale_review_bones': scale_review,
+            'limits': ['Inventory covers every supplied sample, not unsupplied sparse keys or between-key extrema.',
+                       'Exact nonzero differences are reported without an invented tolerance or disposition.',
+                       'Complete local samples do not identify serialized channel presence versus decoder-filled defaults.',
+                       'Working positions use declared affine source_to_working after parent composition; quaternions normalize for evaluation only. Unit labels and bases are declarations, not independently authenticated.',
+                       'Source/target hashes are declared identities; clip hash is computed over sorted compact JSON of this fixture clip, not a native clip file.',
+                       'Additive samples are inventoried as supplied; no base pose is applied and their working positions are diagnostic, not evaluated source motion.',
+                       'Target reference locals are shown for disposition review, not directly subtracted across different rigs/units.',
+                       'Observed translation or scale offsets require an explicit preserve/adapt/reject decision with evidence; this command makes none and proves no retarget, contact, visual or runtime behavior.']}
+
+
 def evidence(record, base, required=True):
     require(isinstance(record['evidence'], list) and (not required or bool(record['evidence'])),
             'evidence file list required')
@@ -238,15 +361,20 @@ def load_json(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=('validate-fixture', 'verify-mapping', 'summarize-receipt'))
+    parser.add_argument('command', choices=('validate-fixture', 'verify-mapping', 'inspect-source-motion', 'summarize-receipt'))
     parser.add_argument('path', type=Path)
     args = parser.parse_args()
     try:
+        fixture_hash = hashlib.sha256(args.path.read_bytes()).hexdigest() if args.command == 'inspect-source-motion' else None
         data = load_json(args.path)
         if args.command == 'validate-fixture':
             result = validate_fixture(data)
         elif args.command == 'verify-mapping':
             result = verify_mapping(data)
+        elif args.command == 'inspect-source-motion':
+            result = inspect_source_motion(data)
+            require(hashlib.sha256(args.path.read_bytes()).hexdigest() == fixture_hash, 'fixture changed during inspection')
+            result['identities']['fixture_file_sha256'] = fixture_hash
         else:
             result = summarize_receipt(data, args.path.resolve().parent)
         print(json.dumps(result, indent=2))

@@ -87,6 +87,43 @@ and the other applicable gates pass.
 Blender acceptance still does **not** establish
 in-game/runtime acceptance: retain the separate native/package and runtime gates.
 
+### Final-readback clipping audit
+
+Run a repeatable surface/contact audit on the **final exported and independently
+reimported animation**, assembled with the actual target skin/deformation graph,
+weapon, visible magazines and moving parts. Sample every affected frame at the
+source cadence and inspect between-key/contact transitions where interpolation
+can introduce intersections. Cover both hands and every digit, thumb, palm and
+wrist against the relevant moving object; include other demonstrated contact pairs.
+Audit affected aliases/body/ADS variants individually unless their relevant
+composed motion and deformation are proved equivalent. Similar names or equal
+clip duration do not justify reuse.
+
+Blender's `mathutils.bvhtree.BVHTree.overlap()` identifies overlapping surface
+indices; use evaluated/deformed geometry in a common coordinate space. Reuse the
+project's existing checker. Supplement crossings with suitable embedded-geometry
+and clearance tests: a finger entirely inside a closed object can evade a surface
+crossing test. Verify watertightness/winding before treating a signed or ray-based
+inside test as penetration depth; open/thin meshes and coincident intended contact
+need explicit interpretation. Raw counts, AABBs and isolated fingertips cannot
+certify a natural grip or a clean hand.
+
+Record clip/variant, full time range/cadence, exact native bank/rig/mesh/deformation
+and assembly/checker hashes, contact pairs and flagged frame/time/parts. Review
+flagged opaque/wire close-ups and the complete smooth action at normal and slow
+speed. Distinguish crossings, embedded candidates, contact gaps and intentional
+contact. Numeric success does not replace the user's visual gate.
+
+Make this audit a required final-candidate packaging/deployment input; missing,
+stale or incomplete coverage cannot be called a cleared build. Rerun affected
+checks after an animation, skin, bind, component/mount or deformation change;
+reuse other evidence only when its relevant inputs and covered behavior match.
+Visible defects and unreviewed findings block accepted-beta/install clearance.
+Keep failed candidates offline. An exception requires the user's explicit
+acceptance of the identified defect and artifact; record it without relabeling
+the clipping/contact check as clean. Game visibility/dispatch still needs its own
+runtime verification.
+
 ### Reusable Blender review checklist and receipt
 
 Start UNVERIFIED and fill one receipt for the identified candidate and affected
@@ -102,6 +139,11 @@ clip/subject variants. Do not prefill a pass from historical results.
   frame/time ranges per view. A static orbit/turntable is spatial evidence only.
 - [ ] Inspect all applicable subject checks and listed defects, including every
   digit/thumb and wrist/elbow/arm/contact/mechanism in the weapon specialization.
+- [ ] Reuse the [matched anatomical checkpoint](finger-checkpoint.md): source
+  channel inventory, reference and critical-pose opaque skin, evaluated wire,
+  joint landmarks and relevant weights. Check wrist/forearm bend and extension,
+  source inter-joint curl/twist and inferred-tip uncertainty together. These
+  diagnostics complement continuous playback; they do not replace it.
 - [ ] Preserve rest/bind/lengths; document justified rotation, nonstretch IK and
   contact corrections. Distinguish source defects from converted-target defects.
 - [ ] Record defects, correction revisions and actual re-review coverage. Keep
@@ -131,6 +173,8 @@ Runtime gate: UNVERIFIED | FAIL | BLOCKED | PASS (separate evidence)
 
 1. Verify mesh/skeleton/clip/base pairing, source hierarchy and mount transforms.
 2. Compare raw decoder → exchange locals → accumulated worlds → evaluated skin.
+   Check source local translation and segment-length variation before assigning
+   a failure to rotations; do not assume the source uses fixed-length anatomy.
 3. If locals agree but skin fails, inspect indices, complete weights and per-mesh
    inverse binds. If skin agrees but fingers are open, identify source graph/IK,
    attachment, translation-retargeting or other pose-changing writers.
@@ -160,6 +204,11 @@ Runtime gate: UNVERIFIED | FAIL | BLOCKED | PASS (separate evidence)
    but shading fails, inspect source custom normals and the actual posed normal path.
 5. Compare reference-pose, extreme-pose and interpolated motion. A static idle pass
    does not establish moving reload or source initial bind.
+6. Audit the diagnostic overlay itself. Thick wire miters on thin triangles,
+   depth bias or through-surface joint lines can resemble mesh spikes or clipping.
+   Compare the same evaluated vertices/triangles in opaque and wire views and
+   adjust only the display when the artifact is in the overlay. Do not change
+   topology, skin or pose to fix a visualization artifact.
 
 ## If timing or events fail
 
@@ -176,6 +225,12 @@ Retain one neutral/reference pose, hand opposition/flexion extreme, known failur
 contact/release/regrip, fast mechanism sweep and transition endpoint per affected
 behavior row. Include original key times, quarter/off-grid samples and dense
 critical intervals. Regular sampling elsewhere needs a declared cadence.
+Reuse those poses and their source/native hashes for the wire, bone, skin and
+anatomical measurements instead of creating another acceptance system. After a
+contact correction, compare clearance alongside curl/twist, wrist/arm shape and
+the previously unaffected digits; better contact does not cancel new damage.
+Expand dense diagnostics only where a new failure or changed behavior warrants
+them, while retaining the required full-motion review.
 
 Negative controls should detect the failure they target: wrong parent with the
 same rest silhouette; dropped weight set; changed native float/event/unselected

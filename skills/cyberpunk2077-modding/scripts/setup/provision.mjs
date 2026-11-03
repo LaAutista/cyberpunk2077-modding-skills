@@ -272,7 +272,7 @@ async function docs(root){
 }
 async function skills(root){
  const dest=privateDirectory(root,'agent-skills',true);
- for(const name of ['cyberpunk2077-modding','weapon-animation-inspection']){
+ for(const name of ['cyberpunk2077-modding','weapon-animation-inspection','cyberpunk2077-animation-retargeting','wolvenkit-docs']){
   missingSkill(path.join(path.dirname(skill),name),dest,name);
  }
  const target=path.join(dest,'reverse-engineer-anything');

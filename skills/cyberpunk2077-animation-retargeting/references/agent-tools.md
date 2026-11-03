@@ -6,6 +6,11 @@ review renders, install a mod or establish gameplay acceptance.
 
 ## Run the native gate from one fixture
 
+When consulting WolvenKit behavior or changing its invocation/import/export
+options, use [WolvenKit Docs](../../wolvenkit-docs/SKILL.md) to read the cached
+official pages and compare their versions with this pinned pipeline. Do not
+silently upgrade the toolchain based on current documentation.
+
 `scripts/native_pipeline.py` uses the sibling modding skill's existing native
 adapter and independent readers. It replaces repeated command construction; it is
 not another animation serializer. Requires Python 3.11+, Linux/POSIX, Node, an
@@ -158,6 +163,10 @@ order. Incomplete scans report errors and exit1; no matches in a complete scan i
 an explicit empty result.
 
 ## Inspect graphs without expanding huge handle trees
+
+Use the [graph tracing workflow](animation-graphs.md#trace-one-affected-path)
+to select states, transitions and the output path before interpreting a summary.
+These commands inspect resource declarations; they do not run a state machine.
 
 ```sh
 python3 -B scripts/asset_inspect.py graph /private/player.animgraph.json

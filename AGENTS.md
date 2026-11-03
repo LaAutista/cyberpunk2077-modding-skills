@@ -15,7 +15,8 @@ Case-specific offsets, skeletons, clocks and thresholds need new fixtures before
 
 Routes: [general modding](skills/cyberpunk2077-modding/SKILL.md),
 [weapon inspection](skills/weapon-animation-inspection/SKILL.md),
-[retargeting state machine](skills/cyberpunk2077-animation-retargeting/SKILL.md).
+[retargeting state machine](skills/cyberpunk2077-animation-retargeting/SKILL.md),
+[WolvenKit documentation](skills/wolvenkit-docs/SKILL.md).
 The retargeting skill carries the operating rules when installed outside this repo;
 this root AGENTS.md is not automatically loaded in unrelated mod projects.
 

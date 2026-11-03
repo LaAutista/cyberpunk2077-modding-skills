@@ -10,7 +10,7 @@ trap 'rm -f -- "$fixture_cache"; rm -rf -- "$scratch"' EXIT
 dest=$scratch/agent/skills
 run() { bash "$repo/scripts/install-skills.sh" --dest "$dest" "$@"; }
 run
-for skill in cyberpunk2077-modding weapon-animation-inspection cyberpunk2077-animation-retargeting; do diff -qr -x __pycache__ -x '*.pyc' -x '*.pyo' "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
+for skill in cyberpunk2077-modding weapon-animation-inspection cyberpunk2077-animation-retargeting wolvenkit-docs; do diff -qr -x __pycache__ -x '*.pyc' -x '*.pyo' "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
 [[ -f $dest/cyberpunk2077-modding/scripts/setup/provision.mjs ]]
 [[ -f $dest/cyberpunk2077-modding/scripts/comparison/diagnostic-dependencies.json ]]
 [[ -z $(find "$dest" -type d -name __pycache__ -print -quit) ]]
@@ -26,7 +26,7 @@ mapfile -t backups < <(find "$scratch/agent/skill-backups" -mindepth 1 -maxdepth
 [[ $(cat "${backups[0]}/cyberpunk2077-modding/local-note.md") == custom ]]
 [[ ! -e $dest/cyberpunk2077-modding/local-note.md ]]
 [[ $(cat "$dest/unrelated/settings") == keep ]]
-# Force failure promoting the third folder; all previous installed copies must return.
+# Force failure promoting the fourth folder; all previous installed copies must return.
 printf 'rollback\n' > "$dest/cyberpunk2077-modding/local-note.md"
 cp -R "$dest" "$scratch/expected"
 mkdir "$scratch/bin"
@@ -34,7 +34,7 @@ real_mv=$(command -v mv)
 cat > "$scratch/bin/mv" <<'SH'
 #!/usr/bin/env bash
 for arg in "$@"; do
-    case $arg in */.cyberpunk-skill-stage.*/cyberpunk2077-animation-retargeting) exit 91 ;; esac
+    case $arg in */.cyberpunk-skill-stage.*/wolvenkit-docs) exit 91 ;; esac
 done
 exec "$REAL_MV" "$@"
 SH
@@ -42,7 +42,7 @@ chmod +x "$scratch/bin/mv"
 if REAL_MV="$real_mv" PATH="$scratch/bin:$PATH" run --update >"$scratch/rollback.log" 2>&1; then exit 1; fi
 diff -qr "$scratch/expected" "$dest" >/dev/null
 if bash "$repo/scripts/install-skills.sh" --dest "$repo/skills" --update >"$scratch/overlap.log" 2>&1; then exit 1; fi
-# Exercise upgrading a prior two-skill installation, including failed third promotion.
+# Exercise upgrading a prior two-skill installation, including failed fourth promotion.
 dest=$scratch/prior/skills
 mkdir -p "$dest"
 for skill in cyberpunk2077-modding weapon-animation-inspection; do cp -R "$repo/skills/$skill" "$dest/$skill"; done
@@ -50,5 +50,15 @@ cp -R "$dest" "$scratch/prior-expected"
 if REAL_MV="$real_mv" PATH="$scratch/bin:$PATH" run --update >"$scratch/migration-rollback.log" 2>&1; then exit 1; fi
 diff -qr "$scratch/prior-expected" "$dest" >/dev/null
 run --update
-for skill in cyberpunk2077-modding weapon-animation-inspection cyberpunk2077-animation-retargeting; do diff -qr -x __pycache__ -x '*.pyc' -x '*.pyo' "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
-printf 'PASS: install, explicit update, no-op, backup, unrelated files, rollback, two-to-three migration and source-overlap rejection.\n'
+for skill in cyberpunk2077-modding weapon-animation-inspection cyberpunk2077-animation-retargeting wolvenkit-docs; do diff -qr -x __pycache__ -x '*.pyc' -x '*.pyo' "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
+# Exercise the current three-skill installation upgrading to the documentation skill.
+dest=$scratch/current/skills
+mkdir -p "$dest"
+for skill in cyberpunk2077-modding weapon-animation-inspection cyberpunk2077-animation-retargeting; do cp -R "$repo/skills/$skill" "$dest/$skill"; done
+cp -R "$dest" "$scratch/current-expected"
+if REAL_MV="$real_mv" PATH="$scratch/bin:$PATH" run --update >"$scratch/current-rollback.log" 2>&1; then exit 1; fi
+diff -qr "$scratch/current-expected" "$dest" >/dev/null
+run --update
+for skill in cyberpunk2077-modding weapon-animation-inspection cyberpunk2077-animation-retargeting wolvenkit-docs; do diff -qr -x __pycache__ -x '*.pyc' -x '*.pyo' "$repo/skills/$skill" "$dest/$skill" >/dev/null; done
+[[ -f $dest/wolvenkit-docs/references/snapshot-workflow.md ]]
+printf 'PASS: install, explicit update, no-op, backup, unrelated files, rollback, two-to-four and three-to-four migration and source-overlap rejection.\n'

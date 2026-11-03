@@ -77,7 +77,7 @@ for (const file of files) {
     links++;
   }
 }
-if (skills !== 3) errors.push(`Expected three skill entry points, found ${skills}`);
+if (skills !== 4) errors.push(`Expected four skill entry points, found ${skills}`);
 if (errors.length) {
   console.error(errors.join('\n'));
   process.exitCode = 1;

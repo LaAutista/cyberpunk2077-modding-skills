@@ -11,20 +11,32 @@ supply an absent evaluated source pose.
    source frame. Establish whether graph IK, translation retargeting, constraints
    or procedural deformation are missing. Keep raw decoded playback and evaluated
    playback distinguishable. Use the [source contract](source-playback-adapters.md).
+   Inventory source local T/Q/S variation before assuming rotation-only motion;
+   target length preservation does not justify discarding source translation.
 2. Pin target native skeleton, player variant, skin and required helper evaluation. Keep native
    rest/bind matrices, all influence sets and component placement. Use direct native
    skeleton mapping or optional controls around that contract; do not rebuild the
    deformation skeleton to fit a grip or wait for an unrelated animator-rig project.
 3. Align source and target in a declared weapon/common frame. Calibrate wrist/palm
    orientation, thumb base/opposition and digit axes using rotations. Record the
-   calibration and both skeletons' unchanged local lengths/scales.
+   calibration, source length/translation ranges and preserved target anatomy.
+   Compare anatomical wrist bend, forearm direction and arm extension as described
+   in [contact adaptation](../../../cyberpunk2077-animation-retargeting/references/contact-and-ik.md).
 4. Capture source → target retarget → final native readback at the same time and
    framing, from top/left/right plus palm/underside, thumb web and digit close-ups.
    At the early checkpoint, final-native evidence may be UNVERIFIED; it remains a
    later required gate, not an assumed result.
+   At rest/reference and the selected critical poses, pair opaque skin with actual
+   evaluated triangle wire, joint landmarks and relevant weights. Keep their pose,
+   mesh and inverse-bind identities together so a bone view cannot silently stand
+   in for a different skin or helper evaluation.
 5. Account for both hands' thumb, index, middle, ring and little finger: full joint
    chain, knuckles, webbing, nail, surface shape and intended contact. Record
    occlusions explicitly. Inspect actual opaque skin, not just bones or wireframe.
+   For a trigger finger, include an unobstructed view from each side of the
+   trigger/guard at both closed and released extremes and between them. A weapon,
+   support hand or sleeve hiding the fingertip leaves that contact unverified;
+   an accepted support-hand repair does not certify the trigger hand.
 6. Check the reference pose and a small set of flexion/opposition extremes with
    interpolation. Only proceed to full motion once the relevant source and target
    reference failures are resolved or the next experiment is explicitly bounded.
@@ -34,9 +46,10 @@ supply an absent evaluated source pose.
 | Field | Required evidence |
 | --- | --- |
 | Identity | Input/tool hashes, source frame/time, body/skin variant, base/additive convention. |
-| Mapping | Named joint correspondence, reference frames, rest and inverse-bind ownership. |
+| Mapping | Named joint correspondence, reference frames, rest and inverse-bind ownership; authored versus inferred terminal landmarks. |
 | Preservation | Joint offsets, scales, lengths, weights and intentional authored exceptions. |
-| Shape | Palm/thumb-base/digit surface comparison in matched views, including hidden regions. |
+| Shape | Matched opaque/wire/joint/weight evidence at reference and critical poses; palm/thumb-base/digit surfaces and hidden regions. |
+| Anatomy | Source local-channel inventory, palm-relative knuckle positions, signed inter-joint curl/twist, wrist bend and arm extension. |
 | Contact | Palm/digit/control/component distances or intersections with assumptions stated. |
 | Status | PASS / FAIL / UNVERIFIED for source, bind, alignment, deformation, native and runtime. |
 
@@ -53,12 +66,20 @@ The V4 comparison pass is therefore insufficient to pass this full checkpoint.
 - **All fingers fail similarly:** revisit common frame, wrist roll, hand scale and
   parent/control composition before adding per-digit offsets.
 - **Only thumb fails:** inspect thumb base rest/axis and opposition, not just its
-  endpoint. Match the source then inspect native helpers and skin.
+  endpoint. Distinguish an inferred terminal ray from the actual distal skin and
+  disclose estimator uncertainty. Match the source then inspect native helpers
+  and skin.
+- **Bone directions fit, grip shape differs:** compare knuckle positions, phalanx
+  lengths, source local translations, axial twist and actual distal surfaces.
+  Equal rays can start at different positions and end at different contact pads.
 - **Bones fit, skin folds:** preserve the failing view/time and inspect weighted
   helpers, inverse binds and normals. Do not reweight before identifying the owner.
 - **One view looks good:** add the missing surface view. Mark unobserved interior
   or hidden skin UNVERIFIED; do not infer it from the silhouette.
 
 After corrections, retain the failed checkpoint and rerun its static views before
-full [contact/motion](proportions-contact.md) QA. Bingle's palm/finger calibration
+full [contact/motion](proportions-contact.md) QA. Verify that improved clearance
+has not damaged source curl/twist, thumb opposition, release shape, wrist/arm or
+another digit; record a remaining tradeoff rather than replacing one failed view
+with a better one. Bingle's palm/finger calibration
 is an inspected transferable idea; its FO4/MMD mapping and scale are not CP presets.

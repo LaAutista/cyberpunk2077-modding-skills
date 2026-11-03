@@ -265,6 +265,452 @@
         "Claim runtime or source fidelity from native/package checks.",
         "Demand a separate conversation for every clip or add unrequested weapon variants."
       ]
+    },
+    {
+      "id": "graph-transition-clock-and-interruption",
+      "prompt": "A synthetic Cyberpunk diagnostic supplies two fixed local translations A.x=0 and B.x=10 metres, identity rotations and unit scales. For this offline subset only, define w=elapsed/0.20 and P=(1-w)*A+w*B, clamped to [0,1]. Entry is at elapsed=0. The sampler also has clipSpeed=2; no relationship between sampler speed and the supplied blend clock is defined. Compute x at elapsed 0, 0.05, 0.10 (immediately before interruption), and 0.20 without interruption. At 0.10 two transitions become eligible, priority 10 and 200, and a BlendFromPose node is involved; no arbitration, capture or reset semantics are supplied. Explain which post-interruption result can be established and choose the next bounded evidence step. Can this prove the game transition or make a candidate ready for installation? No playback, native resource or runtime observation is supplied.",
+      "must_observe": [
+        "Derive x=0,2.5,5,10 under the explicit offline formula and do not multiply blend elapsed by sampler speed.",
+        "Keep post-interruption output unresolved; inspect arbitration, capture and reset semantics against the exact graph and executable or a controlled existing trace.",
+        "Preserve clip and transition clocks, distinguish this scalar subset from quaternion/track/IK evaluation, and make no invented runtime or visual claim.",
+        "Use existing inspection workflow and do not install a candidate or require a whole-engine rewrite."
+      ],
+      "must_not_observe": [
+        "Choose priority 200 or 10 solely from the numeric value or array position.",
+        "Assert a BlendFromPose capture/reset rule without evidence.",
+        "Call the arithmetic engine parity or installation acceptance.",
+        "Refuse the supported offline calculation merely because the runtime algorithm is incomplete."
+      ]
+    },
+    {
+      "id": "animated-anchor-not-rotation-only",
+      "fixtures": [
+        "fixtures/animated-anchor.json"
+      ],
+      "prompt": "Use the supplied synthetic animated-anchor.json and the installed retargeting skill. A proposed adapter copies rotations but keeps all native anatomical local translations fixed. Source and target match at both endpoints; the author says the source can be treated as rotation-only. Run the available source-motion inspection on the complete supplied data, identify what the endpoint check missed, and write a concise readiness handoff with the next smallest meaningful test. Do not edit source fixtures, game files or installed skills. No game assets, continuous playback or runtime observations are supplied.",
+      "must_observe": [
+        "Actually execute inspect-source-motion on the fixture and identify255mm intermediate Shoulder local travel with constant parent and equal endpoints.",
+        "Keep rotation-only admissibility OPEN/failed as proposed; do not infer safe transfer from endpoint agreement or copy source travel onto native anatomy.",
+        "State root cause, reusable channel-inventory prevention and a repeatable intermediate-key regression; distinguish synthetic inventory from visual/native/game proof.",
+        "Choose a measured source/native reach/contact/ownership discriminator rather than rebuilding an engine or inventing an offset."
+      ],
+      "must_not_observe": [
+        "Claim source is rotation-only or accept the retarget because endpoints match.",
+        "Stretch arms or translate native anatomical joints as an automatic repair.",
+        "Claim rendered/continuous visual or gameplay acceptance."
+      ]
+    },
+    {
+      "id": "direction-match-is-not-skin-acceptance",
+      "prompt": "A weapon reload candidate passed native readback and source-relative phalanx direction checks within0.004degrees. Actual source and target skins are available but were never compared in wireframe. The user rejected the smooth comparison: the native thumb is more open and the fingers wrap differently. A correction reduced a measured ring intersection from12.6mm to6.3mm by opening two ring joints10degrees each; other bones were byte-exact. A separate anatomical measurement shows source wrist bend11.6degrees versus target48.1degrees at the pickup key. Native fingers are shorter and knuckle positions differ by6\u20137mm. Only these measured facts are supplied in this evaluation, not the asset files. Explain the validation failure and produce a concrete root-cause/prevention/regression handoff that follows the existing skills. No new platform, game launch or installation.",
+      "must_observe": [
+        "Treat the user-rejected candidate as FAILED; distinguish observed mismatch from unproven exact skin cause.",
+        "Identify why bone-direction, unchanged-payload and reduced-intersection checks missed surface, source-curl and surrounding wrist damage.",
+        "Specify matched actual opaque AND wire skin, bone/joint orientations, own inverse binds/weights and terminal-axis uncertainty through representative contact/release/rest/extreme frames; inspect all digits/thumb/wrist/arm together.",
+        "Reject the20degree distal-opening change as resolved merely because contact improved; preserve anatomy, timestamps, rejected artifacts and unresolved evidence.",
+        "Give a reusable change to the existing checkpoint/workflow and practical positive/negative regression with explicit unrun state; then require full connected source/native before-after playback before propagation/installation."
+      ],
+      "must_not_observe": [
+        "Claim the actual wire mesh, skin or playback was inspected from these facts alone.",
+        "Treat glove/barehand geometry differences as an excuse to pass visible defects.",
+        "Suggest stretching arms, destructive bone edits or more isolated curl offsets without a measured discriminator.",
+        "Build a replacement validation platform or require a new approval conversation for every unrelated clip."
+      ]
+    },
+    {
+      "id": "pinned-native-graph-branches",
+      "prompt": "Use the native implementation reference for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. Assume its ordinary finite branches and valid data. With base float track 4, added track 10 and effective weight .25, derive dense BasePose/Interpolate/Add and added-only sparse Interpolate/Add. For the ordinary transition candidate pass, eligible unforced local priority20 precedes eligible unforced global20; how does the outcome change if the global is priority200 or a forced priority-100, and if transition-active is nonzero? Derive all four transition curve weights at progress .25 and explain why an inertialization request with selected duration .20 is not simply an ordinary .20 crossfade. Explain what these results establish about a full game pose. No game, playback or additional executable analysis is available.",
+      "must_observe": [
+        "Derive dense 4,5.5,6.5 and added-only sparse 10,2.5 without treating missing channels as zero universally.",
+        "Use higher signed priority, first tie, forced precedence; skip local outgoing scan when transition-active is nonzero in the cited branch.",
+        "Derive Linear .25, EaseIn .015625, EaseOut .578125, EaseInOut .0625.",
+        "Distinguish stored zero crossfade and downstream inertialization request from an ordinary .20-second crossfade.",
+        "Limit claims to named build/branches and derivation; do not claim observed game output or complete scheduler."
+      ],
+      "must_not_observe": [
+        "Keep all priority/math unknown merely because the public declarations omit it, ignoring the supplied implementation reference.",
+        "Apply these findings to an unspecified build or unknown transition subsystem.",
+        "Claim runtime, visual or native-code execution from arithmetic."
+      ]
+    },
+    {
+      "id": "pinned-capture-and-custom-curves",
+      "prompt": "Use the native implementation references for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4, finite valid data and unit quaternions. BlendFromPose captures Y with translation(6,0,0), scale(2,1,1), from current X with translation(2,0,0), scale(2,1,1); both rotations are identity. Compute its saved transform contribution and full-weight Local recomposition. Would a generic inverse-transform replacement preserve this behavior? Now evaluate its CustomCurve Hermite mode at time .5 with key times[0,2/3,4/3,2] and stored values[2,4,-3,7]. Explain the stored-value roles and whether time-interval scaling of tangents applies. Finally, a captured pose has fewer transforms than the current pose and its bones are ordered differently: does the count-different conversion automatically fix bone identity? State what can be concluded and what a useful compatibility check must examine. No game execution, asset import or live installation is available.",
+      "must_observe": [
+        "Derive D.t=(1,0,0), D.q=identity, D.s=(1,1,1), and recomposed translation(4,0,0), not captured translation6.",
+        "Reject silently replacing the recovered equation with a generic inverse; distinguish nonunit-scale behavior from unit-scale round trips.",
+        "Use u=.25 and Hermite roles endpoint2, outgoing tangent4, incoming tangent-3, endpoint7 to derive3.484375, with no interval-length tangent multiplier.",
+        "Explain indexed segment copying/default tails, no bone-name matching or coordinate correction, and required segment/base-track layout compatibility.",
+        "Keep static/transcription evidence separate from game selection, final pose, visual acceptance and install readiness."
+      ],
+      "must_not_observe": [
+        "Assume full recomposition must equal Y under nonunit X scale and alter the documented native formula to make it so.",
+        "Apply cubic Bezier ordering to the Hermite values or scale tangents by2.",
+        "Claim pose-count conversion certifies arbitrary bone ordering or rig compatibility.",
+        "Claim runtime verification or perform a live mod/skill installation."
+      ]
+    },
+    {
+      "id": "pinned-clock-sync-shared-pose",
+      "prompt": "Use the native implementation references for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4 and assume ordinary finite valid branches. (1) Detailed delta d=.02, global dilation g=.1, owner scale e=.5: derive the four Puppet clock-policy increments in priority order. For inertialization x=1,v=0,T=1,safeMode=true, what is the scalar correction at t=.25, and does that prove the final constrained bone? (2) An action database contains wildcard (*,-1,-1,duration=.8) followed by exact (attack,2,4,duration=.2), and current inputs are attack,2,4. Which duration is selected? Explain how outgoing-action duration is produced, and distinguish a missing resource from a valid resource with no matching row. (3) ByProgress has one contributor time=.8,duration=2,weight=.25 and targetDuration=4. What target times does it request? For two contributors at normalized phases .125 and .375 with weights .5 each, compare the ideal-trigonometry phase under the native weighting structure and a conventional circular mean. ByEvent instead has a first matching target event at frame15; what does it request and does the contributor phase affect it? Do Speed/master receivers necessarily store those target times? If two masters and a slave share one syncTag, what determines the value read? (4) A normal two-graph chain prefills one ordinary mapped bone with local translation2. Graph1 writes local translation5, then graph2 reads it using SharedMetaPose. What value/domain does graph2 read? What changes if graph1 is skipped? May we infer every float track was reset to reference, or that SharedMetaPose receives the final skinned pose? No native execution, current graph assets, playback or live installation is available.",
+      "must_observe": [
+        "Derive Puppet increments .02,.01,.001,.002 for the ordered flags/default branch; do not call all of them raw frame delta.",
+        "Derive safe quintic correction .896484375 at t=.25; separate history, application and later rotation constraints from scalar arithmetic.",
+        "Select .8 from first wildcard row; explain activated action-node outgoing fields alias outgoing transition slots; no-match zero differs from missing-resource no write.",
+        "Derive ByProgress old=new=.4 and ByEvent approximately .5 with loop0; identify target event lookup and Speed/master forwarding instead of unconditional sampler writes.",
+        "Use same tag/member per-instance aliases and actual traversal writes/reads, not highest-weight leader election.",
+        "Read local5 after graph1, local2 if skipped under the supplied prefill; floats have separate lifetime and final aggregate/model conversion and skinning are later.",
+        "Use build-scoped implementation findings while preserving live graph, final skin and runtime uncertainty.",
+        "Derive ideal-trigonometry multi-contributor phases .125 native weighting versus .25 conventional unweighted-angle circular mean; keep native approximation accuracy unverified."
+      ],
+      "must_not_observe": [
+        "Ignore supported native derivations because public declarations alone are incomplete.",
+        "Invent one universal graph clock, sync mechanism or final IK/skinning order.",
+        "Claim native/game execution or installation readiness from the scenario."
+      ]
+    },
+    {
+      "id": "pinned-skinning-and-duration-setting",
+      "prompt": "Use the native references for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. We have the confirmed SimpleSkinningAttachment to SkinnedMeshComponent path, with valid finite inputs and admitted gates, and need an offline explanation before investigating a deformed character. (1) MetaRig bone names are [Hip,Hand,Spine], mesh names [Hand,Missing,Hip]. Which aggregate indices are cached, where do source matrices come from, and does the final no-op pose virtual mean no matrices were written? Both cache keys are unchanged after a hypothetical name-array edit: must that edit rebuild the map? (2) For the first mapped bone, the mesh-supplied matrix D translates by (-3,1,0). Its aggregate QS has unit scale, rotation +90 degrees around Z, and translation (4,5,6). Derive the exact real-arithmetic packed output and compare reversed multiplication. State the normal output record size, what happens to an out-of-range aggregate index, and bounds for epsilon=.5. Explain whether an entry whose mask is nonzero but whose selected LOD bit is clear is automatically skipped by the inner loop. (3) MetaRig track names are [blink,smile], mesh tracks [squint,blink]. Derive the map and whether a missing track is proven to become zero at the renderer. Identify the two special eye lookups and whether those matrices represent the task-owned second auxiliary QS. Does either later job receive that final second QS on the traced continuation? (4) Remaining inertia duration=.8 and new request=.3. Identify the setting, its explicit initialized default and all three sign branches. Does static initialization prove the current live mode, or provide a verified INI edit recipe? Does reflection of graph timeDeltaMultiplier/isPaused authorize us to implement them in an offline evaluator? No game execution, live component values, actual mesh assets or rendered playback are available.",
+      "must_observe": [
+        "Derive bone map [1,2047,0], first exact name matching, verbatim mesh boneRigMatrices and two-key cache reuse; no-op final virtual does not erase prior common-helper CPU writes.",
+        "Derive stored-row D*P translation (3,2,6), reversed product (1,6,6), and packed columns (0,-1,0,3),(1,0,0,2),(0,0,1,6) under the stated exact arithmetic.",
+        "Identify concrete48-byte output; invalid aggregate index substitutes identity QS leaving D; bounds use aggregate translation plus/minus.5, giving (3.5,4.5,5.5) to (4.5,5.5,6.5).",
+        "Distinguish outer LOD range from inner nonzero-mask test; do not invent a selected-bit skip in the inner loop.",
+        "Derive float map [65535,0]; for the now-identified concrete backend interpret each word as signed16, so FFFF loads S-4 without a sentinel skip. Actual prefix contents/accessibility and later renderer use remain unproved; no assumed renderer zero/default.",
+        "Identify l_J_eye_JNT/LeftEye and r_J_eye_JNT/RightEye fallbacks as bone-derived eye matrices, separate from auxiliary QS; normal later job payloads exclude final second QS without claiming global no-escape.",
+        "Identify InertiaBlend/OverrideMode default0 and negative/zero/positive durations.3/.3/.8; distinguish initialized default from effective live value and unproved file grammar.",
+        "Keep normal node-clock copying and reflected graph-field execution semantics separate; require actual consumer or causal discriminator, not name-inferred pause/multiplier behavior.",
+        "State offline instruction/arithmetic scope and actual runtime, mesh, backend and visual limitations."
+      ],
+      "must_not_observe": [
+        "Claim installed/rendered/playback/game correctness or blame a specific Saber asset from synthetic inputs.",
+        "Invert mesh matrices in the mapping factory, swap matrix order silently, or select raw64 output for the confirmed concrete caller.",
+        "Label the second auxiliary QS as camera or eyes merely because two special matrices exist.",
+        "Conclude reflected graph fields are globally unused/editor-only, or manufacture a runtime mode/config-file path."
+      ]
+    },
+    {
+      "id": "pinned-timer-mesh-roundtrip-and-auxiliary",
+      "prompt": "Use the current pinned native-clock, native-skinning and native-shared-pose references for saved executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4, and the named WolvenKit source commit. We need concrete offline deductions, not a game test. (1) The clock has frequency 32,000,000 counts/second and successive counters differ by 6,400,000. Global factor product is 4, entity factor .25, and all stated inputs are finite. Derive elapsed units, the capped detailed increment, FrameInfo delta and all four ordered Puppet branches. Does a 24-fps Blender timeline require another division by24? Is this evidence of the current running game's cadence? Distinguish cap-before-scale from cap-after-scale, and default FrameInfo copying from owner replacement. (2) Native mesh D translates by -3 on X. Explain the orphan exporter joint transform/parent/scale assumptions. For a separate explicitly admitted nonlegacy importer-helper call, an X-only child has local translation1 under parent translation2, both with identity rotation/unit scale. Derive the rebuilt D and D*P translation for a later model-space P at3; compare a flat child at3. Explain which local/world/inverse-bind/scale information this helper actually reads and why this is a discriminator rather than a proven shipped asset defect. (3) Destination mesh names are [Hip,Hand]. First skin A contains [Hip,ExtraA], second skin B contains [Hip,ExtraB,ExtraC]; matched Hip rotation is identity in both. Which skin wins and which legacy branch applies? Does unmatched Hand force legacy detection to fail, or does successful import establish that matrices were rebuilt? What changes if a matched joint instead has a nonidentity rotation? (4) For the typed SkAnimAdjuster evaluator with applyMotion enabled and admitted active state, identify the motion-extraction source, auxiliary pointer written, translation/rotation/scale scope and what the later normal job payloads receive. Does plain SkAnim pose evaluation prove a write to that same pointer? No actual game frame, character asset, import conversion or rendered playback is available. Run small independent arithmetic checks for the supplied cases and report exact evidence limits.",
+      "must_observe": [
+        "Derive .2 seconds from counter/frequency, capped d approximately .066, FrameInfo approximately .264; four Puppet increments .066,.0165,.066,.264 with ordered predicates and no repeated global scaling.",
+        "Establish physical seconds from QPC/QPF and the connected native chain; cap precedes global scaling, no Blender-fps division, no live cadence claim.",
+        "Orphan inversion gives flat joint X=3 with unit scale; admitted local-child helper yields D X=-1 and D*P residual2, whereas flat child3 yields D=-3 and residual0; distinguish helper LocalTransform T/Q from world, supplied inverse-bind and scale.",
+        "First skin A wins equal one-match score despite B having more joints; at least one matched identity-rotation joint permits legacy preservation despite missing Hand, so successful import does not prove rebuild; nonidentity matched rotation changes that heuristic and opens nonlegacy rebuild/add-missing route.",
+        "Trace SkAnimAdjuster through entry.animation+30 and Animation.motionExtraction+68, conditional second auxiliary wrapper+10 translation and normalized rotation writes with scale unchanged; plain SkAnim pose-only body and normal later payload exclusion remain distinct from final movement application.",
+        "Execute and report independent finite arithmetic checks with input/reference hashes and preserve actual import/runtime/visual limitations."
+      ],
+      "must_not_observe": [
+        "Use min(elapsed*g,.066), apply global scaling twice, or convert the seconds clock according to Blender FPS.",
+        "Claim the importer helper reads joint WorldMatrix, authored inverse-bind matrices or scale when this named helper does not, or generalize the orphan route to every export.",
+        "Label the second auxiliary as camera, eyes or proven entity motion; claim a live game/import/character fix from these synthetic deductions."
+      ]
+    },
+    {
+      "id": "finger-parent-transport",
+      "prompt": "Use the retargeting skill to review this finger mapper. Right-handed column-vector rotations are active; all initial world rotations are identity and the child longitudinal ray is +X. The parent correction is +90 degrees about Z. The child desired world ray is +Z. Path A recomputes the child world orientation after the parent correction, then applies the shortest swing from its current ray to +Z. Path B applies the shortest swing from the original child ray to +Z to its original world orientation, then uses the updated parent only for local reconstruction. The declared mapping independently transfers a source-derived world orientation for each bone. Both paths pass ray and local-length checks, but actual skin is unavailable. Calculate both world rotation matrices, their relative axial rotation, and explain the smallest correction and sufficient regression/remaining review. Execute a small arithmetic check; do not change real files or claim a rendered fix.",
+      "must_observe": [
+        "Derive A=Rx(+90)*Rz(+90) and B=Ry(-90), both taking X to Z, with A*B^T=Rz(+90).",
+        "Identify unintended90degree child axial transport under the stipulated independently mapped world-orientation contract; preserve the source-derived snapshot and reconstruct locals with the updated parent.",
+        "Check full orientation and local T/S, unrelated branches and parent-before-child reconstruction; preserve failed ray-only evidence.",
+        "Distinguish algorithmic twist reference from independently measured anatomical surface roll; require actual opaque/wire skin and joined motion before acceptance.",
+        "Execute finite matrix/ray arithmetic and retain visual/native/runtime uncertainty."
+      ],
+      "must_not_observe": [
+        "Promote equal ray directions or preserved lengths into whole-finger correctness.",
+        "Treat frozen world orientation as universally correct when another mapping intentionally transfers parent motion.",
+        "Infer anatomical roll from a nearly axial pad normal or change finger lengths/wrist pose to hide the difference.",
+        "Claim real skin, native or gameplay checks ran."
+      ]
+    },
+    {
+      "id": "pinned-float-backend-storage",
+      "prompt": "Use the native implementation references for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. The confirmed concrete float backend has C=4,K=2, storage B=0x90000, current pointer B, other pointer B+16, and valid nonoverflowing construction. Its source S=0x40000 contains [11,22,33,44]; an explicitly accessible prefix float at S-4 contains77. Map words are [0000,FFFF,0001,0002], n=4. Compare the final current buffer and ordered source reads for an empty secondary table versus a populated table with ordinal0->output3 and ordinal2->output1 only. Does missing ordinal1 avoid reading the prefix? What changes if prefix accessibility is unknown? Explain initial storage, nonempty-source/n=0 versus empty-source caller behavior, direct n=5 capacity, and two post-write calls with no intervening write. Execute a small explicit-address arithmetic check; do not run a native executable or edit real assets. State exactly what remains unproved about renderer output and the character defect.",
+      "must_observe": [
+        "Derive direct buffer [11,77,22,33] and secondary [0,22,0,11], both reading S,S-4,S+4,S+8 in order; use explicit addresses, not Python negative list indexing.",
+        "Missing ordinal suppresses destination store after source read; unknown prefix prevents a predicted value/fault, not the static address calculation.",
+        "Normal constructor zero-fills both buffers; each mapper clears only current C-float buffer before signed n test. Nonempty source with n=0 clears and rotates; empty source skips both.",
+        "Direct n=5 can touch second buffer first float when writing first buffer; distinguish selected capacity from total allocation.",
+        "Two post calls rotate B->B+16->B with other pointer and storage unchanged; equality wrap uses32-bit C*K; no publication or pointer-swap claim.",
+        "Run bounded analyst arithmetic and label it separately from native execution, renderer use or Saber attribution."
+      ],
+      "must_not_observe": [
+        "Use source[-1] to stand for S-4 or invent FFFF skip/zero handling.",
+        "Claim mapper output, constructor initialization or buffer rotation proves GPU/rendered behavior.",
+        "Launch a game/native target, mutate live profiles or report a repaired Saber."
+      ]
+    },
+    {
+      "id": "pinned-state-and-scratch-lifetimes",
+      "prompt": "Use the implementation references for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. Assume valid initialized slots and no intervening delegated callback/transfer writer where stated. A fresh ordinary duration cache first fails resource lookup; later a successful refresh writes .4/true and the next lookup fails. A configured additive history has authored default .75, first setup, a missing track, later successful capture .2, another missing track, then either activation alone or selected setup again. Derive the retained values and distinguish registration, fresh fill, setup and activation. A temporary region is written with KEEP, released, and reserved again at the same offset without another writer: does new pose metadata imply a fresh identity payload? For graph selection, a nonnull candidate has a valid populated entry, A3/admission are false, and file global initializer=1: is the populated-entry predicate skipped on update, and is the live global known? If A2 is true in nested GraphSlot evaluation, which route wins despite admission0? Finally the candidate visitor sees matching nodeA, nonmatchingB, then matching nodeC whose id was already0; all promotions succeed. Which candidate remains and what traversal limit matters? Check these consequences with a small state/branch table. No native execution, assets, playback or live installation is available.",
+      "must_observe": [
+        "Fresh duration/inertia zero/false survive first failure; .4/true survive later failure; registration allocates metadata, fresh payload fill supplies zero, and no-feature authored fallback differs.",
+        "Named history setup writes .75, missing retains it, successfulcapture.2 then missing retains.2; activation consumes.2 under stated premise, rerunsetup writes.75; optionalcallbacks/transfers can modify actualvalues.",
+        "KEEP survives normal cursor-only release/reuse; metadata initialization does not imply identity/zero/saved-capture payload.",
+        "Update computes populated-entry predicate eagerly when candidate exists even when A3/admissionfalse; invalid/missing entry cannot be treated as safe false. Fileglobal1 is not observedlivevalue.",
+        "NestedA2 compiledstream retains precedence over admission0; visitedmatchingC replacesA before zero-id stopsdescent, so lastvisitedmatching is not lastserialized.",
+        "Execute a small analyst state/branch check and preserve no-native/runtime/visual evidence boundary."
+      ],
+      "must_not_observe": [
+        "Assume failure restores authored duration, activation universally clears namedhistory, or everydelegatedcallback preserves state.",
+        "Treat freshstate zero-fill and temporaryarena reuse as the same initializationcontract.",
+        "Infer global immutability, time/pause control semantics, allgraph traversalorder or game correctness."
+      ]
+    },
+    {
+      "id": "pinned-keyed-record-and-factor",
+      "prompt": "For the pinned native contract, ordinary wrapper+18 merge receives A keys[7,7],B keys[7,9,9],w=.25. Both A7 records and first B7 have original coefficients+50/+54/+58=.5; V(+10) is0 for A,8 for B; both U(+30)=(2,3,4,5). A L/H=-2/-1,B L/H=3/4. B9-only coefficients(+50,+54,+58,+5c,+60)=(.5,.5,3,4,5),Q=(0,0,0,2),U=(2,3,4,5). Derive output order,V,U,coefficients,signed fields and unmatched Q. Does w=0 remove B-only records? Are gaps/inactive tails zero? Execute F(.25,.5,.5),F(0,0,1),F(2,0,0) arithmetic. Distinguish validity/semantic limits. Separately compare Puppet requested factor0 without curve phases against source1,target.5,valid constant curve times[0,1],values[2,2],duration1 and active blend-in elapsed.125. Does target clamp ensure positive emitted factor in both? For admitted inertia T0/nonnegativeelapsed versus T>0,previousDt0,matching finite included-float histories and0<=elapsed<T, distinguish initialization from application under masked exceptions. Do not execute native/game or modify assets/installations.",
+      "must_observe": [
+        "Output keys[7,7,9], each A7 pairs with first B7; B-only duplicates collapse to first. Matching V=3,U=ones,first three scalar coefficients=.5,L=-2,H=4. Unspecified matched +5c/+60 values remain unknown.",
+        "B9 +50/+54 become.125 while +58/+5c/+60 stay3/4/5; Q remains unnormalized(0,0,0,2),Uunchanged. Endpointw0 retains B-only records; copied gaps and inactive tails need not be zero.",
+        "F results.375,1,2; last is unclamped small-sum fallback. Preserve sixteen-record storage/capacity precondition, no guessed payload purpose.",
+        "No-curve requested0 becomes positive minimum; valid selected w2 curve emits0 from positive target.5/source1. This is conditional on actual curve/phase, not observed runtime.",
+        "T0 with nonnegativeelapsed initializes before termination but skips polynomial; positiveT/previousDt0 can produce retainedNaN velocity despite safeMode and reach application under masked exceptions.",
+        "Run bounded analyst arithmetic; report no native/runtime/visual/Saber diagnosis."
+      ],
+      "must_not_observe": [
+        "Uniformly attenuate all unmatched fields, sort/deduplicate every input record, normalize unmatched Q or erase zero-weight records.",
+        "Substitute normalized weighted fraction for F, clamp small-sum fallback, assume missing scalar values or unknown record-purpose labels.",
+        "Treat positive requested-factor clamp as a universal clock proof or T0 as proof of quintic division; claim game defect reproduced."
+      ]
+    },
+    {
+      "id": "pinned-named-operators",
+      "prompt": "Use the native references for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. Assume finite inputs and valid storage/indices unless specified, with no unmentioned callback writes. Derive and execute small checks for these separate cases. Blend2 bounds2,6 receives scalar3; its scalar child then disappears with stored weight.6; separately reset it. BlendMultiple has sorted values[-2,1,4],bounds[-2,4],scalar-1.25: give final indices/fraction and dominant event child. What does its radial formula produce for L2,H6,x1? Override selected-track current2,second4,w.5,multiplier3 has two identical descriptors: give each intermediate/result for modes1 and2. Compare a local DynamicMask record with the same effective weight. For DynamicMask oldweight0,newweight.5,selector-1,maskCount1, compare overlay activation/sync/update/evaluation; then selector0 at unchanged weight. In an ordinary interior blend, incoming second auxiliary translation is(8,0,0,9),weight.25 and second child is missing: derive the temporary's second auxiliary and result, then contrast a missing first/endpoint caller output. State which output domains the identified compiled command blends. For ordinary contributors incomingP.8,w.25, derive weights when both children exist and when first is missing. Finally scalar sync changes storedw0 to1; valid indices remaini0,j1. Which child does Blend2 versus BlendMultiple sync under this premise? Explain what reflected graph-control serialization skips and direct named-property address access do and do not establish. No native execution, assets, game, installation or visual evidence is available.",
+      "must_observe": [
+        "Blend2 remap.25, absent scalar retains.6, reset0; Multiple final i1,j0,w approximately.750501 and dominant second index0; radial value7.",
+        "Override u1.5: mode1 intermediate5 then3.5, mode2 intermediate8 then14; DynamicMask copies second4 for effective1.5.",
+        "DynamicMask invalid selector can activate and sync overlay but skips overlay update/eval; valid selector at unchanged active weight uses overlay without another crossing.",
+        "Missing second temporary retains second translation(0,0,0,1), so blend result(6,0,0,7); missing first/direct endpoint does not reset caller secondaux/keyed/flag. Compiled command blends body/floats only, not complete ordinary wrapper parity.",
+        "Contributors.6/.2, absent first leaves.2 without renormalization; Blend2 snapshots oldweight0 before scalar sync hence first, Multiple reads changedweight1 afterward hence second.",
+        "Graph-control metadata skip/named access does not establish actual playback pause/time interpretation or global unused/editor-only status. Run bounded analyst checks and preserve native/runtime/visual limits."
+      ],
+      "must_not_observe": [
+        "Uniform missing-input reset, conventional radial modulo, treating provisional Multiple order as final event order, or deduplicating configured override descriptors.",
+        "Clamp all per-record weights, require selector validity for overlay activation/sync, assume missing selected child always skips interpolation, or zero all temporary fourth lanes.",
+        "Claim ordinary/compiled wrapper equivalence, infer playback semantics from metadata alone, or present calculated values as native/game observations."
+      ]
+    },
+    {
+      "id": "pinned-motion-adjuster-solvers",
+      "prompt": "Use the motion-adjustment contract for the pinned executable. Assume finite initialized state, ordinary valid transforms and no unmentioned callback writes, except the explicit degenerate interval. Execute small arithmetic and noncommuting quaternion checks. MotionAdjuster has duration3,oldelapsed1,dt4,nonzero correction state,unchanged targets and both correction enables: position deltaXYZ12 along X, signed angle+60 or-60 in separate cases. Give current outputs and next elapsed/state, then explain the next call's completion timing. Derive its signed angle for currentDirection(0,1,1),targetDirection(1,0,-7). Contrast reset versus activation starting elapsed.75,k2,dt.1. For SkAnimAdjuster, compare initialization/progress for p0,z2,t2,u0,a1 against p1,z3,t0,u-1,a1. Under masked floating exceptions, state the exact zero-denominator boundary without claiming a runtime fault. Independently evaluate an admitted SkAnimAdjuster correction at f1 with saved context C position(3,0,0),Q=Rx90; full and partial extraction M position(0,2,0),Q=Ry90; target position(5,6,7); initial forward(1,0,0),target direction(0,1,0); current context position(1,1,1),Q=Ry90; all input scales1. Give predicted full position, correction delta, final auxiliary translationXYZ and quaternion; distinguish right versus left current-conjugate multiplication and identify which auxiliary/fields change. Finally uncompressed extraction endpoints have positionsX-4,8 and angles10,730, sampled halfway through valid duration: derive position/angle/quaternion rule and distinguish n1. No native/game/Blender execution, assets or installation is allowed.",
+      "must_observe": [
+        "MotionAdjuster position24, positive angle60 and negative angle-120; elapsed5,k2 then next oldelapsed admission completes/clears e/k. Shared-Z angle-60. Reset keeps elapsed.75/k2 and writesdt0; activation setselapsed0/k1.",
+        "Sk initialization first case is admitted and replacesp witht2, yielding0/0 progress; conditional nonfinite under masked exceptions, no observed fault. Second skips initialization and yieldsf-.5 with no lower clamp.",
+        "Rpos(3,0,2),Kdelta(2,6,5),finalsecondauxXYZ(4,5,6). QaimRz90,output Qaim*conj(Ry90)=(.5,-.5,.5,.5) up to sign/rounding; wrong reversed order differs.",
+        "Second auxiliary translation/quaternion replaced, existing scale preserved; current-context inverse does not rotate translation difference. Distinguish first-auxiliary MotionAdjuster replacement.",
+        "Uncompressed midpointX2,angle190 after one-turn adjustment, q=(0,0,sin95deg,cos95deg),translationw0,scaleones; n1 emits sole record without second read.",
+        "Run finite analyst arithmetic/quaternion checks, declare no native numerical/runtime/visual proof, do not attribute Saber failure."
+      ],
+      "must_not_observe": [
+        "Symmetric angular clamp or translation snap, completion based only on newelapsed, reset clears all active timing, or missing-direction defaults shared across both solvers.",
+        "Clamp negative Sk progress, treat exactly1 as inactive, invent zero-denominator guard, silently ignore init rewritingp, or claim observed NaN/game fault.",
+        "Reorder noncommuting factors, inverse-rotate XYZ, alter auxiliaryscale, apply repeated modulo to730, or infer full investigation/game acceptance."
+      ]
+    },
+    {
+      "id": "pinned-rig-mask-compilation",
+      "prompt": "Use the current RigPart compilation and DynamicMask references for saved executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. All storage is valid and names resolve to the stated indices unless specified. Bones0..5 have parents[-1,0,1,1,0,4]. Singles are bone2/.2 then bone2/.9. First top-level tree is root0/default.6 with ordered nested descriptors root1/default.8 (itself nested root3/.7), then root4/.4; a later top-level tree is root4/.9. Derive the complete sorted ordinary pairs. Separately run root1/.8 with nested root4/.4 and no singles, then a missing root with nested valid root4/.4, and explain what each includes. For compiled ordinary[2,4] and authored special names[4,1,4], give compiled specials and consumer matches. Compare ordinary[1,4],special[1,4] when ordinary1 fails the consumer validity gate, and ordinary[1,4],special[1,4,7] with both ordinary entries admitted. For parents[-1,2,0],root2, which descendant is missed and why? Give name-map lookup results for ordinals32768,65535,65536,65537 and distinguish a fresh map from repeated compilation; are part counts and map count reset in the same place? Does sorting imply normalized weights or ordinary membership for every special index? Execute bounded independent compiler/cursor/encoding checks. No native execution, assets, game, installation or visual evidence is available.",
+      "must_observe": [
+        "Derive ordinary[(0,.6),(1,.8),(2,.2),(3,.7),(4,.4),(5,.4)] from first insertion, singles before trees and nested before enclosing defaults; later duplicate/tree does not overwrite.",
+        "Separate nested-outside-subtree case includes1,2,3 at.8 and4,5 at.4; missing outer root skips nested valid root entirely. Existing membership does not prune descendants.",
+        "Special[1,4] against ordinary[2,4] yields no special matches; rejecting ordinary1 also stalls [1,4]; upper extra7 permits1,4. Subset needs preceding validity admission as well as order.",
+        "Later-index traversal misses child1 under root2 for parents[-1,2,0]; no universal hierarchy repair.",
+        "Ordinals32768/65535/65536/65537 map to-32768/-1/0/1, with-1 skipped. Fresh ctor clears map count, reserve-only helper does not; each part build clears its own two derived counts.",
+        "Do not infer weight normalization, special subset, stable duplicate-name selection, repeated-map reset or live deformation. Run independent finite checks and distinguish source/hook/storage/runtime boundaries."
+      ],
+      "must_not_observe": [
+        "Last-wins weighting, suppress descendants of an existing bone, process nested children of a missing root, or silently constrain nested roots to the outer subtree.",
+        "Filter specials by ordinary membership, advance special cursor past mismatches, ignore consumer rejection, or treat signed16 encoding as arbitrary full32 indices.",
+        "Call reserve a reset, promote arithmetic to native/game/Saber proof, or hide unexpanded rig hooks and actual resource selection."
+      ]
+    },
+    {
+      "id": "pinned-property-and-multiple-producers",
+      "prompt": "Use the current native clock and named-operator references for saved executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. In a deliberately supplied memory model S and G are distinct source objects. S has multiplier1 atE8, flagsEC=1,ED=1 and sentinelEE=0x7F; G is separately unchanged. Assume correct concrete Float/Bool registration and successful generic-adapter admission/path lookup. First tag0-clear the Float field, then tag0-clear BoolEC; report bytes/adjacent fields affected and whether G changed. Compare a nonempty remaining property path, tag1 text and the direct-G named-input route. Does this establish cloning, pause/time interpretation or a globally unused field? For an actual Multiple S, an accepted successful generic property edit invokes its notification; derive the setup callback path and required premises. Source scalar payloads[-0,4,smallest positive float32 subnormal,-2] replace a destination with old count2,capacity6 and sentinel tail; derive copies/count and finite sorted result with DAZ off and completed comparisons. What survives beyond the logical count? Separately source[2,0,1] and retained pose links[A,B,C] go through setup: give final values/links. Explain more-than32 equal-value stability, payload multiplicity and unobserved native float settings without inventing NaN ordering. Finally MultiBlend provider P has parentId7,branch40=3,owner48=N and provider list[(id2,A),(id7,B),(id7,C)]. Identify its chosen parent, fourth argument and missing-parent result; does changing only owner48 directly alter this method, or establish node query188/190 or O30 application? Execute small independent byte/copy/order/parent checks. Do not run native/game/Blender or change installations.",
+      "must_observe": [
+        "Float tag0 clears exactly S.E8..EB, preservesEC/ED/EE; BoolEC clears one byte preservingED/EE; G unchanged under explicitly distinct S. Direct named-input route carriesG but arbitrary parsing is not proved.",
+        "Nonempty remaining path rejects primitive access; tag1 delegates to unexpanded parsers. Adapter retains source handle without payload cloning; value access is not playback semantics or proof of global inactivity.",
+        "Successful admitted notification reaches source+38=273996C for actual Multiple, then27398C0; preserve identity/type/owner/path/result premises and distinguish actual editor/load callers.",
+        "Spare-capacity growth copies2 then2 payloads (8bytes each), count4; finite sorted[-2,-0,minSubnormal,4], bit multiset intact, tail beyondcount unchanged. More-than32 stability not guaranteed; NaN/nativeMXCSR outside premise.",
+        "Values[0,1,2] retain links[A,B,C], with no paired permutation; duplicate scalar payload/count preservation and source storage/allocation premises.",
+        "Parent B wins first id match, receives arg4=3; missing parent returns low byte1. Owner48 is not directly read in this method; provider persistence/parent forwarding neither constructs alternate node queries nor proves O30 application. Execute actual bounded analyst checks and preserve runtime limits."
+      ],
+      "must_not_observe": [
+        "Silently assumeS=G, clear neighboring fields, equate value-format/parser facilities to graph timing, or call source adapter a clone.",
+        "Append old scalar prefix, clear inactive capacity tail, sort retained links with scalar values, normalize weights, promise larger equal-key stability or general NaN behavior.",
+        "Select last matching provider, turn no-parent into failure, label provider+E8 as node+100, or claim alternate-query recipient/live gameplay evidence."
+      ]
+    },
+    {
+      "id": "preview-normal-boundary",
+      "prompt": "A Cyberpunk reload preview has a sharp wrist crease. All native joint positions, weights and own inverse binds match readback. The preview constructs triangles from POSITION, sets use_smooth=True and skins the vertices, but does not read NORMAL. The identified native normal path is normalize((sum weight*boneSkinMatrix3x3)*sourceNormal). In a synthetic fixed-pose example, triangle vertices are (0,0,0),(1,0,0),(0,1,0), sourceNormal=(1,0,1)/sqrt(2), and two equally weighted skin matrices have linear blocks I and a positive90degree rotation aroundZ. Compute the posed triangle normal and source-path normal, and compare the inverse-transpose alternative. Execute the small calculation. State what the passed checks establish, the smallest next preview change/check, and what remains unknown about the actual wrist/grip. No images, native execution or gameplay are supplied; do not edit a game or install anything.",
+      "must_observe": [
+        "Compute geometric normal +Z and source-path normal (1,1,2)/sqrt(6), differing by about35.264degrees. The inverse-transpose path gives (1,1,1)/sqrt(3) and does not match the supplied native contract.",
+        "Keep the pose and geometry fixed; restore the identified normal path, verify palette/binds/all influences and actual evaluated corner normals, and preserve the geometric render as a negative control.",
+        "Separate shading from actual deformation/contact; no claimed visual review, full-motion acceptance, installation or runtime proof."
+      ],
+      "must_not_observe": [
+        "Change bones, smooth geometry, alter weights or accept wrist anatomy solely because position checks passed.",
+        "Assume smooth shading preserves authored normals, recommend inverse transpose despite the supplied contract, or claim observed visual/gameplay success."
+      ]
+    },
+    {
+      "id": "pinned-collection-motion-queries",
+      "prompt": "Use the current native query and named-operator references for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. All pointers remain stable and storage is valid within the stated capacities; callbacks do not make independent alias writes. Distinguish the collection C from its graph update input and describe what the twelve retained ordinary producers establish. For resolved SkAnim entries, state branch priority when all three optional pointers are present. For C188, stable L=4: derive a,b,n for mode1 inputs(-.5,1),(8,1),(4,-1),(3,1), and mode0 inputs(-.5,1). Use identity-rotation/unit-scale abstract samples S(t).x=10+t, Te=4 to derive extraction for a3,b1; separately a7,b1 with d8. Do not substitute a concrete sampler for this supplied function. Evaluate native D on X.t3,X.s2,Y.t7,Y.s4 along one identity-rotation axis. For d4, b1, extracted XYZ length2 and both turn tags, derive direct result fields0/40/44/48/49; distinguish repeated duration reads and unwritten bytes. If Multiple combines children with turn bytes2 and4 while its caller result49 initially equals0xA5, derive that byte after the local combination. For C180 with optional188/190 null, duration4 and absent extraction, which record/event operations remain? Then use full-clip extracted length6 and request weight.2, with130 event-appender invocations and sufficient outer storage: derive length, emitted event weights/count and key source. Compare old outer counts15,16,FFFFFFFF; distinguish physical prefix, local guard and upstream guarantees. State direct cleanup ownership and whether these paths establish accumulated O30 application. Execute bounded independent time/transform/byte/address/event checks; no native/game/Blender run, asset or installation action is available.",
+      "must_observe": [
+        "Separate local C and graph update input; twelve null initializations establish those ordinary producers only. SkAnim priority is 188, then 190, then 180, then ordinary after entry resolution.",
+        "Mode1 yields (-.5,1,0), (0,1,0), (0,4,0), (3,1,1); mode0 retains the negative start. Preserve signed remainder, negative endpoint sentinel and one-bit n.",
+        "Abstract samples give +2 then -2 using Te=4; native D gives t=.5,s=2. Do not substitute affine inversion, quaternion normalization or native bit parity.",
+        "With stable L4,b1,length2: V0=3,V40=.5,V44=.125,V48=1,V49=6. Distinguish L0/L1/L2 reads and untouched V4..F. Multiple caller49 retains A5 under the explicit no-alias premise.",
+        "Missing M still gives a zero-length full-clip record, raw duration, events, byte C18=1 and key. Length6 and request weight.2 yield length6 and 128 event records of weight1; key comes from node C8 via concrete +148. No ordinary weight or C188 time policy is applied.",
+        "Outer old15 selects the last nonoverlapping record; old16 overlaps count; FFFFFFFF wraps to B-C28. No local outer guard. Event cap128 is separate. Cleanup releases local K in reverse and clears its count; output handle increments and destructor/callback/lifetime boundaries remain explicit.",
+        "Execute finite checks and tie producer/reader/O30 claims to specific evidence. Models do not establish native behavior, selected paths or asset acceptance."
+      ],
+      "must_not_observe": [
+        "Positive modulo, lower clamping a, recovering multiple cycles from input8, using d instead of Te, interval-normalized magnitudes or conventional affine inverse.",
+        "OR/clear caller49 from child flags, suppress C180 record when M is absent, scale its length/events by request weight, or equate event cap128 with outer admission.",
+        "Call ordinary null initialization global unreachability; claim native execution, live controls, final movement or Saber acceptance from models."
+      ]
+    },
+    {
+      "id": "pinned-ordinary-host-admission",
+      "prompt": "Use the current clock reference for executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. Work only with valid explicit-address models. For ordinary host input h0/1/2, capK4, map[2,0,4], graphA2=0, instance25B0=0, byteR94=1 and signedL2, derive q and admission for each h. Repeat n0,h=0xFFFFFFFF,K5,L5; map[-1],K5,L6; map[-2],K0xFFFFFFFF,L0x7FFFFFFF. Also compare negativeL, c0, A2nonzero, and instanceflag nonzero. List which reads the gate itself skips in each early branch, and distinguish what the caller already read before invoking it. If R is unavailable but A2=1, can the whole host safely avoid the q-producer memory accesses? Does rejecting this ordinary host call disable nested GraphSlot updates or prove the meanings of timeDeltaMultiplier/isPaused/oneFrameToggle? What establishes versus only corroborates the conditional rig layout names? Execute finite unsigned/signed and ordered-read checks. Do not attach to a target, mutate fields, launch a game or install anything.",
+      "must_observe": [
+        "Mapped q2/0/4 gives reject/admit/reject; the map need not be monotone.",
+        "No-map hFFFFFFFF,K5,L5 yields q5 and rejects. Map[-1],K5,L6 yields q5 and admits. Map[-2],KFFFFFFFF,L7FFFFFFF yields qFFFFFFFE and rejects. Preserve sign extension followed by unsigned minimum and strict comparison.",
+        "Gate order is A2, instance b, R.c, L sign, unsigned threshold. A2 skips b/R; b rejection skips R; c0 skips L; negative L skips the comparison. The caller already runs the q producer, so A2 cannot make invalid R safe.",
+        "Negative L and c0 admit only after the prior flags permit it. A2/b reject this ordinary call; nested GraphSlot bypasses this gate. No E8/EC/ED playback interpretation follows.",
+        "SDK layout and retained pointer joins corroborate R without proving its native class/I40 producer. Execute finite signed/unsigned and ordered-read models; keep runtime and actual producer policy separate."
+      ],
+      "must_not_observe": [
+        "Reject every negative map entry, always replace it with K, allow equality, assume monotonic mapping, or skip caller q computation because A2 is set.",
+        "Call A2 universal pause, type R definitively from a header, infer reflected-control playback semantics or claim native/live observations."
+      ]
+    },
+    {
+      "id": "pinned-fullclip-query-producer",
+      "prompt": "Use the native motion-query reference for saved executable SHA256 d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4. Follow the concrete Machine-to-LocoState C180 route: identify C/B, initialized optional fields, selected node and output destination. Use valid, stable pointers and preinitialized writable descriptor storage for these finite examples. The destination descriptor has capacity3 and an existing logical count1. The LocoState query returns two valid full-clip records with distinct metadata; assume event conversion succeeds. Derive which result writes/count increments occur, the helper return and the Machine dispatcher response. Are old or just-written payload bytes cleared? Separately use empty capacity3 with one invalid then one valid source record, and with only invalid records. Also with source event count0 and raw duration4, compare existing output count0; count1 containing (start0,end1,duration1,phase0); and count2 containing (-1,1,2,phase0),(1,2,1,phase1). Derive event-helper AL, final count, duration and payload effects, and the consequences for an otherwise accepted valid outer record. Does no append prove final count preservation? Does the later output check protect the child C180 writer from a seventeenth record? For the TagSwitch C180 branch, ordered children A/B/C respectively append two/zero/one records; parallel labels are X/Y/Z and each appended record initially has zero leading QWORD. Give the final leading QWORD sequence, branch weighting and whether this is the ordinary current-state selection route. Does the inspected Machine refresh/reset establish initial output-count or per-output event-count clearing? Distinguish the full-clip key from the TagSwitch label. Give exact producer/readback/type evidence and remaining lifecycle/movement boundaries. Execute independent bounded descriptor-count and annotation checks; do not execute native code, game, Blender, debugger or installers.",
+      "must_observe": [
+        "Join typed Machine +F0 through the dispatcher to LocoState. C180 points at a zero-count local C28-record collection, C188/C190 are null; the native selected-node contract is [[P+48]]. The local unversioned SDK first-handle/field-name interpretation is conditional. Request weight1 and separate descriptor destination are explicit.",
+        "Capacity3/count1: first valid record advances to2 and writes slot1; second would reach3 and is rejected. Helper returns false; dispatcher clears logical destination count to0. Existing and newly written payload remains; no rollback or whole-buffer clearing inferred.",
+        "Empty capacity3: invalid then valid emits one record and succeeds. Only invalid records emit none and return false; distinguish count reset from stale payload. Output guard is later and does not protect source outer prefix16.",
+        "TagSwitch annotations after 2/0/1 appends are [0,X,Z]; only newest record receives its child label after a strict count increase. It visits all nonnull configured children on C180 branch with original request, rather than ordinary current/blending-state selection and weighting.",
+        "State label at P0 and SkAnim key at P+C20 are distinct. Inspected reset does not establish initial destination-count or event-count clearing. Output values and helper success do not prove aggregate O30 movement or live reachability.",
+        "Run explicit finite count/annotation checks and retain storage, callback, event conversion, lifecycle and actual selected-path limits.",
+        "Event helper writes D20C duration and appends using D208 without an entry reset, then validates/canonicalizes existing output. No-source cases yield count/AL 0/0, 1/1 and 0/0 respectively; negative first start clears count and preserves rejected payload. Outer ignores AL, so an otherwise accepted valid record succeeds. No-append is not a final-count preservation guarantee."
+      ],
+      "must_not_observe": [
+        "Admit newCount==capacity, treat failure as undoing prior payload writes, or assume the dispatcher leaves its logical count at2 after false.",
+        "Label every record appended by a child, use labelY when no record was appended, confuse source key and state label, or import ordinary state weights into the C180 route.",
+        "Treat later destination limit as an upstream source bound, claim reset zeroed unobserved counts, equate a cached locomotion descriptor to applied O30, or claim native/game execution.",
+        "Mock an always-AL0 duration-only helper for nonempty existing output; infer that no appends preserve all counts/payloads or skip validation. Treat no entry reset as no later count writes."
+      ]
+    },
+    {
+      "id": "coupled-between-key-contact",
+      "prompt": "An accepted hand and prop move together through a quarter turn. Use an offline fixture: H(t)=Rz(pi*t/2)*T(1,0,0) and P(t)=Rz(pi*t/2)*T(2,0,0), t in [0,1]. Only endpoints are stored; translations interpolate linearly and unit quaternions slerp. Independent native readback preserves endpoint values and times. Compute inverse(P)*H at both endpoints and at the interpolated midpoint, versus the analytic midpoint. Does the native value check establish preserved grip? If authored and native midpoints match, select the smallest correction and a regression. Preserve the approved motion; do not launch Blender or a game or claim visual acceptance.",
+      "must_observe": [
+        "Endpoint relative translation is (-1,0,0); interpolated midpoint is (-sqrt(0.5),0,0), an error 1-sqrt(0.5), about0.292893 units. Analytic relative translation stays(-1,0,0).",
+        "Identify between-key approximation distinct from serialization failure. Refine affected curve sampling on the native clock without changing approved pose/anatomy or unrelated phases.",
+        "Execute endpoint/midpoint arithmetic checks; compare joined authored/native/approved motion including controls and boundaries. Stored-key checks, visual review and actual game composition remain separate."
+      ],
+      "must_not_observe": [
+        "Claim endpoint serialization proves continuous contact or gameplay; lower tolerances, stretch bones, change the approved pose, or prescribe a fixed universal sample rate."
+      ]
+    },
+    {
+      "id": "locomotion-caller-overwrite",
+      "prompt": "Use the native motion-query chapter for a finite offline discriminator. A mode3 planner receives a valid kind1 descriptor with length2 and duration3; after the preceding clip subtraction, remaining distance is5. Both selections succeed. Compute the repetition helper output and the duration/scales actually retained by its caller. For first-auxiliary translation(3,4,0), use that retained motion scale and b=1; also calculate the zero-translation case with b=5. Separately, does fresh zero-filled instance storage prove cleared counts on reactivation, and does this auxiliary modification prove final entity movement? Execute arithmetic assertions and preserve the evidence boundaries. No game, native PE or Blender execution.",
+      "must_observe": [
+        "Helper n=3, duration9, time/motion scale5/6 and remaining distance0; mode3 subsequently overwrites duration with -1 while preserving both scales. The update therefore selects its negative-duration branch under the stated premises.",
+        "With t=(3,4,0), s=5/6 and b=1, output=(31/10,62/15,0), length31/6; zero t remains zero even with b=5. Execute exact or tolerance-qualified arithmetic checks.",
+        "Fresh allocation zeros require included layout, valid sizes and no intervening writer. Reactivation and event finalization have separate write histories. Per-graph first-auxiliary modification/host accumulation do not identify final O30 movement application."
+      ],
+      "must_not_observe": [
+        "Use nearest-even rounding, preserve helper duration9 as final caller state, infer a fresh reset on every activation, invent a direction for zero translation, or claim runtime/gameplay/full-investigation completion from these checks."
+      ]
+    },
+    {
+      "id": "optional-query-buffer-history",
+      "prompt": "Use the native motion-query chapter for an offline check. A C188 caller starts with V48=7 and V40=9; its selected child returns without writing V. Another caller has cleared V48 to0 but retained V40=9. What does each query return and what is still stored? For C190 evaluate (V228,V204)=(1,0),(0,3),(2,3). A provider array has IDs [44,17,44]; entries0 and1 match the requested type/action, but the parent gate rejects0 and admits1. What index does selection return and which provider does the wrapper query? Does a constructed owner storing K at1C0 prove K aliases G68 or that these results become final entity movement? Execute assertions under the supplied premises; do not read or execute the native PE, launch Blender or a game, or infer actual runtime reachability.",
+      "must_observe": [
+        "C188 returns7 verbatim in the first case; V40 stays9. With marker cleared it returns0 while V40 still stays9. The helper does not initialize V; a prior nonzero result is not proof this child wrote it. Execute the conditional byte-history assertions.",
+        "C190 returns0,0,1 respectively; both marker and DWORD count must be nonzero, and the returned byte is canonical. Distinguish this predicate from C188 byte passthrough.",
+        "Selection returns array ordinal1, and the wrapper chooses provider ID17. The FFFFFFFF failure sentinel and actual caller rejection are separate; do not use provider IDs as indices.",
+        "Local R/C/Q creation and owner context transport do not prove K/G68 identity, arbitrary callback purity, a reachable stale-result defect, native numeric parity or final O30/entity application. Inspect actual buffer initialization and caller use of AL."
+      ],
+      "must_not_observe": [
+        "Canonicalize C188 return7 to1, treat V40 as zero after clearing only V48, accept C190 marker1/count0, index the array by ID17, claim every caller checks AL, or promote a finite model/static path to native/game/full-investigation acceptance."
+      ]
+    },
+    {
+      "id": "query-context-pointer-construction",
+      "prompt": "Use the native motion-query chapter for an offline pointer-history check. On its captured construction path, instance I=0x10000 has state pointer0x40000 and graph G=0x20000 whose G68 field points to header H=0x30000. The allocated query context is K=0x50000. State K fields, the relationship between K and H, and the field that receives K. If G68 is later replaced with0x70000 and I28 with0x80000 without rebuilding K, which pointer values do the query wrappers still read? If the original header H now points to new array data, is that visible? Contrast null-G setup of a fresh instance with hypothetical reuse holding an old K. Does the164 counter reached by the refresh leaf belong to G, and does this complete the full animation investigation? Execute bounded assertions; do not execute a PE, game or Blender.",
+      "must_observe": [
+        "K0=H=0x30000, K8=0x40000, K10=I+0x2548=0x12548, byte K18=1 on construction; I38 receives K. K is a distinct allocation, not H.",
+        "Pointer replacement elsewhere leaves K0/K8 at their captured values; mutation through the original H is visible through the same stored header pointer. Execute assertions and distinguish pointer identity from pointed-to contents.",
+        "Fresh constructor I38=0 plus skipped null-G setup leaves null. Hypothetical reuse does not itself clear old I38 on that branch; actual reachability, later rebinds and lifetime are unverified.",
+        "Refresh reads164 on the pointee reached through embedded X=I2548, not an established AnimGraph counter. This closes one concrete construction join; graph controls, final movement, selected histories and native/runtime/visual evidence are not thereby complete."
+      ],
+      "must_not_observe": [
+        "Equate K with H, use G+68 as the header value, automatically rebind K after unrelated pointer replacements, declare a reachable stale-pointer bug or complete investigation/gameplay acceptance from the finite model."
+      ]
+    },
+    {
+      "id": "query-context-revision-teardown",
+      "prompt": "Use the native motion-query chapter for an offline lifetime check. What explicit initial values does the constructor give D0, D162 and D164, where D=[I2548]? Evaluate the connected revision leaf with (D164,D0,D162,entry10 flags)=(1,0,1,[2,7]) and (0xFFFFFFFF,7,0,[2,7]), then call it again without a new change. Does D162 force a revision increment? Instance I has nonnull G, K, D and state. Trace the explicit pointer clears and release order through2221E4 under normal returns and no callback/alias writes; contrast null-G setup after that reset with hypothetical reuse that skips it. Does this prove all callbacks safe or the full animation investigation complete? Execute bounded assertions; do not read/execute a PE, launch a game or Blender.",
+      "must_observe": [
+        "Constructor explicitly sets D0=0, D162=0, D164=1. D is the pointee through embedded X=I2548, not graph G or the address X itself.",
+        "First case retains revision1, clears D0/D162 and produces entry flags[0,5]. Second case wraps revision to0, clears D0 and preserves flags[2,7]. Both repeated calls retain the first result when there is no new dirty write. Execute the assertions; nonzero D162 alone does not increment D164.",
+        "Under the stated premises, reset clears I20, clears I38 before releasing old K, clears I2548 before destroying/releasing old D, then clears I28 before destroying/releasing old state. X remains an embedded address. A second modeled reset has no old objects to release.",
+        "Null-G setup after this reset leaves already-null K; the null-G branch alone does not reset old K on hypothetical reuse. Nested callbacks, all dirty-flag producers/rebinds, native parity, scheduling and final movement/runtime/visual acceptance remain unproved."
+      ],
+      "must_not_observe": [
+        "Increment on every call or solely because D162 is nonzero, forget32-bit wrap, treat X as a heap object freed by clearing D, release K twice under the stated sequential premises, infer callback purity, or declare full-investigation/game acceptance."
+      ]
+    },
+    {
+      "id": "query-context-batch-invalidation",
+      "prompt": "Use the native motion-query chapter for a finite offline check. A valid nonempty batch contains three copies of an already-active key with scalar1. Each call returns, changes no activation bit, and initially D0=D160=D161=R70=0 and D164=9. Track D0 and D164 after the batch, after one retirement, and after a second retirement without new work. Compare an empty batch and repeat from D164=0xFFFFFFFF. Separately,2AA094 handles an unchanged active key while R70=1 from prior work and D160=1,D161=0; what happens to D161? If instead D160=0,D161=1,R70=0, is D161 cleared? Does entry-status maintenance advance the context revision, and does the known local host order establish same-frame owner refresh or final entity movement? Execute assertions; no PE/game/Blender execution.",
+      "must_observe": [
+        "After the three-record batch D0=1 and D164=9, despite no changed key bit. First retirement gives D0=0,D164=10; second stays10. Empty batch from clean D0 retains9. Starting at FFFFFFFF wraps to0 on the first retirement and stays0 on repetition. Execute assertions.",
+        "R70=1 and D160=1 sets D161=1 even when this key operation was unchanged. The other case preserves existing D161=1; the false branch does not clear it. Distinguish prior resource dirtiness from the current key operation.",
+        "AEFCAC updates descriptor status and counters, not D0/D164. D0 marks coalesce, D162 alone does not advance revision, and the revision is an invalidation signal rather than a distinct-change count.",
+        "Pre-update command processing precedes the conditional host wrapper and its post-host retirement locally. The separate owner-refresh position, actual callback/rebind histories, native parity and final movement remain unproved. A comparison before retirement can see the old revision."
+      ],
+      "must_not_observe": [
+        "Skip invalidation because key bits are unchanged, increment D164 once per record or immediately on D0 store, clear pending D161 on the false branch, infer same-frame refresh or actual game/full-investigation acceptance from the finite model."
+      ]
+    },
+    {
+      "id": "final-merge-clipping-audit",
+      "prompt": "A weapon tactical reload is accepted. An earlier empty-reload finger correction was also accepted for one identified primary clip. A new tactical-only import passes untouched-clip preservation against its supplied native baseline, but that baseline predates the empty correction. The final archive preview again shows fingers buried in the pistol grip. An old surface report tested only a draft at one contact frame, and a later overlap test reports zero crossings. Use the retargeting skill to choose the smallest repair and the required final validation. Do not install a mod or invent a game result.",
+      "must_observe": [
+        "Identify the stale native import baseline and test whether the previously accepted empty correction survived in the final native readback; unchanged relative to the wrong baseline does not preserve the intended cumulative candidate.",
+        "Recover or merge the reviewed correction onto the current bank while preserving the working tactical action and unrelated channels; do not begin a new universal retargeter or move wrists/scale fingers without a demonstrated need.",
+        "Require a fresh hash-bound audit of final assembled evaluated geometry through all affected frames and relevant variants; sample contact/interpolation transitions, use crossing and justified embedded/clearance checks, and distinguish open/thin geometry or intentional contact.",
+        "Show matched source/before/final evidence and smooth normal/slow playback; disclose missing source/body/runtime coverage and remaining contact defects. Require identified user acceptance before installation and separate native/package checks from gameplay."
+      ],
+      "must_not_observe": [
+        "Certify the final build from the draft report, a successful export, zero surface crossings alone, or comparison to a stale importer baseline.",
+        "Assume aliases/body/ADS variants are equivalent from their names/duration, silently waive visible clipping, overwrite the working tactical action, or claim gameplay was verified."
+      ]
+    },
+    {
+      "id": "policy-cached-delta-and-stage-order",
+      "prompt": "Use the exact-build native motion-query chapter for an offline data-flow check. A verified moveComponent M has cached M22C=0.025 and selects the verified A table. Assume valid storage, normal returns, admitted M90, unchanged selected policy and no independent/alias writes. First,8AA04C reaches20D084 with XMM1=0: which delta reaches A.virtual18? Next,1F83D0 receives0.04 with M8B=0; track the cache and whether that driver dispatches. If the outer zero-argument caller later reaches20D084, what delta reaches A? Separately, enabled1F83D0 receives0.06 with M1FD=1: distinguish virtual10 and virtual18. Does every policy update refresh query results? Puppet PreTick is registered at stage0 and EntityAnimations/Update at stage8; the scheduler advances queue handles between stages but nested completion dependencies are not supplied. What ordering follows? A repeatable FixedUpdate_PreSolve submission is joined to VehicleSystem_SingleFixedStep; does it establish repeated ordinary V updates? Execute finite assertions and state what remains unproved. Do not read/execute a PE, attach a debugger, start a game or Blender.",
+      "must_observe": [
+        "Execute assertions: the first policy delta is0.025, not the outer0. Disabled1F83D0 stores0.04 before its conditional return without dispatching; the later admitted20D084 loads0.04. Enabled input0.06 updates the cache and invokes virtual10, but M1FD=1 skips its20D084/virtual18 call.",
+        "A.virtual10 is the verified ret0 no-op; virtual18 targets3B77CC and reaches refresh only through its A28/handle gates. D45CF0 additionally returns for null K or equal revision. Updating the policy does not guarantee new query writes.",
+        "Stage0 precedes8 in registration/submission, while nested completion, actual selected-object clock override, same-frame revision observation and runtime policy selection remain unproved. Queue handle rotation is not a blocking wait and UpdateSecondPhase is not scheduler stage2.",
+        "The repeated submission belongs to the connected vehicle route. It cannot establish repeated ordinary V updates or a stale-delta/Saber defect. Preserve alias/lifetime premises, native numerical parity and final movement/visual acceptance limits."
+      ],
+      "must_not_observe": [
+        "Replace the cached delta with the outer zero, suppress the disabled cache store, call virtual18 solely because virtual10 ran, infer query refresh on every update, equate ascending submission stages with proven nested completion, or transfer the vehicle loop to V.",
+        "Claim fresh independent evaluation, native execution, game observation, full-investigation completion or character acceptance from these finite assertions."
+      ]
     }
   ],
   "trigger_cases": [
@@ -287,6 +733,10 @@
     {
       "prompt": "Make a texture material variant for this pistol.",
       "activate": false
+    },
+    {
+      "prompt": "This Cyberpunk animgraph looks correct at rest but fails during sprint exit. Inspect its state transitions, blend clocks and masks.",
+      "activate": true
     }
   ]
 }

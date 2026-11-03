@@ -1,0 +1,4 @@
+interface:
+  display_name: "WolvenKit Docs"
+  short_description: "Consult cached official WolvenKit documentation"
+  default_prompt: "Use $wolvenkit-docs to read the relevant cached official documentation and explain the version-matched WolvenKit workflow."

@@ -1,8 +1,8 @@
 ---
 name: cyberpunk2077-animation-retargeting
-description: Retarget external or Cyberpunk weapon/player animation onto a verified Cyberpunk 2077 skeleton. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
+description: Retarget external or Cyberpunk animation onto a verified Cyberpunk 2077 skeleton and diagnose animgraph blending, masks and state transitions. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.5.0"
+  version: "1.8.17"
 ---
 
 # Cyberpunk 2077 animation retargeting
@@ -36,9 +36,18 @@ and other moving parts together. Use the exact candidate's native readback and
 verified assembly inputs; an older mechanism bank or a preview-only placement
 offset cannot stand in for the shipped data.
 
+Run the required [final-readback clipping audit](../cyberpunk2077-modding/references/animation-retargeting/qa-debugging.md#final-readback-clipping-audit)
+on the assembled, deformed candidate before installation. Check every affected
+frame and relevant alias/body variant; bind findings to final resource hashes.
+Also verify that [previously approved clips survived the merge](references/native-readback.md#cumulative-candidate-preservation). A draft audit or preservation against a
+stale import baseline cannot clear the final build.
+
 Actually inspect continuous playback at normal speed, plus slow playback/scrubbing
 of fast contacts. Use first-person and complementary side/close views and the
 [full-motion review checklist](../cyberpunk2077-modding/references/animation-retargeting/qa-debugging.md#mandatory-blender-visual-acceptance).
+For skin creases, also verify the renderer's normal source and evaluated corner
+normals at a fixed pose; positions/weights passing does not prove that authored
+normals survived import. Use the existing [skin/normal boundary check](../cyberpunk2077-modding/references/animation-retargeting/native-deformation.md#next-diagnostic-when-skin-still-fails).
 Record clip, variant, candidate hash, complete time range, views, observed defects
 and evidence. Unwatched renders, a few poses, contact sheets, numeric checks and
 successful native exports do not pass this gate. Missing coverage stays OPEN;
@@ -87,6 +96,32 @@ propagating the change. Preserve local translations, scales, lengths, wrist/body
 motion, other digits and unrelated clips. See [contact](references/contact-and-ik.md)
 for the reference-pose trap and the existing visual gate for installation approval.
 
+## Learn from validation failures
+
+When a significant defect or missed inspection is found, record both its technical
+cause and why the previous checks let it through. In the owning project's existing
+FAILURE/status record, link three outcomes: root cause, the smallest reusable
+prevention change in this skill/workflow, and an executed regression or a precise
+unrun check. Preserve rejected artifacts and failed subchecks. Update the relevant
+reference/helper and existing evals; do not create a second validation system or
+turn a case-specific offset/tolerance into a general rule.
+
+Before batching deformation work, complete the existing
+[finger/skin checkpoint](../cyberpunk2077-modding/references/animation-retargeting/finger-checkpoint.md)
+with matched opaque and wire surfaces, actual joints/bone orientations and skin
+influences at rest and representative contact/release/extreme keys. Inspect digits,
+thumb, wrist and arm together. Bone-direction agreement does not certify skin
+shape/contact; a repair that improves one measurement but damages curl, twist,
+wrist pose or reach remains FAILED. Reuse unchanged evidence; refresh affected
+views and native readback after a real change, then review complete motion.
+
+Inventory source animated local translations/scales before assuming a rotational
+adapter can represent the action. The existing
+[source-motion check](references/pipeline.md#source-motion-inventory) exposes these
+channels; it cannot authorize copying them onto native anatomical joints. Unhandled
+anchor travel needs a measured adaptation or a named OPEN limitation before
+expansion. See the [RPG7 validation lesson](references/bf6-workflow.md#rpg7-validation-failure).
+
 ## Gates
 
 | Gate | Required evidence before advancing |
@@ -103,6 +138,29 @@ for the reference-pose trap and the existing visual gate for installation approv
 Read only references needed for the current gate. For general tools/resource work
 use the sibling [modding skill](../cyberpunk2077-modding/SKILL.md); for actual
 motion/deformation review use [weapon inspection](../weapon-animation-inspection/SKILL.md).
+For graph-only defects or motion that changes during composition, use
+[animation graphs, blending and transitions](references/animation-graphs.md).
+For the inspected Cyberpunk 2.5 implementation, use the
+[native blend/state semantics](references/native-graph-semantics.md): transform
+order, quaternion interpolation, sparse tracks, weight history, priority and curves,
+with focused chapters for feature-driven duration, clock/inertialization,
+synchronization/events, shared-pose publication and concrete mesh skinning preparation. Use
+[named blend operators](references/native-blend-operators.md) for Blend2,
+BlendMultiple, Override or DynamicMask selection, missing inputs and command
+differences; use [motion adjustment](references/native-motion-adjuster.md) for
+the two distinct auxiliary solvers and identified extraction sampling. Use
+[contributor and motion queries](references/native-motion-queries.md) to distinguish
+ordinary weighted collection from optional interval/full-clip results, their
+time rules, write footprints, event ownership and locomotion lifecycle/planner
+consumers. Check the caller's later overwrites and cached inputs before treating
+a helper result or outer argument as the retained playback state. For query-refresh
+timing, distinguish registered stages from completion of their nested jobs. Consult the sibling
+[WolvenKit Docs skill](../wolvenkit-docs/SKILL.md) for cached primary documentation;
+where it does not specify a runtime contract, follow the exact implementation
+and validate a discriminator instead of inventing semantics from field names.
+Trace the selected state and its changing inputs through masks and downstream
+constraints; clip playback, a declared transition and final evaluated pose are
+separate evidence. Reuse the bounded graph/mask inspector before adding tooling.
 For BF6 and replacement-model ports, start with the
 [BF6 findings and platform boundary](references/bf6-workflow.md): measured interaction
 frames, native component bindings, arm controls, finger calibration and release coverage.

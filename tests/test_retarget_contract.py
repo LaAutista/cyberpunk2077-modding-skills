@@ -3,6 +3,7 @@ import copy
 import hashlib
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -83,6 +84,193 @@ class FixtureTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 1, result.stderr)
                 self.assertIn('FAILED:', result.stderr)
                 self.assertNotIn('Traceback', result.stderr)
+
+
+class SourceMotionTests(unittest.TestCase):
+    def setUp(self):
+        self.fixture = json.loads((SKILL / 'evals/fixtures/minimal.json').read_text())
+
+    def inspect(self):
+        return contract.inspect_source_motion(self.fixture)
+
+    def row(self, name='hand'):
+        return next(row for row in self.inspect()['bones'] if row['source'] == name)
+
+    def static(self):
+        reference = self.fixture['source']['skeleton']['reference_local']
+        self.fixture['clip']['local_samples'] = [copy.deepcopy(reference) for _ in range(3)]
+
+    def test_existing_fixture_root_translation_spike_is_open_without_changing_old_commands(self):
+        before = copy.deepcopy(self.fixture)
+        result = self.inspect()
+        root = self.row('root')
+        self.assertEqual(root['local_translation']['maximum_distance_from_first'],
+                         {'distance': .1, 'sample_index': 1, 'time': .5, 'value': [.1, 0, 0]})
+        self.assertEqual(result['translation_review_bones'], ['root'])
+        self.assertEqual(root['translation_disposition'], 'OPEN')
+        self.assertEqual(contract.validate_fixture(self.fixture),
+                         {'structural_fixture': 'CHECKED', 'behavior': 'OPEN', 'samples': 3})
+        self.assertEqual(contract.verify_mapping(self.fixture),
+                         {'structural_mapping': 'CHECKED', 'reference_pose_reconstruction': 'OPEN', 'mapped_bones': 2})
+        self.assertEqual(self.fixture, before)
+
+    def test_animated_clavicle_with_constant_parent_requires_disposition(self):
+        self.static()
+        self.fixture['source']['skeleton']['names'][1] = 'clavicle'
+        self.fixture['mapping'][1]['source'] = 'clavicle'
+        self.fixture['clip']['sample_times'] = [0, .125, 1]
+        for frame, t in zip(self.fixture['clip']['local_samples'], ([1, 0, 0], [1, .25, 0], [1, .1, 0])):
+            frame[1]['t'] = t
+        row = self.row('clavicle')
+        self.assertEqual(row['mapped_target'], 'hand')
+        self.assertEqual(row['parent'], 'root')
+        self.assertEqual(row['local_translation']['maximum_distance_from_reference']['time'], .125)
+        self.assertEqual(row['local_translation']['maximum_distance_from_reference']['distance'], .25)
+        self.assertEqual(row['world_position_working']['maximum_distance_from_first']['distance'], .25)
+        self.assertTrue(row['translation_requires_disposition'])
+        self.assertEqual(row['translation_disposition'], 'OPEN')
+        self.assertEqual(self.row('root')['world_position_working']['maximum_distance_from_first']['distance'], 0)
+
+    def test_rotating_parent_moves_child_without_local_translation_change(self):
+        self.static()
+        self.fixture['clip']['local_samples'][1][0]['q'] = [0, 0, math.sqrt(.5), math.sqrt(.5)]
+        row = self.row()
+        self.assertFalse(row['translation_requires_disposition'])
+        self.assertEqual(row['local_translation']['changed_from_first_sample_indices'], [])
+        witness = row['world_position_working']['maximum_distance_from_first']
+        self.assertEqual(witness['sample_index'], 1)
+        self.assertAlmostEqual(witness['distance'], math.sqrt(2))
+        for actual, expected in zip(witness['value'], [0, 1, 0]):
+            self.assertAlmostEqual(actual, expected)
+        self.assertFalse(self.inspect()['rotation_only_assumption_supported'])
+
+    def test_child_translation_middle_spike_survives_equal_endpoints(self):
+        self.static()
+        self.fixture['clip']['local_samples'][1][1]['t'] = [1, 0, -.4]
+        row = self.row()
+        self.assertEqual(row['local_translation']['changed_from_first_sample_indices'], [1])
+        self.assertEqual(row['local_translation']['maximum_distance_from_first']['distance'], .4)
+        self.assertEqual(row['local_translation']['minimum'], [1, 0, -.4])
+        self.assertEqual(row['local_translation']['maximum'], [1, 0, 0])
+
+    def test_constant_reference_offset_is_not_mistaken_for_no_translation_issue(self):
+        self.static()
+        for frame in self.fixture['clip']['local_samples']:
+            frame[1]['t'] = [1.5, 0, 0]
+        row = self.row()
+        self.assertEqual(row['local_translation']['changed_from_first_sample_indices'], [])
+        self.assertEqual(row['local_translation']['offset_from_reference_sample_indices'], [0, 1, 2])
+        self.assertEqual(row['local_translation']['maximum_distance_from_reference']['distance'], .5)
+        self.assertEqual(row['translation_disposition'], 'OPEN')
+
+    def test_animated_parent_scale_and_constant_child_reference_scale_offset(self):
+        self.static()
+        self.fixture['clip']['local_samples'][1][0]['s'] = [2, 1, 1]
+        for frame in self.fixture['clip']['local_samples']:
+            frame[1]['s'] = [1, 1, 1.2]
+        self.assertEqual(self.row('root')['local_scale']['maximum_distance_from_first']['distance'], 1)
+        row = self.row()
+        self.assertEqual(row['local_scale']['changed_from_first_sample_indices'], [])
+        self.assertAlmostEqual(row['local_scale']['maximum_distance_from_reference']['distance'], .2)
+        self.assertEqual(row['scale_disposition'], 'OPEN')
+        self.assertEqual(row['world_position_working']['maximum_distance_from_first']['distance'], 1)
+        self.assertFalse(row['translation_requires_disposition'])
+
+    def test_declared_centimeters_rotation_and_affine_offset_produce_meter_positions(self):
+        self.static()
+        self.fixture['conventions'].update(source_units='cm', working_units='m', target_units='m',
+            source_to_working=[0, -.01, 0, 10, .01, 0, 0, 20, 0, 0, .01, 30, 0, 0, 0, 1])
+        self.fixture['source']['skeleton']['reference_local'][1]['t'] = [100, 0, 0]
+        for frame, x in zip(self.fixture['clip']['local_samples'], (0, 50, 100)):
+            frame[0]['t'] = [x, 0, 0]
+            frame[1]['t'] = [100, 0, 0]
+        row = self.row()
+        self.assertEqual(row['world_position_working']['reference'], [10, 21, 30])
+        self.assertEqual(row['world_position_working']['maximum_distance_from_first']['value'], [10, 22, 30])
+        self.assertEqual(row['world_position_working']['maximum_distance_from_first']['distance'], 1)
+        self.assertEqual(self.row('root')['local_translation']['maximum_distance_from_first']['distance'], 100)
+        self.assertEqual(self.inspect()['units']['local_translation'], 'cm')
+        self.assertEqual(self.inspect()['units']['world_position_working'], 'm')
+        self.assertEqual(self.inspect()['units']['local_scale'], 'dimensionless')
+
+    def test_parent_order_is_resolved_before_world_composition(self):
+        expected = {r['source']: r for r in self.inspect()['bones']}
+        skeleton = self.fixture['source']['skeleton']
+        skeleton['names'].reverse()
+        skeleton['reference_local'].reverse()
+        skeleton['parents'] = [1, -1]
+        for frame in self.fixture['clip']['local_samples']:
+            frame.reverse()
+        actual = {r['source']: r for r in self.inspect()['bones']}
+        self.assertEqual(actual, expected)
+
+    def test_unmapped_source_translation_is_still_reported(self):
+        self.fixture['mapping'].pop(0)
+        self.fixture['unmapped_targets'] = [{'target': 'root', 'reason': 'native root preserved'}]
+        row = self.row('root')
+        self.assertIsNone(row['mapped_target'])
+        self.assertIsNone(row['target_reference_local'])
+        self.assertEqual(row['translation_disposition'], 'OPEN')
+
+    def test_missing_trs_incomplete_samples_invalid_mapping_and_nonfinite_rejected(self):
+        mutations = [
+            lambda f: f['clip']['local_samples'][1][1].pop('t'),
+            lambda f: f['clip']['local_samples'][1][1].pop('q'),
+            lambda f: f['clip']['local_samples'][1][1].pop('s'),
+            lambda f: f['clip']['local_samples'][1].pop(),
+            lambda f: f['clip']['local_samples'][1][1].update(t=[0, float('nan'), 0]),
+            lambda f: f['clip']['local_samples'][1][1].update(s=[1, float('inf'), 1]),
+            lambda f: f['clip']['local_samples'][1][1].update(s=[1, 0, 1]),
+            lambda f: f['mapping'][0].update(source='absent'),
+            lambda f: f['clip'].update(sample_times=[0, .5, float('inf')]),
+        ]
+        for mutate in mutations:
+            fixture = copy.deepcopy(self.fixture)
+            mutate(fixture)
+            with self.subTest(mutate=mutate), self.assertRaises((ValueError, KeyError, TypeError)):
+                contract.inspect_source_motion(fixture)
+
+    def test_finite_inputs_that_overflow_composition_are_rejected(self):
+        self.static()
+        for frame in self.fixture['clip']['local_samples']:
+            frame[0]['s'] = [1e308, 1, 1]
+            frame[1]['t'] = [2, 0, 0]
+        with self.assertRaisesRegex(ValueError, 'nonfinite source hierarchy result'):
+            self.inspect()
+
+    def test_hashes_bind_clip_payload_and_no_gate_promotion_is_invented(self):
+        result = self.inspect()
+        identities = result['identities']
+        self.assertEqual(identities['source_sha256'], self.fixture['source']['sha256'])
+        self.assertEqual(identities['target_sha256'], self.fixture['target']['sha256'])
+        self.assertEqual(identities['target_container_sha256'], self.fixture['target']['container_sha256'])
+        for field in ('behavior', 'translation_handling', 'scale_handling', 'retarget', 'visual', 'runtime'):
+            self.assertEqual(result[field], 'OPEN')
+        self.fixture['clip']['local_samples'][1][0]['t'][0] += .1
+        self.assertNotEqual(self.inspect()['identities']['clip_canonical_payload_sha256'], identities['clip_canonical_payload_sha256'])
+        self.fixture['clip'].update(animation_type='additive', base_definition='explicit source base, not supplied here')
+        result = self.inspect()
+        self.assertEqual(result['world_position_semantics'], 'UNCOMPOSED_ADDITIVE_HIERARCHY_DIAGNOSTIC')
+        self.assertEqual(result['retarget'], 'OPEN')
+
+    def test_cli_is_read_only_hashes_exact_fixture_and_reports_original_times(self):
+        with tempfile.TemporaryDirectory() as temp:
+            p = Path(temp) / 'fixture.json'
+            self.fixture['clip']['sample_times'] = [0, .125, 1]
+            p.write_text(json.dumps(self.fixture))
+            before = {q.name: q.read_bytes() for q in p.parent.iterdir()}
+            run = subprocess.run([sys.executable, '-B', str(SCRIPT), 'inspect-source-motion', str(p)], capture_output=True, text=True)
+            self.assertEqual(run.returncode, 0, run.stderr)
+            report = json.loads(run.stdout)
+            self.assertEqual(report['sample_times'], [0, .125, 1])
+            self.assertEqual(report['identities']['fixture_file_sha256'], hashlib.sha256(before[p.name]).hexdigest())
+            self.assertEqual(before, {q.name: q.read_bytes() for q in p.parent.iterdir()})
+            del self.fixture['clip']['local_samples'][1][0]['t']
+            p.write_text(json.dumps(self.fixture))
+            run = subprocess.run([sys.executable, '-B', str(SCRIPT), 'inspect-source-motion', str(p)], capture_output=True, text=True)
+            self.assertEqual(run.returncode, 1)
+            self.assertIn('FAILED:', run.stderr)
+            self.assertNotIn('Traceback', run.stderr)
 
 
 class ReceiptTests(unittest.TestCase):

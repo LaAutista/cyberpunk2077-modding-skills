@@ -359,3 +359,273 @@ aiming inspection, and its explicit MAX/native/visual/gameplay evidence limits.
 Project-relative adapter examples remain case-specific supplied-input routes;
 no private assets, scene files, installed binaries or live configuration is copied.
 These source-reported findings are not new installer validation results.
+
+## Animation graph investigation, 2026-11-02
+
+[Graphs, blending and transitions](skills/cyberpunk2077-animation-retargeting/references/animation-graphs.md)
+adds original synthesis from revision-pinned RED4ext.SDK/Codeware reflection,
+WolvenKit converter implementation and retained executable/resource-specific
+analysis. It separates declarations, converter behavior, scoped native evaluator
+branches, offline replay and in-game observation. It includes a concrete ranged
+reload state/variant/speed contract, mask fallback, LS/MS boundaries and indexed
+SharedMetaPose evidence, with the unresolved scheduling and interruption rules.
+Private assets, executable bytes and disassembly are not distributed. Existing
+visual acceptance, native readback, deployment authorization and runtime gates
+remain unchanged; this knowledge release does not certify any character or weapon.
+
+## WolvenKit Docs skill, 2026-11-02
+
+The [WolvenKit Docs workflow](skills/wolvenkit-docs/SKILL.md) is original guidance
+for consulting a private local documentation snapshot on each invocation. Its
+initial source is `CDPR-Modding-Documentation/WolvenKit-8-Wiki` revision
+`2fb9050fad45187867be9fd2b7a98a6ee98f7039`: 88 Markdown files, 432,799 bytes,
+complete expected path coverage and verified Git blob/SHA256 identities. The
+fetched upstream text, generated indexes and local receipts are not distributed
+in this repository. Documentation licensing is not declared by that source;
+no application-license inheritance or redistribution right is asserted. The
+skill preserves source/version attribution and distinguishes documentation
+retrieval freshness from the historical versions described by individual pages.
+
+## RPG7 validation learning 2026-11-02
+
+Private owning project: `ready-or-not-ports-to-cyberpunk/work/rpg7`, BF6 RPG7
+reload candidate ZIP SHA256 `95f5da7a7802adbec675006baab582ddf5178e5aa036d30d26675d7514d04f80`.
+The user rejected finger/thumb articulation. It remains uninstalled and visual
+FAILED. Local game/source assets and private adapters are not distributed here.
+
+Root cause: a rotation-only arm adapter silently omitted explicitly animated
+source shoulder-anchor translation; matching endpoints/source direction and
+native serialization did not check source travel or anatomical wrist bend. A
+ring-only contact correction then changed source curl. Actual surface/wire review
+was omitted despite the existing required hand checkpoint. This is an execution
+and validation failure, not proof that native checks exercised skin fidelity.
+
+Prevention is in the existing source-motion inventory, contact/finger checkpoint,
+joined before-after review and failure learning record. Regression coverage uses
+an intermediate-anchor synthetic fixture, concrete workflow evals and the retained
+private failure receipts below. No corrected RPG7, continuous-playback acceptance
+or game behavior is claimed. The actual diagnostic wire overlay itself briefly
+created miter spikes on thin triangles; opaque mesh/unchanged topology separated
+that display artifact before interpreting it as asset damage.
+
+| Private evidence path relative to that project | SHA256 |
+| --- | --- |
+| `gameplay/wrist-angle-diagnostic-v1/verification.json` | `5cdad07961e28b1ede6ae9487a537271d5ec1a534fefb2e443d82fe09fe34560` |
+| `gameplay/wrist-angle-diagnostic-v1/source-shoulder-verification.json` | `1333e8c47cc537659d729855d4a6b1445eb58becaef3da2189966ba4d48999d1` |
+| `gameplay/wrist-angle-diagnostic-v1/elbow-circle-verification.json` | `1e9582d00971498f858fba823a800706ce76313f2f542deb68679a5781613fc5` |
+| `gameplay/wrist-angle-diagnostic-v1/reach-estimate-verification.json` | `0fbaa7888a219a8c0e56b3a7693a6e1e65390eadf0c1b8df9466d4f7da81151e` |
+| `animations/finger-diagnostic-v1/verification.json` | `23b8c9ef95674cb97a901e61e03c1e34f54ef0de0b89ea83dfd34db5b752d8c4` |
+| `review/wire-inspection-v1/verification-final.json` | `864c7e15917e75d1d49f857d7bf07eacb1b526077f73d6e165009b72cf349eac` |
+| `review/wire-inspection-v1/skin-cap-measurements.json` | `824ab7baa174953bbb3d2f81281e9f391b8da63d74c01bd85c8e355c1980bad0` |
+| `animations/comparison-media/handoff-wrist-failed-v1.json` | `4d21e8efb3d725a27faadc22675f81c5f313dc28b50d44cd372748fa3f470bd8` |
+
+The source shoulder raw-channel equality, feasible-circle bound and numerical
+subsets have their own stated scope. An optional clavicle replay residual5.55um
+against5um and a twist reconstruction residual0.01717degrees against0.01degrees
+remain failed/precision-unresolved in their original logs; they are not rounded
+into passes. Skin-cap direction depends on the stated surface selector and is not
+an authored nail axis. These limitations are retained in the private findings.
+
+## Native animation implementation follow-through, 2026-11-02
+
+The [native graph supplement](skills/cyberpunk2077-animation-retargeting/references/native-graph-semantics.md)
+supersedes declaration-only uncertainty for identified branches of the pinned
+2.5 executable. New bounded static traces establish transform/quaternion math,
+Local/Ref order, deadband/clamp and track-presence rules, previous-frame weight
+data flow, signed transition priority/ties/forced handling, effective-duration
+selection, inertialization requests and cubic transition curves. Separate analyst
+checks exercise lane transcriptions and numerical counterexamples; they do not
+execute the game. Follow-up traces resolve equal-count captured contributions,
+count-different conversion/caller hazards, five custom curve kernels, feature
+database lookup and outgoing-slot production, Entity/Puppet clock policies,
+inertia history/quintic application, configured and tagged synchronization,
+loop/reset/event delivery, and normal shared-pose production/publication.
+Focused chapters link through that supplement. The work checked the cached
+WolvenKit sources first; undocumented contracts were derived from identified
+native call chains rather than inferred from reflected field names.
+
+Capture/curve findings and feature-duration data flow received independent
+instruction reviews. Seeded arithmetic checks, rational polynomial constraints,
+row-order fixtures and rubric-hidden agent evaluations remain different evidence
+from native execution. Private executable/disassembly artifacts remain excluded.
+Concrete live graph/feature/component inputs, alternate untraced engine paths,
+final rendering and visual/gameplay gates stay explicit; no Saber development or
+live mod/profile change was part of this skill investigation.
+
+The 1.8.1 follow-up identifies `InertiaBlend / OverrideMode`, its explicit
+default and setter/reset chain. It also traces typed skinning attachments to a
+concrete SkinnedMeshComponent destination: mesh-to-MetaRig name mapping and cache
+keys, unchanged mesh rig matrices, indexed 48-byte matrix writes, bounds and
+eye/float handoffs. Independent symbolic replay checked every lane of the saved
+four-entry matrix writer and QS converter and corrected a draft padding error
+before integration. Later-job payload tracing excludes the final second
+auxiliary QS from both submissions on the inspected path. Reflected graph
+pause/time controls and unobserved runtime inputs retain their stated limits.
+
+The typed SkAnimAdjuster evaluator supplies a conditional motion-extraction-based
+writer to that second auxiliary channel, with translation/normalized rotation
+and unchanged scale. This producer and the first-channel MotionAdjuster writer
+are distinguished from the unproved final movement application of the accumulated
+first channel. Neither channel is labeled camera or eyes from its position alone.
+
+The normal frame producer is connected from its QPC/QPF timer through engine,
+GSM, session and scheduler to the animation callback. Its elapsed seconds are
+rounded to float and capped at approximately .066 before global scaling; details
+retain the separate capped increment and scale for Entity/Puppet policy selection.
+Five arithmetic discriminators and a 23-window evidence audit check that static
+trace without claiming actual cadence or effective settings. Pinned WolvenKit
+mesh export/import source also distinguishes orphan-joint reconstruction,
+local-transform matrix rebuilding and the legacy matrix-preservation branch.
+These source contracts do not certify an asset round trip or a Blender preview.
+
+The 1.8.3 continuation preserves the concurrent 1.8.2 finger-parent correction.
+Constructor/table/consumer joins now identify the concrete float backend's
+signed16 source indices, read-before-secondary-lookup order, zero fill and
+write-pointer rotation. In particular FFFF addresses the preceding float; no
+renderer default or runtime fault is inferred. Explicit-address discriminators
+and independent saved-instruction reviews checked those statements.
+Further native traces establish fresh graph-state fill, authored additive-history
+setup, retained no-write values, normal arena cursor restoration/reuse, and typed
+A3 candidate production/admission including nested GraphSlot exclusions.
+The same continuation identifies the source-wrapper's four-range FNV fingerprint,
+conditional cache reuse, the dynamic-mask hierarchy/sentinel operation and its
+mutable-parent reads. Retained component handles resolve to named-float/status
+readers on the traced paths rather than the accumulated auxiliary QS. Ordinary
+keyed-record merging preserves input order and uses distinct matched
+coefficient remapping and unmatched attenuation, with capacity/purpose limits.
+Explicit reset and zero-time/nonfinite inertia branches distinguish initialization from
+polynomial application; native execution and actual selected inputs remain open.
+The Puppet factor producer separates its positive target clamp from optional
+unclamped curve interpolation; finite asset-conditioned zero-factor examples do
+not establish which curves a running character selects.
+These findings remain bounded to the identified paths; missing reflected-control,
+auxiliary-application, operator and live numerical/visual evidence is not relabeled
+as complete merely because documentation or installation checks pass.
+
+The1.8.4 operator continuation preserves1.8.3 and both unrelated dirty native
+helpers. New focused references distinguish Blend2, BlendMultiple, Override and
+DynamicMask selection/lifecycle/event/sync rules, ordinary versus compiled output
+domains, alternate query result algorithms and temporary auxiliary defaults.
+MotionAdjuster and SkAnimAdjuster now have separate direct correction equations
+and lifecycle evidence; a constructor-backed uncompressed extraction sampler
+establishes its single-turn interpolation. Independent instruction review and
+finite discriminators retain precise scope rather than claiming engine execution.
+Typed graph lifecycle traces distinguish three flag-filtered serialization paths
+from a named-property address-access route; a pinned official Blender add-on
+source follow-up establishes metadata transport only. Actual graph-control
+interpretation, aggregate auxiliary application and named producer/subtype/runtime
+boundaries remain explicit. No Saber repair or gameplay acceptance is implied.
+
+The1.8.5 producer continuation corrects the earlier unqualified "clone request"
+label: the retained source handle belongs to a generic property adapter, with
+actual Float/Bool accessors and conditional source-identity/registry/parser
+boundaries. Value transport still does not establish graph playback controls.
+The concrete Root update forwards its existing context without reading the
+graph fields; selected child behavior remains separate.
+An admitted successful Multiple property edit reaches its actual setup callback.
+Complete finite scalar copy/sort branches preserve payload bits and duplicate
+counts while retained pose links remain positional.
+The typed RigPart compiler establishes first-insertion precedence, tree order,
+signed index encoding and independently compiled special membership. A checked
+cursor-stall counterexample and the reserve-only name-map lifecycle prevent
+inventing subset/reset guarantees. MultiBlend provider ownership and graph array
+storage are joined separately from its parent-ID delegation interface; alternate
+query production and aggregate auxiliary application are still unresolved.
+Retained instruction reviews and finite discriminators support those bounded
+contracts, without target execution or asset/gameplay acceptance.
+
+The 1.8.7 query continuation separates contributor storage from graph update
+contexts, identifies twelve ordinary producers and traces the selected SkAnim
+interval/full-clip branches through their direct outputs and cleanup. It preserves
+signed remainder, the one-cycle flag, the extraction endpoint, native transform
+order, separate duration reads and branch-specific weighting. Multiple's local
+result footprint does not propagate the SkAnim turn-tag byte. A scoped independent
+instruction review checks full-clip storage, event ownership and cleanup without
+claiming arbitrary callback purity. Ordinary-host admission and its signed16-map
+producer are also closed locally; nested entry and actual graph-control semantics
+remain separate. These are implementation findings and analyst discriminators,
+not native execution, complete graph coverage or Saber acceptance.
+
+A subsequent shape-specific trace positively joins a nonnull C180 producer:
+typed LocomotionMachine refresh, admitted LocoState collection, instance-relative
+descriptor conversion and source-event cleanup. TagSwitch labels only the newest
+record emitted by each child. Strict destination capacity, partial payload writes,
+logical-count invalidation and unproved initial output-count/event-count reset
+remain explicit. This closes that producer and immediate reader, while C188/C190
+construction, later planning and aggregate O+30 application remain open.
+The event converter's lack of an entry reset is distinct from its subsequent
+validation: existing entries are processed even with zero source events, and
+the invalid-data branch clears the logical count. Finite zero/one/negative-start
+cases preserve this distinction and the outer producer's ignored return byte.
+
+The1.8.9 lifecycle/planner continuation preserves the concurrent1.8.8 hand/prop
+between-key sampling guidance. Native compiler/allocation evidence establishes
+fresh descriptor/event count zeros under layout and writer-history premises;
+it does not establish a reactivation reset. The typed Machine consumes converted
+lengths and scales its first auxiliary translation. Planner helpers and both
+mode callers are reconciled: ignored selection returns, defaulted fields and a
+later duration=-1 overwrite prevent helper-local equations becoming false final
+playback claims. Main/cold event conversion and finite zero/negative/tie cases
+remain distinct from native numerical parity. The lifecycle draft review was
+completed by root after workers became unavailable; new Machine/planner checks
+have no completed separate-agent review. C188/C190, actual graph-control use,
+final movement application and selected runtime/visual behavior remain open.
+
+The1.8.11 optional-query continuation preserves the concurrent1.8.10 validation
+failure and finger/skin guidance. Saved-build instruction evidence now identifies
+both local C188/C190 constructors, their separate success predicates, ordinal
+selection, named result consumers, a constructor-backed owner and its context
+binding. Conditional buffer histories distinguish old caller bytes from fresh
+publication without claiming a reachable game defect. K's own construction and
+graph G68 join, remaining cold/callback/lifetime behavior, native parity and final
+movement remain open. Root checked91 instruction anchors and56 retained capture
+receipts; no fresh independent worker evaluation was available. No target/game
+execution, Saber repair or full-investigation completion is implied.
+
+The1.8.12 context continuation establishes the instance setup and explicit
+query-context fields: K0 stores the graph G68 provider header, K8 the instance
+state and K10 an embedded context address. K and the header are distinct
+allocations. Guarded instruction evidence and finite pointer-history checks
+separate construction from later rebinds, fresh null defaults from hypothetical
+reuse, and the embedded-context version read from an AnimGraph property. The
+previous42/43-case checkpoints and unrelated/concurrent work are preserved.
+Root-only checks supply no fresh independent worker review, native/game execution
+or final movement/visual acceptance; the full investigation remains open.
+
+The1.8.14 lifetime continuation preserves the concurrent1.8.13 contact/helper
+guidance. It connects the embedded context's initial revision1, conditional
+32-bit increment and local change-flag reset to the ordinary instance wrapper,
+and traces pointer clearing and release order during instance teardown. Root
+checked55 instruction anchors,18 new guarded PE receipts and36 finite revision
+cases, with the preceding286 frozen evidence hashes revalidated. All44 prior
+workflow cases remain. The new case covers repeat/no-change behavior and the
+conditional reset path without treating callbacks or runtime scheduling as
+proved. No native/game/Blender execution or fresh independent worker evaluation
+is claimed; final movement, selected histories and full-investigation completion
+remain open. Separate private host-debugger fixture tests do not establish
+animation-engine behavior or a ready game observer.
+
+The1.8.15 mutation continuation connects a primary-instance D0 producer through
+pre-update command processing. Nonempty batches invalidate even when repeating
+an active key; several marks coalesce until conditional revision retirement.
+It distinguishes entry status/policy, resource bits, pending D161 and reset D162,
+and preserves the separate owner-refresh scheduling gap. Root checked91 retained
+instruction anchors,49 new guarded captures and30 finite cases;350 preceding
+frozen hashes were revalidated. Two author-check failures and their corrections
+are preserved. All45 prior workflow cases survive. This is static/model evidence,
+without fresh independent worker review, native parity, game/Blender execution,
+Saber acceptance or full-investigation completion.
+
+The1.8.17 policy-dispatch continuation preserves the concurrent1.8.16 clipping
+and cumulative-candidate guidance. Exact-build registration, constructor/table
+joins and decoded callers connect moveComponent's cached delta to the selected
+policy virtual18 update; an outer zero argument does not replace that cache.
+Puppet PreTick registers at stage0 and animation update at stage8, while nested
+job completion and actual selected policy remain unproved. A separate repeated
+pre-solver route belongs to the connected vehicle fixed-step submission, not
+an observed repeated V update. Root checked80 retained instruction anchors,
+95 guarded PE-read receipts and eight finite discriminators;511 prior frozen
+hashes were revalidated. No fresh independent-agent review, native execution,
+numerical parity or full-investigation completion is implied. A separate earlier
+identity-only game capture supplies current pointers and cleanup evidence, not
+these policy selections or a character's visual acceptance.

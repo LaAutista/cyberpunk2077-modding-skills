@@ -110,3 +110,22 @@ Do not synthesize a CHECKED receipt to satisfy this helper. The fixture/mapping
 validators prove structure only; native parity, measured reference poses, visual
 review and gameplay remain separate work. The workflow evals exercise these false
 success traps with realistic prompts rather than matching instruction wording.
+
+## Source motion inventory
+
+Before a rotation-only mapping or reach correction, run the existing helper on the
+complete decoded canonical fixture:
+
+```sh
+python3 -B scripts/retarget_contract.py inspect-source-motion /path/to/fixture.json
+```
+
+It inventories source local translation/scale changes and reference offsets using
+all supplied samples, including intermediate keys and the declared coordinate
+units. Static local offsets under a rotating parent are different from animated
+local travel. Preserve sparse/native keys in the decoder; an undersampled fixture
+cannot reveal a missing spike. Record each affected channel's intended native
+control/transform ownership, measured adaptation or unsupported status in the
+existing mapping/evidence record. A report is not a retargeter or permission to
+alter anatomical offsets; unaccounted travel keeps admissibility OPEN. Pair it
+with the actual posed source/native reach and skin checks at the relevant extrema.

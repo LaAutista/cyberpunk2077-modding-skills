@@ -31,6 +31,9 @@ Gate/question; baseline, fixture and candidate paths/hashes:
 Observed failure: time/view/bone/component and measured or visible discrepancy:
 Attempt 1: hypothesis, change, exact command, result, evidence path/hash:
 Attempt 2: hypothesis, change, exact command, result, evidence path/hash:
+Why existing validation missed it:
+Reusable prevention change and affected helper/reference:
+Regression: original failing fixture, expected rejection, corrected control, actual result:
 Remaining hypothesis A:
 Remaining hypothesis B:
 Discriminator: smallest test with distinct predicted observations for A and B:
@@ -42,3 +45,11 @@ Changing a file name, a nearby offset or the prose explanation does not restart 
 budget. Do not destroy failures when a later narrow result passes. If the required
 environment is unavailable, report exact manual steps and expected observations;
 continue independent tasks only, with the blocking gate visibly OPEN/FAILED.
+
+Treat a significant missed inspection as a validation defect even when technical
+checks passed. Identify the limited invariant those checks actually exercised;
+record the missing visual/channel/geometry coverage rather than weakening their
+thresholds. A prevention change is complete only when its regression catches the
+old failure (or is explicitly unrun), with a legitimate control to avoid an
+always-failing check. Use the existing project evidence and workflow evals. Keep
+real-asset, synthetic, visual and runtime results separate.

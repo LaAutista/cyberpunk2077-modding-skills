@@ -4,17 +4,26 @@ Reusable instructions and tested helpers for AI coding agents working with
 WolvenKit, redscript, CET, weapon rigs, animation adaptation and MCP tooling.
 The workflow comes from real modding work; evidence and limitations travel with it.
 
-The latest update records the BF6 MP5/L115 work: mandatory source/native video
+The toolkit records the BF6 MP5/L115 work: mandatory source/native video
 review, palm-relative finger calibration, native magazine bindings, arm-control
 ownership, first-install audio and faster readback. This is a growing porting
 toolkit, not a finished one-click converter. [Current findings and limits](skills/cyberpunk2077-animation-retargeting/references/bf6-workflow.md)
 separate demonstrated corrections from experiments and pending gameplay checks.
+
+Graph investigation now includes [pinned native blend and transition semantics](skills/cyberpunk2077-animation-retargeting/references/native-graph-semantics.md).
+Focused chapters cover capture/custom curves, feature durations, clocks and
+inertialization, synchronization/events, and shared-pose publication. These are
+build-scoped implementation findings, not observed gameplay or a complete engine.
+The [WolvenKit Docs skill](skills/wolvenkit-docs/SKILL.md) consults a private local
+documentation snapshot with source/version attribution. Neither replaces the
+separate native, visual and gameplay acceptance gates.
 
 | Start here | Use it for |
 | --- | --- |
 | [Agent operating contract](AGENTS.md) | Preserve baselines, work one gate, stop failed repair loops and report bounded evidence. |
 | [Animation retargeting skill](skills/cyberpunk2077-animation-retargeting/SKILL.md) | Take one source clip through mapping, target reconstruction, native readback, diagnostic packaging and runtime acceptance. |
 | [BF6 porting findings and platform boundary](skills/cyberpunk2077-animation-retargeting/references/bf6-workflow.md) | Source/native comparison, reference-grip repair, actual component bindings, controls, audio and attachment coverage. |
+| [WolvenKit Docs skill](skills/wolvenkit-docs/SKILL.md) | Read the relevant official documentation from a private local snapshot, with source/version attribution and controlled refresh. |
 | [Cyberpunk modding skill](skills/cyberpunk2077-modding/SKILL.md) | Choose implementation layers, inspect resources, select tools and verify packages. |
 | [Weapon animation inspection skill](skills/weapon-animation-inspection/SKILL.md) | Inspect donor/replacement rigs, full motion, collisions, hand contact and native exports. |
 | [Animation retargeting knowledge hub](skills/cyberpunk2077-modding/references/animation-retargeting/index.md) | Load focused chapters for source playback, rest/bind, proportions, finger alignment, contact, native helpers, events and evidence-based debugging. Local case receipts retain explicit acceptance limits. |
@@ -35,7 +44,7 @@ git clone https://github.com/LaAutista/cyberpunk2077-modding-skills.git
 cd cyberpunk2077-modding-skills
 ```
 
-For Codex, install **all three sibling skill folders** into your user skill directory:
+For Codex, install **all four sibling skill folders** into your user skill directory:
 
 ```bash
 bash scripts/install-skills.sh
@@ -55,9 +64,12 @@ deliberately. An unchanged installation is a no-op. Run only one installer at a 
 
 For a repository-scoped or other existing installation, pass
 `--dest "/path/to/project/.agents/skills"` (or your current skills directory).
-Keep the three folders adjacent so their relative links
+Keep the four folders adjacent so their relative links
 resolve. See [official skill discovery and invocation documentation](https://learn.chatgpt.com/docs/build-skills).
 These instructions install knowledge and helpers, not game tools, MCP servers or mods.
+WolvenKit Docs uses a separate private documentation cache; the upstream text is
+not redistributed here. See its [snapshot workflow](skills/wolvenkit-docs/references/snapshot-workflow.md)
+for initial acquisition and refresh. Updating skills does not overwrite that cache.
 
 The root `AGENTS.md` governs this checkout; it is not installed as a global agent
 policy. The retargeting skill carries its own gate/loop/baseline rules when invoked
@@ -72,12 +84,14 @@ and distinguish automated checks from runtime verification.
 $cyberpunk2077-animation-retargeting Take one sprint clip through the next blocking
 gate. Preserve the working reload and produce an isolated diagnostic slice.
 
+$wolvenkit-docs Consult the cached official documentation for exporting rigs and animations.
+
 $weapon-animation-inspection Inspect this replacement's donor rig and reloads.
 Preserve appearance and timing, inspect actual rendered frames, and verify native readback.
 ```
 
 Use `/skills` to confirm discovery; restart the client if the new skills do not
-appear. Other agents can read the three `SKILL.md` files directly or use their own
+appear. Other agents can read the four `SKILL.md` files directly or use their own
 skill installation mechanism. Automatic discovery in other hosts is not tested here.
 
 ## Setup/preflight review candidate

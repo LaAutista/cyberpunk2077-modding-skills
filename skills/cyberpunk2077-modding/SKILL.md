@@ -20,10 +20,12 @@ Combine routes when the task actually crosses layers.
 
 | Task | Start here |
 | --- | --- |
+| WolvenKit instructions, options, UI/CLI, extraction or import/export documentation | [WolvenKit Docs](../wolvenkit-docs/SKILL.md): read the relevant locally cached official pages and version notes before choosing commands or options. |
 | Implement scripts, tweaks, UI or native behavior | [Development playbook](references/development-playbook.md); use the [topic map](references/topic-map.md) to find the actual API/format source. Read [corrections](references/documentation-corrections.md) when adapting examples. |
 | Extract, import, cook, pack, inventory clips/materials or compare CR2W | [Resource pipeline](references/resource-pipeline.md). Keep the established native/Wine route, compatible donor containers, fresh outputs and native readback; check ignored fields before trusting a diff. |
 | Fit or port a weapon; inspect rigs, mechanisms, collision or hand contact | [Weapon workflow](references/weapon-rigging-animation.md): establish source pairing and the behavior/acceptance ledger before fitting. Use the sibling [inspection skill](../weapon-animation-inspection/SKILL.md) for playback/render/contact inspection. |
 | Retarget any animation; diagnose source playback, binds, fingers, proportions or native deformation | [Retargeting skill](../cyberpunk2077-animation-retargeting/SKILL.md) for one-gate execution and bounded repair loops; [technical hub](references/animation-retargeting/index.md), then the chapter for the failing stage. Complete the finger checkpoint before motion transfer where hands/digits are involved. |
+| Diagnose animgraph blending, masks, state transitions or composed-pose mismatches | [Graph investigation](../cyberpunk2077-animation-retargeting/references/animation-graphs.md): trace the component, state, clocks, pose/value links and downstream consumers against pinned resources. |
 | Inspect runtime state or evaluate a bridge/MCP/tool, including Edgemodders | [Tool selection](references/tool-selection.md). Discover existing bounded capabilities; distinguish source claims, protocol fixtures and live engine results. |
 | Resolve paths, prerequisites or Linux/Wine setup | [Environment](references/environment.md). Locate the actual tools and profile; historical paths and downloaded packages do not establish working installations. |
 
@@ -81,3 +83,10 @@ Use the [evidence register](references/animation-retargeting/evidence-register.m
 for dated case receipts and ownership context, then check the owning project's
 current checkpoint. Preserve failed reports and valuable references when updating
 knowledge; add source-linked discoveries at the relevant branch, not case history here.
+
+For a significant retargeting mistake or missed inspection, apply the existing
+[validation learning rule](../cyberpunk2077-animation-retargeting/SKILL.md#learn-from-validation-failures):
+record cause and missed detection, update the relevant shared prevention, and run
+a regression. Deformation acceptance requires matched opaque/wire skin plus
+joint/weight/orientation checks of the connected fingers, thumb, wrist and arm;
+no numeric direction/contact result substitutes for those views and full motion.

@@ -25,6 +25,15 @@ semantics; absent additive scale is not automatically an absolute unit-scale tra
 Strip the bind exactly once. Preserve the first sample even for
 AdditiveWithoutFirstFrame; do not delete it based on the type name.
 
+The writer adapter above does not define engine graph composition. For selected
+bases, additive-space and float-track modes, masks, previous-frame dependencies,
+blend clocks and state transitions, read [animation graphs](animation-graphs.md).
+The [pinned native formulas](native-graph-semantics.md) establish different Local
+and Ref composition orders and track-presence behavior for the inspected 2.5
+branches; do not substitute them for this interchange adapter or another build.
+Pin the actual converter version: a newer upstream export schema does not change
+the contract of the installed writer or establish native evaluation order.
+
 Preserve real stored key times, constant/hold keys and terminal endpoints. Header
 numFrames is not the stored key count. Raw keyed and SIMD-resampled output need
 different evidence; inspect serialized times independently. Tiny rotations with

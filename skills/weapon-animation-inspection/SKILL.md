@@ -21,6 +21,9 @@ For Unreal source recovery and graph-aware retargeting, use the
 [HK416-derived reusable workflow](../cyberpunk2077-modding/references/ron-port-workflow.md).
 Use the [additive preview helper](references/additive-preview.md) only with its
 explicit bind-relative export contract and chosen normal base.
+For state-dependent failures, trace [graph blends and transitions](../cyberpunk2077-animation-retargeting/references/animation-graphs.md)
+and label the inputs and operators actually reproduced in Blender. A clip-only
+preview cannot establish state selection, interruption or downstream IK behavior.
 Start weapon work with the [acceptance ledger and behavior matrix](../cyberpunk2077-modding/references/weapon-rigging-animation.md#acceptance-ledger).
 Keep source pairing, retarget, visual, native/package and runtime results explicitly
 PASS, FAIL or UNVERIFIED in historical ledgers; new retarget receipts use the
@@ -91,3 +94,10 @@ Use the established Blender scripting API when necessary; use Bash, jq,
 ImageMagick and FFmpeg for generic file, sheet and video work. Keep diagnostic
 cameras/arms out of exports. Native readback, sampled collision gates and offline
 views do not establish runtime graph, IK, material or gameplay behavior.
+
+For a significant retargeting mistake or missed inspection, apply the existing
+[validation learning rule](../cyberpunk2077-animation-retargeting/SKILL.md#learn-from-validation-failures):
+record cause and missed detection, update the relevant shared prevention, and run
+a regression. Deformation acceptance requires matched opaque/wire skin plus
+joint/weight/orientation checks of the connected fingers, thumb, wrist and arm;
+no numeric direction/contact result substitutes for those views and full motion.

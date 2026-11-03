@@ -1,7 +1,7 @@
 # BF6 weapon ports: findings and platform boundary
 
-Updated 2026-11-02 from the MP5/PW5A3 and L115 work. This is a reusable method
-with bounded case evidence, not a release declaration for either whole weapon.
+Updated 2026-11-02 from the MP5/PW5A3, L115 and rejected RPG7 work. This is a reusable method
+with bounded case evidence, not a release declaration for any whole weapon.
 The earlier RoN MP5 acceptance is a different source route and artifact. RoN work
 was later shelved in favor of BF6; retain its useful lessons without treating its
 missing-animation fallbacks as the BF6 baseline. Purchased replacement models,
@@ -112,6 +112,32 @@ release at 60 Hz. Compare source and target signed bends/angular changes on the
 same clock before calling a fast step a retarget twitch or smoothing it away.
 Linear world-matrix interpolation between source samples is an estimate, not
 proof of the source engine's interpolation. Preserve failed subframe comparisons.
+
+## RPG7 validation failure
+
+The RPG7 reload candidate was rejected for finger/thumb shape after native,
+serialization and abstract direction checks passed. Actual matched wire/opaque
+inspection had been omitted. This was a validation failure, not evidence that
+numeric tests were wrong or that source/target body differences could be ignored.
+
+| Demonstrated cause and missed check | Reusable prevention | Regression evidence |
+| --- | --- | --- |
+| The source animates its clavicle anchor by about255–260mm; the adapter kept the native anchor fixed. Endpoint reach passed while the native arm became nearly straight, adding18.6/36.4degrees of wrist bend at sampled keys. | Inventory complete source localT/S channels and their parent chain; declare handling before using a rotation-only adapter. Compare anatomical forearm/palm directions and extension ratio. Check the elbow-circle bound before changing a pole. | An animated-anchor synthetic fixture tests intermediate travel with equal endpoints. The private actual-channel and feasible-circle receipts reproduce the RPG7 failure; they do not prescribe native joint translations. |
+| V3 phalanx directions matched within0.004degrees, but native knuckle layout, segment lengths, terminal surface directions and twist differed. | Compare actual wire AND opaque skin, joint centers, own inverse binds/weights and source/native anatomical frames. Treat inferred tip axes and absent source runtime layers as uncertainty. | The private matched mesh fixture shows different wrap even with direction agreement. The workflow eval must reject a direction-only surface pass. |
+| A ring correction removed an isolated skin patch but opened distal articulation by20degrees. | Check source curl/twist, all digits, palm/wrist/arm and original contact together before propagating a local repair. Keep preservation checks and source fidelity separate. | Source/V3/V4 before-after comparison rejects the improved-penetration but damaged-articulation candidate. |
+
+These are measurements for one rejected asset/clip. Do not reuse their offsets,
+angles, tolerances or proposed reach bounds as another weapon's correction.
+Wire/opaque inspection found no evidence of swapped digit weights or inverse-bind
+substitution in the checked cases; that limited negative finding is not a whole
+rig/runtime pass. A wire-only spike caused by thin-triangle overlay miters was
+separated from unchanged actual geometry before interpreting it as a mesh defect.
+
+The smallest next work is one measured anatomical/surface/contact adaptation,
+with source travel handled explicitly, then the same joined checks and complete
+motion review. No corrected RPG7 or gameplay acceptance is claimed. See the
+[private evidence provenance](../../../PROVENANCE.md#rpg7-validation-learning-2026-11-02)
+and the existing [failure ledger](failure-ledger.md).
 
 ## Review and first-install coverage
 

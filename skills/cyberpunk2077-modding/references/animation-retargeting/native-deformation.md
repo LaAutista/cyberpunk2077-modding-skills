@@ -89,3 +89,15 @@ neutral reference. Record body variant, camera, normal source, chunk/palette and
 root context. If drivers already disagree, return to source/reference sampling.
 If skin matches a source compute result but the source anatomy is not accepted,
 label that shape question separately; a matching implementation cannot certify it.
+
+
+The RPG7 preview repeated this failure despite using the full helper evaluator:
+its mesh importer retained positions/weights/binds but ignored the authored
+`NORMAL` accessor and let Blender recompute posed geometric normals. Native
+readback and wire/position checks could not detect that separate shading boundary.
+At a fixed pose, compare imported normals, the identified source normal transport
+and actual evaluated corner normals, with vertex positions/topology unchanged.
+Reuse the verified source-compute evaluator when its palette/binds/weights match;
+do not smooth geometry, edit weights or rotate bones to hide a shading error.
+Retain the old geometric-normal render as a negative control. Fixing shading
+cannot clear a real wrist fold, skin intersection or grip mismatch.
