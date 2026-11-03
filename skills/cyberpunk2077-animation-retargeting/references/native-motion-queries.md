@@ -191,8 +191,9 @@ The normal route places command processing before the conditional host wrapper;
 inside that wrapper the ordinary host returns before1B5DB4 retires D0/D162.
 This is a local ordering result. The owner refresh3B77CC→D45CF0 now has a
 connected movement-policy caller and stage registration, as below. The ordinary
-nested-job dependency is now connected too: stage0 work precedes stage8 in the
-same scheduler traversal. A comparison before retirement can still see the old
+nested-job dependency is connected too: stage0 work precedes stage8 within the
+same bucket. Across buckets, use actual submission order rather than stage numbers.
+A comparison before retirement can still see the old
 value; do not infer same-frame refresh, rebuilt ordinals,
 all callback/rebind histories or final entity movement from invalidation alone.
 
@@ -233,10 +234,15 @@ and uses float+4 of its returned pair; identify that object's actual override
 before applying an Entity/Puppet clock formula. The nested worker label
 `UpdateSecondPhase` does not mean scheduler stage2.
 
-The same registrar places `EntityAnimations/Update` at stage8. Scheduler
-`0x1408ED21C` traverses twelve stages for each of three buckets, using one queue
-and advancing its handles between nonempty stage lists. The ordinary dependency
-and worker path below now connects **completion of nested work** to that ordering.
+The same registrar places `EntityAnimations/Update` at stage8 with bucket mask7.
+Both descriptors therefore participate in buckets0,1,2 when enabled. Scheduler
+`0x1408ED21C` is bucket-major: it resets the twelve-stage scan at8ED247/8ED24A,
+then advances the bucket at8ED2F8. With one queue and handle advances between
+nonempty stage lists, the relevant order is PreTick0, Animations0, PreTick1,
+Animations1, PreTick2, Animations2, where the suffix is the bucket. Stage8 in
+bucket0 precedes stage0 in bucket1; all stage0 work does not precede all stage8 work.
+The ordinary [nested-job completion contract](#nested-stage-completion) below joins
+earlier submitted groups to later ones.
 `0x14027316C` remains an asynchronous handle advance, not a blocking wait. Stage
 numbers or the advance call alone would not have established this contract.
 Actual selected-instance identity, clock override and callback histories remain
@@ -277,8 +283,9 @@ still releases the copied payload before its worker returns.
 
 For example, with parent count1: submit child A ->2, finish A ->1, submit B ->2,
 return parent ->1, finish B ->0. Under the ordinary stable-storage/normal-return
-premises below, this joins the traced stage2 PreMove workers before later stages
-in the same traversal. It is neither a synchronous wait nor a fixed frame delay.
+premises below, this joins the traced stage2 PreMove workers before later submitted
+groups on that queue, including later stages of the same bucket. It is neither a
+synchronous wait nor a fixed frame delay.
 The callback's other jobs have not all had their behavior reconstructed.
 
 Private provenance: `shared-pose-deep/query-upper-clock-findings.md` and
@@ -291,7 +298,11 @@ final O30 application or character acceptance follows from the owner join.
 
 Use this contract only for the identified build and ordinary connected queue path,
 with valid handles, nonoverflowing counters, normal returns and stable storage.
-It does not cover arbitrary detached/captured queues or external state mutation.
+Child enrollment must be closed when completion is accepted, or future enrollment
+must be protected by an already-counted callback. The count cannot reach zero
+while that callback can still add its ordinary children. This completion epoch
+does not cover new work submitted through a captured handle after zero, arbitrary
+detached queues or external state mutation.
 
 Stage submitter8ED324 passes queue10 as predecessor and queue18 as completion
 handle to272B40. Submission increments completion.count18 before queuing or
@@ -299,7 +310,8 @@ deferring the job; the zero-to-one transition retains a reference at1C. If the
 predecessor is pending, its byte20 gate protects a count recheck and linked-list
 insertion at head0. If completion wins that race, the job takes the ready route.
 27316C moves a pending queue18 into queue10 and allocates a new empty queue18.
-Jobs sharing a stage can run concurrently; subsequent stages depend on its handle.
+Jobs sharing one stage list can run concurrently; later submitted groups depend
+on its handle. The stage number alone does not order different buckets.
 
 Worker2732D0 copies a ready job and its handle, builds context E with E20 pointing
 to a local handle cell, and invokes the callback at2735DF. Wrapper4BA494 constructs
@@ -317,6 +329,10 @@ count at273760;271F00 detaches further waiters on a guarded zero recheck. The
 worker drains those linked records too, propagating completion through nested groups.
 If admission found the child already complete, the no-op can run through the normal
 ready/callback/decrement path. Reference count1C is distinct from pending count18.
+The byte20 gate protects waiter-list operations; it does not serialize every count
+increment. A zero recheck cannot fence arbitrary work newly enrolled after that
+observation. Such work needs its own dependency/epoch, not a stronger reading of
+the existing fence.
 
 Parallel submitter274208 contributes once per worker, including deferred workers.
 Its range wrapper2729F4 invokes the optional terminal callback on the last terminal
@@ -333,15 +349,21 @@ need no pending join. If the join has reserved its parent contribution and the
 child finishes before the guarded recheck, it takes the ready route. Returning
 from the callback alone cannot clear the pending-child example.
 
-For enabled descriptors in this traversal, this connects stage0 completion before
-stage8 execution. A stage0 refresh cannot be described as observing a revision
-retired later by stage8 of that same traversal. It does not prove a one-frame delay,
-exclude other writers/refresh routes, identify V's active policy or diagnose Saber.
+For enabled descriptors in the same bucket, this connects stage0 completion before
+stage8 execution. That stage0 refresh cannot see a revision retired later by that
+bucket's stage8. It does not exclude an earlier bucket's stage8 retirement. Puppet
+1F8470 filters objects by `(object.byte15A & 15) == bucket`; EntityAnimations
+D33BEC forwards the bucket to79D980, whose time-bearing79CFB0/79D574 graph routes
+select bucket1. Joining the selected policy object, animation instance, context
+revision and bucket is still required. Neither registration mask7 nor this ordering
+proves that V uses a particular path, a fixed frame delay or a Saber defect.
 The pinned [SDK group declarations](https://github.com/wopss/RED4ext.SDK/blob/8ebb8da485b4ab22081e9be65de70fe1193538da/include/RED4ext/JobQueue.hpp)
 corroborate group completion; the address joins above come from saved-build code,
 not a separately verified mapping of SDK address hashes. Root instruction checks
-and finite interleaving models support this result; native execution, fresh
-independent-agent review and final game/visual acceptance remain unverified.
+and finite interleaving models support this result. A later independent instruction
+audit corrects the former traversal-wide shorthand to bucket-major ordering and
+makes the closed-enrollment premise explicit. It preserves the original checks;
+native scheduler execution and final game/visual acceptance remain unverified.
 
 ## C188: interval extraction and selected result writes
 

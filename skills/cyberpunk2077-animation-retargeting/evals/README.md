@@ -1,5 +1,11 @@
 # Retargeting workflow evals
 
+The `scheduler-bucket-and-completion-epoch` case checks bucket-major submission
+order and the limit of a completed dependency when unrelated future work is added.
+It preserves same-bucket ordering and ordinary closed enrollment without assuming
+that equal masks join the selected policy, animation instance and revision.
+
+
 The `native-inverse-euler-poles` case checks rounded threshold decisions for
 adjacent quaternion inputs and distinguishes coordinate agreement from pole
 orientation loss. Execute the supplied finite bit calculations; the documented

@@ -633,7 +633,8 @@ these policy selections or a character's visual acceptance.
 The1.8.18 continuation connects ordinary nested-job completion to the registered
 animation-stage order. Saved-build submission, handle rotation, parent-context
 construction, finalization, worker decrement and waiter propagation establish a
-conditional stage0-before-stage8 dependency, including the traced parallel work.
+conditional same-bucket stage0-before-stage8 dependency, including traced parallel
+work. The 1.8.23 audit below corrects the earlier traversal-wide shorthand.
 The caller still advances asynchronously; this does not prove a selected V policy,
 same-frame revision observation, a one-frame delay or a character repair. Root
 checked166 instruction anchors,25 guarded PE reads,631 finite parent/child
@@ -724,3 +725,17 @@ It found the imported normalization helper missing from the initial Euler hash
 manifest. Its unchanged earlier pin is retained as an explicit post-run
 supplement, not a retroactive pre-execution check. The numerical comparisons
 passed independently of that helper; original manifests remain preserved.
+
+The 1.8.23 review corrects scheduler scope: the retained loop is bucket-major,
+with both Puppet PreTick and EntityAnimations registered for all three buckets.
+A same-bucket stage0 dependency remains supported, while bucket0 stage8 precedes
+bucket1 stage0. Equal registration masks do not join a selected policy object,
+animation instance and context revision. The ordinary nested completion proof
+also requires closed enrollment or an already-counted callback protecting future
+children; a completed fence cannot cover unrelated work added after zero.
+Original reports, finite checks and the broader historical wording are preserved
+privately. The corrected reference and workflow case distinguish waiter-list
+serialization from pending-count increments and model the admitted completion
+race. These are instruction/finite-model findings, not native concurrency or a
+game observation. Existing clipping/preview gates and all earlier case IDs remain.
+The investigation remains active and Saber remains held.
