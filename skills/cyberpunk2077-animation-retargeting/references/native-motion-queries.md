@@ -245,8 +245,47 @@ separate from the conditional static ordering proof.
 A third decoded driver route can repeatedly submit `FixedUpdate_PreSolve`
 work, but its connected outer label is `VehicleSystem_SingleFixedStep`.
 Keep that owner and route attached to the evidence: it does not show repeated
-ordinary V updates. The remaining first-route upper producer, concrete selected
-clock, final movement application and native numerical parity are still open.
+ordinary V updates. The first route is now connected to the vehicle update owner
+below. Concrete selected V clock, final movement application and numerical parity
+for these query/clock paths remain open.
+
+#### Vehicle update owner and direct worker completion
+
+Registration1415DA270 names `gameVehicleSystem`, size20A80 and type table14366D0E0.
+Its constructor thunk141934F44 reaches9C4624, whose primary-table store1430A31D8
+is supported by the complete base-constructor register flow. Primary slot0
+returns the same descriptor143BC83B8; slot33/+108 isDAB65C. That method binds the
+object to `VehicleSystem_Update`, group4/stage2/mask1. This establishes the owner
+of the constructor/table route, not a sampled live system or V selection.
+
+The `VehicleSystem_PreUpdate&PreMove` submission copies its incoming frame delta
+unchanged through the explicit payload fields to the movement driver's M22C.
+The copied delta is an input; the label does not identify V's effective clock.
+The fixed-step route above remains a separate vehicle path.
+
+The first submission passes Q10/Q18 cells through the complete A0CBEC wrapper
+to272B40. Its completion group is C=Q18. Worker context E20 points to C's cell.
+The child maker21ACC00 passes E20 as the completion-cell argument through the
+complete A0D2D0 wrapper to274208. A separately created group273008(0), initialized
+with pending count0, is the predecessor. It is not the child's completion group.
+
+Every submitted parallel worker contributes directly to C18. The original
+parent job retains its own count until callback return, preventing transient zero
+while children finish during incremental submission. These workers need no extra
+nested-queue destructor to join C. With no work, the connected terminal callback
+still releases the copied payload before its worker returns.
+
+For example, with parent count1: submit child A ->2, finish A ->1, submit B ->2,
+return parent ->1, finish B ->0. Under the ordinary stable-storage/normal-return
+premises below, this joins the traced stage2 PreMove workers before later stages
+in the same traversal. It is neither a synchronous wait nor a fixed frame delay.
+The callback's other jobs have not all had their behavior reconstructed.
+
+Private provenance: `shared-pose-deep/query-upper-clock-findings.md` and
+`query-vehicle-join-findings.md`; 50 new instruction anchors, 19 guarded reads,
+395 finite direct-parent schedules and 74 prior source bindings checked. This is
+static/model evidence. No actual scheduler execution, V policy/clock observation,
+final O30 application or character acceptance follows from the owner join.
 
 #### Nested stage completion
 

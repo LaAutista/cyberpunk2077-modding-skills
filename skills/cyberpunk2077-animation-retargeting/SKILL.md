@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget external or Cyberpunk animation onto a verified Cyberpunk 2077 skeleton and diagnose animgraph blending, masks and state transitions. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.8.18"
+  version: "1.8.19"
 ---
 
 # Cyberpunk 2077 animation retargeting
@@ -145,6 +145,8 @@ For the inspected Cyberpunk 2.5 implementation, use the
 order, quaternion interpolation, sparse tracks, weight history, priority and curves,
 with focused chapters for feature-driven duration, clock/inertialization,
 synchronization/events, shared-pose publication and concrete mesh skinning preparation. Use
+[measured normalization limits](references/native-normalization.md) when judging
+float32 parity, zero/overflow behavior or a simplified quaternion model. Use
 [named blend operators](references/native-blend-operators.md) for Blend2,
 BlendMultiple, Override or DynamicMask selection, missing inputs and command
 differences; use [motion adjustment](references/native-motion-adjuster.md) for

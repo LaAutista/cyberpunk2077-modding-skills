@@ -1,5 +1,12 @@
 # Retargeting workflow evals
 
+The `native-normalization-domain` case applies the measured native leaf's input
+range and MXCSR limits without treating a double equation as universal parity.
+The `vehicle-direct-completion` case checks direct child contributions and the
+parent's still-pending count during incremental submission, while preserving
+the distinction between a vehicle owner and V's selected clock. Neither case
+authorizes a game run; fresh independent evaluation is separate from root checks.
+
 [Cases and trigger prompts](retargeting-cases.json) test agent decisions separately
 from deterministic Python/native helper tests. [minimal.json](fixtures/minimal.json)
 is synthetic two-bone data with intentionally synthetic identity hashes. It is not

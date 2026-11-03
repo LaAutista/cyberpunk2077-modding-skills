@@ -644,3 +644,19 @@ six routing cases remain; two earlier scheduling criteria are qualified to avoid
 requiring an obsolete global unknown, and a new dependency case makes49. Fresh
 independent-agent review, native concurrency/numerical parity and visual/game
 acceptance remain open. No new game attachment or Saber change is implied.
+
+The1.8.19 continuation adds actual isolated execution of one exact89-byte
+quaternion-normalization leaf:920 synthetic inputs in two controlled MXCSR modes,
+1834 finite bit comparisons and1760 ordinary reference comparisons. The maximum
+ordinary component/norm errors are about1.183e-7, within predeclared3e-7 limits.
+Tiny/huge finite inputs demonstrate why a stable double normalization is not
+universal native parity. A buffered-output failure and its wrapper-only fix are
+retained; changed code/constant admission fails before execution. This does not
+execute the interpolation selector, CRT, graph or game or explain a character bug.
+The vehicle supplement closes the constructor-backed gameVehicleSystem owner
+and direct worker-to-parent completion joins with50 anchors,19 guarded reads,
+395 finite schedules and74 prior bindings. Its clock remains separate from V.
+All49 earlier workflow IDs and six routing cases remain, with two new cases.
+Root review/finite checks do not replace fresh independent evaluation; full
+investigation, selected histories, final movement and visual/game acceptance
+remain open. No game launch, attachment, live mod change or Saber work occurred.

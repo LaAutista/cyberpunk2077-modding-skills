@@ -8,8 +8,9 @@ All addresses below are preferred-image addresses, not portable hooks. Class
 registration, constructor stores and instance vtables establish the operator
 identities; constants and branch instructions establish the formulas.
 
-These are scoped implementation findings and analyst numerical checks, not native
-code execution or game observations. Use finite valid transforms, valid mask
+These are scoped implementation findings and analyst numerical checks, with one
+[isolated native normalization measurement](native-normalization.md). The other
+equations remain unexecuted models; none is a game observation. Use valid transforms, valid mask
 indices and the identified branch. Recheck identities before applying them to a
 different build. The focused references cover [capture and custom curves](native-capture-curves.md),
 [feature durations](native-feature-duration.md), [clocks and inertia](native-clock-inertia.md),
@@ -43,8 +44,10 @@ quaternion's signs when the dot product has its sign bit set, then uses the
 absolute dot. For dot greater than float32(0.99), it normalizes the linear blend.
 Otherwise it uses sine/angle SLERP weights. The exact stored threshold is
 `0.9900000095367432`, not the often-assumed 0.9995. The sign-mask initializer and
-acosf/sinf calls were traced. The normalization helper's zero-norm branch returns
-zero lanes, not identity; this is not a valid-input substitute for validation.
+acosf/sinf calls were traced. The normalization helper computes reciprocal and
+product before masking zero-norm output to zero lanes, not identity. Its measured
+underflow/overflow limits require input-range validation; finite/nonzero alone
+does not guarantee a unit output. See the [measurement](native-normalization.md).
 These equations are not promises of bit-identical Python/native float behavior.
 
 Ordinary transition blend helper `0x1408e3548` reaches this same `L` through

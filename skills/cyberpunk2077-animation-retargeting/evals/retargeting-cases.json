@@ -725,6 +725,32 @@
         "Release parent dependents when only its body or one parallel worker finishes; treat1C as the work count, treat27316C as a blocking wait, or omit the completion race.",
         "Apply the ordinary-path proof to arbitrary detached/captured queues or claim actual V identity, native execution/parity, fresh independent review or character acceptance."
       ]
+    },
+    {
+      "id": "native-normalization-domain",
+      "prompt": "Use the pinned native normalization measurement for an offline diagnosis. Compare outputs for quaternions (2^-74,0,0,0), (2^-63,0,0,0), (2^64,0,0,0), and zero under masked round-to-nearest gradual underflow versus FTZ+DAZ. Execute a small independent double normalization comparison for the nonzero cases. Why does finite/nonzero validation alone fail? The ordinary measured corpus passed3e-7 error limits: does that certify the interpolation selector, every input, the game MXCSR or a stretched character? Do not execute a PE, game or Blender.",
+      "must_observe": [
+        "Use the measured exact leaf:2^-74 yields(1,0,0,0) with gradual underflow but all+0 with FTZ+DAZ;2^-63 yields the unit axis in both;2^64 yields all+0 in both;zero yields all+0, not identity.",
+        "Execute the double comparison: each finite nonzero axis input gives a unit axis with stable double norm, exposing categorical disagreement at tiny/huge inputs. Native squared sums round/underflow/overflow before the reciprocal product and final zero mask.",
+        "Keep920 inputs/two modes,1834 finite bit pairs and1760 ordinary reference pairs as scoped host measurements. The zero mask follows division/multiplication; it does not prevent all masked exception flags.",
+        "No upstream interpolation/trig, selected-input reachability, actual game mode or character fix is proved; retain the wider numerical/visual/game gap."
+      ],
+      "must_not_observe": [
+        "Treat finite nonzero as sufficient for all inputs, return identity for zero, extend the3e-7 result to all quaternions/CPUs or claim game execution, selected MXCSR, a Saber cause or full investigation completion."
+      ]
+    },
+    {
+      "id": "vehicle-direct-completion",
+      "prompt": "Use the pinned native motion-query chapter. Identify the owner of the first movement-update route and distinguish its PreUpdate/PreMove submission from the separately traced fixed-step route. A valid parent job contributes1 to completion C; its worker context E20 points to C. The child maker passes E20 as completion cell and a new zero-pending group as predecessor. Track C through: submit A, A finishes, submit B, parent returns, B finishes. Execute the counter assertions. Does a separate nested-queue destructor have to join these particular children? Does this identify V's clock or prove final aggregate motion? No native/game execution.",
+      "must_observe": [
+        "Identify constructor/table-backed gameVehicleSystem, VehicleSystem_Update group4/stage2/mask1 and the copied delta as an input. Keep the separately traced VehicleSystem_SingleFixedStep route distinct.",
+        "Execute counts[2,1,2,1,0]. Each child contributes directly to C, while the parent prevents transient zero during incremental submission. The new zero-count group is predecessor, not completion.",
+        "These direct workers need no extra nested-queue finalizer to join C. The ordinary enclosing queue contract conditionally includes this stage2 work before later stages; handle rotation is not a synchronous wait.",
+        "V selection/clock, other callback jobs, final O30 application, native scheduling and visual/game acceptance stay open."
+      ],
+      "must_not_observe": [
+        "Send completion to the temporary predecessor, decrement to zero after A while the parent is active, require an extra destructor for these direct children, call the vehicle delta V's observed clock, or claim full investigation/game acceptance."
+      ]
     }
   ],
   "trigger_cases": [
