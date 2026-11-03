@@ -695,3 +695,32 @@ comparison, including NaN skip, with the prior text and regression retained.
 Native code and private input/output logs are not distributed.
 These finite checks do not close other numerical domains, selected inputs,
 lifetimes, independent review coverage or visual/game acceptance. Saber is held.
+
+
+The 1.8.22 milestone measures the complete inverse quaternion-to-Euler routine
+with actual atan2/asin dependencies in 4,196 calls over 2,098 fixed inputs. It
+confirms equality takes the ordinary branch and demonstrates alternating
+ordinary/pole decisions across four adjacent float32 inputs. Coordinate error
+stayed within 0.000060781 degrees and ordinary unit reconstruction within
+0.000089138 degrees; pole reconstruction loss reached 4.82212 degrees in the
+finite corpus. The latter is measured loss, not a global bound or a pass against
+the ordinary 0.001-degree limit. Native forward conversion and constraint
+application were not executed, and selected game inputs remain unknown.
+
+A fresh independent private audit checked 128 retained mask/weight hash bindings,
+14 code ranges, both Python checkers and independently authored numerical models.
+It found a source-preservation wording error: 672 base/output-alias calls
+intentionally changed that writable buffer. The reference now qualifies distinct
+output versus alias; original evidence and wording remain retained privately.
+Separate normalization and cached-delta workflow evaluations executed their
+finite checks without native or game execution. All 53 prior cases and six
+triggers are preserved, with one added inverse-Euler case. The full investigation
+and Saber acceptance remain open. No native code or private game assets are
+distributed.
+
+An independent Euler audit checked seven code ranges, 36 manifest bindings,
+the retained compiler bridge, table bounds and separate matrix reconstruction.
+It found the imported normalization helper missing from the initial Euler hash
+manifest. Its unchanged earlier pin is retained as an explicit post-run
+supplement, not a retroactive pre-execution check. The numerical comparisons
+passed independently of that helper; original manifests remain preserved.

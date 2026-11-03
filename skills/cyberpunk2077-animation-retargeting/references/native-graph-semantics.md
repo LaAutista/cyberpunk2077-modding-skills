@@ -10,7 +10,7 @@ identities; constants and branch instructions establish the formulas.
 
 These are scoped implementation findings and analyst numerical checks, including
 isolated native [normalization](native-normalization.md) and
-[composition/interpolation measurements](native-transform-numerics.md). Other
+[transform, mask, weight and inverse-Euler measurements](native-transform-numerics.md). Other
 equations remain unexecuted models; none is a game observation. Use valid transforms, valid mask
 indices and the identified branch. Recheck identities before applying them to a
 different build. The focused references cover [capture and custom curves](native-capture-curves.md),

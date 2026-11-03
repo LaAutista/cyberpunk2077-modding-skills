@@ -780,6 +780,20 @@
         "Deduplicate the entries, reuse the original base on the second aliased write, force translation w to zero, conceal the first failed reference or change tolerances to pass.",
         "Treat .01 equality as entry, decide from unrounded decimal differences, claim no added evaluation for-.5 solely because clamp is zero, leak leaf mutation through a copying caller, or claim callbacks/game execution or a Saber fix."
       ]
+    },
+    {
+      "id": "native-inverse-euler-poles",
+      "prompt": "Use the pinned native inverse-Euler measurement for an offline check. For q=(x,0,0,w), decode float32 bit pairs (3f2f345a,3f3aa732), (3f2f345b,3f3aa731), (3f2f345c,3f3aa730), (3f2f345d,3f3aa72f). Execute the documented product/sum rounding and pole comparisons. Does increasing x give a monotone branch transition, and what does equality do? Independently reconstruct the input orientation generated from stored angles (170,-86.5,73) and the documented native pole output, using the correct channel/axis order; calculate orientation loss. Explain why coordinate agreement within0.001degrees need not imply orientation preservation. Distinguish unit and nonunit results and say whether this establishes native forward conversion, constraint behavior, selected game inputs or a Saber repair. Do not read/execute a PE, attach to a process, run a game or Blender, install anything or modify source assets.",
+      "must_observe": [
+        "Execute float32 bits: s remains3eff7cee; rounded norm alternates3f800000/3f7fffff and positive threshold alternates3eff7cee/3eff7ced. Branches ordinary,positive,ordinary,positive; equality ordinary, pitch alternates approximately86.375717 and90. Do not force a monotone transition or decide using unrounded double arithmetic.",
+        "Use stored Roll/Y,Pitch/X,Yaw/Z with Qz(c)*Qx(b)*Qy(a). Independently reconstruct the mixed-angle input and native output(0,-90,259.68243408203125); shortest orientation loss is approximately4.82212degrees, with float32-input rounding disclosed if not reproduced. Pole yaw can change along with pitch.",
+        "Keep4196 native calls/2098 inputs,16 equality calls, two explicitly chosen MXCSR modes, coordinate error6.07804e-5degrees and ordinary unit reconstruction8.91380e-5degrees as finite host observations. Pole maximum4.82212degrees was measured separately, not passed against the ordinary0.001degree tolerance or asserted as a global bound.",
+        "Nonunit comparisons check literal inverse coordinates, not scale-invariant orientation. New calculations execute only host arithmetic; native forward conversion, rotation-limit application, alias/extreme/CRT domains, actual game state and visual/Saber acceptance remain unproved."
+      ],
+      "must_not_observe": [
+        "Replace the rounded branch with one continuous double threshold, select a pole at equality, permute the Euler axes, normalize the nonunit input silently or treat coordinate-error agreement as orientation preservation.",
+        "Claim a new native run, universal4.82212degree bound, native constraint/forward parity, full investigation completion, a measured live game mode or a Saber cause/fix."
+      ]
     }
   ],
   "trigger_cases": [

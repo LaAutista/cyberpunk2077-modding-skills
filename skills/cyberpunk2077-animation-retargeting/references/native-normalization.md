@@ -73,10 +73,10 @@ one output row split by buffered stdout/stderr; the checker rejected it. Flushin
 stdout before the final status fixed the wrapper only, and a complete rerun
 passed. Original failure, bytes, inputs and acceptance limits were preserved.
 
-The later [composition/interpolation measurement](native-transform-numerics.md)
-executes the selector, native trig dependencies and signed nonuniform-scale QS
-composition on separate finite corpora. None of those results comes from this
-normalization-only run. Weight/mask thresholds, event seams, Euler poles,
-skinning and wider numerical domains remain outside these measurements. Fresh
-independent review, selected-path reachability and visual/game acceptance remain
-separate.
+The later [transform measurements](native-transform-numerics.md) execute the
+interpolation selector and native trig dependencies, signed nonuniform-scale QS
+composition, masked kernels, weight prefixes and inverse-Euler pole branches on
+separate finite corpora. None comes from this normalization-only run. Event seams,
+remaining constraint/skinning numerical paths and wider domains remain outside
+those measurements. Independent review has separate retained records; selected
+game inputs and visual/game acceptance remain separate.

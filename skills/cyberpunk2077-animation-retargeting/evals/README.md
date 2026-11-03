@@ -1,5 +1,10 @@
 # Retargeting workflow evals
 
+The `native-inverse-euler-poles` case checks rounded threshold decisions for
+adjacent quaternion inputs and distinguishes coordinate agreement from pole
+orientation loss. Execute the supplied finite bit calculations; the documented
+native inverse does not certify forward conversion, constraints or a character.
+
 The `native-mask-weight-boundaries` case checks fourth-lane identity, duplicate
 mask entries with aliased versus distinct output, and rounded bias subtraction
 before the weight gate. It distinguishes a leaf's input mutation from a copying

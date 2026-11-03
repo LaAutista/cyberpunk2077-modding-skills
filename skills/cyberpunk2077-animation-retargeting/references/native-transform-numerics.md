@@ -1,7 +1,7 @@
-# Measured native transforms, masks and weight boundaries
+# Measured native transforms, masks, weights and Euler poles
 
 Use these measurements to check an offline pose model's transform order,
-interpolation branch and write footprint. They extend the separate
+interpolation branch, write footprint and inverse-Euler pole behavior. They extend the separate
 [normalization measurement](native-normalization.md), not whole-graph parity.
 The [graph semantics](native-graph-semantics.md) identify the callers and equations.
 
@@ -10,7 +10,8 @@ Build: Cyberpunk 2.5, executable SHA256
 Addresses are preferred-image addresses for this saved build, not portable hooks.
 Exact unmodified bytes ran in isolated Linux fixtures on an AMD Ryzen 7 7800X3D
 with GCC 16.2.1's Microsoft ABI bridge. Compiler argument/result handling was
-reviewed. Code was RX, constants/first inputs read-only, output writes guarded;
+reviewed. Code was RX, independent source pages read-only and output writes guarded,
+including the deliberately writable base/output alias described below;
 owned mappings and MXCSR were restored. Changed payloads were rejected before
 mapping/execution. No game loader, game process, mod or character asset ran.
 
@@ -93,8 +94,12 @@ second quaternion is overwritten with the sign-adjusted bits before either
 branch, including endpoint weights. Preserve that effect when the caller reuses
 the buffer; a pure function returning only the blended quaternion misses it.
 This is the leaf's footprint. Transform lerp `0x14032A460` first copies both
-quaternion operands to its stack. The masked tests below protected the actual
-source transform arrays read-only and observed no source-array mutation.
+quaternion operands to its stack. With distinct output, both source transform
+arrays remained read-only and unchanged. With output equal to base, the actual
+base/output buffer was deliberately writable and accumulated the documented
+writes; the added array and header/mask pages stayed protected. A fresh audit
+found 672 of the 740 base-alias calls changed that buffer. The earlier blanket
+source-preservation wording was too broad; the retained measurements were valid.
 
 SLERP does not add a final normalization. For q0=(0,0,0,1), q1=(2,0,0,0), w=.5,
 the diagnostic output is approximately (1.41421354,0,0,.70710677), not unit length.
@@ -190,10 +195,74 @@ NaN classification is not a promise about every NaN payload or game reachability
 Negative weights entering before clamping do not prove the entire evaluator is
 a no-op: auxiliary, sparse-track and postprocess paths remain separate.
 
+## Inverse Euler poles and float32 boundary changes
+
+The complete inverse `0x1403B1A88..0x1403B1C92` ran with its bounded asin wrapper,
+actual atan2/asin implementations and MXCSR helpers: seven ranges, 2,135 code
+bytes and 4,315 code/constant bytes over ten sparse pages. The indexed atan2
+table includes all 241 entries admitted by the finite ratio range. Excluded
+NaN/domain handlers remained unmapped. No host trig replaced a native call.
+
+The fixed corpus contains 2,098 finite, nonzero quaternions: angle grids, both
+quaternion signs, 257 adjacent float32 boundary values at each pitch/sign,
+256 random unit inputs with both signs, and eight labeled nonunit diagnostics.
+Both MXCSR modes completed 4,196 calls: 2,556 ordinary, 824 positive-pole and
+816 negative-pole results. All returned the separate output pointer, preserved
+the read-only input and MXCSR controls, and wrote only the three output floats.
+
+Stored `(a,b,c)` means Roll/Y, Pitch/X, Yaw/Z. Mathematical reconstruction is
+`Qz(c)*Qx(b)*Qy(a)`; see the [rotation-limit contract](native-clock-inertia.md#rotation-limits-degrees-and-component-order).
+The pole decision rounds every product and sum to float32:
+
+```text
+n = f32(f32(f32(w*w)+f32(x*x)) + f32(f32(z*z)+f32(y*y)))
+s = f32(f32(z*y)+f32(w*x))
+positive pole if s > f32(f32(.499)*n)
+negative pole if s < f32(f32(-.499)*n)
+otherwise ordinary, including equality
+```
+
+Positive poles return `(0,90,2*degrees(atan2(y,w)))`; negative poles return
+`(0,-90,-2*degrees(atan2(y,w)))`. These snap before the exact mathematical pole.
+Reproducing them with a continuous inverse or a single double-precision threshold
+changes behavior. For `q=(x,0,0,w)`, these consecutive bit pairs demonstrate it:
+
+| x bits | w bits | Rounded n | Branch | Native Pitch, degrees |
+| --- | --- | --- | --- | --- |
+| `3f2f345a` | `3f3aa732` | 1 | ordinary, equality | 86.37571716308594 |
+| `3f2f345b` | `3f3aa731` | 0.9999999403953552 | positive pole | 90 |
+| `3f2f345c` | `3f3aa730` | 1 | ordinary, equality | 86.37571716308594 |
+| `3f2f345d` | `3f3aa72f` | 0.9999999403953552 | positive pole | 90 |
+
+All four have `s=0.49900001287460327`. Their rounded thresholds alternate
+between that value and `0.4989999830722809`. Increasing x therefore does not
+give a monotone branch transition in this constructed float32 neighborhood.
+The eight equality inputs stayed ordinary in both modes, and all 2,098 output
+triples were bit-identical between these modes. Neither statement generalizes
+to arbitrary inputs, modes or CPUs.
+
+Against independent double coordinate formulas with the measured branch,
+maximum error was `0.000060780398143833736` degrees modulo 360. Ordinary unit
+inputs reconstructed within `0.00008913798915620792` degrees. Both passed the
+predeclared 0.001-degree limits. Pole reconstruction loss was measured separately,
+not hidden by that tolerance: it reached `4.822119703509309` degrees for the
+unit input generated from `(170,-86.5,73)` with negative quaternion sign, whose
+native output was `(0,-90,259.68243408203125)`. The pole formula can change yaw
+as well as pitch. This is a finite observed maximum, not a universal bound or
+proof that the game encounters this case.
+
+Nonunit cases checked the literal coordinate formula only. The fixture did not
+execute native angles-to-quaternion conversion, rotation-limit application,
+constraints or a graph. Zero/nonfinite/extreme inputs, source/output aliasing,
+full CRT domains, selected game inputs and character behavior remain unverified.
+
 Private provenance: `blending-deep/compose-leaf/`, `interpolate-leaf/`,
 `mask-native/` and `weight-gate-native/`, each with pre-execution contract,
 exact-byte admission, compiler review, native log, independent checker and hash
-verification. The wider investigation still needs event seams, Euler poles,
-other mask/native numerical paths, selected inputs/lifetimes, fresh independent
-review and final visual/game acceptance. These finite measurements do not
+verification; inverse conversion is retained under `transitions-deep/euler-native/`.
+An independent audit replayed the mask/weight comparisons and checked their
+retained instruction/admission bindings; it did not rerun native code. The wider
+investigation still needs event seams, remaining numerical/constraint paths,
+selected inputs/lifetimes, remaining independent review and final visual/game
+acceptance. These finite measurements do not
 diagnose or repair a stretched character by themselves.
