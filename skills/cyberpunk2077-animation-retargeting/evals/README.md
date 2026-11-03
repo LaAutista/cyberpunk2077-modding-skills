@@ -1,5 +1,11 @@
 # Retargeting workflow evals
 
+The `native-mask-weight-boundaries` case checks fourth-lane identity, duplicate
+mask entries with aliased versus distinct output, and rounded bias subtraction
+before the weight gate. It distinguishes a leaf's input mutation from a copying
+caller's source arrays, preserves the failed identity premise and does not turn
+prefix measurements into completed callbacks or selected game behavior.
+
 The `native-transform-numerics` case distinguishes composition order from full
 affine equivalence, .99 equality from the next float, and a returned quaternion
 from the second input's mutation. Execute the supplied independent derivations;

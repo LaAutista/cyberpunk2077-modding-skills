@@ -1,4 +1,4 @@
-# Measured native composition and quaternion interpolation
+# Measured native transforms, masks and weight boundaries
 
 Use these measurements to check an offline pose model's transform order,
 interpolation branch and write footprint. They extend the separate
@@ -14,7 +14,7 @@ reviewed. Code was RX, constants/first inputs read-only, output writes guarded;
 owned mappings and MXCSR were restored. Changed payloads were rejected before
 mapping/execution. No game loader, game process, mod or character asset ran.
 
-Both fixtures used masked exceptions and round-to-nearest with gradual underflow
+The fixtures used masked exceptions and round-to-nearest with gradual underflow
 (`1F80`) and FTZ+DAZ (`9FC0`). These are fixture settings, not measured game values.
 They reused the bounded guard and preserved predeclared tolerances and failures.
 No game code or executable is distributed with this skill. The experiments do
@@ -92,6 +92,9 @@ The sign decision uses the dot's **sign bit**, including negative zero. The
 second quaternion is overwritten with the sign-adjusted bits before either
 branch, including endpoint weights. Preserve that effect when the caller reuses
 the buffer; a pure function returning only the blended quaternion misses it.
+This is the leaf's footprint. Transform lerp `0x14032A460` first copies both
+quaternion operands to its stack. The masked tests below protected the actual
+source transform arrays read-only and observed no source-array mutation.
 
 SLERP does not add a final normalization. For q0=(0,0,0,1), q1=(2,0,0,0), w=.5,
 the diagnostic output is approximately (1.41421354,0,0,.70710677), not unit length.
@@ -99,10 +102,98 @@ Two zero quaternions return zero, not identity. With an orthogonal unit pair,
 minimum-subnormal weight yields x bits `00000002` in gradual mode and zero with
 FTZ+DAZ. These diagnostics do not establish that such inputs reach a real graph.
 
-Private provenance: `blending-deep/compose-leaf/` and
-`blending-deep/interpolate-leaf/`, each with pre-execution contract, exact-byte
-admission, compiler review, native log, independent checker and hash verification.
-The wider investigation still needs weight/mask thresholds, event seams, Euler
-poles, other native numerical paths, selected inputs/lifetimes, fresh independent
-review and final visual/game acceptance. These measurements do not diagnose or
-repair a stretched character by themselves.
+## Masked Local/Ref write boundaries
+
+Complete masked Local `0x1408E5318..0x1408E5471` and Ref
+`0x142741A90..0x142741BC7` ran with transform lerp
+`0x14032A460..0x14032A4D0`, composition and the native quaternion/trig closure.
+The admission contains 4,223 code/constant bytes across 16 sparse pages. Synthetic
+three-record inputs tested distinct output and output equal to base, both sine
+dispatches and both MXCSR modes. The 95-row corpus includes 64 deterministic
+random sets, boundary products, empty/unlisted entries, ordered duplicates and
+Local's signed-index/minimum-count bounds. Invalid Ref indices were excluded.
+
+All 1,480 calls preserved protected inputs and output guards. The comparison
+passed 2,400 ordinary written records, 1,120 exact full-composition records and
+2,040 exact untouched records. The 192 threshold calls distinguish interpolation
+at both float32(.0001) and float32(.9999) from skipping below the lower boundary
+and full composition above the upper. `u=f32(w*maskWeight)` has no second clamp.
+The two sine dispatches matched in this corpus only.
+
+Predeclared per-write limits were translation `3e-5 + 3e-6*abs(reference)`,
+quaternion component `2e-6`, scale `3e-6*max(1,abs(reference))`, multiplied by the
+number of writes to that record for repeated entries. Maximum observed absolute
+errors were respectively `3.0149123972478264e-5`, `1.951670626221258e-7` and
+`2.955648099600694e-6`; all passed those limits. This is not a universal absolute
+`3e-5` translation bound or full interpolation bit parity.
+
+The first comparison failed because the reference assumed Local's fractional
+identity translation was (0,0,0,0). Exact constant `0x1437BB7A0` and its stack
+stores instead establish T=(0,0,0,1), Q=(0,0,0,1), S=(1,1,1,1). With B.tw=0,
+B.sw=1 and A.tw=0, the fractional route writes tw=1-u; full composition writes
+tw=0. The original checker/failure remain preserved. Only the reference identity
+was corrected; the same native log, inputs and tolerances then passed. No native
+code was patched or rerun to fit the corrected expectation.
+
+Entries are processed in order without deduplication. For the X/Y example above,
+two Local entries for index0 with u=.5 give:
+
+| Output storage | Final translation xyz / fourth lane | Final scale xyz |
+| --- | --- | --- |
+| Distinct from base | (6,-12,11.999999) / .5 | (1.5,3.75,6) |
+| Same as base | (19.74759293,-28.31153107,23.25000191) / 1 | (1.125,4.6875,9) |
+
+The aliased second write consumes the first result; distinct output rereads the
+original base. Do not claim actual compiled masks contain duplicate indices.
+No added/output alias, partial-byte overlap, dynamic model-space mask path or
+selected-resource/lifetime behavior was tested.
+
+## Weight admission before clamping
+
+The unchanged evaluator prefix `0x1403A92E4..0x1403A9349` was measured through
+its subtract, multiply, absolute mask and ordered comparison, stopping at skip
+`0x1403A934A` or enter `0x1403A938B`. Separately, the unchanged clamp prefix
+`0x1403A92B8..0x1403A92CC` stopped at `0x1403A92CD` before dispatch. These are
+123 admitted code bytes, not completed node/function calls. No child evaluation,
+callback or graph continuation ran.
+
+Unadmitted code bytes were INT3; the fixture's SIGTRAP handler checked the phase
+and exact stop PC, captured XMM6 or XMM3 plus MXCSR using the host ucontext layout,
+and returned to its own saved context. Original tested instructions were not
+patched. Input pages stayed read-only and unchanged; owned signal state, MXCSR
+and mappings were restored. An unrelated host trap was rejected before the
+native run, and changed payload bytes were rejected before mapping/execution.
+
+173 input/bias/scale triples in both MXCSR modes produced 346 gate/clamp pairs,
+or 692 prefix entries. All 334 finite effective-result pairs matched independent
+float32 subtraction-then-multiplication bits; 12 nonfinite pairs matched their
+classifications. All branch decisions and all 346 clamp results matched. The
+clamp was tested independently even when the gate rejected the input; do not
+claim that those clamp results were used by the evaluator's skipped path.
+
+| Effective weight | Gate | Independently measured clamp |
+| --- | --- | --- |
+| +float32(.01), bits 3c23d70a | Skip | Same positive value |
+| -float32(.01), bits bc23d70a | Skip | +0 |
+| Next larger positive magnitude, 3c23d70b | Enter | Same positive value |
+| Next larger negative magnitude, bc23d70b | Enter | +0 |
+| -.5 | Enter | +0 |
+| +infinity / -infinity | Enter | 1 / +0 |
+| NaN, including infinity-infinity or zero*infinity | Skip, unordered | +0 |
+
+Stored float32(1+.01) minus bias1 yields bits `3c23d700`, below the gate; stored
+float32(1024+.01) minus bias1024 yields `3c240000`, above it. Preserve rounding
+after input storage, subtraction and multiplication instead of deciding from
+the intended decimal difference. Minimum-subnormal input survives in gradual
+mode and becomes zero with FTZ+DAZ; exception flags were recorded separately.
+NaN classification is not a promise about every NaN payload or game reachability.
+Negative weights entering before clamping do not prove the entire evaluator is
+a no-op: auxiliary, sparse-track and postprocess paths remain separate.
+
+Private provenance: `blending-deep/compose-leaf/`, `interpolate-leaf/`,
+`mask-native/` and `weight-gate-native/`, each with pre-execution contract,
+exact-byte admission, compiler review, native log, independent checker and hash
+verification. The wider investigation still needs event seams, Euler poles,
+other mask/native numerical paths, selected inputs/lifetimes, fresh independent
+review and final visual/game acceptance. These finite measurements do not
+diagnose or repair a stretched character by themselves.

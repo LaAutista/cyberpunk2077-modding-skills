@@ -56,6 +56,9 @@ The [native interpolation corpus](native-transform-numerics.md#interpolation-bra
 executes the selector and actual trig dependencies in two fixture CPU dispatches
 and MXCSR modes. Equality at .99 selects SLERP, which has no final normalization.
 These finite measurements are not universal bit-identical Python/native behavior.
+`L` copies both quaternion operands to stack locals before calling that helper.
+The measured masked callers preserved their read-only source transform arrays;
+do not propagate the leaf's second-input mutation through a copying caller.
 
 Ordinary transition blend helper `0x1408e3548` reaches this same `L` through
 `0x1408e3a54`. Sparse body records interpolate when both inputs are present, copy
@@ -112,11 +115,14 @@ BlendAdditive evaluator `0x1403a92e4` calculates:
 
 ```text
 e = (instanceWeight - biasValue) * scaleValue
-if abs(e) <= float32(0.01): evaluate base and record its named track; skip added pose
+if not (abs(e) > float32(0.01)): evaluate base and record its named track; skip added pose
 otherwise: w = clamp(e, 0, 1) for the ordinary transform kernels
 Local: C(B, L(identity, A, w))
 Ref:   L(B, C(A, B), w)
 ```
+
+The comparison is ordered: NaN also takes the skip route. Writing only
+`abs(e) <= threshold` with an unconditional else would misclassify NaN.
 
 `B` and `A` are the evaluated base and added transforms. Full weight directly
 composes `C(B,A)` for Local and `C(A,B)` for Ref. Their order differs; Ref does not
@@ -147,6 +153,19 @@ Unlisted bones remain unwritten. Local checks signed indices against storage
 bounds; no corresponding check was observed in the inspected Ref kernel. Valid
 compiled-mask data is a precondition. Do not substitute these branches for the
 separate BlendByMaskDynamic model-space-rotation path.
+
+The [native masked corpus](native-transform-numerics.md#masked-localref-write-boundaries)
+measures these branches and both distinct output and output-equals-base storage.
+Local's fractional identity has T=(0,0,0,1), Q=(0,0,0,1), S=(1,1,1,1): retain the
+fourth lanes when comparing native bytes. Mask entries run in order without
+deduplication; repeated indices can accumulate when output aliases base, whereas
+distinct output rereads the original base. This does not establish duplicate
+indices in actual compiled masks or arbitrary overlap safety.
+
+The [weight-prefix measurement](native-transform-numerics.md#weight-admission-before-clamping)
+checks float32 subtraction/multiplication and the strict magnitude gate, stopping
+before callbacks. The clamp was also measured independently for rejected inputs;
+its result must not be described as used by the evaluator on the skipped route.
 
 The named previous-frame track is concrete state, not just metadata. Evaluation
 records the selected track from the base pose before evaluating the added pose.

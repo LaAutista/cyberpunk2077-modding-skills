@@ -675,3 +675,23 @@ All51 prior workflow cases and six triggers remain, plus one new root-evaluated
 case. These finite host measurements do not establish selected graph inputs,
 game globals, full CRT domains, fresh independent review or visual/game behavior.
 The full investigation remains open and Saber remains held.
+
+The1.8.21 supplement measures complete masked Local/Ref kernels in1480 calls,
+including2400 ordinary written-record comparisons,1120 exact full compositions,
+2040 unchanged records and192 threshold calls. It distinguishes sequential
+base-alias accumulation from distinct output and confines quaternion-leaf
+mutation to the transform caller's stack copies. A failed reference identity
+assumption was corrected from the native constant/stores, preserving the first
+failure, unchanged native log/corpus and original error limits.
+
+Separate exact gate/clamp prefixes produced692 entries/346 pairs, confirming
+strict .01 admission, float32 bias/scale rounding and the distinction between
+negative admission and clamping. Expected trap boundaries stop before any graph
+callback or dispatch; these are not completed evaluator calls. All52 earlier
+workflow cases and six triggers remain, plus one new case with executed root
+arithmetic. Fresh evaluation identified the finite-only limit of the old
+threshold shorthand; the main reference now explicitly uses the ordered
+comparison, including NaN skip, with the prior text and regression retained.
+Native code and private input/output logs are not distributed.
+These finite checks do not close other numerical domains, selected inputs,
+lifetimes, independent review coverage or visual/game acceptance. Saber is held.

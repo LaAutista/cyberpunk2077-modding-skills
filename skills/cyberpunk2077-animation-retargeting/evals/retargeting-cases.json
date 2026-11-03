@@ -765,6 +765,21 @@
       "must_not_observe": [
         "Claim a new native run from these calculations, global/game selection from file-backed data, universal bit parity from finite errors, q1 immutability at endpoints, normalized SLERP for arbitrary inputs, or a complete investigation/Saber fix."
       ]
+    },
+    {
+      "id": "native-mask-weight-boundaries",
+      "prompt": "Use the pinned native transform/mask/weight measurements. Base B has t(1,2,3,0), qX90, s(2,3,4,1); added A has t(5,6,7,0), qY60, s(.5,1.5,2,1). Two ordered Local mask entries address index0, each with u=.5. Execute an independent double calculation of the resulting translation (including its fourth lane) and scale for distinct output versus output equal to base. Why did the original Local reference fail, and which evidence was changed? For each sign, execute float32 checks of exact .01 magnitude and its next larger representable magnitude; then compare stored float32(1+.01)-1 and float32(1024+.01)-1024 at scale1. Explain effective -.5, NaN and the distinction between gate selection and a separately measured clamp. Does the quaternion leaf's mutation mean these source transform arrays changed? State what the native fixtures actually executed and what remains unproved. Do not execute a PE, attach to a process, run a game or Blender, install anything or modify source assets.",
+      "must_observe": [
+        "Execute Local calculations: distinct output ends at t approximately(6,-12,12,.5), scale(1.5,3.75,6,1); output equal to base ends at t approximately(19.7475953,-28.3115335,23.25,1), scale(1.125,4.6875,9,1). Entries are ordered and not deduplicated; only the alias consumes the first write as its next base.",
+        "Use Local's measured interpolation identity T(0,0,0,1), Q(0,0,0,1), S ones. The failed reference's tw0 was corrected from the native constant/stores; original failure, exact native log, inputs and tolerances were preserved. Do not call tw a forced zero/padding lane or claim actual masks contain duplicates.",
+        "Execute float32 assertions: absolute bits3c23d70a at either sign skips, next magnitude3c23d70b enters; bias1 produces3c23d700 and skips while bias1024 produces3c240000 and enters. Respect stored-input and operation rounding. Effective-.5 enters before the separate clamp gives+0; a clamped body weight does not prove every evaluator output or callback is a no-op.",
+        "NaN selects the unordered skip; the independently measured MAXSS/MINSS clamp gives+0. Do not say the evaluator used a clamp result for a rejected input. These prefix tests stopped before callbacks/dispatch, using exact instructions and checked trap addresses; they were not completed evaluator calls.",
+        "The low-level quaternion helper mutates its second input, but transform lerp copies both operands to stack; protected source arrays remained unchanged. Keep1480 mask calls,2400 ordinary records,1120 exact full and2040 untouched records separate from692 prefix entries/346 gate-clamp pairs. No arbitrary alias, invalid Ref-index, selected-game input, full investigation or character acceptance follows."
+      ],
+      "must_not_observe": [
+        "Deduplicate the entries, reuse the original base on the second aliased write, force translation w to zero, conceal the first failed reference or change tolerances to pass.",
+        "Treat .01 equality as entry, decide from unrounded decimal differences, claim no added evaluation for-.5 solely because clamp is zero, leak leaf mutation through a copying caller, or claim callbacks/game execution or a Saber fix."
+      ]
     }
   ],
   "trigger_cases": [
