@@ -98,6 +98,36 @@ hold or explicitly adapt transition boundaries, then check intermediate blends
 and inherited locomotion additives against their actual base. A full-weight FK/IK
 match alone does not prove a partial-weight blend or the engine's final IK result.
 
+### MP5 reload-to-rest and transition lesson (2026-11-03)
+
+A matching wrist/weapon endpoint does not establish a matching held pose. The MP5
+reload-to-idle review exposed an elbow/finger/skin jump that wrist-only checks
+missed. Compare both shoulders, elbows, wrists, all digit chains and evaluated
+skin on both sides of the handoff, then inspect continuous playback through it.
+Use the user-accepted held pose as the measured reference; do not substitute an
+older donor idle simply because its wrist position agrees. Check both hands.
+
+For a bounded transition repair, preserve unrelated motion, anatomical local
+translations/scales and lengths. Verify intermediate frames, not just endpoints,
+and synchronize only controls whose ownership has been established. An elbow
+swivel may preserve the wrist while changing the silhouette; its angle is a
+per-rig measurement, never a reusable constant. Report skin/contact regressions
+separately even when the boundary discontinuity improves.
+
+Keep contact corrections phase-specific and object-relative. End a free-hand
+reach adjustment before magazine contact/visibility begins; verify the actual
+native event/key times. Audit every routed alias and body/ADS variant, but copy
+motion only after verifying compatible rests, source action and channel semantics.
+Merge into the current cumulative bank and independently verify that accepted
+clips and events survive. Separate successful serialization, user preview
+acceptance and in-game confirmation; none grants the other two.
+
+The MP5 female idle-hand correction and primary hip tactical early-reach trial
+received user preview acceptance. That acceptance did not cover installation,
+sprint/empty/ADS trials, other body variants or remaining contact defects. The
+visibility-key ordering correction was separately confirmed in game for both hip
+reloads. Do not promote the entire MP5 from these individual results.
+
 A fixed-length solve can still fold the arm unnaturally. RPG7's idle retained the
 donor shoulder while fitting the source grip, giving an elbow inner angle near
 28degrees versus78degrees in source. Compare the mapped source clavicle/upper-arm
@@ -105,6 +135,15 @@ placement, elbow plane, wrist/palm and skinned shoulder together even for static
 holds. A source-directed clavicle test preserved grip/weapon/lengths and improved
 the angle, but remained an unaccepted offline probe; it is not a universal fix.
 Check adjoining actions and accepted manipulation before propagating a repair.
+
+After changing an arm base pose, rebuild compatible additive motion from the
+actual fitted base. Reapplying the raw source shoulder preference at every
+additive key can preserve full-weight grips yet increase partial-blend drift.
+Compare intermediate weights and between-key frames against the last passed
+candidate, not only the original broken bank. RPG7 walking exposed this: the
+first propagation increased the measured residual from1.07mm to1.89mm; carrying
+the fitted base reduced it to1.27mm without changing the check tolerance. These
+are diagnostic measurements, not universal tolerances or proof of engine IK.
 
 ## Finger articulation and timing
 

@@ -45,6 +45,39 @@ try {
   assert.equal(json.animations[0].samplers[0].interpolation,'STEP');
   assert.equal(json.animations[0].extras.optimizationHints.preferSIMD,false);
   run('check-animation.mjs',['prepare',source,prepared],false);
+  // Many individually valid channels must not overflow JavaScript's argument stack.
+  const dense=structuredClone(j),count=40000,tracks=5,denseBin=Buffer.alloc(count*(tracks*4+16));
+  dense.nodes=Array.from({length:tracks},(_,i)=>({name:'dense'+i}));dense.bufferViews=[];dense.accessors=[];
+  dense.animations[0].channels=[];dense.animations[0].samplers=[];
+  for(let channel=0;channel<tracks;channel++){
+    const offset=channel*count*4;
+    for(let i=0;i<count;i++)denseBin.writeFloatLE(i/(count-1),offset+i*4);
+    dense.bufferViews.push({buffer:0,byteOffset:offset,byteLength:count*4});
+    dense.accessors.push({bufferView:channel,componentType:5126,count,type:'SCALAR',min:[0],max:[1]});
+    dense.animations[0].channels.push({sampler:channel,target:{node:channel,path:'rotation'}});
+    dense.animations[0].samplers.push({input:channel,output:tracks,interpolation:'LINEAR'});
+  }
+  for(let i=0;i<count;i++)denseBin.writeFloatLE(1,tracks*count*4+i*16+12);
+  dense.bufferViews.push({buffer:0,byteOffset:tracks*count*4,byteLength:count*16});
+  dense.accessors.push({bufferView:tracks,componentType:5126,count,type:'VEC4'});dense.buffers[0].byteLength=denseBin.length;
+  const denseSource=path.join(work,'dense-source.glb'),denseOutput=path.join(work,'dense-prepared.glb');writeGlb(denseSource,dense,denseBin);
+  const denseBefore=fs.readFileSync(denseSource);
+  run('check-animation.mjs',['prepare',denseSource,denseOutput,'--preserve-key-sampling']);
+  assert.deepEqual(fs.readFileSync(denseSource),denseBefore);
+  const denseBytes=fs.readFileSync(denseOutput),denseJson=JSON.parse(denseBytes.subarray(20,20+denseBytes.readUInt32LE(12)));
+  for(const accessor of denseJson.accessors.slice(0,tracks)){assert.equal(accessor.count,count);assert.deepEqual(accessor.min,[0]);assert.deepEqual(accessor.max,[1]);}
+  // Null and the native null-handle are valid; missing or live extraction must fail closed.
+  const motionAuthor=structuredClone(j);
+  Object.assign(motionAuthor.animations[0].extras,{frameClamping:false,frameClampingStartFrame:0,frameClampingEndFrame:0});
+  const motionReadback=structuredClone(motionAuthor);motionReadback.animations[0].extras.rootMotionType='Unknown';
+  const motionSource=path.join(work,'motion-source.glb'),motionOutput=path.join(work,'motion-readback.glb'),motionJson=path.join(work,'motion.json');
+  writeGlb(motionSource,motionAuthor,bin);writeGlb(motionOutput,motionReadback,bin);
+  for(const [motionExtraction,ok] of [[null,true],[{HandleRefId:'-1'},true],[{HandleRefId:'2'},false],[undefined,false]]){
+    const motion={Data:{RootChunk:{animationDataChunks:[],animations:[{Data:{animation:{Data:{name:{$value:'fixture'},animationType:'Normal',duration:1,
+      frameClamping:false,frameClampingStartFrame:0,frameClampingEndFrame:0,motionExtraction,animBuffer:{Data:{$type:'animAnimationBufferSimd'}}}}}}]}}};
+    fs.writeFileSync(motionJson,JSON.stringify(motion));
+    run('check-animation.mjs',['verify-authored',motionJson,motionJson,motionSource,motionOutput],ok);
+  }
   j.animations[0].extras.animationType='Unsupported';writeGlb(path.join(work,'unsupported.glb'),j,bin);
   run('check-animation.mjs',['prepare',path.join(work,'unsupported.glb'),path.join(work,'rejected.glb')],false);
   j.animations[0].extras.animationType='Normal';
@@ -110,5 +143,5 @@ try {
   const unchangedBytes=fs.readFileSync(unchangedOut);
   assert.deepEqual(unchangedBytes.subarray(28+unchangedBytes.readUInt32LE(12)),multiBin);
   assert.equal(JSON.parse(fs.readFileSync(unchangedOut+'.raw-readback.json')).corrections.length,0);
-  console.log('PASS: native ticks/bounds, STEP retention, mode/header/overwrite refusals, independent tiny-quaternion decoding and multi-clip/channel buffer offsets with preserved input bytes.');
+  console.log('PASS: native ticks/bounds, STEP retention, mode/header/overwrite and root-extraction refusals, independent tiny-quaternion decoding and multi-clip/channel buffer offsets with preserved input bytes.');
 } finally {console.log('Fixture evidence retained:',work);}
