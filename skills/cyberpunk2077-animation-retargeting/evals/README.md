@@ -1,5 +1,7 @@
 # Retargeting workflow evals
 
+The four matched-reference/inverse-LBS cases distinguish rotation correspondence from mesh pose-back, native anatomical preservation from scene fitting, and fixed-weight reconstruction from anatomy or gameplay evidence. Execute the noncommuting rotation and singular-blend examples; retain the source handoff’s reported-only status.
+
 The `component-policy-and-appearance-lifetime` case tests same-record selection,
 visual precedence, raw versus complemented instance flags and ordered overwrites.
 It also distinguishes weak component identity from a resource generation, retained

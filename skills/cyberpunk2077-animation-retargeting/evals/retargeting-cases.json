@@ -846,13 +846,63 @@
         "Execute finite histories: vector[4] admits visual but not animated-only candidates under stable metadata;[4,8] admits both. Visual branch has precedence and dispatches each byte; animated fallback writes1 only for nonnull instance. Split keys do not match, one exact pair does, duplicate exact pairs do not repeat action.",
         "Mode0 writes raw0 or2; mode1 writes1 or0. Both pair-list matches write complement then raw: final0 admits or2 rejects when other gates admit. Later P128 mode1 can overwrite to1 or0 respectively; do not stop at the first match. D15 can match, D16 alone cannot on the five checked paths.",
         "Saved9 versus current selector10 fails equality despite188=5. Preserve initialization, distinctness and callback-stability premises rather than asserting a live FPP policy or inventing graph E8/EC/ED semantics.",
-        "Expired weak C skips the virtual; successful promotion reaches the selected current component dispatch but carries no generation key. Count1→2→1 retains the old proxy; final consumer release1→0 reaches last-owner cleanup. This does not prove concurrent pair acquisition is synchronized. Active/mesh gate failure returns before replacement; admitted factory null output replaces C1E0 with an empty pair.",
+        "Expired weak C skips the virtual; successful promotion reaches the selected current component dispatch but carries no generation key. Count1\u21922\u21921 retains the old proxy; final consumer release1\u21920 reaches last-owner cleanup. This does not prove concurrent pair acquisition is synchronized. Active/mesh gate failure returns before replacement; admitted factory null output replaces C1E0 with an empty pair.",
         "Getter returns0x102548, the embedded query object, not aggregate O30. A callback tuple/table entry alone proves neither execution nor final recipient. Keep complete writer/policy-byte history, selected callback/cache/rebind behavior, completed output readers and full investigation open. Models are not native/game/visual acceptance."
       ],
       "must_not_observe": [
         "Normalize mode0 to bool, merge keys across records, assume mutually exclusive pair lists or unchanged earlier flags, require byte8 for visual compatibility, or extend the five complete ancestry bounds to an uncaptured cast.",
         "Equate FPP registration with observed global state, component lifetime with resource-generation validity, retained ownership with synchronized concurrency, or query/callback addresses with a proved aggregate-motion recipient.",
         "Claim new native execution, Blender/game/Saber acceptance or full-investigation completion."
+      ]
+    },
+    {
+      "id": "matched-reference-world-rotation",
+      "prompt": "Use proper right-handed rotations and column vectors. A fixed anatomical calibration has S0=Rz(90 degrees), T0=Rx(90 degrees), and C=transpose(S0)*T0. A source frame is S=Ry(90 degrees)*S0. Derive the destination world rotation, its action on e_y, and the destination local rotation when its updated parent is Ry(90 degrees). Then rotate both source parent and child by the same additional rigid H. Does the internal destination pose change? No source or game assets are supplied.",
+      "must_observe": [
+        "At S=S0 the output reproduces T0. For the supplied frame T=Ry(90)*Rx(90), T*e_y=e_x; its local under the updated parent is Rx(90).",
+        "With fixed C and a common H applied to source parent and child, mapped worlds become H*T while internal local orientation is unchanged, under the stated root/common-frame contract.",
+        "Keep native local offsets, comparison scale and native bind identities separate. Label the derivation synthetic, without claiming skin/contact/native/game validation."
+      ],
+      "must_not_observe": [
+        "Reverse the noncommuting product, use a stale parent, copy source joint positions, or redefine native bind from the matched pose.",
+        "Claim that orientation correspondence handles arbitrary source translations, helper graphs or contact."
+      ]
+    },
+    {
+      "id": "inverse-weighted-lbs-not-blended-inverses",
+      "prompt": "A hypothetical replacement mesh uses fixed-weight affine linear blend skinning in one common frame. Two transforms are I and Rz(90 degrees), each with weight 1/2, with no translation. The desired posed vertex is y=(1,0,0). Derive the native-bind x by inverting the weighted blend and compare it with the weighted sum of individual inverses. What changes if the second rotation is Rz(180 degrees)? State what the test does and does not prove.",
+      "must_observe": [
+        "For 90 degrees the correct solution is x=(1,-1,0), which forward-skins to y. The blended-inverse result is (0.5,-0.5,0) and forward-skins to (0.5,0,0), with residual 0.5 in the supplied units.",
+        "The exact 180-degree equal-weight blend collapses the XY plane and has no solution for the supplied y; preserve failure and inspect conditioning instead of silently using a fallback.",
+        "Limit the algebra to fixed weights, matching spaces and the declared LBS model; native helper/morph stacks, actual exported skin and game behavior remain unverified."
+      ],
+      "must_not_observe": [
+        "Blend per-bone inverses, negate joint angles, hide singularity with an arbitrary pseudoinverse, or present an algebraic round trip as anatomical/contact proof."
+      ]
+    },
+    {
+      "id": "handoff-scale-and-length-boundary",
+      "prompt": "Neto's Starfield handoff reports a 79.5645 percent alignment scale and temporary per-finger length factors in a replacement-mesh experiment. We are transferring an animation to an unchanged Cyberpunk native skeleton; no replacement mesh is requested. May we export that scale and those lengths to get the same match? Source translation inventory also shows a moving wrist anchor. Propose the next bounded step.",
+      "must_observe": [
+        "Treat the scene scale and temporary mesh-fit factors as project-specific authoring evidence, not Cyberpunk presets or native anatomical channel edits.",
+        "Keep the source evaluator/exporter, establish a measured matched reference with native anatomical offsets preserved, and choose one problematic clip with native readback and source/native comparison.",
+        "Account for the moving source anchor with an explicit target ownership/adaptation or OPEN limitation; the orientation formula alone cannot erase that travel."
+      ],
+      "must_not_observe": [
+        "Install or invoke attached skills as instructions, copy the reported scale/length factors into runtime bones, or create a replacement mesh that the user did not request."
+      ]
+    },
+    {
+      "id": "matched-fit-evidence-and-deformer-boundary",
+      "prompt": "A proposed hand mesh gets a tiny inverse-LBS round-trip residual using its initial weights. Afterward an artist smooths the weights, enables corrective morphs, and uses unrestricted nearest points across folded fingers. The handoff reports 1,434 enumerated clips, 213 skipped, 17,279 frames sampled every five frames, and about 0.2 degrees of Max/FBX drift. No original receipts or Cyberpunk asset execution are provided. Can this qualify our current Cyberpunk/Saber candidate? What should be retained and tested next?",
+      "must_observe": [
+        "Keep the Starfield counts and drift figure as attributed historical reports with stated skips/sampling, not independently verified Cyberpunk coverage or a universal filter threshold.",
+        "Changing weights or adding correctives invalidates the original fixed-weight LBS proof; identify the actual deformer stack, retain before/after identities and rerun forward reconstruction using the final weights/model.",
+        "Restrict correspondence by side/digit/region, retain supported nail surfaces, use bidirectional area-balanced comparisons and actual multi-view skin review; small residuals do not prove anatomy or contact.",
+        "Keep the deferred character project and existing native/visual/runtime acceptance gates open; propose only the relevant bounded authorized fixture."
+      ],
+      "must_not_observe": [
+        "Claim exhaustive clip coverage, blindly apply 0.2 degrees or a fixed smoothing iteration count, or declare a Saber repair/native/runtime pass from the supplied prose."
       ]
     }
   ],

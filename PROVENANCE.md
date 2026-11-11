@@ -816,3 +816,8 @@ serialization from pending-count increments and model the admitted completion
 race. These are instruction/finite-model findings, not native concurrency or a
 game observation. Existing clipping/preview gates and all earlier case IDs remain.
 The investigation remains active and Saber remains held.
+
+
+## 2026-11-11 — matched reference and inverse skinning guidance
+
+Retargeting 1.8.27 adds an original adaptation of the user-supplied Neto handoff dated 2026-11-10 (archive SHA-256 `128e2353dd590605dac878cdb15fa56cbb2cf60bb6e90b74517b31aef39e7bb2`; nine manifest files verified). The guidance distinguishes world-orientation calibration from optional inverse weighted LBS for replacement meshes, preserving native anatomical transforms and per-mesh bind ownership. Four workflow cases cover noncommuting rotations, singular blends, authoring-only scale/lengths, and changed weights/correctives. Starfield figures remain attributed historical reports; no Cyberpunk asset, animation, character or game acceptance is claimed. The installed RPG7 fitted-base/partial-blend paragraph absent from the restored source was preserved byte-for-byte.

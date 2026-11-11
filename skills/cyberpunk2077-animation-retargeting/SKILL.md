@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget external or Cyberpunk animation onto a verified Cyberpunk 2077 skeleton and diagnose animgraph blending, masks and state transitions. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.8.26"
+  version: "1.8.27"
 ---
 
 # Cyberpunk 2077 animation retargeting
@@ -121,6 +121,8 @@ adapter can represent the action. The existing
 channels; it cannot authorize copying them onto native anatomical joints. Unhandled
 anchor travel needs a measured adaptation or a named OPEN limitation before
 expansion. See the [RPG7 validation lesson](references/bf6-workflow.md#rpg7-validation-failure).
+
+For measured reference-pose matching, use [matched-pose calibration](references/matched-pose-calibration.md). It separates saved world-orientation correspondence from optional inverse-LBS replacement-mesh work; preserve native anatomy, per-mesh binds and the existing acceptance gates.
 
 ## Gates
 
