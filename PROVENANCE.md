@@ -1,5 +1,30 @@
 # Provenance and verification
 
+## Constructed successor jobs and row history, 2026-11-11
+
+Retargeting1.8.30 binds two selected-record dispatch routes and explicit pending
+holds that cover their constructed jobs before individual admission. The outer
+hold moves into a queued release payload; its actual group wiring distinguishes
+pending completion from an already finished callback at a later import. These
+conditional counted-work results do not identify the selected pose producer or
+join it before the earlier transfer. Cycles, external blockers and arbitrary
+future or unjoined work retain separate contracts.
+
+The row continuation separates sentinel-first lookup, a stored hash, shallow
+object-pointer copying and logical active-index mutation. Later byte-label
+writes overlap the earlier row metadata copy, and source count reset requires
+distinct source/destination storage to preserve the destination. Neither step
+constructs or retains the selected object. The typed Workspot PostBuckets callback
+clears map pairs before opaque cleanup; registration is not its invocation or a
+proof of the missing auxiliary-motion update.
+
+The guidance derives from independently reviewed saved-byte/dataflow packets
+and finite host models. Three new workflow cases exercise these distinctions,
+preserving the earlier66 cases and six triggers. Evaluation and installation
+results are recorded separately; host checks do not constitute engine execution,
+selected-frame or visual acceptance. Existing native corpora and unrelated peer
+changes are preserved. Game bytes, raw research and private assets are excluded.
+
 ## Workspot callback identity and successor dependencies, 2026-11-11
 
 Retargeting1.8.29 connects the constructed workspot manager's successful new-state

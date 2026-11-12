@@ -142,9 +142,13 @@ stable service; virtual98's own consumer behavior is separate from the proved
 main-bank copy path. The [output-consumption trace](native-output-consumption.md)
 now joins the bone-backend type, eye storage/read pair, B+14 descriptor, actual
 packed-bank reader, stage invocation and bounded completion. Its successor
-continuation distinguishes imported job dependencies from synchronous setup and
-from the still-unproved producer-before-transfer join. None alone proves
-rendered output or the selected producer-before-transfer relationship.
+continuation distinguishes imported job dependencies from synchronous setup,
+then binds both selected-record dispatch routes and explicit holds that account
+for the constructed jobs before terminal dependency imports. It also follows
+source-row copying, later metadata/reset writes and the outer hold's queued
+release, preserving both pending/completed advance cases. Selected record type,
+source/destination nonaliasing and producer-before-transfer remain separate
+obligations. None alone proves rendered output.
 
 Retained provenance: `appearance-handoff-continuation/captured` and
 `appearance-handoff-continuation/proxy-followup`, `backend-retention` and

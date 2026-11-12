@@ -70,6 +70,24 @@ parent's still-pending count during incremental submission, while preserving
 the distinction between a vehicle owner and V's selected clock. Neither case
 authorizes a game run; fresh independent evaluation is separate from root checks.
 
+The `native-constructed-successor-enrollment` case distinguishes a represented
+constructed job set from arbitrary future enrollment. Execute the finite pending
+count histories, omitted-hold counterexamples, wrapper ownership moves and both
+late-import advance cases. Keep counted ordering separate from arbitrary progress,
+selected record type and producer-before-transfer. These are host models, not
+engine or concurrency observations.
+
+The `native-typed-registration-versus-update-entry` case separates a loaded
+metadata value from its field address and captured raw manager. Execute the pair
+swap and pointer distinctions; preserve callback lifetime/invocation limits and
+the bounded PostBuckets result without interpreting RET imm0 as numeric zero.
+
+The `native-row-copy-versus-active-selection` case exercises sentinel-first
+lookup, loaded values versus formed addresses, partial-width row writes and
+index-only deletion, later overlapping metadata writes and source count reset.
+Execute the finite model while keeping copy-point preservation, source/destination
+nonaliasing, physical pointer bits, active selection and unknown virtual type distinct.
+
 [Cases and trigger prompts](retargeting-cases.json) test agent decisions separately
 from deterministic Python/native helper tests. [minimal.json](fixtures/minimal.json)
 is synthetic two-bone data with intentionally synthetic identity hashes. It is not

@@ -113,6 +113,19 @@ epoch. That remains an offline static question, separate from live activation.
 Final D-output application, C-to-O/O30 acquisition and composition-to-reset order
 also remain open.
 
+The constructor-bound manager's +108 registration is now a bounded resolved lead.
+It builds a callback capturing raw manager M, with the native label
+`[U]/WorkspotManager/PostBucketsTick` and selector 5. Its known copy/move leaf
+copies M without retaining it; registration does not itself invoke callback slot0.
+The selected adapter loads captured M and reaches a body that iterates map M+1C8.
+Each node's pointer/control pair is swapped with a zero local pair before the
+old pair is passed to delegated cleanup. The captured bodies do not directly
+invoke D+18. Their cleanup, final registration transfer and framework invocation
+remain separate boundaries; this is not transitive absence or a lifetime proof.
+The registrar's type-related argument is loaded QWORD[M+30] when nonnull, with
+its own fallback. It is neither &M30 nor the captured M pointer. Do not repeat
+this PostBuckets route as an unexamined animation-update entry.
+
 Private provenance: independently reviewed sealed `aux-callback-edge/sample-output`,
 its `descriptor-producer` child, and `aux-callback-edge/upstream-entry`. Their saved
 instruction and finite field/handle checks do not establish selected gameplay.
@@ -237,18 +250,131 @@ handles, so do not call it an immutable byte-for-byte snapshot.
 
 The final service dispatcher also has later dependency plumbing through the
 **object field T+18**, distinct from the **virtual method at table+18** and T+8.
-Its concrete nested-query delegates remain offline continuation points, with no
-selected pose-producer identity yet established. Preserve the direction:
-prior wait → transfer submission → successor dependency/submissions → later
-completion. Successor ordering does not establish a producer-before-transfer
-join. Unexpanded cold branches, selected group/instance history, lifetime and
+The nested-query consumers now reach an actual selected-record dispatch. Both the
+parallel worker and the separately constructed dependency-graph jobs load O from
+the selected 48-byte row at +10, construct a local context/nested query, and call
+140332F90(O,context,query). Its body actually invokes O.virtual08 after selected
+policy gates. A call site and shared row layout still do not identify O's concrete
+table, its animation role, an immutable cross-callback snapshot or a matrix read.
+The index mask 0xDFFFFFFF clears only bit29; valid selected storage is a separate
+premise. The context copier preserves selected bits and retains a named handle;
+it is not a bytewise snapshot. The optional post-action can run directly or as
+another queued job according to a selected virtual gate.
+
+Preserve the direction: prior wait → transfer submission → successor dependency/
+submissions → later completion. Successor ordering does not establish a
+producer-before-transfer join. Selected group/instance history, lifetime and
 actual completed use retain their own evidence requirements.
+
+### Row installation and active selection
+
+The selected record source is now a concrete subrecord P returned by a bounded
+lookup. It selects the first entry with either the requested hash or an unused
+hash sentinel; it does not prefer a later exact match over an earlier sentinel.
+The caller requires a valid nonnull result. Its following hash leaf compares and
+stores the requested hash, and unchanged hashes permit reuse of existing P
+contents. Hash equality alone certifies neither initialization nor freshness.
+Keep loaded F=QWORD[Q+38], embedded descriptor address V=F+10 and L=&K10 distinct.
+
+The installer shallow-copies 16 bytes from source row+8 to destination row+8,
+including O at +10. It copies the qword at +18, then replaces only its low DWORD
+with the caller's subrecord ordinal. It neither constructs nor retains O in those
+captured direct stores. The tail can rewire links and remove selected rows by
+swapping index entries and leading ordinal DWORDs. It does not physically swap
+whole 48-byte rows or their O cells. A removed row may still contain the copied
+pointer bits while no longer belonging to the active prefix. Use the updated
+indices to determine which row is selected; retained bits do not prove lifetime
+or eventual invocation.
+
+On the construction path, the later destination finalizer clears WORD[row+1C]
+and derives two byte labels at +1C/+1D, then sets L+68. These bytes overlap the
+upper DWORD of row+18: its preservation was true only at the earlier copy point.
+The captured graph operations do not directly rewrite O, active indices or count.
+Their byte arithmetic wraps; valid graph/scratch bounds and terminating recursion
+remain premises, not an unrestricted topological-order proof. The no-rebuild
+branch bypasses these finalizers.
+
+The owner finalizer clears each source P's byte+68 and DWORD counts at
++10/+24/+34/+40/+54/+64, leaving backing pointers, stored hash and physical O bits.
+It neither releases O nor proves source/destination nonaliasing. Distinct P/L and
+row storage are needed to conclude that source reset leaves destination selection
+intact; opaque storage delegates and later callbacks retain their own limits.
+The source may be cached or conditionally rebuilt by separately supplied direct
+preparers. O's construction/table and selected instance history remain concrete
+offline questions. Do not choose an O subtype from the row category or hash.
+
+### Constructed job enrollment under explicit holds
+
+A dependency import that occurs before individual job admission can still cover
+that constructed set when a real pending-work hold already exists. The traced
+1403E90F4 increments group pending DWORD+18 before storing the group in an
+unreleased wrapper. Its zero-to-one reference-count handling is separate. It
+does not directly replace the supplied group cell. In the outer call this
+preserves destination D; importing a dependency from T+18 did not alias D to T18.
+Optional observer/container calls retain their explicit no-relevant-mutation
+and lifetime premises.
+
+For each constructed graph record, the code makes holds for completion group A
+and predecessor group B before linking edges or importing terminal A groups.
+The paired move transfers the group pointers and release flags to persistent
+64-byte records. Moved-from temporary destruction sees null groups and removes
+no contribution. All jobs are then admitted with B as predecessor and A as
+completion. The actual control-flow path finalizes the nested query before
+walking the persistent records backwards, releasing B then A for each record.
+The once-only release flag prevents a second decrement; count zero still uses
+the retained gated detach/recheck contract.
+
+For example, a completion group starting at zero has pending=1 after its hold.
+An import at that point attaches to represented work. Two admissions raise its
+count to 3; dropping the hold leaves 2 until those jobs finish. Completions may
+interleave with release without erasing admitted contributions. Without the
+hold, an earlier import at zero cannot cover jobs added afterward. This is the
+constructed-set distinction, not authorization to add arbitrary contributors
+after the hold has been released or to omit the closed-epoch premise.
+
+The result assumes valid initialized groups/arrays, matching wrapper counts,
+nonoverflowing counters, nonaliasing stable storage and ordinary successful
+admission/completion. It does not prove progress through cycles or external
+blocking. The independent finite hold and linked-group models explain the count
+invariant; they are not engine execution or a concurrency stress test.
+
+### Outer hold release and the later import
+
+The distinct outer D wrapper now has a concrete release route. Two ownership
+moves transfer it through a temporary into a queued payload; cleanup of either
+moved-from wrapper sees a null group. The queued callback releases the payload
+once, before its own ordinary job completion. A second release call is inert
+under the once-only flag. Releasing D and finishing the callback are separate
+events; allocation/free and optional observer delegates retain their limits.
+
+The parallel submission, intervening ordinary job and release job each use the
+current Q10 predecessor and Q18 completion, then advance Q. An advance seeing
+pending work promotes Q18 to Q10 and creates a new completion group. Seeing zero
+leaves the cells unchanged. Thus a later counted stage either depends on the
+preceding stage's pending completion or follows its already completed work.
+This requires stable group identities, successful ordinary admission/completion,
+properly attached child work and closed relevant enrollment. The intervening
+callback remains opaque; no termination or unjoined-work guarantee follows.
+
+After the release submission advances, the code exports Q2 and imports its
+completion into the then-current Q10. If release is pending, that destination
+is the release completion group, not its already captured predecessor. If
+advance sees zero, the release callback has already returned and Q10 may retain
+the old predecessor; the later import cannot retroactively delay that release.
+Do not claim that advance always creates a new group. The ordinary Q2 export
+uses its constructed, unmodified Q20=0 state; the alternate state is separate.
+Finite scheduling models distinguish these cases without proving arbitrary
+graph progress or an observed engine deadlock. D remains distinct from the T18
+source. Selected O construction/type and producer enrollment before the earlier
+T10 transfer remain open.
 
 Private provenance: recovery packets `aux-callback-edge/storage-invocation`,
 `skinning-edge/reader/continuation`, `main-buffer-association`, `queue-consumer`,
 `second-queue-publication/stage-invocation`, `phase-producer`, `phase38-producer`,
-`outer360` and the G3 `owner-reset` continuation,
-with their independent saved-evidence reviews.
+`outer360`, `successor-consumer`, `successor-enrollment`, `row-installation`,
+`row-finalization`, `outer-hold-release`,
+and the G3 `owner-reset` and `update-entry/capture` continuations, with their independent
+saved-evidence reviews.
 They contain exact byte/argument checks and finite address/order discriminators;
 those models do not constitute a game concurrency test. Executable bytes and
 raw disassembly are not distributed with this guidance.

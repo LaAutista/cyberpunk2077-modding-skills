@@ -972,6 +972,56 @@
         "Equate T field18, table slot18 and T field8.",
         "Claim producer-before-transfer or a race/engine defect from missing evidence."
       ]
+    },
+    {
+      "id": "native-constructed-successor-enrollment",
+      "prompt": "Use the candidate native output-consumption guidance for this saved-evidence problem. A helper loads G from a group cell, atomically increments pending G+18, stores G in a wrapper and sets its release flag to zero. Moving the wrapper swaps its pointer and release flag with a newly null destination. A once-only release decrements G when its pointer is nonnull. Each constructed graph record gets completion A and predecessor B holds before edges are linked and terminal A groups are imported. The program submits all row jobs with B as predecessor and A as completion, finalizes its nested query, then destroys persistent wrapper records backwards, B before A. Execute a finite one-group model for zero, one and two distinctly labeled jobs: hold then import before any admission; permit either admission order, each finish only after its own admission, and release only after all admissions. Report history counts, verify represented work cannot disappear while an admitted job remains, and show what omitting the hold changes. Also check two successive ownership moves, moved-from cleanup and repeated destruction. Separately, outer D had a dependency imported from T+18, then its hold moved into a queued release payload. The counted parallel stage, an opaque ordinary job and this release each submit using current Q10/Q18 and advance Q. Advance promotes Q18 to Q10 and creates a new Q18 only when the inspected completion count is nonzero; zero leaves the cells unchanged. Later ordinary Q2 export (constructed Q2+20 remains zero) is imported into then-current Q10. Execute two small address/order witnesses: the release captures predecessor0x1000 and completion0x2000; in one witness it remains pending at advance, and in the other it has returned before advance sees zero. A Q2 source with positive count is then imported. Report the destination in each witness and whether this can become a new prerequisite of the already submitted release. Keep callback hold release distinct from its subsequent job-completion accounting. Both record-job routes call selected O.virtual08, but no O constructor/table is supplied. State the limits for arbitrary future contributors, external blockers, opaque callbacks, D identity, O type and the earlier T10 transfer. Do not access the game, PE, network or private research packets.",
+      "must_observe": [
+        "Recognizes the explicit positive hold before terminal imports, preserved by move, with null moved-from destruction and at-most-once pending decrement; does not substitute a reference-count increment for pending work.",
+        "Runs and explains the finite zero/one/two-job histories with stated admission-order model; includes missing-hold counterexamples and move/repeated-destruction checks. The supplied distinct-label ordering rules permit 1,2,16 histories,19 total.",
+        "Explains actual constructed-set admission before persistent B/A release and ordinary nested accounting, while preserving initialized storage, matching counts, graph validity, lifetime and nonoverflow premises.",
+        "Keeps D as a destination group distinct from imported T18 and per-entry A/B groups. Actual Q wiring gives conditional counted parallel-stage, opaque ordinary job, then release ordering; it does not prove arbitrary progress or producer-before-earlier-T10.",
+        "Executes both late-import witnesses: pending advance targets0x2000 while release predecessor stays0x1000; zero advance can target old0x1000 only after release already returned. The later import cannot retroactively add a release prerequisite. Preserves ordinary Q2+20=0, callback-release versus callback-completion and closed-enrollment premises."
+      ],
+      "must_not_observe": [
+        "Treat all imports before individual submission as ineffective despite the explicit hold.",
+        "Treat pointer movement or temporary destruction as a second pending hold or an early release of the moved hold.",
+        "Claim arbitrary later contributors, cycles or unjoined external work are covered by the finite proof.",
+        "Claim selected animation behavior, unconditional progress, D=T18 identity, producer-before-transfer or live/native execution.",
+        "Assume advance always creates a new group, import always targets a different group, or a late import into Q10 retroactively delays an already returned release."
+      ]
+    },
+    {
+      "id": "native-typed-registration-versus-update-entry",
+      "prompt": "Use the candidate native output-consumption guidance for this saved-evidence problem. Constructed manager M has table+108 bound to a registration body. It captures raw M at F+0, puts a known callback table at F+40 and passes F to a registrar. The known copy/move method copies one QWORD without retaining it; slot18 is RET imm16(0). Manager virtual8 executes MOV RAX,[RCX+30], tests the loaded value and calls table slot0 only when it is null. The registrar uses selector5 and the native label [U]/WorkspotManager/PostBucketsTick, and passes a descriptor with that callback to an append helper; its final storage and framework dispatch are not supplied. The known slot0 adapter would load M from F and enter a body that iterates map M+1C8, swapping each selected node+10 pair with a zero local before opaque cleanup. No captured direct body calls D.virtual18. For M=0x1000, QWORD[M+30]=0x9000, and selected map pair=(0x6000,0x7000), execute a small field/pointer/pair-swap model. Distinguish the type-related value, captured manager, field address, stored callback and actual invocation. Explain whether this closes the missing D18 update, proves global non-use, retains M or returns numeric zero. Identify the useful remaining discriminator without repeating the now-resolved PostBuckets direct body or launching the game.",
+      "must_observe": [
+        "Computes loaded metadata value0x9000, field address0x1030 and captured manager0x1000 as distinct; fallback is conditional on a null loaded value.",
+        "Executes the pair model showing map pair becomes(0,0) and local retains(0x6000,0x7000) before delegated cleanup; keeps later effects open.",
+        "Distinguishes descriptor construction/registration from actual framework slot0 invocation and raw manager lifetime; the copier does not retain M and RET imm16(0) does not define a numeric result.",
+        "Treats typed PostBuckets registration as a bounded resolved lead, not the selected D18 caller or transitive/global absence; seeks a newly connected typed entry, implementation or result recipient."
+      ],
+      "must_not_observe": [
+        "Equate QWORD[M+30],&M30 and M or force the nonnull field to equal the fallback type-global value.",
+        "Claim the captured raw pointer is retained or that registration invokes slot0.",
+        "Interpret RET imm16(0) as returning integer zero.",
+        "Claim D18 is unused everywhere, final motion is applied, or opaque cleanup is completely understood."
+      ]
+    },
+    {
+      "id": "native-row-copy-versus-active-selection",
+      "prompt": "Use the candidate native output-consumption guidance for this saved-evidence problem. A lookup returns the first P whose hash is either the requested value or sentinel CBF29CE484222325, and null on exhaustion. The caller requires a nonnull P; its next leaf stores the requested hash and skips rebuilding when it was already equal. Compare [sentinel,requested], [other,requested,sentinel] and an empty collection. Separately, Q=0x1000 has QWORD[Q+38]=0x5000; the concrete getter returns F+10. K=0x8000 has QWORD[K+10]=0xD000, while the caller forms L with LEA K+10. Compute F,V,L. A row installer copies16bytes from source row+8, including opaque O bits at+10; it copies row+18 qword A1B2C3D455667788 then overwrites only its low DWORD with ordinal0x99. A later removal starts with physical object cells [O0,O1,O2] and logical indices [1,2,0]; it removes logical position0 by swapping that index with the last active entry, swapping leading row ordinals only, marking the removed row and decrementing count. Execute a finite lookup/pointer/byte/index model: report resulting row+18 and active object sequence, and distinguish those from unchanged physical O cells. Also compare node mask DFFFFFFF and edge mask BFFFFFFF on E0000001. On the construction path only, a later finalizer clears WORD[row+1C] then derives byte labels at+1C/+1D. For an explicit synthetic example use labels0x12 and0x34 after that clear; compute both intermediate and final row+18 values. A source reset then clears P byte+68 and DWORDs+10/+24/+34/+40/+54/+64, without directly changing backing pointers or the hash. Distinct source P and destination L/storage is a premise, not a supplied allocation proof. Explain its importance. No O constructor/table or selected runtime mode is supplied. State what can and cannot be concluded about O type, lifetime, row survival and actual dispatch. No target execution, PE, game or network access.",
+      "must_observe": [
+        "Executes sentinel-first lookup cases yielding first entry, second entry and null; preserves nonnull-result premise and rejects freshness/content identity from an equal stored hash.",
+        "Computes F=0x5000,V=0x5010,L=0x8010, keeping loaded F, embedded address and LEA separate from Q+38 or loaded K+10.",
+        "Computes copy-stage row+18=0xA1B2C3D400000099, post-clear0xA1B2000000000099 and supplied-label result0xA1B2341200000099 while O bits stay separate; active indices become[0,2,1] with active prefix[0,2] and objects[O0,O2], while physical O cells remain[O0,O1,O2].",
+        "Distinguishes node mask result0xC0000001 from edge result0xA0000001 and leaves index/storage validity separate. Source count reset neither releases O nor proves P/L nonaliasing; metadata writes overlap row18 upper DWORD, so its copy-point preservation is not immutable-to-dispatch. O construction/type/lifetime and eventual invocation remain open."
+      ],
+      "must_not_observe": [
+        "Prefer a later exact hash match over an earlier sentinel or dereference an exhausted lookup as valid.",
+        "Equate field loads with LEA addresses or claim a hash match proves the object epoch.",
+        "Model removal as physically swapping complete rows/O pointers or treat a removed row as active because its pointer bits remain.",
+        "Infer a concrete virtual08 class, retained ownership, immutable-to-dispatch layout, selected pose production or live acceptance."
+      ]
     }
   ],
   "trigger_cases": [
