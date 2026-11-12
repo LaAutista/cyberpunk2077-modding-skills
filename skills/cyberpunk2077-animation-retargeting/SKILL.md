@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget external or Cyberpunk animation onto a verified Cyberpunk 2077 skeleton and diagnose animgraph blending, masks and state transitions. Use for source decoding, skeleton mapping, coordinate conversion, FK/IK and hand contact, additive semantics, .anims authoring and native readback. Excludes ordinary mesh fitting, textures, audio and gameplay scripting.
 metadata:
-  version: "1.8.30"
+  version: "1.8.31"
 ---
 
 # Cyberpunk 2077 animation retargeting
@@ -162,7 +162,12 @@ ordinary weighted collection from optional interval/full-clip results, their
 time rules, write footprints, event ownership and locomotion lifecycle/planner
 consumers. Check the caller's later overwrites and cached inputs before treating
 a helper result or outer argument as the retained playback state. For query-refresh
-timing, distinguish registered stages from completion of their nested jobs. Consult the sibling
+timing, distinguish registered stages from completion of their nested jobs. The
+[AnimationSystem-to-frame trace](references/native-output-consumption.md#animation-update-to-frame-transfer)
+connects the represented graph/skinning jobs to a real pre-transfer wait; preserve
+its registration, selected-history and closed-enrollment conditions. It also
+distinguishes the index copy/sort from filtering or an atomic source snapshot.
+Consult the sibling
 [WolvenKit Docs skill](../wolvenkit-docs/SKILL.md) for cached primary documentation;
 where it does not specify a runtime contract, follow the exact implementation
 and validate a discriminator instead of inventing semantics from field names.

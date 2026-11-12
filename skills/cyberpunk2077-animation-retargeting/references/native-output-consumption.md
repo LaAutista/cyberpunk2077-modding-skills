@@ -205,9 +205,11 @@ dependency. Other concrete drain/wait paths attach exported T+8 work to their
 supplied query; an address or descriptor alone is still not a completion fence.
 
 The transfer takes records before importing its prior dependency internally,
-while allocation emitted each record before matrix production. The now-proved
-outer wait therefore needs an actual join to the selected pose producer before
-it can establish producer-before-transfer ordering. The selected outer+350
+while allocation emitted each record before matrix production. This A8 route's
+prior-transfer wait does not itself join the selected pose producer. The separate
+[B0 framework route below](#animation-update-to-frame-transfer) supplies a conditional
+represented graph/skinning completion path; it does not infer order from A8/B0
+slot numbers or select a live buffer. The selected outer+350
 phase object is now conditionally constructed through the fixed
 `servicesGameServicesWin` registration. Its virtual40 drains a locked collection
 of 0x28-byte records and clears its count; that byte lock is not the pending-work
@@ -223,6 +225,165 @@ no main-bank producer/group join. Their delegated calls are not a proof of
 transitive absence. Do not infer a race, fixed delay, finished frame or engine
 defect from that missing join. Selected generation/bank history, destination
 mapping/lifetime and actual draw consumption remain OPEN.
+
+## Animation Update to frame transfer
+
+The later saved-build trace connects actual AnimationSystem callbacks to a
+framework completion group that the selected B0 world-update route waits before
+T10 transfer. This is a conditional static membership/order result, not a claim
+that every registered descriptor, graph, producer or later write is covered.
+Keep the selected engine/framework/state/session tables, registration transport,
+callable and object lifetimes, group-cell stability, valid nonaliasing storage,
+ordinary return, nonoverflowing counts and closed relevant enrollment explicit.
+
+### Actual invocation and the Kick/Finish bridge
+
+The inspected bucket worker constructs nested query N from its execution context,
+then supplies N as the callback's fourth argument. Its concrete invoker loads the
+stored callable table and calls slot0. The inspected traversal is bucket-major:
+buckets 0..2 each visit their stage arrays, with active/mask filtering. Peers within
+one stage may run in parallel. An empty bucket-stage array skips advance; a
+nonempty array whose descriptors are all rejected still advances. The separate
+pre/post-group iterator advances once per visited group, even an empty group.
+Neither advance is a synchronous wait. Registration's group/selector numbers
+alone do not prove transport into these particular arrays.
+
+The typed Kick callable constructs its own Q0 with zero parent; do not identify
+that local query with the incoming framework N. Its reused incoming-argument
+home cell later holds an export result. The producer also constructs Q1, submits
+work to both queries, and imports Q1 into the then-current Q0 predecessor only
+after earlier Q0 submissions. That import does not add a new prerequisite to
+work already submitted. Kick finally imports exported Q0 into W+AA9B0 for its
+stored system W.
+
+The typed Finish callable imports W+AA9B0 into incoming N10. Its source pending
+count is tested before the source cell is reloaded for attachment; the two loads
+need stable identity and lifetime. Finalization can join pending N10 to the
+counted framework parent even when N18 is empty. An empty current completion
+cell does not erase a represented predecessor. The ordinary parent callback
+remains counted until after its nested finalization and return. Together with
+the selected same-system stage traversal, these bodies supply the conditional
+Kick-to-Finish bridge; the callback names alone did not supply it.
+
+Classify the actual work before calling this a pose producer. The first resolved
+Kick job is a counted status/list pass. A later range job conditionally reaches
+controller clock/command distribution, whose later command consumption is
+separate. An earlier context-range job performs selection/status maintenance and
+can append a truncated WORD index to a gated collection. Its context copier is
+still only an incomplete navigation prefix; do not claim a full context copy,
+original scalar preservation across every opaque call, or pose production from
+those partial fields. The cached gate owner and reloaded collection owner must
+match for the gate argument. The worker resets its TLS priority byte to FF;
+it does not restore an arbitrary prior byte.
+
+### The index handoff is append, copy and sort
+
+The concrete append 1403BBEEC adds one WORD to W+8A4D8 under valid backing and
+nonoverflowing size arithmetic. It preserves an aligned active-element source
+across backing relocation, reloads backing, stores the new count, then writes
+the new WORD. It does not search for duplicates. Count-before-element storage
+and the surrounding writer gate do not prove the later reader shares that gate.
+
+Update's helper 1404EAEF0 saves source count before reserving local capacity,
+reloads source backing afterward, copies twice that saved count in bytes, and
+then installs local count. This is an actual local byte copy, with valid separate
+storage and ordinary allocator/seed behavior as premises. It is not an atomic
+snapshot proof. A particular append must finish before the relevant observed
+range, with stable valid count/backing/content through copying; a later append
+does not appear in an already copied range. The observation sequence alone does
+not demonstrate an actual concurrent defect.
+
+The complete insertion, pivot, partition and cold heap paths of 14079E908 sort
+the local WORD range without changing its length or multiset. For bucket base
+`B = W + 0x50 + uint8(bucket)*0x2E170`, the comparator resolves
+`O(i) = QWORD[B+0x30+8*uint16(i)]`. Under stable object pointers and fields its key is:
+
+```text
+(uint32(O+0x9C), !(bit9(O+0x68) && !bit1(O+0x68)), bit1(O+0x68))
+```
+
+The primary comparison is unsigned. Equal primary values order bit9-set/bit1-clear,
+then both-clear, then bit1-set regardless of bit9. No semantic priority/LOD name
+or index-value tie-break is established. The exact comparator and predicate
+preserve the live R10/R11 cursors used by their callers; this is body evidence,
+not an ABI promise about volatile registers. Valid bounds and stable keys matter.
+The sort is not proved stable among equal keys. It neither filters nor deduplicates:
+Update visits every local position and zero-extends its WORD into the job payload.
+Duplicate indices remain duplicate submission opportunities, not proof that a
+pose is evaluated or applied twice. Same W/bucket/generation and WORD truncation
+history remain separate from this local ordering contract.
+
+### Graph jobs and their original completion group
+
+The selected Update callable forwards its inherited N through the actual fifth
+argument into 14079E758. Each local index supplies a 40-byte graph-job record to
+14212F9E0, binding 142131650. The record's+18 is the computed **bucket-base pointer**;
+the selector byte is at+21, and the zero-extended WORD is a DWORD at+24. Only 34
+of 40 bytes are explicitly initialized; C..F and22..23 are padding. Pointer-field
+copies neither retain their owners nor freeze the pointed-to pose/details.
+
+The maker's wrapper actually loads the current completion from the N18 cell and
+predecessor from N10 before ordinary admission. Taking their addresses earlier
+does not freeze the handle values. The ordinary worker holds the original job
+completion handle in a stack cell, passes that cell's address through J20, calls
+the payload callback, and retires its contribution only after the callback returns.
+
+The graph task 1421301C0 saves J and conditionally calls the graph evaluator. Early
+exits and alternate paths remain; admission is not universal graph execution.
+On a qualifying postgraph path, it constructs query M from saved J, submits the
+112-byte skinning payload bound to callback 1421314B0 or the separate parameter broadcast, then
+advances and finalizes M before returning. M20 points to the worker-held **original
+graph-job completion cell**, not the N18 field after later query advances. Pending
+child work joins that original group while the enclosing graph callback is still
+counted; already completed closed work needs no pending join.
+
+The selected skinning callback conditionally enters the previously established
+SimpleSkinningAttachment/entSkinnedMeshComponent CPU route. On that synchronous
+route its packed 48-byte matrix writes precede callback return. Properly attached
+child completion therefore propagates through M, the original graph group and
+the framework query. Unknown callback effects and detached descendants require
+their own evidence. A copied pose pointer is not a frozen pose.
+
+The common later Update submissions preserve this represented chain. The extra
+bucket-1 branch is separately resolved into four ordinary submission stages and
+one range stage, each followed by the same accepted advance. It reloads mode
+from N28; volatile incoming DL is not treated as the bucket. The makers load
+actual N10/N18 values after allocation. The range stage's nonnull terminal means
+zero work count still admits terminal-only cleanup. Multiple workers can return
+after terminal invocation, and their returns remain counted. Five stages do not
+imply exactly five runtime jobs. Both captured Update branches are covered at
+this query-handling boundary; their bound payload callbacks remain unexpanded.
+
+### The actual pre-transfer wait
+
+In the inspected B0 body 1405D48F0, framework.virtual10 returns before a T330
+prior-transfer wait and the actual T10 call. Inside the selected gameplay-state
+path, a local session query is submitted, exported, and genuinely waited through
+1405D3CFC/14026D9A0 before state/framework return. Later session/group submissions
+use that query's cells and preserve its represented work. Finalizing/exporting a
+query alone would not establish this wait.
+
+The session constructor's formerly open post-call-RCX qualification is resolved:
+its complete 81-byte direct helper 142BEE470 has no calls/branches and preserves
+RCX through ordinary return, so derived table stores use the entry receiver.
+That does not select the actual owner+2A8 session or prove table persistence.
+The exact range helper between T10 target load and call also preserves R9/R10;
+it reloads the input base, so coherent range storage remains a premise.
+
+The resulting conditional chain is synchronous skinning writes → attached
+postgraph completion → original graph-job group → framework/session group →
+state wait → framework return → later T10 transfer. The state's group and prior
+T+8 transfer group are distinct. This does not claim that the preceding T330 wait
+completes new copy jobs submitted by the later transfer. Their later joined
+completion retains its own earlier proof.
+
+For a selected-frame claim, bind the actual registration and callable, W/O/component
+and backend, source allocation/descriptor/bank/generation and later transfer
+record/destination. Exclude or account for intervening writes and other producers;
+opaque post-state/post-tick hooks remain. Queue publication before matrix stores
+is ordered only for a writer actually covered by the proved completed chain.
+Do not turn this conditional route into all-producer completion, an observed race,
+a fixed one-frame delay, renderer use, final deformation or gameplay acceptance.
 
 ## Successor dependency after transfer
 
@@ -365,14 +526,20 @@ Do not claim that advance always creates a new group. The ordinary Q2 export
 uses its constructed, unmodified Q20=0 state; the alternate state is separate.
 Finite scheduling models distinguish these cases without proving arbitrary
 graph progress or an observed engine deadlock. D remains distinct from the T18
-source. Selected O construction/type and producer enrollment before the earlier
-T10 transfer remain open.
+source. Selected O construction/type and that successor's producer relationship
+to the earlier T10 remain open. The separate AnimationSystem/B0 proof above does
+not identify this opaque selected-row object or retroactively order its work.
 
 Private provenance: recovery packets `aux-callback-edge/storage-invocation`,
 `skinning-edge/reader/continuation`, `main-buffer-association`, `queue-consumer`,
 `second-queue-publication/stage-invocation`, `phase-producer`, `phase38-producer`,
 `outer360`, `successor-consumer`, `successor-enrollment`, `row-installation`,
 `row-finalization`, `outer-hold-release`,
+the AnimationSystem `animation-preupdate-finish`, `animation-preupdate-kick`,
+`animation-kick-submission`, `animation-kick-range-submission`,
+`animation-kick-context-submission`, `animation-framework-invocation`,
+`animation-update-completion`, `animation-update-bucket1`,
+`animation-index-selection`, `engine-frame-transfer`, `session-constructor-identity`,
 and the G3 `owner-reset` and `update-entry/capture` continuations, with their independent
 saved-evidence reviews.
 They contain exact byte/argument checks and finite address/order discriminators;

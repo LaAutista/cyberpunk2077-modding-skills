@@ -277,3 +277,16 @@ exercise the distinct name/extraction gates and local output addresses, then
 count-dependent imports, synchronous setup versus queued work, closed enrollment
 and the remaining producer-before-transfer boundary. Finite host models do not
 execute the engine or certify selected frames.
+
+
+The three frame-completion cases added in1.8.31 cover the actual framework
+parent cell and state wait, local index copy/sort membership, and Kick/range
+completion boundaries. Execute their finite host histories and arithmetic; keep
+those illustrations separate from native interleavings and selected game history.
+`native-framework-frame-completion` must use the original worker-held completion
+cell after N advances and distinguish the state wait from the prior transfer
+group. `native-index-copy-sort-membership` must preserve duplicates and unsigned
+ordering without inventing an atomic snapshot.
+`native-kick-and-range-completion-boundaries` must retain late-import chronology,
+N10-only parent joining and terminal-only work at zero range count. All69 prior
+cases and six trigger cases remain unchanged.

@@ -1022,6 +1022,60 @@
         "Model removal as physically swapping complete rows/O pointers or treat a removed row as active because its pointer bits remain.",
         "Infer a concrete virtual08 class, retained ownership, immutable-to-dispatch layout, selected pose production or live acceptance."
       ]
+    },
+    {
+      "id": "native-framework-frame-completion",
+      "prompt": "Use the candidate animation guidance to assess this saved-evidence handoff. The actual framework invoker calls a preserved selected Update callable with nested query N in R9; the thunk puts N in argument5. A graph maker captures N18=0x2000 as its counted completion. Its worker keeps that original handle in cell0x8000 and sets J20=0x8000. Update later advances N, so current N18 is0x4000. A qualifying graph task constructs M from saved J, sets M20 from J20, submits one child through M, advances M and finalizes M before returning. Pending child completion contributes one join to the group loaded through M20. The original graph-job contribution retires after callback return. Execute two finite pending-count histories: the child is still pending at finalization and finishes after the graph returns; the child has already finished before finalization. Also show the counterfactual gap if original retirement occurred before attaching a still-pending child. State which parent cell/handle M uses and whether current N18 redirects it. On the supplied typed synchronous skinning branch, CPU matrix writes precede the child's return. The selected B0 state exports and waits its session group, returns through the framework, waits the separate prior T8 group, then calls T10 to submit copy jobs. What ordering is supported and which completion would cover the new copies? Separately, a constructor calls a complete straight-line helper with no calls/branches or RCX-alias writes, then stores derived tables through RCX. Does the helper leave receiver identity unresolved? Registration-to-stage-array transport, actual owner/session selection, writer allocation/bank/generation and post-state hooks are not supplied. Give the next concrete discriminator without inferring A8/B0 order from slot numbers or claiming all producers/rendering. Use only saved facts and finite host arithmetic; no game, PE, network, private packets or target execution.",
+      "must_observe": [
+        "Uses M20=0x8000 and original parent handle0x2000, distinguishing both from current N18=0x4000; taking a query-cell address does not freeze its later value.",
+        "Executes pending-child history parent counts1\u21922\u21921\u21920 and already-complete-child history1\u21920, with the original callback counted through attachment. Demonstrates an early-zero point only in the declared retirement-before-join counterfactual; keeps these host illustrations distinct from native atomic interleavings.",
+        "Connects the qualifying synchronous skinning writes through properly attached completion to the actual state/framework wait before T10. Distinguishes session group, prior T8 wait and completion exported by newly submitted copy work.",
+        "Resolves static constructor entry/post-call RCX identity from the complete no-write leaf while retaining actual session selection/table lifetime; does not demand another capture or live test for this already supplied body fact.",
+        "Keeps selected registration, types/gates, stable storage/handles, closed enrollment, buffer/record/bank/generation identity and later writes separate; proposes a concrete registration or writer-to-transfer identity/history discriminator."
+      ],
+      "must_not_observe": [
+        "Alias M20 to current N18 or redirect already captured graph completion when N advances.",
+        "Count a child join only after the enclosing job retires, or promote the counterfactual gap into an observed engine race.",
+        "Claim the preceding T8 wait completes copy jobs submitted afterward, or treat finalization/export alone as the observed state wait.",
+        "Leave the supplied straight-line RCX preservation unresolved solely because RCX is ABI-volatile, or infer actual live-session selection from that constructor proof.",
+        "Claim unconditional all-producer completion, absence of later writes, numeric A8/B0 slot ordering, a fixed delay, native concurrency validation or rendered/visual acceptance."
+      ]
+    },
+    {
+      "id": "native-index-copy-sort-membership",
+      "prompt": "Use the candidate animation guidance on this index handoff. A gated worker truncates saved DWORD0x10002 to WORD before calling the concrete append helper. Source collection initially contains WORDs[3,2,0,3,1]; append has valid nonoverflowing storage. The helper increments/stores count and adds the supplied WORD, without a membership search. A second example appends from an aligned existing source at oldBacking+2, while the backing moves from0x1000 to0x2000. Show the rebased source address and copied value. Update saves source count before reserve, reloads source backing afterward, copies that count of WORDs to distinct local storage and then sorts locally. A further WORD4 is appended only after this local copy. For stable object fields use (O+9C,O+68): index0=(5,0), index1=(0xFFFFFFFF,0), index2=(5,0x202), index3=(5,0x200), index4=(0,0). Execute append/truncation, relocation and a finite local-order/multiset check using the actual comparator from the guidance. Compute B and the index2 pointer-slot address for W=0x100000,bucket2. The retained Update loop visits every local WORD and zero-extends it into payload DWORD+24. Report the local submission sequence, duplicate multiplicities and whether late4 belongs. Explain whether the sort deduplicates, filters or guarantees stable ordering between distinct indices with equal comparison keys. In a separate source-history scenario count was saved before reserve but another actor may mutate/reallocate backing before its reload; no common reader lock or lifetime proof is supplied. What is and is not proved about that copy, a specific earlier append, and a resulting pose? Do not infer urgency/LOD semantics for the key fields. Use only finite host models and the guidance; no game, PE, network, native execution or private packets.",
+      "must_observe": [
+        "Executes truncation0x10002\u21922, append result[3,2,0,3,1,2], and aligned relocation from0x1002 to0x2002 preserving value2 under the valid backing premise.",
+        "Applies unsigned primary comparison and exact status predicate ordering, obtaining local sequence[3,3,0,2,2,1] with both3 and2 occurring twice; does not interpret0xFFFFFFFF as negative.",
+        "Computes B=0x15C330 and index2 slot=0x15C370; distinguishes the pointer-slot address from the loaded O and keeps same W/bucket/history conditional.",
+        "Keeps late4 absent from the already copied local range; sort preserves the WORD multiset/count without filtering or deduplication and does not promise equal-key stability. Duplicate submissions do not prove a pose is applied twice.",
+        "Distinguishes saved count from later backing observation and no atomic-snapshot proof from an observed defect. Selected append timing, owner/gate identity, valid stable backing/keys, ordinary allocation and completed job/buffer history remain separate."
+      ],
+      "must_not_observe": [
+        "Undo WORD truncation, treat append as a set insertion or copy the stale source pointer after relocation.",
+        "Use signed primary order, omit either duplicate, insert late4 into an earlier copy, or claim native equal-key stability from a stable host sort.",
+        "Confuse B, pointer-slot address and loaded O, or assign semantic names to the opaque ordering fields.",
+        "Call the local copy atomic solely because the writer used a gate, or assert a live concurrency defect from the two observation points.",
+        "Promote local submission opportunities or synthetic sorting into selected graph execution, repeated pose application, native parity or rendered acceptance."
+      ]
+    },
+    {
+      "id": "native-kick-and-range-completion-boundaries",
+      "prompt": "Use the candidate animation guidance to review these saved routes. The actual Kick callback receives framework query N but constructs separate zero-parent Q0 and Q1. Earlier Q0 work captured predecessor0x3000 and completion0x4000; after a positive-count advance, Q0 predecessor is0x4000. A later import attaches pending Q1 group0x6000 to that current predecessor. Show which group receives the import and whether the earlier job acquires a new prerequisite. Finish imports stored W+AA9B0 into its incoming N10, testing one source pointer's count and then reloading the source cell; the framework later finalizes N with N18 empty and N10 pending. Explain the required identity and parent accounting. The three resolved Kick payload routes are a status/list pass, a conditional controller clock/command distributor, and selection/status maintenance followed by a gated WORD append. Their context-copy helper is only a32-byte prefix without RET; controller C and aggregate O come from different pointer paths. Does this establish full context copying, C/O equality or inequality, command consumption or a completed pose? Separately, the extra bucket1 Update path has four ordinary stages and a range stage, with one advance after each. The range descriptor has nonnull terminal, null preparation/auxiliary, zero chunk override and count c. For a valid global field value3, its unsigned capacity expression is3+1 and m=min(capacity,c). Execute a finite table for c=0,1,7 showing m and admitted worker count; the m=0/nonnull-terminal path admits one terminal-only worker. In a four-worker example, terminal invocation occurs while two worker wrappers have not returned: model the remaining completion count and when it can reach zero. State whether these are exactly five jobs, whether advance waits, and whether copied pointer payloads retain/freeze their targets. No game, PE, network, native execution or private-packet access.",
+      "must_observe": [
+        "Keeps framework N separate from Kick Q0/Q1, computes late import destination0x4000 while the earlier captured predecessor remains0x3000, and rejects retroactive prerequisite creation.",
+        "Requires stable source identity across Finish count test/reload, and explains that pending N10 can join the counted framework parent even with empty N18 before the enclosing callback retires.",
+        "Classifies the three actual Kick jobs without promoting clock/command distribution to consumption or pose production; leaves incomplete context copier open and C/O as separate provenance without asserting universal equality or inequality.",
+        "Executes range table (c,m,workers)=(0,0,1),(1,1,1),(7,4,4). Zero count still has terminal cleanup; five stages need not be five jobs. With two wrappers outstanding, completion remains2 then1 then0 as they retire, despite earlier terminal invocation.",
+        "Distinguishes asynchronous advance, counted callback return, attached descendants and opaque detached work; raw pointer payload copies do not prove retention, frozen state, arbitrary completion or live acceptance."
+      ],
+      "must_not_observe": [
+        "Equate incoming N with local Q0 or claim a late import changes an already submitted job's captured predecessor.",
+        "Skip a pending N10 parent join because N18 is empty, or treat the tested source pointer and reloaded source as inherently identical.",
+        "Infer full context-copy semantics from an unterminated prefix, full pose production from job names, or C/O identity or universal nonaliasing from different provenance.",
+        "Treat zero range count as no admitted work, terminal invocation as all worker returns, five stages as exactly five jobs, or query advance as a synchronous wait.",
+        "Promote host counts, metadata or pointer copies into native concurrency, selected frame/buffer freshness or visual acceptance."
+      ]
     }
   ],
   "trigger_cases": [

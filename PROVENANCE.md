@@ -1,5 +1,32 @@
 # Provenance and verification
 
+## AnimationSystem completion and index history, 2026-11-11
+
+Retargeting1.8.31 connects the actual Kick/Finish/Update callables to their
+represented framework query, including both explicit Update branches. Qualifying
+postgraph skinning work joins the original graph-job completion before retirement;
+the selected B0 state genuinely waits its session group before framework return
+and transfer. The separate prior-transfer group does not complete newly submitted
+copy jobs. The session constructor's receiver preservation is independently
+resolved from its complete straight-line helper. Selected registration transport,
+object/gate history, buffer/bank/generation identity, later writes and detached
+work remain distinct obligations. No live or visual completion is claimed.
+
+The connected index path appends a truncated WORD, copies the observed source
+range, and sorts the local range without filtering or deduplicating. Its exact
+unsigned/status comparator and cold heap path preserve multiplicity under valid
+stable state. Saving count before reserve and reloading backing afterward does
+not prove an atomic snapshot or an actual concurrent defect. The partial context
+copier and later command consumption are not promoted into completed pose work.
+
+This guidance uses independently reviewed saved-byte/control/dataflow packets
+and preserves their ordinary-storage, lifetime and closed-enrollment premises.
+Three new workflow cases supplement all69 earlier cases and six triggers; their
+finite host checks do not execute native instructions or certify engine races.
+Evaluation/install/publication receipts are separate. Existing native corpora,
+Neto guidance, preview gates and unrelated local/public peer differences remain
+preserved. Game bytes, raw disassembly and private research/assets are excluded.
+
 ## Constructed successor jobs and row history, 2026-11-11
 
 Retargeting1.8.30 binds two selected-record dispatch routes and explicit pending

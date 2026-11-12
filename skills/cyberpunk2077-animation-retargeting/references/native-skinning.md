@@ -147,8 +147,13 @@ then binds both selected-record dispatch routes and explicit holds that account
 for the constructed jobs before terminal dependency imports. It also follows
 source-row copying, later metadata/reset writes and the outer hold's queued
 release, preserving both pending/completed advance cases. Selected record type,
-source/destination nonaliasing and producer-before-transfer remain separate
-obligations. None alone proves rendered output.
+source/destination nonaliasing and producer/transfer identity remain separate
+obligations. The later [AnimationSystem and B0 frame trace](native-output-consumption.md#animation-update-to-frame-transfer)
+conditionally joins admitted graph jobs and qualifying synchronous skinning work
+to a real wait before transfer across both captured Update branches. It resolves
+that represented-work path, while the actual registration, selected gates and
+same allocation/record/bank/generation still need evidence. None alone proves
+rendered output.
 
 Retained provenance: `appearance-handoff-continuation/captured` and
 `appearance-handoff-continuation/proxy-followup`, `backend-retention` and
