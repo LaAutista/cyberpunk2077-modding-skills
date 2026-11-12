@@ -156,15 +156,26 @@ node uses and the final aggregate movement recipient are not generalized from it
 
 The later-job alias question is resolved by the submitted ranges. Let T be the animation task's RBP: the second QS occupies `[T+0x280,T+0x2b0)`. Skinning's 96-byte source view is `[T+0x220,T+0x280)`, ending immediately before it, and the final 112-byte descriptor is `[T+0x160,T+0x1d0)`. The pointer fields trace through `0x1403242e0` to MetaRig metadata and through `0x140b4eef8` to aggregate transform/float arrays. The latter helper also copies the first auxiliary QS temporarily, but that copy is overwritten before submission. Neither numerical QS belongs to the submitted skinning view. The broadcast job copies only a component pointer. The task then releases its stack without a later direct read of the second QS or its context alias. This excludes those two delivery routes; it does not prove that every possible graph callback is unable to retain a pointer elsewhere.
 
-### Stored query callbacks still need an invocation and recipient
+### Stored query callbacks and clip extraction
 
-The known accessor output now reaches a 1B0-stride record, including its tuple
-copy/move callbacks. This proves storage, not slot0 execution or final O+30
-application. The owner relation is W=[S], not automatically W=S; a separately
-observed S+270 attachment cannot substitute for the actual D=W+270 storage.
+The known accessor output reaches a 1B0-stride record through tuple copy/move.
+A later concrete workspot-manager new-state construction proves [S]=S for that
+successful stable provenance, joining D=W+270 to S+270. Existing map entries and
+an arbitrary nominal service lookup do not inherit that identity. The constructed
+destination's +18 body contains a real slot0 call; its known adapter binds K to
+the stored record Q. Entry into that body and its gates remain premises.
 Follow [callback storage and output consumption](native-output-consumption.md#stored-callbacks-and-owner-identity)
-for the known/alternate table distinction, unbound third argument/K and concrete
-service/destination dispatch boundaries.
+for the actual stack-cell argument, known/alternate table distinction and selected
+outer-caller/epoch limits. Neither this invocation nor record initialization
+establishes final aggregate O+30 application.
+
+The known callback's descriptor now joins to the queried animation's motion-extraction
+handle at record Q+F0. Its separate Q+D8 name gate is not the handle's nonnull test.
+Conditional endpoint sampling and combination reach destination-local output fields;
+the concrete extraction subclass and final application remain open. Connected manager
+map/getter methods do not supply the missing outer D+18 caller or a D-output recipient.
+Use the [descriptor/output continuation](native-output-consumption.md#clip-descriptor-sampling-and-local-outputs)
+for null/lifetime premises and the bounded search's exact limits.
 
 ### Retained component handles are not auxiliary-QS consumers by themselves
 

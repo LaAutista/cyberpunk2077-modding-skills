@@ -141,7 +141,9 @@ storage and getter proof binds this field to stage T for the same constructed,
 stable service; virtual98's own consumer behavior is separate from the proved
 main-bank copy path. The [output-consumption trace](native-output-consumption.md)
 now joins the bone-backend type, eye storage/read pair, B+14 descriptor, actual
-packed-bank reader, stage invocation and bounded completion. None alone proves
+packed-bank reader, stage invocation and bounded completion. Its successor
+continuation distinguishes imported job dependencies from synchronous setup and
+from the still-unproved producer-before-transfer join. None alone proves
 rendered output or the selected producer-before-transfer relationship.
 
 Retained provenance: `appearance-handoff-continuation/captured` and

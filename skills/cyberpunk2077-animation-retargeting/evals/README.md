@@ -44,6 +44,13 @@ clamps. Execute the finite host checks while preserving actual native
 parity's bounded domain, callback storage versus invocation, and W=[S] versus S.
 No native rerun, live history or rendered-frame acceptance is implied.
 
+The `native-workspot-callback-identity` case distinguishes a successful constructor's
+explicit self-pair from an existing map hit and a nominal service query. Execute
+the pair/stack/gate checks to bind the known adapter's K to its stored record;
+preserve the alternate-table, outer-entry/epoch and aggregate-motion boundaries.
+The older stored-record-only case does not supply those extra constructor/entry
+premises. Host arithmetic does not prove live callback execution.
+
 The `native-mask-weight-boundaries` case checks fourth-lane identity, duplicate
 mask entries with aliased versus distinct output, and rounded bias subtraction
 before the weight gate. It distinguishes a leaf's input mutation from a copying
@@ -246,3 +253,9 @@ before/during/after finalization and multiple parallel workers. Execute the fini
 sequence and premature-completion counterexample. Use the ordinary-path premises;
 the newer static dependency proof does not establish V's selected policy, a live
 frame's ordering, native concurrency/parity or a fixed one-frame refresh delay.
+
+The `native-workspot-sampling-origin` and `native-stage-successor-dependencies` cases
+exercise the distinct name/extraction gates and local output addresses, then
+count-dependent imports, synchronous setup versus queued work, closed enrollment
+and the remaining producer-before-transfer boundary. Finite host models do not
+execute the engine or certify selected frames.

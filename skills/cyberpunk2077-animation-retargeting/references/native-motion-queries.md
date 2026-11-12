@@ -743,12 +743,27 @@ does not establish execution or an aggregate read. Follow the selected callback
 transfer/dispatch and exact pointer origin before calling it the final motion
 recipient. Transfer1FFADD0 clears the source table at+40, installs it at destination
 +40 and calls its+10 method; selected2FCAE0 copies exactly the24-byte tuple. This
-is a transfer, not a proved evaluation. Table slot0's adapter/method, if invoked,
-reacquires the same query context; its nontrivial cold branch and the actual
-slot0 invocation/timing remain untraced. Retained provenance:
-`aux-recipient-continuation/accessor-followup` and
-`aux-recipient-continuation/getter-callback`. No aggregate O30 reader is proved by
-these accessor joins.
+is a transfer, not by itself a proved evaluation. The initial accessor/getter
+packets left the cold method and invocation open. Later independently reviewed
+cold and concrete workspot-manager continuations bind the conditional slot0 call
+and its K argument to stored record Q; cold K+CC/+4/+8 writes therefore address
+that record. The known method still reacquires the query context, not aggregate O.
+The [callback continuation](native-output-consumption.md#stored-callbacks-and-owner-identity)
+explains the successful new-state self-pair and actual stack argument while
+preserving dynamic service/map identity and selected outer-entry/epoch boundaries.
+The later [descriptor/output continuation](native-output-consumption.md#clip-descriptor-sampling-and-local-outputs)
+joins the known callback to `AnimSetEntry.animation.motionExtraction`, moved into
+record Q+F0. Q+D8 holds its separate name gate, so a nonzero name does not establish
+a nonnull extraction object. Conditional endpoint samples feed D-local results;
+the concrete extraction subtype and final recipient remain unbound. Connected
+manager methods transfer state fields or read S+50/+60, distinct from D's outputs
+even when the qualified self-pair establishes D=S+270. A scoped exact-reference/map
+pass did not find the outer D+18 caller; it does not exclude indirect or transitive
+routes and leaves caller/epoch selection as an offline static question.
+Retained provenance: `aux-recipient-continuation/accessor-followup`,
+`getter-callback`, `cold-recipient/captured`, and recovery `aux-callback-edge/service-type`,
+`sample-output`, its `descriptor-producer` child and `upstream-entry`.
+No aggregate O30 reader is proved by these accessor/callback joins.
 
 ## Evidence and open links
 

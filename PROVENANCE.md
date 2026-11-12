@@ -1,5 +1,31 @@
 # Provenance and verification
 
+## Workspot callback identity and successor dependencies, 2026-11-11
+
+Retargeting1.8.29 connects the constructed workspot manager's successful new-state
+self-pair to its stored-record callback invocation. Exact stack/adapter dataflow
+binds the known callback's K to the record; existing map hits and arbitrary nominal
+service lookups retain separate provenance requirements. The descriptor producer
+separates the animation-name gate from its clip motion-extraction handle. Generic
+sampling-interface identity does not select a concrete extraction implementation,
+and D-local result fields are distinct from the manager getter's state fields.
+
+The skinning continuation follows the constructed outer phase object through its
+collection and command routes, then binds the actual successor T.virtual18 call.
+Its count-dependent import and queued callbacks carry prior-work dependencies;
+synchronous setup does not thereby wait. The late object fieldT18 is distinct
+from table slot18 and T8. These findings do not retroactively prove a selected
+pose producer finished before the earlier transfer, or establish O30 application.
+Unexpanded concrete successors remain offline investigation points.
+
+This milestone uses independently reviewed saved-byte/control/dataflow packets
+and finite host workflow evaluations. Three cases supplement the prior63 cases
+and six triggers; the earlier storage-only prompt now explicitly excludes later
+construction/invocation evidence. The previous native corpora are preserved,
+not rerun or broadened into selected-frame claims. Canonical/public peer
+changes, preview gates and asset baselines are preserved. Game bytes, raw
+research, private handoffs and assets are not distributed with this guidance.
+
 ## Component policy and appearance handoff, 2026-11-03
 
 Retargeting1.8.26 traces later set/clear writes to the ordinary host's admission
