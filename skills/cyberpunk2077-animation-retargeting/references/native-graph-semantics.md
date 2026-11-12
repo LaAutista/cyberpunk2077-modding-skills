@@ -10,7 +10,7 @@ identities; constants and branch instructions establish the formulas.
 
 These are scoped implementation findings and analyst numerical checks, including
 isolated native [normalization](native-normalization.md) and
-[transform, mask, weight and inverse-Euler measurements](native-transform-numerics.md). Other
+[transform, mask, weight and Euler/constraint measurements](native-transform-numerics.md). Other
 equations remain unexecuted models; none is a game observation. Use valid transforms, valid mask
 indices and the identified branch. Recheck identities before applying them to a
 different build. The focused references cover [capture and custom curves](native-capture-curves.md),
@@ -351,9 +351,12 @@ replace it with a mathematical inverse transform. The count-different conversion
 helper copies corresponding segments and fills tails, without matching bone names
 or converting coordinate spaces. The **capture caller** passes a newly allocated
 temporary as source on that branch; its payload is not initialized by the traced
-constructors. Do not conflate that scratch-data hazard with the later application
-caller's correct saved-contribution source or claim it caused a particular asset
-failure without observations. The capture reference gives the exact argument flow.
+constructors. Its two fresh temporaries have identical copied layouts, so all
+converter missing tails are zero and logical payload comes from the old source
+scratch under the valid-storage premises. This differs from the later application
+caller's explicit saved-contribution source. Do not attribute an asset failure
+without selected branch/history evidence; the capture reference gives the exact
+argument and pre-read writer trace.
 
 This node's Linear mode returns p; its Smoothstep mode uses
 `clamp((3-2*p)*p*p,0,1)` for finite input, and CustomCurve dispatches to a separate

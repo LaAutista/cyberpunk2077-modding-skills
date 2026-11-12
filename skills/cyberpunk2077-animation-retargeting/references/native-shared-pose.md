@@ -156,6 +156,16 @@ node uses and the final aggregate movement recipient are not generalized from it
 
 The later-job alias question is resolved by the submitted ranges. Let T be the animation task's RBP: the second QS occupies `[T+0x280,T+0x2b0)`. Skinning's 96-byte source view is `[T+0x220,T+0x280)`, ending immediately before it, and the final 112-byte descriptor is `[T+0x160,T+0x1d0)`. The pointer fields trace through `0x1403242e0` to MetaRig metadata and through `0x140b4eef8` to aggregate transform/float arrays. The latter helper also copies the first auxiliary QS temporarily, but that copy is overwritten before submission. Neither numerical QS belongs to the submitted skinning view. The broadcast job copies only a component pointer. The task then releases its stack without a later direct read of the second QS or its context alias. This excludes those two delivery routes; it does not prove that every possible graph callback is unable to retain a pointer elsewhere.
 
+### Stored query callbacks still need an invocation and recipient
+
+The known accessor output now reaches a 1B0-stride record, including its tuple
+copy/move callbacks. This proves storage, not slot0 execution or final O+30
+application. The owner relation is W=[S], not automatically W=S; a separately
+observed S+270 attachment cannot substitute for the actual D=W+270 storage.
+Follow [callback storage and output consumption](native-output-consumption.md#stored-callbacks-and-owner-identity)
+for the known/alternate table distinction, unbound third argument/K and concrete
+service/destination dispatch boundaries.
+
 ### Retained component handles are not auxiliary-QS consumers by themselves
 
 Three concrete retained-handle routes now have distinct immediate readers:
@@ -191,7 +201,7 @@ After graph-chain evaluation, animation task continuation `0x142130b1e..0x142130
 
 The skinning task optionally broadcasts parameters via `0x14053c978`, checks component+0x8b, and calls `0x140325580`. That helper walks 16-byte handles at component+0x120 with count+0x12c and calls each recipient's vtable+0xe0. A traced AnimatedComponent insertion path filters those handles by **entISkinningAttachment** ancestry before appending them; the recipients are attachments. Concrete SimpleSkinningAttachment locks its destination component and forwards the view. The [native skinning reference](native-skinning.md) follows a confirmed SkinnedMeshComponent destination through metadata/name mapping, actual 48-byte matrix writes, bounds, eye matrices and float-track delivery. This goes beyond the unnamed array in the public ISkinableComponent declaration.
 
-Thus node overlay and graph writeback precede aggregate local-to-model conversion, which precedes the later job submissions on this path. The graph's synchronous command callback is separate from those jobs. Concrete attachment/destination identity and CPU preparation are now traced for the named branch. Worker selection, concrete renderer backend behavior and completion relative to rendering remain outside this proof. An IK node's placement depends on active graph topology, and external procedural components may have other stages; this trace does not order all IK globally.
+Thus node overlay and graph writeback precede aggregate local-to-model conversion, which precedes the later job submissions on this path. The graph's synchronous command callback is separate from those jobs. Concrete attachment/destination identity, packed-buffer CPU reads and a conditional nested-job completion relationship are now traced for the named branch; see [output consumption](native-output-consumption.md). Selected producer-before-transfer ordering, destination lifetime and completion relative to rendering remain separate. An IK node's placement depends on active graph topology, and external procedural components may have other stages; this trace does not order all IK globally.
 
 ## Discriminators and runtime follow-up
 

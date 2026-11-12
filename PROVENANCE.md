@@ -821,3 +821,34 @@ The investigation remains active and Saber remains held.
 ## 2026-11-11 — matched reference and inverse skinning guidance
 
 Retargeting 1.8.27 adds an original adaptation of the user-supplied Neto handoff dated 2026-11-10 (archive SHA-256 `128e2353dd590605dac878cdb15fa56cbb2cf60bb6e90b74517b31aef39e7bb2`; nine manifest files verified). The guidance distinguishes world-orientation calibration from optional inverse weighted LBS for replacement meshes, preserving native anatomical transforms and per-mesh bind ownership. Four workflow cases cover noncommuting rotations, singular blends, authoring-only scale/lengths, and changed weights/correctives. Starfield figures remain attributed historical reports; no Cyberpunk asset, animation, character or game acceptance is claimed. The installed RPG7 fitted-base/partial-blend paragraph absent from the restored source was preserved byte-for-byte.
+
+
+## 2026-11-11 — reviewed blending and pose-consumption continuation
+
+Retargeting 1.8.28 integrates independently reviewed work against the same pinned
+executable: remaining concrete BlendOverride leaves; known auxiliary callback
+storage and pair/receiver identity; equal-layout BlendFromPose scratch behavior;
+main-bank offset/history publication and actual CPU payload copies; and the
+constructed transfer stage's actual call and prior-group wait. The wait covers
+the prior closed enrollment epoch, not jobs the subsequent call will submit.
+The selected pose-producer/group join and final O30 recipient remain open.
+Registry direct-body evidence is not a transitive absence proof.
+
+A fresh, independently admitted Windows-ABI fixture executed 390 fixed cases
+across both trig dispatch values and two MXCSR modes: 1,560 forward/constraint
+calls. Maximum orientation errors were 0.0000271553° and 0.0000780843° against
+a frozen 0.001° criterion; norm error was 1.2729453e-7. Disabled-clamp pole
+reconstruction loss 4.77933966015° was measured separately against original
+input, not absorbed into parity tolerance or claimed as an all-input bound.
+New code, constants, tables, ABI, input bytes, write extents and saved results
+received independent review. Old native helpers were not rerun. Exact executable
+bytes, disassembly, native payloads and private research packets are not shipped
+with these semantic notes.
+
+One workflow case applies descriptor/copy ordering, zero-tail scratch behavior,
+rounded-norm quaternion loss and callback identity. The existing inverse-only
+case retains its original 4,196-call facts while distinguishing that fixture's
+evidence from the separate new forward/constraint result. Neto, BF6/MP5/RPG7
+guidance and unrelated validators are preserved. This is a bounded knowledge
+milestone; selected graph controls, auxiliary-motion application, producer
+ordering and visual/game acceptance do not become complete by publication.

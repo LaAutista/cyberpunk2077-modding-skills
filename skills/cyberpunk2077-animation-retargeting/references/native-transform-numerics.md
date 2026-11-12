@@ -251,10 +251,44 @@ native output was `(0,-90,259.68243408203125)`. The pole formula can change yaw
 as well as pitch. This is a finite observed maximum, not a universal bound or
 proof that the game encounters this case.
 
-Nonunit cases checked the literal coordinate formula only. The fixture did not
-execute native angles-to-quaternion conversion, rotation-limit application,
-constraints or a graph. Zero/nonfinite/extreme inputs, source/output aliasing,
-full CRT domains, selected game inputs and character behavior remain unverified.
+Nonunit cases checked the literal coordinate formula only. This inverse-only
+fixture did not execute the forward converter or constraint; the later finite
+experiment below does. Neither fixture executes a graph. Zero/nonfinite/extreme
+inputs, source/output aliasing, full CRT domains, selected game inputs and
+character behavior remain unverified.
+
+## Finite native forward conversion and constraints
+
+A separately admitted experiment executed the actual forward 1403B1950 and
+constraint 140A02760 with their real normalization, inverse, clamp, cached resolver
+and sine/cosine dependencies. Its 390 fixed cases ran with dispatcher values 0/2
+and MXCSR 1F80/9FC0: 1,560 calls. Forward angles were within ±360 degrees;
+constraint inputs were finite unit quaternions with finite ordered enabled bounds
+within [-180,180]. Uncached name lookup and exceptional math paths were excluded
+under reviewed domain/admission conditions, not replaced with host functions.
+
+The forward result agrees with independent matrix composition Rz(c)Rx(b)Ry(a).
+Constraint settings +18/+24/+30 clamp pitch/roll/yaw respectively, then reconstruct
+and normalize. Maximum orientation errors were 0.0000271553 degrees forward and
+0.0000780843 degrees for constraints, below the frozen 0.001-degree criteria;
+maximum norm error was 1.2729453e-7, below 1e-6. No output-bit differences appeared
+between the two dispatcher or MXCSR values in this corpus. Whole-page canaries
+preserved all bytes outside the selected quaternion; no-name, negative-index,
+equal-to-count and empty-count cases preserved the entire output page.
+
+**Disabled clamps still perform inverse/forward conversion.** Their near-pole
+reconstruction loss against the original input reached 4.77933966015 degrees.
+That separate measurement reflects the known pole snapping; it was not oracle
+error or extra tolerance. Do not model this route as guaranteed quaternion
+pass-through or use the finite maximum as a universal error bound/correction.
+
+The wrapper, fixed inputs, exact dependencies and exclusion boundaries were
+independently reviewed before native execution; saved results were independently
+checked afterward. Private provenance is recovery `rotation-constraint` and
+`review-continued/g7-native-results-independent-review.md`. Native bytes and
+fixture executables remain local. Arbitrary floats/modes, uncached lookup, all
+constraints, active graph scheduling, asset behavior and visual/game acceptance
+remain outside this finite result.
 
 Private provenance: `blending-deep/compose-leaf/`, `interpolate-leaf/`,
 `mask-native/` and `weight-gate-native/`, each with pre-execution contract,
@@ -262,8 +296,8 @@ exact-byte admission, compiler review, native log, independent checker and hash
 verification; inverse conversion is retained under `transitions-deep/euler-native/`.
 An independent audit replayed the mask/weight comparisons and checked their
 retained instruction/admission bindings; it did not rerun native code. The wider
-investigation still needs remaining numerical/constraint paths, selected
-inputs/lifetimes and remaining independent review. The separate
+investigation still needs paths outside the admitted numerical corpora and
+selected inputs/lifetimes; finite parity does not certify those boundaries. The separate
 [collector measurement](native-synchronization.md#finite-native-collector-measurement)
 covers bounded event seams, not selected event delivery. Future asset visual/game
 acceptance remains separate. These finite measurements do not

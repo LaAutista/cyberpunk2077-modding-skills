@@ -437,12 +437,13 @@ c = degrees(atan2(2*(w*z-x*y), 1-2*(z*z+x*x)))
 
 At test=y*z+w*x greater than float32(.499)*normSquared, it selects(a,b,c)=(0,90,2*degrees(atan2(y,w))); below the negative threshold it selects(0,-90,-2*degrees(atan2(y,w))). These are explicit pole conventions, not globally unique coordinates. Native asin's error string confirms `asinf`; the two-argument helper has atan2's signed-quadrant/range-reduction structure. CPU-specific sin/cos kernels and bit-exact CRT rounding were not reimplemented.
 
-The later [native inverse-Euler measurement](native-transform-numerics.md#inverse-euler-poles-and-float32-boundary-changes)
-executes this inverse and its actual atan2/asin dependencies. It measures
-float32 boundary alternation and pole reconstruction loss, while keeping the
-native forward conversion and constraint application unexecuted. Use its rounded
-branch contract when reproducing a selected input; a continuous double inverse
-does not preserve these pole decisions.
+The [native inverse-Euler measurement](native-transform-numerics.md#inverse-euler-poles-and-float32-boundary-changes)
+measures rounded branch alternation and pole reconstruction loss. The later
+[finite forward/constraint experiment](native-transform-numerics.md#finite-native-forward-conversion-and-constraints)
+executes the actual reconstruction and rotation-limit path with their dependencies.
+Disabled clamps still undergo inverse/forward conversion and can change a
+near-pole quaternion. Preserve the rounded branch contract; a continuous double
+inverse or pass-through model does not reproduce these decisions.
 
 Post-correction clamping and Trajectory restoration mean quintic endpoint constraints alone do not prove the final returned bone follows those constraints.
 

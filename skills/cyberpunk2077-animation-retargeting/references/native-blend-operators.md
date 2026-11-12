@@ -254,9 +254,13 @@ count. Do not assume both this command and normal evaluator run on the same pose
 The reflected `getDeltaMotionFromOverride` byte+48 has constructed flags18B004001,
 with serialization bit3 and indirect-address bit21 clear. Generic property access
 is possible, but a semantic consumer is still unidentified. The actual+100 method
-forwards base only regardless of that byte. Its name is not a motion algorithm
-or an unused-field proof. Concrete configured blend/postprocess/sync subclasses remain selected
-implementation boundaries, not universally modeled by the built-in equations.
+forwards base only regardless of that byte. The remaining small concrete entries
+also add no byte48 read: two leaves return AL=0/1 (not all of RAX), slot+A8
+forwards to the typed table's type getter at+8, and slot+110 clears the state byte
+indexed by node+38 and sets the supplied output byte. These exact-body negatives
+do not make the property globally unused. Configured blend/postprocess/sync
+subclasses and external property visitors remain selected implementation boundaries.
+Retained provenance: `override-consumer` and its independent leaf/table review.
 
 ## BlendByMaskDynamic
 

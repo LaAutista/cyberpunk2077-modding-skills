@@ -6,8 +6,10 @@ These are static findings for Cyberpunk 2077 2.5 executable SHA256
 `d36e74c47592e9c656ae250078cb40b2be63c782af5bfbeff2280d43e653fab4`.
 Addresses are preferred-image VAs. Revalidate the executable, class construction
 and virtual slots before applying them to another build. The trace reaches actual
-CPU matrix and bounds writes; it does not establish GPU upload, vertex rendering,
-an instantiated asset's inputs or gameplay acceptance.
+CPU matrix/bounds writes, a packed-payload CPU reader and a conditional nested-job
+completion relationship. It does not establish selected producer-before-transfer
+ordering, GPU upload, vertex rendering, an instantiated asset's inputs or gameplay
+acceptance.
 
 The retained `animation-graphs-research/shared-pose-deep` evidence includes
 `recipient-followup.md`, `aux-alias-followup.md`, `skinned-metadata-followup.md`,
@@ -126,18 +128,27 @@ The factory forwards the descriptor to service143BBCAE8 virtual+2B0. For the
 captured service table, this is3D9740, which branches on descriptor byte X+60.
 In7150E0, the post-initialization stack store sets X+60=1. The checked builder
 writes and qword aliases preserve it under valid-object/ABI premises, selecting
-3DAD50 for this table. That constructor's retention of X+C0 and its returned
-backend table remain unresolved. Wrapper constructor
-3D9C64 stores the returned backend N at P+10 and retains N. Later7155C0 calls the
-service's+4D0; its five-byte getter returns [service+70]. That object's+98 receives
-&P10 and the original argument0. These are concrete transport edges, not completed-
-buffer reads. Follow the selected service/result tables and B's actual output pointer
-before claiming a rendering consumer. Preserve the distinction between the
-earlier pose-side proxy call and a reader after matrix production.
+3DAD50 for this table. That constructor installs N's primary table 143059AB0, returns
+N, and retains the reloaded B=[X+C0] in H+10. The checked helper links/selects H
+through N+48 using the requested Skinning metadata key. A later keyed accessor
+returns &H10 for a matching node under its mask gate; actual callers dereference
+that field into B. Stable list/key/object identity remains a premise, including
+across repeated lookups; a creation request alone does not prove H's instance table.
+
+Wrapper constructor 3D9C64 stores N at P+10 and retains it. Later 7155C0
+dispatches [service+70].virtual98 with &P10 and argument0. The later constructor,
+storage and getter proof binds this field to stage T for the same constructed,
+stable service; virtual98's own consumer behavior is separate from the proved
+main-bank copy path. The [output-consumption trace](native-output-consumption.md)
+now joins the bone-backend type, eye storage/read pair, B+14 descriptor, actual
+packed-bank reader, stage invocation and bounded completion. None alone proves
+rendered output or the selected producer-before-transfer relationship.
 
 Retained provenance: `appearance-handoff-continuation/captured` and
-`appearance-handoff-continuation/proxy-followup`. Weak promotion, descriptor
-aliases and handle lifetime are statically checked. Selected scheduling,
+`appearance-handoff-continuation/proxy-followup`, `backend-retention` and
+`backend-retention/attachment-ownership`, followed by the recovery `skinning-edge`
+packets. Weak promotion, descriptor aliases and the named handle transport are
+statically checked. Selected scheduling,
 resource generations, transitive cache lifetime and rendered output remain OPEN.
 
 ### WolvenKit round-trip boundary
@@ -203,7 +214,11 @@ descriptor's LOD. It obtains a buffer through bone-backend virtual+0x28, or uses
 the pre-supplied descriptor at component+0x1c8/+0x1d0 and clears that descriptor
 after the call. Both branches select **48-byte output records** through
 `0x1402982dc → 0x140298f4c`, followed by backend virtual+0x20. The separately
-inspected raw-64-byte helper exists but is not selected by this caller.
+inspected raw-64-byte helper exists but is not selected by this caller. For the
+constructed table 14305CA08, +28 returns the normal bank allocation and +20 is
+RET-only; it is not a completion barrier. The [allocation/publication continuation](native-output-consumption.md#main-allocation-b14-and-actual-payload-reads)
+joins that bank to its actual CPU reader and distinguishes the B+14 descriptor
+from payload and selected-update completion.
 
 The inner loop skips an entry only when its entire mask byte is zero. Selection
 of the outer range is separate; the inner loop does not test the selected LOD bit.
@@ -263,7 +278,11 @@ index produces a bone-derived matrix delivered to backend virtual+0x58 with
 selector 0 / 1. The caller replaces its last stored vector with (1,1,1,1).
 These matrices are unrelated to the task's two auxiliary QS records. The special
 helper does not repeat the main loop's aggregate-index bounds check; valid input
-mapping remains required. No shader or procedural-eye execution was observed.
+mapping remains required. The named subtype's+58/+60 pair now proves storage
+and an actual validity-gated read of those 64 bytes. Stores precede the validity
+bit locally, but the bit does not certify a fresh frame or synchronization; see
+[separate eye storage](native-output-consumption.md#concrete-bone-backend-and-separate-eye-storage).
+No shader or procedural-eye execution was observed.
 
 ### Concrete float-track backend
 

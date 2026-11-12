@@ -31,8 +31,18 @@ that equal masks join the selected policy, animation instance and revision.
 
 The `native-inverse-euler-poles` case checks rounded threshold decisions for
 adjacent quaternion inputs and distinguishes coordinate agreement from pole
-orientation loss. Execute the supplied finite bit calculations; the documented
-native inverse does not certify forward conversion, constraints or a character.
+orientation loss. Execute the supplied finite bit calculations; this inverse-only
+fixture and host reconstruction do not themselves certify native forward conversion
+or constraints. Preserve the separate later finite measurement and its scope.
+Neither result certifies a character.
+
+The `native-output-history-and-parity` case connects descriptor history, actual
+packed-byte transfer and nested-parent completion without inventing an earlier
+producer fence. It distinguishes X/Y count mismatch from equal temporary layouts
+and old scalar payload, then calculates orientation loss from one saved native row with disabled
+clamps. Execute the finite host checks while preserving actual native
+parity's bounded domain, callback storage versus invocation, and W=[S] versus S.
+No native rerun, live history or rendered-frame acceptance is implied.
 
 The `native-mask-weight-boundaries` case checks fourth-lane identity, duplicate
 mask entries with aliased versus distinct output, and rounded bias subtraction

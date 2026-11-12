@@ -55,11 +55,26 @@ The count-different **capture** caller has a further hazard: at `0x142739ea6`,
 it passes a newly allocated temporary as the conversion source, not the saved
 capture pointer used in the equal-count branch. The traced temporary constructors
 reserve arena storage and initialize metadata, not the pose payload. No saved
-capture copy into that source appears on this path. Its numerical result therefore
-depends on runtime scratch contents; do not assume identity data or silently
-correct the native source argument. The later count-different **application**
-branch does pass the saved contribution explicitly. Prove layout/count compatibility
-and identify the selected branch before predicting an asset's output.
+capture copy into that source appears on this path. More specifically, the mismatch
+tests current X versus saved Y transform totals, while both fresh temporaries A/B
+receive the same copied 18-byte node-context descriptor. On successful ordinary
+disjoint reservations with stable compatible layout, conversion A→B copies every
+logical transform/scalar segment and complete validity word; all missing-tail
+lengths are zero in either mode. Reference-context metadata is still accessed.
+Default tails therefore do not initialize this source.
+
+The size helper performs only arithmetic; metadata follows reserved transform
+storage, and logical third-segment counts can differ from reserved capacities.
+Between A construction and conversion, the only call is B construction through
+the same non-payload-writing chain. The subsequent difference reads X/B and
+writes A's transforms; X still needs accessible compatible records. Prior child
+evaluation reaches virtual+128 before A is reserved, so selected earlier writers
+and actual A bytes remain history inputs. This conditional theorem does not
+identify a live mismatch or an asset defect. Do not assume identity data or
+silently correct the source. The later count-different **application** branch
+explicitly passes the saved contribution and has a different source contract.
+Private provenance: recovery `scratch-continuation` and its independent review;
+byte-layout/source discriminators illustrate the static result, not native parity.
 
 ### Scratch lifetime on the connected normal host
 
