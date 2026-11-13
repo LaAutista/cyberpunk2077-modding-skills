@@ -2,7 +2,7 @@
 name: cyberpunk2077-animation-retargeting
 description: Retarget and repair Cyberpunk 2077 animation, hand poses, transitions and native playback. Use for motion mapping, additive bases or animgraph mismatches; not static mesh fitting.
 metadata:
-  version: "1.9.0"
+  version: "1.9.1"
 ---
 
 # Cyberpunk animation retargeting
@@ -75,6 +75,16 @@ package through exact native/readback and extracted-resource checks. A record-or
 repair with byte-identical decoded motion does not require re-authoring or redundant
 preview approval. Refresh affected views when any relevant input changes. Gameplay
 confirmation remains specific to the package actually tested.
+
+## Mandatory reload-to-fire integration for every weapon port
+
+Follow [reload-to-fire integration](references/reload-to-fire.md) for every weapon
+port, not only reported delay bugs. Demonstrate smooth firing at the measured ready
+pose for both tactical and empty hip reloads while preserving ammo and normal shot
+eligibility; correct the integration only when needed. Verify the effective script chain,
+ammo/hand-return gates and actual in-game transition. Timer-only previews, compiled
+scripts and callback execution cannot clear this gate. Record user-deferred routes
+as OPEN and preserve the existing authorization and unchanged-motion reuse rules.
 
 ## Mandatory source-versus-retarget comparison
 

@@ -167,3 +167,11 @@ as evidence, not parameter-free templates. In particular, `build_mp5_static_grip
 a rejected diagnostic that retains the old sorting pattern. The shared checked pipeline
 is the reusable route. Do not copy private assets, raw disassembly or proprietary clips
 into this skill. Transfer the method to M277/Neto work, not MP5 angles, timing or mounts.
+
+## Reload-to-fire follow-up accepted 2026-11-13
+
+The user later confirmed the v4 hip tactical/empty firing-delay repair. See
+[mandatory reload-to-fire integration](reload-to-fire.md) for the compiled ARR/WWCM/EDW
+conflict, protected-field access failure, moving-deadline defect and bounded runtime
+acceptance. This extends the case's evidence; it does not certify ADS reload or every
+speed/body/interruption combination. Preserve the earlier animation success separately.

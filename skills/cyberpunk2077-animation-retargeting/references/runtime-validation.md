@@ -30,7 +30,13 @@ intended checked output. Leave deployment to the authorized manager/profile path
 
 Before an authorized user runtime test, identify the remaining question that
 Blender review did not resolve and verify the user's preview acceptance. Do not
-ask the user to rediscover a known visible failure in game.
+ask the user to rediscover a known visible failure in game. For script-only repairs,
+reuse identified unchanged accepted motion evidence under the entrypoint rules;
+newly affected transition behavior still needs its own review and runtime check.
+
+For every weapon port, complete the [mandatory reload-to-fire checks](reload-to-fire.md)
+for tactical and empty hip reloads. Keep unsupported/deferred routes explicit; a
+reload-only playback pass does not establish responsive firing or a smooth firing join.
 
 For that runtime test:
 

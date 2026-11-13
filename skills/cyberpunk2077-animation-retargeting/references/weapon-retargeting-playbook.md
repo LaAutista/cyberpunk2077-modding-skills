@@ -191,6 +191,10 @@ is closed if it loads these resources; a mod-manager restart is not automaticall
 Keep a verified rollback artifact, but do not make an old rejected grip the final solution
 when the user requested repair of the approved pose.
 
+Before declaring any weapon port complete, perform [reload-to-fire integration](reload-to-fire.md).
+Measure each reload's ready pose, trace the effective scripts and verify both actual
+reload-to-fire transitions; do not leave this until the user reports a delay.
+
 ## 11. Record the actual acceptance and leave an actionable handoff
 
 Ask for the smallest remaining runtime discriminator: equip/idle first after an equip

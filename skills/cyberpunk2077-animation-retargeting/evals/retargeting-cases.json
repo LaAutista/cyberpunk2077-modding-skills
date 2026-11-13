@@ -1128,6 +1128,36 @@
         "Claim new runtime success from byte-identical preview.",
         "Require manager restart without a demonstrated need or expand acceptance beyond user scope."
       ]
+    },
+    {
+      "id": "weapon-port-reload-to-fire",
+      "prompt": "A new weapon port has smooth reload-only videos and compiles. Its CET module logs both reload callbacks. The effective cache has WWCM gating an EDW ExitCondition replacement; ARR supplies ToFullAuto, and the Lua adapter continually sets the grip deadline to elapsed after hand return. Can we mark the port complete? Explain the smallest complete next step without changing poses.",
+      "must_observe": [
+        "Keep firing transition/runtime gate OPEN despite callbacks and compilation.",
+        "Trace effective compiled exit and shot chains; identify missing ARR held-fire exit behavior and moving deadline risk without claiming measured runtime attribution.",
+        "Restore scoped commit plus held-fire exit and latch readiness open, preserving shot checks and unrelated weapons.",
+        "Measure this weapon\u2019s tactical/empty hand-return points; inspect actual smooth transition to firing, then verify both in game against installed hashes.",
+        "Retain accepted unchanged motion evidence; test supported speeds/resume and route exclusions, report untested variants."
+      ],
+      "must_not_observe": [
+        "Declare ready from timers or callback presence",
+        "Copy MP5 2.2/3.2 timings as defaults",
+        "Globally replace EDW or disable unrelated mods",
+        "Claim ADS reload works from hip reload acceptance"
+      ]
+    },
+    {
+      "id": "standalone-reload-to-fire",
+      "prompt": "A standalone weapon port has no ARR, WWCM, CET or staged framework. Its identified native motion and in-game tactical/empty hip tests show smooth firing at the ready pose with ammo and normal shot restrictions intact. Must we add the MP5 integration scripts or install those frameworks to finish?",
+      "must_observe": [
+        "Accept identified existing responsive behavior without introducing code or dependencies.",
+        "Treat unsupported staged/framework routes as N/A and retain exact tested scope."
+      ],
+      "must_not_observe": [
+        "Require ARR, WWCM, CET or staged reload installation",
+        "Copy MP5 timings or rewrite a working reload",
+        "Bypass ammo or normal firing eligibility"
+      ]
     }
   ],
   "trigger_cases": [

@@ -43,6 +43,14 @@ need firing, dry-fire, reload and applicable mechanism/equip/holster sounds;
 record source provenance and identify donor placeholders. A visible attachment
 slot does not prove compatibility or correct optic/muzzle placement.
 
+## Mandatory weapon-port firing integration
+
+Every weapon port must satisfy the sibling [reload-to-fire contract](../cyberpunk2077-animation-retargeting/references/reload-to-fire.md):
+both hip reloads fire smoothly at their measured hand-return point. Inspect effective
+framework/response-mod/dual-wield script ownership and restore the intended commit,
+held-fire exit and shot checks at the scoped integration point. Verify actual firing
+in the installed profile; import/compile success and a ready timer do not suffice.
+
 ## Animation acceptance
 
 The [retargeting skill](../cyberpunk2077-animation-retargeting/SKILL.md) owns motion

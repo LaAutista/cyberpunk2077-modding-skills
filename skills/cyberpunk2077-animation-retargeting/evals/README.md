@@ -305,3 +305,18 @@ work and static mesh fitting. Keep expected routing with the reviewer.
 The source check, native audit and portable tests do not certify a new weapon. A
 fresh-agent task is useful evidence about guidance execution, not a live host
 implicit-routing guarantee. Do not install mods or launch games for these evals.
+
+## Reload-to-fire cases (1.9.1)
+
+`weapon-port-reload-to-fire` rejects callback/compile/timer-only completion and
+requires the effective exit/shot chain, measured ready pose and actual firing join.
+`standalone-reload-to-fire` prevents unnecessary dependencies or changes when the
+existing identified behavior already passes, and preserves ammo/shot restrictions.
+
+Independent read-only agent evaluation on 2026-11-13 exercised both scenarios
+without seeing the grader expectations. It rejected premature completion and
+selected a scoped correction for the conflicting profile; it accepted a standalone
+route without adding frameworks. Review identified ambiguous unconditional wording
+about implementation/dependencies, eligibility and unsupported routes. Those were
+clarified and the agent re-read the guidance: PASS, no blocking issue. This evaluates
+instruction behavior, not new game execution or automatic skill discovery.
