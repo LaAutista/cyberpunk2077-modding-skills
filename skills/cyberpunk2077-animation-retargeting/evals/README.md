@@ -187,7 +187,7 @@ test is not an executed discriminator; a refusal alone does not satisfy a case
 that calls for a concrete failure record or derivation. Retain failing transcripts
 and change the skill only when a demonstrated decision warrants it.
 
-For trigger cases, expose the three skill descriptions to a fresh evaluator with
+For trigger cases, expose the four relevant sibling skill descriptions to a fresh evaluator with
 the prompt and record selected skills. Do not expose `activate`. Positive prompts
 should select this skill; pure static fitting, texture, audio or gameplay requests
 should route elsewhere. A description review is not a live host auto-routing test.
@@ -290,3 +290,18 @@ ordering without inventing an atomic snapshot.
 `native-kick-and-range-completion-boundaries` must retain late-import chronology,
 N10-only parent joining and terminal-only work at zero range count. All69 prior
 cases and six trigger cases remain unchanged.
+
+## MP5 recovery cases (1.9.0)
+
+The complete-grip, changed-base, serialized-order and unchanged-review cases test
+mistakes demonstrated by the BF6 MP5 recovery. Preserve their artifact/scope limits.
+For `compressed-order-hidden-by-readback`, use the two synthetic native JSONs in
+`fixtures/native-order/`; the evaluator receives the prompt and fixture paths but
+not the grader's expected file choice. Require an executed shared native audit,
+not merely a prose warning. The constants/float bytes are fixtures, not game data.
+The trigger additions distinguish an animation repair from inspection-only contact
+work and static mesh fitting. Keep expected routing with the reviewer.
+
+The source check, native audit and portable tests do not certify a new weapon. A
+fresh-agent task is useful evidence about guidance execution, not a live host
+implicit-routing guarantee. Do not install mods or launch games for these evals.

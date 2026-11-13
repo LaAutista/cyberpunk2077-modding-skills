@@ -25,6 +25,16 @@ Rows without a linked local reproduction remain proposed discriminators.
 | Donor shoulder retained / valid lengths but over-folded arm | Compare source-mapped clavicle/upper-arm location, elbow inner angle and forearm/palm direction with skin, not reach alone. Keep hand/weapon contact fixed in the discriminator; reject shoulder/wrist damage or new adjoining-state jumps. [BF6 posture](bf6-workflow.md#reconcile-authored-arms-controls-and-transitions). |
 | Package success called gameplay success | Extract and hash shipped bytes, then obtain identified runtime observation. Until then runtime is OPEN. [Runtime](runtime-validation.md). |
 
+The [BF6 MP5 success case](bf6-mp5-success.md) adds these demonstrated controls:
+
+| Failure / symptom | Invariant and smallest discriminator |
+| --- | --- |
+| Wrist/elbow match but the rest grip snaps | Compare both arm chains, every digit and evaluated skin across the boundary; retain the original visible jump as a negative control. |
+| Corrected Normal base plus old additive offsets | Compose old/new bases and re-encoded offsets at full and partial weights; preserve evaluated contact, not stale encoded translations. |
+| Native key multiset passes but equip breaks in game | Audit actual dynamic record order separately from per-channel values; reject the channel-major stream and accept canonical original/fixed controls. [Native gate](native-readback.md#compressed-native-record-order). |
+| Better collision totals but worse shape or seated alignment | Keep phase ownership, anatomical shape, self-clearance and actual skin/prop penetration separate; verify constant mount offsets before moving the prop. |
+| Comparison camera follows an edited digit | Reuse an unchanged reference camera/anchor and clock; compare framing before interpreting the images. |
+
 After two failed corrections at the same gate, write this in the owning project:
 
 ```text

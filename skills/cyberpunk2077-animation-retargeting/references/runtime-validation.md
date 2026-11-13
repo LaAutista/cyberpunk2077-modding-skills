@@ -43,8 +43,10 @@ For that runtime test:
 4. Inspect hand/weapon contact, controls/IK, mechanisms and visibility; check
    audio/events only if part of this clip's acceptance scope. Record deviations.
 5. Record the user's confirmation or failure with exact archive hash, environment,
-   conditions and observations. Restore the baseline using the preserved profile
-   when testing ends or the diagnostic fails.
+   conditions and observations. Restore the baseline through the preserved profile
+   if the diagnostic fails or the user requests rollback. Keep an accepted build
+   installed when that is the authorized outcome; rollback is containment, not a
+   substitute for repairing the requested approved motion.
 
 Expected success is correct named motion with stable transitions and required
 contact/IK in that tested scope. Missing game access leaves runtime OPEN with

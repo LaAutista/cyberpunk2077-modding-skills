@@ -1,4 +1,4 @@
 interface:
   display_name: "Cyberpunk Animation Retargeting"
-  short_description: "Retarget one clip with explicit evidence gates"
-  default_prompt: "Use $cyberpunk2077-animation-retargeting to identify the current blocking gate and produce a verified single-clip vertical slice."
+  short_description: "Retarget native motion with scoped evidence"
+  default_prompt: "Use $cyberpunk2077-animation-retargeting to inspect the current project, reuse verified evidence, and complete the next retargeting gate or compatible batch."

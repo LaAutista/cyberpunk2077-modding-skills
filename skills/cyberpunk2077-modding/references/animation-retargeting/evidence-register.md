@@ -1,5 +1,15 @@
 # Evidence register and reproduction entry points
 
+## BF6 MP5 accepted gameplay, 2026-11-12
+
+The [MP5 success case](../../../cyberpunk2077-animation-retargeting/references/bf6-mp5-success.md)
+binds the accepted archive to the user's no-snap/smooth-motion report, the complete-grip
+and additive repair, and the native key-order failure/recovery. Minor tactical reload
+clipping is accepted for now; ADS reload is deferred. All four banks were structurally
+checked, but that is not all-variant visual or runtime coverage. The case contains
+portable private-project evidence pointers; raw assets and decoder evidence remain local.
+
+
 Snapshot: **2026-10-26**. This hub was synthesized by reading existing reports,
 receipts, source text and checkpoints. Documentation validation did not rerun the
 ports, native exporters, graph/shader runtime, GUI, VM, renders or game. Read the

@@ -1076,6 +1076,58 @@
         "Treat zero range count as no admitted work, terminal invocation as all worker returns, five stages as exactly five jobs, or query advance as a synchronous wait.",
         "Promote host counts, metadata or pointer copies into native concurrency, selected frame/buffer freshness or visual acceptance."
       ]
+    },
+    {
+      "id": "complete-grip-handoff",
+      "prompt": "The user says the gun looks right after reload, then both hands and an arm snap during the idle handoff. Native wrist positions differ by only 0.02 mm and the left elbow now matches. RightArm/RightHand differ by9 degrees, a ring joint by68 degrees and evaluated skin by46 mm. The current draft only changes the left elbow. Diagnose the remaining scope and give the next concrete offline check and repair plan. No game, installs or asset edits.",
+      "must_observe": [
+        "Reject wrist/elbow-only acceptance; identify both complete arm chains and all digits/skin across the boundary.",
+        "Select approved role-specific pose references and inventory held/return/additive routes without indiscriminate global manipulation edits.",
+        "Retain visible bad handoff as negative control and require native/evaluated skin plus actual motion review."
+      ],
+      "must_not_observe": [
+        "Declare snap fixed from wrist/elbow positions.",
+        "Claim all external graph poses impossible or widen scope to an engine rebuild before fixing visible motion."
+      ]
+    },
+    {
+      "id": "changed-base-additive-preservation",
+      "prompt": "A native held base was changed from angle0 to angle30 in a single-axis toy rotation. Its old additive offset is10, and the intended evaluated pose for this sample must remain10. Calculate what stale offsets produce and what re-encoded offset preserves that sample. Then explain how to apply the reasoning to noncommuting 3D arm poses and anatomical translations. No game or assets.",
+      "must_observe": [
+        "Execute arithmetic: stale offset gives40; preserving desired10 with newbase30 needs offset-20 under supplied additive convention.",
+        "Evaluate/encode with actual composition and updated parents; compose result again and check partial weights.",
+        "Preserve Normal anatomy while allowing necessary encoded additive translation changes."
+      ],
+      "must_not_observe": [
+        "Freeze old offsets merely because they previously passed.",
+        "Apply toy angles or scalar subtraction indiscriminately to 3D rotations."
+      ]
+    },
+    {
+      "id": "compressed-order-hidden-by-readback",
+      "prompt": "Use the retargeting skill to assess evals/fixtures/native-order/sample-a.json and sample-b.json before native packaging. Both decode to the same per-channel values and timestamps in an order-independent preview reader. Run an available read-only native validation for both, report actual exit results, and identify any blocking difference. Work only in scratch; do not modify fixtures, install anything or run a game.",
+      "must_observe": [
+        "Execute shared compressed-key audit on both fixtures; sample-a rejects and sample-b passes.",
+        "Explain physical dynamic record order separately from unordered decoded values; no mutation disguised as validation.",
+        "Keep pose/visual/gameplay evidence separate; a layout pass is not full native semantic acceptance."
+      ],
+      "must_not_observe": [
+        "Accept both because decoded poses match.",
+        "Silently sort input or install repaired fixture."
+      ]
+    },
+    {
+      "id": "unchanged-preview-package-repair",
+      "prompt": "The user approved the shown MP5 grip and asked to repair and install that build. A native ordering-only repair preserves every key byte/time, constants, floats and metadata; all four final readback GLBs are byte-identical to the approved inputs, relevant skin/rig/assembly/evaluation inputs are unchanged, and all packed resources verify. Prior archive runtime evidence does not cover the new hash. Decide what evidence can be reused and what remains to do; no actual install in this eval.",
+      "must_observe": [
+        "Reuse covered unchanged motion review and explicit user acceptance, binding proof to repaired package.",
+        "Do not force another identical preview/approval cycle or substitute an older rejected pose as final answer.",
+        "Keep new package runtime OPEN and preserve named clipping/ADS reload exceptions."
+      ],
+      "must_not_observe": [
+        "Claim new runtime success from byte-identical preview.",
+        "Require manager restart without a demonstrated need or expand acceptance beyond user scope."
+      ]
     }
   ],
   "trigger_cases": [
@@ -1102,6 +1154,14 @@
     {
       "prompt": "This Cyberpunk animgraph looks correct at rest but fails during sprint exit. Inspect its state transitions, blend clocks and masks.",
       "activate": true
+    },
+    {
+      "prompt": "The MP5 hand snaps from the correct reload grip into its old idle pose. Repair the complete native handoff.",
+      "activate": true
+    },
+    {
+      "prompt": "Inspect this existing weapon animation for magazine contact and produce matched views; do not edit motion.",
+      "activate": false
     }
   ]
 }

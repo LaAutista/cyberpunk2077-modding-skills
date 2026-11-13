@@ -13,6 +13,7 @@ project's fresh checkpoint before resuming a historical case.
 
 | Current decision or failure | Read |
 | --- | --- |
+| Step-by-step weapon retarget, grip handoff or native-order recovery | [Weapon playbook](../../../cyberpunk2077-animation-retargeting/references/weapon-retargeting-playbook.md), [BF6 MP5 success](../../../cyberpunk2077-animation-retargeting/references/bf6-mp5-success.md) |
 | Animgraph blend, mask, state transition, interruption or clip/preview/runtime mismatch | [Graphs, blending and transitions](../../../cyberpunk2077-animation-retargeting/references/animation-graphs.md) |
 | Exact blend math, weight history, priority, crossfade curves or frozen-state behavior in the inspected 2.5 build | [Native graph semantics](../../../cyberpunk2077-animation-retargeting/references/native-graph-semantics.md) |
 | Captured-pose conversion, nonunit scale, layout mismatch or custom scalar curves | [Native capture and curves](../../../cyberpunk2077-animation-retargeting/references/native-capture-curves.md) |

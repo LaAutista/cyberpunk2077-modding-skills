@@ -21,7 +21,9 @@ separate native, visual and gameplay acceptance gates.
 | Start here | Use it for |
 | --- | --- |
 | [Agent operating contract](AGENTS.md) | Preserve baselines, work one gate, stop failed repair loops and report bounded evidence. |
-| [Animation retargeting skill](skills/cyberpunk2077-animation-retargeting/SKILL.md) | Take one source clip through mapping, target reconstruction, native readback, diagnostic packaging and runtime acceptance. |
+| [Animation retargeting skill](skills/cyberpunk2077-animation-retargeting/SKILL.md) | Retarget or repair the next gate; use one connected action for new routes and compatible batches for established routes. |
+| [Step-by-step weapon playbook](skills/cyberpunk2077-animation-retargeting/references/weapon-retargeting-playbook.md) | Reference selection, whole-grip repair, additive rebasing, phase contacts, native bytes and acceptance. |
+| [BF6 MP5 successful recovery](skills/cyberpunk2077-animation-retargeting/references/bf6-mp5-success.md) | User-tested result, failure mechanisms, ordering regression and explicit remaining limitations. |
 | [BF6 porting findings and platform boundary](skills/cyberpunk2077-animation-retargeting/references/bf6-workflow.md) | Source/native comparison, reference-grip repair, actual component bindings, controls, audio and attachment coverage. |
 | [WolvenKit Docs skill](skills/wolvenkit-docs/SKILL.md) | Read the relevant official documentation from a private local snapshot, with source/version attribution and controlled refresh. |
 | [Cyberpunk modding skill](skills/cyberpunk2077-modding/SKILL.md) | Choose implementation layers, inspect resources, select tools and verify packages. |

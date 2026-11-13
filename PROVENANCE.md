@@ -1,5 +1,29 @@
 # Provenance and verification
 
+## BF6 MP5 recovery and retargeting workflow, 2026-11-12
+
+Retargeting 1.9.0 records the user's accepted gameplay for the exact repaired BF6
+MP5 archive, with minor tactical reload clipping and ADS reload explicitly deferred.
+The complete-grip/reference/additive/contact lessons are separate from the native
+record-order defect. The latter was checked against the shipped WolvenKit 9.0.1
+comparator and original/failed/repaired private banks, then corrected without changing
+any approved pose or timestamp. The subsequent user confirmation does not claim a
+live decoder trace or perfect all-variant source/skin parity.
+
+The existing independent reader now shares a read-only compressed layout/order audit;
+portable regressions reject the channel-major stream and cover supported storage paths.
+No game assets, raw disassembly or private calibration values become reusable defaults.
+The four skills retain their roles with narrower descriptions, a shorter retargeting
+entrypoint, detailed linked procedures and aligned batching/evidence-reuse guidance.
+The installed camera-anchor correction is preserved in source.
+
+Authoring follows OpenAI's [skill guidance](https://learn.chatgpt.com/docs/build-skills),
+[progressive-disclosure guidance](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)
+and [behavioral-eval guidance](https://developers.openai.com/blog/eval-skills): precise
+triggers, detail in supporting references, deterministic safeguards for fragile data,
+and independent task-based checks. Validation and local-install receipts remain in
+the owning project; this source update does not imply external publication.
+
 ## AnimationSystem completion and index history, 2026-11-11
 
 Retargeting1.8.31 connects the actual Kick/Finish/Update callables to their

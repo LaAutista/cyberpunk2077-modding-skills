@@ -2,6 +2,7 @@
 // Independent raw-key repair of the demonstrated WKit9.0.1 compressed reader snap.
 // Reads ACTUAL serialized native bytes; never receives the authored expectation.
 import {supportedTypes,normalize,bindRotation,multiply} from './additive-math.mjs';
+import {inspectCompressedKeys} from './audit-compressed-keys.mjs';
 import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
 const [nativePath,rigPath,cliPath,outPath,flag,requiredText]=process.argv.slice(2);assert(outPath&&flag==='--required-clips'&&requiredText,'Usage: NATIVE.json RIG.json CLI.glb NEW.glb --required-clips NAME,NAME');const required=new Set(requiredText.split(','));assert(required.size>0&&![...required].some(x=>!x));assert(!fs.existsSync(outPath)&&!fs.existsSync(outPath+'.raw-readback.json'),'Refusing to replace readback or report');
 const hash=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex'),root=JSON.parse(fs.readFileSync(nativePath)).Data.RootChunk,rig=JSON.parse(fs.readFileSync(rigPath)).Data.RootChunk,names=rig.boneNames.map(n=>n.$value),source=fs.readFileSync(cliPath);assert.equal(source.readUInt32LE(0),0x46546c67,'Invalid GLB magic');assert.equal(source.readUInt32LE(4),2);assert.equal(source.readUInt32LE(8),source.length,'Invalid declared GLB length');let j,bin;for(let p=12;p<source.length;){assert(p+8<=source.length);const n=source.readUInt32LE(p),type=source.readUInt32LE(p+4);assert(p+8+n<=source.length&&n%4===0);if(type===0x4e4f534a){assert(!j,'Duplicate JSON chunk');j=JSON.parse(source.subarray(p+8,p+8+n));}else if(type===0x004e4942){assert(!bin,'Duplicate BIN chunk');bin=Buffer.from(source.subarray(p+8,p+8+n));}else throw new Error('Unsupported extra GLB chunk');p+=8+n;}assert(j&&bin);
@@ -10,12 +11,9 @@ const additions=[];let binaryLength=bin.length;
 function append(rows){const data=Buffer.alloc(rows.length*16);rows.forEach((r,i)=>r.forEach((v,k)=>data.writeFloatLE(v,i*16+k*4)));const view=j.bufferViews.length;j.bufferViews.push({buffer:0,byteOffset:binaryLength,byteLength:data.length});additions.push(data);binaryLength+=data.length;const id=j.accessors.length;j.accessors.push({bufferView:view,componentType:5126,count:rows.length,type:'VEC4',min:[0,1,2,3].map(k=>Math.min(...rows.map(r=>r[k]))),max:[0,1,2,3].map(k=>Math.max(...rows.map(r=>r[k])))});return id;}
 const report={passed:false,requiredClips:[...required],runtimeVerified:false,scope:'Native compressed quantized/raw/constant rotation bytes and original rig bind-relative composition; only demonstrated CLI identity snapping corrected',inputSHA256:{nativeJson:hash(nativePath),rigJson:hash(rigPath),standardCliGlb:hash(cliPath)},clips:[],skippedClips:[],corrections:[],maxUncorrectedResidual:0};
 for(const entry of root.animations){const a=entry.Data.animation.Data,b=a.animBuffer.Data,name=a.name.$value;if(!required.has(name))continue;assert(supportedTypes.has(a.animationType));assert.equal(b.$type,'animAnimationBufferCompressed');const additive=a.animationType!=='Normal';
- const address=b.dataAddress,inline=b.inplaceCompressedBuffer?.Bytes??b.defferedBuffer?.Bytes;
- const chunk=Buffer.from(inline??root.animationDataChunks[address.unkIndex].buffer.Bytes,'base64');
- const bytes=inline?chunk:chunk.subarray(address.fsetInBytes,address.fsetInBytes+address.zeInBytes);
- assert(bytes.length>=b.numAnimKeys*10+(b.numAnimKeysRaw+b.numConstAnimKeys)*16);
+ const {bytes,sections}=inspectCompressedKeys(root,b,{label:name,rigJointCount:names.length});
  const tracks=new Map();let count=0,p=0;
- for(const[length,size,isConst,quantized]of[[b.numAnimKeys,10,false,true],[b.numAnimKeysRaw,16,false,false],[b.numConstAnimKeys,16,true,false]]){
+ for(const{count:length,size,isConst,quantized}of sections){
   for(let i=0;i<length;i++,p+=size){
    const header=bytes.readUInt16LE(p+(isConst?0:2)),kind=(header&0x6000)>>13;assert(kind<=2,'Unsupported transform key kind');if(kind!==1)continue;
    const bone=header&0x1fff;assert(bone<names.length);
@@ -51,6 +49,6 @@ for(const entry of root.animations){const a=entry.Data.animation.Data,b=a.animBu
   }else{assert(delta<=1e-5,`${name}/${names[bone]}/${i}: unexplained native/CLI quaternion delta ${delta}; native=${JSON.stringify(key.q)} stock=${JSON.stringify(key.stock)} CLI=${JSON.stringify(values[i])} bind=${JSON.stringify(key.bind)} raw=${JSON.stringify(key.delta)}`);report.maxUncorrectedResidual=Math.max(report.maxUncorrectedResidual,delta);}
  }
  if(changed){assert.equal(animation.channels.filter(c=>c.sampler===channel.sampler).length,1,'Shared sampler cannot be patched in place');sampler.output=append(values);}}
- report.clips.push({name,animationType:a.animationType,nativeRotationKeys:count,quantizedRecords:b.numAnimKeys,correctedKeys:corrected});}
+ report.clips.push({name,animationType:a.animationType,nativeRotationKeys:count,quantizedRecords:b.numAnimKeys,correctedKeys:corrected,canonicalDynamicKeyOrderChecked:true});}
 for(const name of required)assert(report.clips.some(c=>c.name===name),`Required clip not independently decoded: ${name}`);
 bin=Buffer.concat([bin,...additions],binaryLength);j.buffers[0].byteLength=bin.length;let jb=Buffer.from(JSON.stringify(j));jb=Buffer.concat([jb,Buffer.alloc((4-jb.length%4)%4,32)]);const out=Buffer.alloc(28+jb.length+bin.length);out.writeUInt32LE(0x46546c67);out.writeUInt32LE(2,4);out.writeUInt32LE(out.length,8);out.writeUInt32LE(jb.length,12);out.writeUInt32LE(0x4e4f534a,16);jb.copy(out,20);out.writeUInt32LE(bin.length,20+jb.length);out.writeUInt32LE(0x004e4942,24+jb.length);bin.copy(out,28+jb.length);fs.writeFileSync(outPath,out,{flag:'wx'});report.passed=true;report.outputSHA256=hash(outPath);fs.writeFileSync(outPath+'.raw-readback.json',JSON.stringify(report,null,2)+'\n',{flag:'wx'});console.log(JSON.stringify({passed:true,clips:report.clips.length,nativeRotationKeys:report.clips.reduce((s,c)=>s+c.nativeRotationKeys,0),correctedReaderKeys:report.corrections.length,maxUncorrectedResidual:report.maxUncorrectedResidual}));

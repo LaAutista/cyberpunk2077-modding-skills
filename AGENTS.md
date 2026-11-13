@@ -36,8 +36,9 @@ defines the interpretation and new status format.
 - Preserve timing, hierarchy, anatomical translations/scales/lengths and unrelated
   tracks unless a measured fixture explicitly requires an authorized change.
 - Reconstruct destination locals using updated destination parents, parent-first.
-- Read back serialized native bytes independently; never export stale preview or
-  controller arrays. Review the final converted motion, not an earlier revision.
+- Read back serialized native bytes independently; validate supported dynamic
+  record order as well as values, metadata and protected channel sequences. Never
+  export stale preview or controller arrays. Review the final converted motion, not an earlier revision.
 - No guessed corrective rotations, cross-weapon calibration reuse, speculative
   fix stacking, or equivalent previews after the existing fixture answers the question.
 - No scope expansion or replacement of a working baseline by an experimental branch.
@@ -66,6 +67,9 @@ acceptance may retain named defects or native fallbacks. Record those limits
 without inventing a flawless visual pass or expanding release criteria. Use the
 [MP5 workflow](skills/cyberpunk2077-animation-retargeting/references/mp5-workflow.md).
 For BF6, use the [current findings](skills/cyberpunk2077-animation-retargeting/references/bf6-workflow.md).
+The [weapon playbook](skills/cyberpunk2077-animation-retargeting/references/weapon-retargeting-playbook.md)
+and [MP5 success case](skills/cyberpunk2077-animation-retargeting/references/bf6-mp5-success.md)
+provide the explicit repair sequence and checked failure controls.
 Start finger repairs with one reversible clip and review it before propagation.
 Require sound coverage on first installation and disclose source/donor provenance.
 

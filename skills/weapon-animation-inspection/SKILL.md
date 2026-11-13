@@ -1,6 +1,6 @@
 ---
 name: weapon-animation-inspection
-description: Inspect and adapt Cyberpunk 2077 weapon meshes, rigs and animation using preserved assemblies, native tracks, Blender previews and export checks. Use for replacement fitting, moving-part collisions, magazine, trigger, grip or hand-contact work. Includes a verified local Lynx case study; other weapons require explicit rig and component adaptation.
+description: Inspect and fit Cyberpunk 2077 weapon meshes and assemblies; review native playback, hand contact and mechanism collisions. Use retargeting for motion edits.
 ---
 
 # Weapon animation inspection
@@ -15,8 +15,9 @@ and [tool-selection guide](../cyberpunk2077-modding/references/tool-selection.md
 Use the [Lynx case](references/lynx-case-study.md) for proven local reasoning and
 bounded evidence; use its [command contracts](references/lynx-command-contracts.md)
 only after supplying the described project-specific tools and owned assets.
-For motion transfer, first use the sibling [retargeting state machine](../cyberpunk2077-animation-retargeting/SKILL.md)
-to preserve a baseline, select one blocking fixture and bound failed correction loops.
+For motion transfer or motion repair, use the sibling [retargeting state machine](../cyberpunk2077-animation-retargeting/SKILL.md)
+to own the workflow, preserve a baseline and bound failed correction loops. Reuse
+its evidence/acceptance rules; do not add a second approval workflow for unchanged motion.
 For Unreal source recovery and graph-aware retargeting, use the
 [HK416-derived reusable workflow](../cyberpunk2077-modding/references/ron-port-workflow.md).
 Use the [additive preview helper](references/additive-preview.md) only with its

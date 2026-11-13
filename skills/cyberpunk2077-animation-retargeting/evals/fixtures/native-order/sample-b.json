@@ -1,0 +1,35 @@
+{
+  "Data": {
+    "RootChunk": {
+      "animations": [
+        {
+          "Data": {
+            "animation": {
+              "Data": {
+                "name": {
+                  "$value": "equip"
+                },
+                "duration": 1,
+                "animationType": "Normal",
+                "animBuffer": {
+                  "Data": {
+                    "$type": "animAnimationBufferCompressed",
+                    "numJoints": 1,
+                    "numAnimKeys": 0,
+                    "numAnimKeysRaw": 4,
+                    "numConstAnimKeys": 0,
+                    "numTrackKeys": 0,
+                    "numConstTrackKeys": 0,
+                    "inplaceCompressedBuffer": {
+                      "Bytes": "AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAD//wAAAAAAAAAAAAAAAAAA//8AIAAAAAAAAAAAAAAAAA=="
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

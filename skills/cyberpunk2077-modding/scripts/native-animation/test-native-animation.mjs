@@ -6,6 +6,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {inspectCompressedKeys,auditCompressedKeys} from './audit-compressed-keys.mjs';
 const here=path.dirname(fileURLToPath(import.meta.url));
 const work=fs.mkdtempSync(path.join(os.tmpdir(),'native-animation-selftest-'));
 function run(script,args,ok=true){
@@ -45,6 +46,39 @@ try {
   assert.equal(json.animations[0].samplers[0].interpolation,'STEP');
   assert.equal(json.animations[0].extras.optimizationHints.preferSIMD,false);
   run('check-animation.mjs',['prepare',source,prepared],false);
+  // Many individually valid channels must not overflow JavaScript's argument stack.
+  const dense=structuredClone(j),count=40000,tracks=5,denseBin=Buffer.alloc(count*(tracks*4+16));
+  dense.nodes=Array.from({length:tracks},(_,i)=>({name:'dense'+i}));dense.bufferViews=[];dense.accessors=[];
+  dense.animations[0].channels=[];dense.animations[0].samplers=[];
+  for(let channel=0;channel<tracks;channel++){
+    const offset=channel*count*4;
+    for(let i=0;i<count;i++)denseBin.writeFloatLE(i/(count-1),offset+i*4);
+    dense.bufferViews.push({buffer:0,byteOffset:offset,byteLength:count*4});
+    dense.accessors.push({bufferView:channel,componentType:5126,count,type:'SCALAR',min:[0],max:[1]});
+    dense.animations[0].channels.push({sampler:channel,target:{node:channel,path:'rotation'}});
+    dense.animations[0].samplers.push({input:channel,output:tracks,interpolation:'LINEAR'});
+  }
+  for(let i=0;i<count;i++)denseBin.writeFloatLE(1,tracks*count*4+i*16+12);
+  dense.bufferViews.push({buffer:0,byteOffset:tracks*count*4,byteLength:count*16});
+  dense.accessors.push({bufferView:tracks,componentType:5126,count,type:'VEC4'});dense.buffers[0].byteLength=denseBin.length;
+  const denseSource=path.join(work,'dense-source.glb'),denseOutput=path.join(work,'dense-prepared.glb');writeGlb(denseSource,dense,denseBin);
+  const denseBefore=fs.readFileSync(denseSource);
+  run('check-animation.mjs',['prepare',denseSource,denseOutput,'--preserve-key-sampling']);
+  assert.deepEqual(fs.readFileSync(denseSource),denseBefore);
+  const denseBytes=fs.readFileSync(denseOutput),denseJson=JSON.parse(denseBytes.subarray(20,20+denseBytes.readUInt32LE(12)));
+  for(const accessor of denseJson.accessors.slice(0,tracks)){assert.equal(accessor.count,count);assert.deepEqual(accessor.min,[0]);assert.deepEqual(accessor.max,[1]);}
+  // Null and the native null-handle are valid; missing or live extraction must fail closed.
+  const motionAuthor=structuredClone(j);
+  Object.assign(motionAuthor.animations[0].extras,{frameClamping:false,frameClampingStartFrame:0,frameClampingEndFrame:0});
+  const motionReadback=structuredClone(motionAuthor);motionReadback.animations[0].extras.rootMotionType='Unknown';
+  const motionSource=path.join(work,'motion-source.glb'),motionOutput=path.join(work,'motion-readback.glb'),motionJson=path.join(work,'motion.json');
+  writeGlb(motionSource,motionAuthor,bin);writeGlb(motionOutput,motionReadback,bin);
+  for(const [motionExtraction,ok] of [[null,true],[{HandleRefId:'-1'},true],[{HandleRefId:'2'},false],[undefined,false]]){
+    const motion={Data:{RootChunk:{animationDataChunks:[],animations:[{Data:{animation:{Data:{name:{$value:'fixture'},animationType:'Normal',duration:1,
+      frameClamping:false,frameClampingStartFrame:0,frameClampingEndFrame:0,motionExtraction,animBuffer:{Data:{$type:'animAnimationBufferSimd'}}}}}}]}}};
+    fs.writeFileSync(motionJson,JSON.stringify(motion));
+    run('check-animation.mjs',['verify-authored',motionJson,motionJson,motionSource,motionOutput],ok);
+  }
   j.animations[0].extras.animationType='Unsupported';writeGlb(path.join(work,'unsupported.glb'),j,bin);
   run('check-animation.mjs',['prepare',path.join(work,'unsupported.glb'),path.join(work,'rejected.glb')],false);
   j.animations[0].extras.animationType='Normal';
@@ -110,5 +144,77 @@ try {
   const unchangedBytes=fs.readFileSync(unchangedOut);
   assert.deepEqual(unchangedBytes.subarray(28+unchangedBytes.readUInt32LE(12)),multiBin);
   assert.equal(JSON.parse(fs.readFileSync(unchangedOut+'.raw-readback.json')).corrections.length,0);
-  console.log('PASS: native ticks/bounds, STEP retention, mode/header/overwrite refusals, independent tiny-quaternion decoding and multi-clip/channel buffer offsets with preserved input bytes.');
+  // The decoder used to sort rotations after reading, hiding a broken native
+  // stream whose T/Q/S records had been regrouped by channel instead of time.
+  function record(bone,tick,kind,{quantized=false,constant=false}={}){
+    const bytes=Buffer.alloc(quantized?10:16);
+    bytes.writeUInt16LE(bone|(kind<<13),constant?0:2);bytes.writeUInt16LE(tick,constant?2:0);
+    return bytes;
+  }
+  const orderedKeys=[];
+  for(const bone of [0,1])for(const tick of [0,65535])for(const kind of [0,1,2])orderedKeys.push({bone,tick,kind});
+  function orderFixture(quantized=false,storage='external'){
+    const dynamic=Buffer.concat(orderedKeys.map(k=>record(k.bone,k.tick,k.kind,{quantized})));
+    // No evidence requires constant keys to follow the dynamic comparator.
+    const constants=Buffer.concat([record(1,200,1,{constant:true}),record(0,100,1,{constant:true})]);
+    const payload=Buffer.concat([dynamic,constants,Buffer.alloc(8)]);
+    const buffer={$type:'animAnimationBufferCompressed',numAnimKeys:quantized?12:0,numAnimKeysRaw:quantized?0:12,numConstAnimKeys:2,numTrackKeys:1,numConstTrackKeys:0,numJoints:2};
+    const root={animations:[{Data:{animation:{Data:{name:{$value:'ordered'},animBuffer:{Data:buffer}}}}}]};
+    if(storage==='external'){
+      root.animationDataChunks=[{buffer:{Bytes:Buffer.concat([Buffer.alloc(4),payload,Buffer.alloc(4)]).toString('base64')}}];
+      buffer.dataAddress={unkIndex:0,fsetInBytes:4,zeInBytes:payload.length};
+    }else buffer[storage]={Bytes:payload.toString('base64')};
+    return {root,buffer,payload,dynamicLength:dynamic.length};
+  }
+  for(const quantized of [false,true])for(const storage of ['external','inplaceCompressedBuffer','defferedBuffer']){
+    const fixture=orderFixture(quantized,storage),before=JSON.stringify(fixture.root);
+    assert.deepEqual(inspectCompressedKeys(fixture.root,fixture.buffer).bytes,fixture.payload);
+    assert.equal(auditCompressedKeys(fixture.root).clips.length,1);assert.equal(JSON.stringify(fixture.root),before);
+    const bad=orderedKeys.toSorted((a,b)=>a.bone-b.bone||a.kind-b.kind||a.tick-b.tick);
+    const badBytes=Buffer.concat([Buffer.concat(bad.map(k=>record(k.bone,k.tick,k.kind,{quantized}))),fixture.payload.subarray(fixture.dynamicLength)]);
+    if(storage==='external')fixture.root.animationDataChunks[0].buffer.Bytes=Buffer.concat([Buffer.alloc(4),badBytes,Buffer.alloc(4)]).toString('base64');
+    else fixture.buffer[storage].Bytes=badBytes.toString('base64');
+    assert.throws(()=>inspectCompressedKeys(fixture.root,fixture.buffer),/noncanonical dynamic key order/);
+  }
+  for(const mutate of [
+    f=>{f.buffer.dataAddress.fsetInBytes=-1;},
+    f=>{f.buffer.dataAddress.unkIndex=1;},
+    f=>{f.buffer.dataAddress.zeInBytes+=5;},
+    f=>{f.buffer.numAnimKeysRaw=-1;},
+    f=>{f.buffer.numAnimKeysRaw=0.5;},
+    f=>{f.buffer.numAnimKeysRaw++;},
+    f=>{f.buffer.numTrackKeys++;},
+    f=>{f.buffer.numJoints=1;},
+    f=>{const data=Buffer.from(f.root.animationDataChunks[0].buffer.Bytes,'base64');data.writeUInt16LE(0x6000,6);f.root.animationDataChunks[0].buffer.Bytes=data.toString('base64');}
+  ]){const f=orderFixture();mutate(f);assert.throws(()=>inspectCompressedKeys(f.root,f.buffer));}
+  const independent=orderFixture();
+  const separate=Buffer.concat([record(1,65535,1,{quantized:true}),independent.payload]);
+  independent.buffer.numAnimKeys=1;independent.buffer.inplaceCompressedBuffer={Bytes:separate.toString('base64')};
+  assert.doesNotThrow(()=>inspectCompressedKeys(independent.root,independent.buffer),'Ordering restarts for each dynamic section');
+  const auditPath=path.join(work,'order-audit.json');fs.writeFileSync(auditPath,JSON.stringify({Data:{RootChunk:independent.root}}));
+  assert.equal(JSON.parse(run('audit-compressed-keys.mjs',[auditPath]).stdout).clips.length,1);
+  run('audit-compressed-keys.mjs',[auditPath,'--required-clips','missing'],false);
+  const unsupported=structuredClone(independent.root);unsupported.animations.push({Data:{animation:{Data:{name:{$value:'simd'},animBuffer:{Data:{$type:'animAnimationBufferSimd'}}}}}});
+  assert.equal(auditCompressedKeys(unsupported).skippedClips[0].name,'simd');
+  assert.throws(()=>auditCompressedKeys(unsupported,new Set(['simd'])),/unsupported native buffer/);
+  // Exercise the production readback entry point: malformed ordering must fail
+  // before a new GLB/report exists, even though the rotation values are unchanged.
+  const orderBin=Buffer.alloc(40);orderBin.writeFloatLE(1,4);orderBin.writeFloatLE(1,20);orderBin.writeFloatLE(1,36);
+  const orderGlb={asset:{version:'2.0'},buffers:[{byteLength:40}],
+    bufferViews:[{buffer:0,byteOffset:0,byteLength:8},{buffer:0,byteOffset:8,byteLength:32}],
+    accessors:[{bufferView:0,componentType:5126,count:2,type:'SCALAR',min:[0],max:[1]},{bufferView:1,componentType:5126,count:2,type:'VEC4'}],
+    nodes:[{name:'bone'}],animations:[{name:'ordered',extras:{animationType:'Normal'},channels:[{sampler:0,target:{node:0,path:'rotation'}}],samplers:[{input:0,output:1,interpolation:'LINEAR'}]}]};
+  const orderNative=path.join(work,'ordered-native.json'),orderCli=path.join(work,'ordered-cli.glb');writeGlb(orderCli,orderGlb,orderBin);
+  const orderRecords=[record(0,0,0),record(0,0,1),record(0,65535,0),record(0,65535,1)];
+  const orderBuffer={$type:'animAnimationBufferCompressed',numAnimKeys:0,numAnimKeysRaw:4,numConstAnimKeys:0,numJoints:2,inplaceCompressedBuffer:{Bytes:Buffer.concat(orderRecords).toString('base64')}};
+  const orderAnimation={name:{$value:'ordered'},animationType:'Normal',duration:1,animBuffer:{Data:orderBuffer}};
+  const orderDoc={Data:{RootChunk:{animations:[{Data:{animation:{Data:orderAnimation}}}]}}};
+  fs.writeFileSync(orderNative,JSON.stringify(orderDoc));
+  run('readback-animation.mjs',[orderNative,rig,orderCli,path.join(work,'ordered-ok.glb'),'--required-clips','ordered']);
+  orderDoc.Data.RootChunk.animations[0].Data.animation.Data.animBuffer.Data.inplaceCompressedBuffer.Bytes=Buffer.concat([orderRecords[0],orderRecords[2],orderRecords[1],orderRecords[3]]).toString('base64');
+  fs.writeFileSync(orderNative,JSON.stringify(orderDoc));
+  const rejectedOut=path.join(work,'ordered-rejected.glb');
+  assert.match(run('readback-animation.mjs',[orderNative,rig,orderCli,rejectedOut,'--required-clips','ordered'],false).stderr,/noncanonical dynamic key order/);
+  assert(!fs.existsSync(rejectedOut)&&!fs.existsSync(rejectedOut+'.raw-readback.json'));
+  console.log('PASS: native ticks/bounds, STEP retention, mode/header/overwrite and root-extraction refusals, tiny-quaternion readback, canonical raw/quantized order with channel-major negative controls, native slice/count/bone bounds and failure before GLB publication.');
 } finally {console.log('Fixture evidence retained:',work);}

@@ -26,6 +26,10 @@ supply an absent evaluated source pose.
    framing, from top/left/right plus palm/underside, thumb web and digit close-ups.
    At the early checkpoint, final-native evidence may be UNVERIFIED; it remains a
    later required gate, not an assumed result.
+   For repair before/after views, anchor the target camera to the same unchanged
+   wrist/palm reference or the previous native pose at the same clock. A camera
+   basis derived from edited finger joints changes the viewing angle with the
+   repair; retain the reference-bank hash and verify matching camera/weapon framing.
    At rest/reference and the selected critical poses, pair opaque skin with actual
    evaluated triangle wire, joint landmarks and relevant weights. Keep their pose,
    mesh and inverse-bind identities together so a bone view cannot silently stand

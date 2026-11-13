@@ -1,6 +1,6 @@
 ---
 name: cyberpunk2077-modding
-description: Implement and inspect Cyberpunk 2077 mods, resources, weapon ports and animation retargets using version-matched WolvenKit, redscript, ArchiveXL, TweakXL and native APIs. Use for mod development and tool evaluation; distinguish offline checks, visual acceptance and gameplay evidence.
+description: Build and inspect Cyberpunk 2077 resources, scripts, tweaks and packages. Use for tool setup, extraction, import/export and deployment integration.
 ---
 
 # Cyberpunk 2077 modding
@@ -45,31 +45,19 @@ slot does not prove compatibility or correct optic/muzzle placement.
 
 ## Animation acceptance
 
-**All animations** require the [Blender visual review and receipt](references/animation-retargeting/qa-debugging.md#mandatory-blender-visual-acceptance)
-before accepted-beta promotion: matched source versus converted
-target through the full timeline and important transitions, with full 360° coverage,
-above/below/obscured areas and relevant close-ups. This covers bodies, faces,
-creatures, props, interactions, cameras and mechanisms. Inspect deformation,
-jitter/popping, stretch/twist, clipping, sliding/contact loss and unnatural motion;
-visible defects fail a clean visual pass. Correct them and renew review unless
-the user explicitly accepts named exceptions; keep those defects recorded. Every digit and
-thumb, wrist/palm, arm and moving weapon contact must be accounted for when present.
-Stills, numeric checks and export success do not replace actual motion review.
-Show full synchronized source/native videos and repair before/after comparisons;
-obtain the user's acceptance of every included animation before installation,
-following the [source comparison gate](../cyberpunk2077-animation-retargeting/SKILL.md#mandatory-source-versus-retarget-comparison).
-Batch reviews are valid; a diagnostic label does not waive this gate.
-Diagnostic exports and isolated single-clip test packages are allowed under the
-[vertical-slice contract](../cyberpunk2077-animation-retargeting/references/runtime-validation.md),
-with visual failures/gaps disclosed. They are not accepted betas; native/package
-and runtime acceptance remain separate.
+The [retargeting skill](../cyberpunk2077-animation-retargeting/SKILL.md) owns motion
+repair and its visual/native/runtime acceptance rules. Use its
+[visual procedure](../cyberpunk2077-animation-retargeting/references/visual-acceptance.md)
+for changed animation and its evidence-reuse rule for unchanged accepted motion.
+This applies to bodies, creatures, faces, props, cameras and weapon mechanisms;
+packing success does not establish visual or gameplay success. Keep named user-accepted
+exceptions explicit. For actual skin/contact inspection use the
+[weapon inspection skill](../weapon-animation-inspection/SKILL.md) and the relevant
+[QA reference](references/animation-retargeting/qa-debugging.md).
 
-A custom animator/control rig is **optional**. Direct raw/native-skeleton retargeting
-is valid; validate the selected path's rest/binds, limb lengths, skin, required
-helpers and exporter. Use justified FK rotations and nonstretch IK/contact
-corrections. An unfinished control rig blocks an independent route only when an
-identified shared native component actually fails that route. See the
-[bind and architecture contract](references/animation-retargeting/spaces-bind.md#native-skeleton-versus-animator-controls).
+A custom animator/control rig is optional. Preserve the native skeleton/rest/bind
+and validated deformation/export contract for the chosen route; see
+[bind and architecture](references/animation-retargeting/spaces-bind.md#native-skeleton-versus-animator-controls).
 
 ## Evidence and handoff
 
